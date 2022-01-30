@@ -5,13 +5,12 @@ HEADER_DIR =	./
 SDIR =	./
 ODIR =	./
 
-SRCS =	$(SDIR)main.cpp\
-		$(SDIR)mutantstack.cpp
+SRCS =	$(SDIR)main.cpp
 
 OBJS =	$(patsubst $(SDIR)%.cpp, $(ODIR)%.o, $(SRCS))
 
 CC = clang++
-C_FLAGS = -Wall -Werror -Wextra -g -std=c++98 -Wshadow
+C_FLAGS = -Wall -Werror -Wextra -g -std=c++98
 C_SANIT = -fsanitize=address
 
 $(NAME):	$(OBJS) 
