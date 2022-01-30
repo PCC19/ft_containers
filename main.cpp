@@ -16,7 +16,7 @@ int main()
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
 	std::vector<int> my_vector;
-	N = 5;
+	N = 10;
 	for (i = 0; i < N; i++)
 	{
 		my_vector.push_back(i * 10);
