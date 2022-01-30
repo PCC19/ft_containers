@@ -1,6 +1,8 @@
 NAME = a
 NAME2 = $(NAME)_stl
 
+MAIN = main.cpp
+
 HEADER_DIR =	./
 
 SDIR =	./
@@ -14,14 +16,15 @@ CC = clang++
 C_FLAGS = -Wall -Werror -Wextra -g -std=c++98
 C_SANIT = -fsanitize=address
 
-$(NAME):	$(OBJS) 
-	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=0 -o $(NAME)
-	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME2)
+$(NAME):	$(OBJS) $(MAIN)
+	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
+	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=0 -o $(NAME2)
 	echo CONCLUIDO
 
-$(ODIR)%.o: $(SDIR)%.cpp
-		#mkdir -p $(ODIR)
-		$(CC) $(C_FLAGS) $(HEADERS) $(L_FLAGS) -c $< -o $@
+#$(ODIR)%.o: $(SDIR)%.cpp
+#		#mkdir -p $(ODIR)
+#		$(CC) $(C_FLAGS) $(HEADERS) $(L_FLAGS) -c $< -o $@
+
 
 all: $(NAME)
 

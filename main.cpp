@@ -1,9 +1,9 @@
 #include <iostream>
 #include <ctime>
 #include "utils.hpp"
-#if V // stl
-	#include <vector>
-#else // ft
+#if V // ft
+	#include "vector.hpp"
+#else // stl
 	#include <vector>
 #endif
 
@@ -15,11 +15,14 @@ int main()
 	int N;
 	int i;
 
+//	std::cout << "Version: " << V << std::endl;
 	ini = clock();
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
+
 	std::vector<int> my_vector;
-	N = 10;
+	print_vector(my_vector);
+	N = 5;
 	for (i = 0; i < N; i++)
 	{
 		my_vector.push_back(i * 10);
@@ -70,7 +73,7 @@ Modifiers
 	clear
 
 util:
-	print_vector
+ok	print_vector
 
 
 
