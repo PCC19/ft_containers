@@ -1,8 +1,11 @@
 #include <iostream>
 #include <ctime>
-#include <vector>
 #include "utils.hpp"
-
+#if V // stl
+	#include <vector>
+#else // ft
+	#include <vector>
+#endif
 
 int main()
 {

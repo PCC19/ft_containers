@@ -1,4 +1,5 @@
-NAME = a.out 
+NAME = a
+NAME2 = $(NAME)_stl
 
 HEADER_DIR =	./
 
@@ -14,7 +15,8 @@ C_FLAGS = -Wall -Werror -Wextra -g -std=c++98
 C_SANIT = -fsanitize=address
 
 $(NAME):	$(OBJS) 
-	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -o $@
+	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=0 -o $(NAME)
+	$(CC) $(HEADERS) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME2)
 	echo CONCLUIDO
 
 $(ODIR)%.o: $(SDIR)%.cpp
