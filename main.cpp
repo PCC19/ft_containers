@@ -22,7 +22,7 @@ int main()
 	std::cout << "Hello World!" << std::endl;
 
 	ft::vector<int> my_vector;
-	print_vector(my_vector);
+//	print_vector(my_vector);
 	N = 5;
 	for (i = 0; i < N; i++)
 	{

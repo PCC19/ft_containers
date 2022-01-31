@@ -1,10 +1,17 @@
 Hello World!
+Constructor: Vector
+pushback:0
+pushback:10
+pushback:20
+pushback:30
+pushback:40
 -----------------------------------
-|
-size: 0		capacity: 0
+|0
+-1094795586|1
+-1094795586|2
+-1094795586|3
+-1094795586|4
+-1094795586|
+size: 5		capacity: 0
 -----------------------------------
------------------------------------
-|0|10|20|30|40|
-size: 5		capacity: 5
------------------------------------
-Elapsed time: 0.225ms
+Elapsed time: 0.332ms
