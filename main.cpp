@@ -5,6 +5,7 @@
 	#include "vector.hpp"
 #else // stl
 	#include <vector>
+	namespace ft = std;
 #endif
 
 int main()
@@ -20,7 +21,7 @@ int main()
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
 
-	std::vector<int> my_vector;
+	ft::vector<int> my_vector;
 	print_vector(my_vector);
 	N = 5;
 	for (i = 0; i < N; i++)
