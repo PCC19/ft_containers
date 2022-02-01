@@ -25,8 +25,14 @@ namespace ft {
 //				this->_Data = new T[1000];
 //				std::cout << "Constructor: Vector" << std::endl;
 			}
+
 			size_type size() const { return this->_size; };
+
 			size_type capacity() const { return this->_capacity; };
+
+			bool empty () const {return (_size == 0);};
+
+
 			void push_back(const value_type& val)
 			{
 				allocate_if_needed();
