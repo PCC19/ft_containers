@@ -103,6 +103,8 @@ namespace ft {
 				}
 			}
 
+			allocator_type get_allocator() const { return _Alloc; };
+
 			const_reference operator[](size_type n) const
 			{	
 				return _Data[n];
