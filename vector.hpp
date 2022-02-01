@@ -30,7 +30,9 @@ namespace ft {
 
 			size_type capacity() const { return this->_capacity; };
 
-			bool empty () const {return (_size == 0);};
+			bool empty () const {return (_size == 0); };
+
+			size_type max_size() const {return _Alloc.max_size(); };
 
 
 			void push_back(const value_type& val)

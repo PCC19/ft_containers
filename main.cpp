@@ -30,6 +30,7 @@ int main()
 	ft::vector<int> my_vector;
 	print_vector(my_vector);
 	std::cout << "Is empty ? " << my_vector.empty() << std::endl;
+	std::cout << "Max size: " << my_vector.max_size() << std::endl;
 
 	N = 5;
 	for (i = 0; i < N; i++)
