@@ -22,43 +22,47 @@ namespace ft {
 			explicit vector(const allocator_type & alloc = allocator_type()) :
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0)
 			{
-				this->_Data = new T[1000];
-				std::cout << "Constructor: Vector" << std::endl;
+//				this->_Data = new T[1000];
+//				std::cout << "Constructor: Vector" << std::endl;
 			}
 			size_type size() const { return this->_size; };
 			size_type capacity() const { return this->_capacity; };
 			void push_back(const value_type& val)
 			{
-//				std::cout << "pushback:" << val << std::endl;
-				// codigo para checar tamanho e realocar
 				allocate_if_needed();
-				this->_Alloc.construct(_Data + this->size(), val);
-				this->_size++;
+				_Alloc.construct(_Data + this->size(), val);
+				_size++;
 			}
 			const_reference operator[](size_type n) const
 			{	
-				return this->_Data[n];
+				return _Data[n];
 			};
 
 		private:
 			void allocate_if_needed(size_type n = 1)
 			{
-				size_type new_capacity;
+				size_type	new_capacity;
+				size_type	i;
 
-				if (this->_capacity == 0)
+				if (_capacity == 0)
 					new_capacity = 1;
 				else
-					new_capacity = this->_capacity;
-				if (this->_size + n >= this->_capacity)
+					new_capacity = _capacity;
+				if (_size + n >= _capacity)
 				{
-					// calcula new capacity
-					while (new_capacity < this->_size + n)
+					while (new_capacity < _size + n)
 						new_capacity*=2;
-					// cria vetor temp com new_capacity
-					std::cout << "new_cap: " << new_capacity;
-
-					// copia vetor antigo para novo
-					// destroi antigo
+					value_type *tmp = _Alloc.allocate(new_capacity);
+					i = 0;
+					while( i < _size)
+					{
+						tmp[i] = _Data[i];
+						_Alloc.destroy(_Data + i);
+						i++;
+					}
+					_Alloc.deallocate(_Data, _size);
+					_Data = tmp;
+					_capacity = new_capacity;
 				}
 			}
 

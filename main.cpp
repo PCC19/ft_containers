@@ -19,7 +19,10 @@ int main()
 	int N;
 	int i;
 
-	std::cout << "Version: " << V << std::endl;
+	if (V == 1)
+		std::cout << "VERSION:  FT" << std::endl;
+	else
+		std::cout << "VERSION: STL" << std::endl;
 	ini = clock();
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
