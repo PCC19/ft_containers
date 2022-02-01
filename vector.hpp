@@ -77,6 +77,23 @@ namespace ft {
 				}
 			}
 
+			void resize(size_type n, value_type val = value_type())
+			{
+				size_type i;
+
+				(void) val;
+				if (n < _size)
+				{
+					i = n;
+					while (i < _size)
+					{
+						_Alloc.destroy(_Data + i);
+						i++;
+					}
+					_size = n;
+				}
+			}
+
 			const_reference operator[](size_type n) const
 			{	
 				return _Data[n];

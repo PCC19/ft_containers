@@ -35,7 +35,6 @@ int main()
 	my_vector.reserve(3);
 	print_vector(my_vector);
 
-
 	N = 5;
 	for (i = 0; i < N; i++)
 	{
@@ -43,6 +42,16 @@ int main()
 		print_vector(my_vector);
 	}
 	print_vector(my_vector);
+
+	
+	std::cout << "resize para menor!\n";
+	my_vector.resize(3,300);
+	print_vector(my_vector);
+//	std::cout << "resize para maior!\n";
+//	my_vector.resize(8,800);
+//	print_vector(my_vector);
+
+
 	std::cout << "Is empty ? " << my_vector.empty() << std::endl;
 	
 	my_vector.pop_back();
