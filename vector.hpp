@@ -55,6 +55,28 @@ namespace ft {
 				_size = 0;	// redundante, apos while size deve ser 0
 			}
 
+			void reserve (size_type n)
+			{
+				size_type	new_capacity;
+				size_type	i;
+
+				if (_size + n >= _capacity)
+				{
+					new_capacity = n;
+					value_type *tmp = _Alloc.allocate(new_capacity);
+					i = 0;
+					while( i < _size)
+					{
+						tmp[i] = _Data[i];
+						_Alloc.destroy(_Data + i);
+						i++;
+					}
+					_Alloc.deallocate(_Data, _size);
+					_Data = tmp;
+					_capacity = new_capacity;
+				}
+			}
+
 			const_reference operator[](size_type n) const
 			{	
 				return _Data[n];

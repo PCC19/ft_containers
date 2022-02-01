@@ -31,6 +31,10 @@ int main()
 	print_vector(my_vector);
 	std::cout << "Is empty ? " << my_vector.empty() << std::endl;
 	std::cout << "Max size: " << my_vector.max_size() << std::endl;
+	std::cout << "Reserve 3\n";
+	my_vector.reserve(3);
+	print_vector(my_vector);
+
 
 	N = 5;
 	for (i = 0; i < N; i++)
