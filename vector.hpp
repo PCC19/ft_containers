@@ -15,6 +15,7 @@ namespace ft {
 			 typedef Allocator								allocator_type;
 			 typedef std::size_t							size_type;
 			 typedef typename Allocator::const_reference	const_reference;
+			 typedef typename Allocator::reference			reference;
 
 			/*
 			 * METHODS
@@ -29,6 +30,12 @@ namespace ft {
 			size_type size() const { return this->_size; };
 
 			size_type capacity() const { return this->_capacity; };
+
+			allocator_type get_allocator() const { return _Alloc; };
+
+			const_reference operator[](size_type n) const {	return _Data[n]; };
+
+			reference operator[](size_type n) {	return _Data[n]; };
 
 			bool empty () const {return (_size == 0); };
 
@@ -79,36 +86,8 @@ namespace ft {
 
 			void resize(size_type n, value_type val = value_type())
 			{
-				size_type i;
-
-				(void) val;
-				if (n < _size)
-				{
-					i = n;
-					while (i < _size)
-					{
-						_Alloc.destroy(_Data + i);
-						i++;
-					}
-					_size = n;
-				}
-				else
-				{
-					i = _size;
-					while (i < n)
-					{
-						push_back(val);
-						i++;
-					}
-				}
+				while (n < _size) pop_back(); while (n > _size) push_back(val);
 			}
-
-			allocator_type get_allocator() const { return _Alloc; };
-
-			const_reference operator[](size_type n) const
-			{	
-				return _Data[n];
-			};
 
 		private:
 			void allocate_if_needed(size_type n = 1)
