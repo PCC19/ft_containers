@@ -31,4 +31,9 @@ size: 5		capacity: 8
 size: 5		capacity: 8
 -----------------------------------
 Is empty ? 0
-Elapsed time: 0.248ms
+pop_back !
+-----------------------------------
+|0|10|20|30|
+size: 4		capacity: 8
+-----------------------------------
+Elapsed time: 0.276ms

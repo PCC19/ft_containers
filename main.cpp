@@ -45,6 +45,9 @@ int main()
 	std::cout << "pop_back !\n";
 	print_vector(my_vector);
 
+	my_vector.clear();
+	std::cout << "Clear !\n";
+	print_vector(my_vector);
 
 
 	// ==========================================

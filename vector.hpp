@@ -46,6 +46,15 @@ namespace ft {
 				_Alloc.destroy(_Data + _size--);
 			}
 
+			void clear()
+			{
+				while (_size > 0)
+					pop_back();
+				_Alloc.deallocate(_Data, _capacity);
+				_Data = nullptr;
+				_size = 0;	// redundante, apos while size deve ser 0
+			}
+
 			const_reference operator[](size_type n) const
 			{	
 				return _Data[n];
