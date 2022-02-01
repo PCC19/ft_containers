@@ -67,7 +67,7 @@ namespace ft {
 					i = 0;
 					while( i < _size)
 					{
-						tmp[i] = _Data[i];
+						_Alloc.construct(&tmp[i], _Data[i]);
 						_Alloc.destroy(_Data + i);
 						i++;
 					}
@@ -91,6 +91,15 @@ namespace ft {
 						i++;
 					}
 					_size = n;
+				}
+				else
+				{
+					i = _size;
+					while (i < n)
+					{
+						push_back(val);
+						i++;
+					}
 				}
 			}
 
@@ -117,7 +126,7 @@ namespace ft {
 					i = 0;
 					while( i < _size)
 					{
-						tmp[i] = _Data[i];
+						_Alloc.construct(&tmp[i], _Data[i]);
 						_Alloc.destroy(_Data + i);
 						i++;
 					}

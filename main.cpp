@@ -47,9 +47,9 @@ int main()
 	std::cout << "resize para menor!\n";
 	my_vector.resize(3,300);
 	print_vector(my_vector);
-//	std::cout << "resize para maior!\n";
-//	my_vector.resize(8,800);
-//	print_vector(my_vector);
+	std::cout << "resize para maior!\n";
+	my_vector.resize(8,800);
+	print_vector(my_vector);
 
 
 	std::cout << "Is empty ? " << my_vector.empty() << std::endl;
