@@ -4,6 +4,8 @@ Hello World!
 |
 size: 0		capacity: 0
 -----------------------------------
+Is empty ? 1
+Max size: 4611686018427387903
 -----------------------------------
 |0|
 size: 1		capacity: 1
@@ -28,4 +30,5 @@ size: 5		capacity: 8
 |0|10|20|30|40|
 size: 5		capacity: 8
 -----------------------------------
-Elapsed time: 0.227ms
+Is empty ? 0
+Elapsed time: 0.248ms

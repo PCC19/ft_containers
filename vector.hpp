@@ -34,13 +34,18 @@ namespace ft {
 
 			size_type max_size() const {return _Alloc.max_size(); };
 
-
 			void push_back(const value_type& val)
 			{
 				allocate_if_needed();
 				_Alloc.construct(_Data + this->size(), val);
 				_size++;
 			}
+
+			void pop_back()
+			{
+				_Alloc.destroy(_Data + _size--);
+			}
+
 			const_reference operator[](size_type n) const
 			{	
 				return _Data[n];

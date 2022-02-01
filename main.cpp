@@ -40,6 +40,11 @@ int main()
 	}
 	print_vector(my_vector);
 	std::cout << "Is empty ? " << my_vector.empty() << std::endl;
+	
+	my_vector.pop_back();
+	std::cout << "pop_back !\n";
+	print_vector(my_vector);
+
 
 
 	// ==========================================
