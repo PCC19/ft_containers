@@ -1,5 +1,5 @@
 template <typename T>
-void	print_vector(T vector_to_print)
+void	print_vector(T& vector_to_print)
 {
 	int i;
 

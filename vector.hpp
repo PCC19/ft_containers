@@ -22,23 +22,45 @@ namespace ft {
 			explicit vector(const allocator_type & alloc = allocator_type()) :
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0)
 			{
+				this->_Data = new T[1000];
 				std::cout << "Constructor: Vector" << std::endl;
 			}
 			size_type size() const { return this->_size; };
 			size_type capacity() const { return this->_capacity; };
-			// temp
-			//void push_back (int n) const { std::cout << "pushback:" << n << std::endl;};
-			void push_back (const value_type &val)
+			void push_back(const value_type& val)
 			{
-				this->_Data = new T[10];
-				std::cout << "pushback:" << val << std::endl;
+//				std::cout << "pushback:" << val << std::endl;
+				// codigo para checar tamanho e realocar
+				allocate_if_needed();
+				this->_Alloc.construct(_Data + this->size(), val);
 				this->_size++;
 			}
 			const_reference operator[](size_type n) const
 			{	
-				std::cout << n << std::endl;
 				return this->_Data[n];
 			};
+
+		private:
+			void allocate_if_needed(size_type n = 1)
+			{
+				size_type new_capacity;
+
+				if (this->_capacity == 0)
+					new_capacity = 1;
+				else
+					new_capacity = this->_capacity;
+				if (this->_size + n >= this->_capacity)
+				{
+					// calcula new capacity
+					while (new_capacity < this->_size + n)
+						new_capacity*=2;
+					// cria vetor temp com new_capacity
+					std::cout << "new_cap: " << new_capacity;
+
+					// copia vetor antigo para novo
+					// destroi antigo
+				}
+			}
 
 
 		protected:
@@ -49,4 +71,3 @@ namespace ft {
 	};
 }
 #endif
-

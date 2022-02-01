@@ -1,6 +1,9 @@
 #include <iostream>
 #include <ctime>
 #include "utils.hpp"
+#ifndef nullptr
+	#define nullptr NULL
+#endif
 #if V // ft
 	#include "vector.hpp"
 #else // stl
@@ -16,17 +19,18 @@ int main()
 	int N;
 	int i;
 
-//	std::cout << "Version: " << V << std::endl;
+	std::cout << "Version: " << V << std::endl;
 	ini = clock();
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
 
 	ft::vector<int> my_vector;
-//	print_vector(my_vector);
+	print_vector(my_vector);
 	N = 5;
 	for (i = 0; i < N; i++)
 	{
 		my_vector.push_back(i * 10);
+		print_vector(my_vector);
 	}
 	print_vector(my_vector);
 
