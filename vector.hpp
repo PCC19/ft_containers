@@ -32,24 +32,24 @@ namespace ft {
 			// Copy constructor
 			vector (const vector & x)
 			{
-				_size = x._size;
-				_capacity = x._capacity;
-				_Alloc = x._Alloc;
-				_Data = _Alloc.allocate(_capacity);
-				*this = x;
+				this->_size = x._size;
+				this->_capacity = x._capacity;
+				this->_Alloc = x._Alloc;
+				this->_Data = _Alloc.allocate(_capacity);
+				size_type i = 0;
+				while (i < _size)
+				{
+					_Data[i] = x._Data[i];
+					i++;
+				}
 			}
 
 
 			// Destructor
-//			~vector() { _Alloc.deallocate(_Data, _capacity); };
-//			~vector()
-//			{
-//				while (_size > 0)
-//					pop_back();
-//				_Alloc.deallocate(_Data, _capacity);
-//				_Data = nullptr;
-//				_size = 0;	// redundante, apos while size deve ser 0
-//			};
+			~vector() { 
+//				std::cout << "s: " << this->_size << " c: " << this->_capacity << std::endl;
+				_Alloc.deallocate(_Data, _capacity);
+				};
 
 			size_type size() const { return this->_size; };
 
@@ -132,7 +132,13 @@ namespace ft {
 
 			void resize(size_type n, value_type val = value_type())
 			{
-				while (n < _size) pop_back(); while (n > _size) push_back(val);
+				// Versao Mac
+				// while (n < _size) pop_back(); while (n > _size) push_back(val);
+				// Versao Linux
+				while (n < _size) pop_back();
+				if (n > _capacity)
+					reserve(n);
+				while (n > _size) push_back(val);
 			}
 
 			void swap (vector& x)

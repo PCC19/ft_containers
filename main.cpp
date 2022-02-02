@@ -87,8 +87,13 @@ int main()
 	std::cout << "Other Vector:\n"; print_vector(other_vector);
 
 	ft::vector<int> second_vector(my_vector);
+	my_vector.push_back(99);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	std::cout << "Sec Vector:\n"; print_vector(second_vector);
+	my_vector.push_back(1);
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Sec Vector:\n"; print_vector(second_vector);
+
 
 
 	// ==========================================
