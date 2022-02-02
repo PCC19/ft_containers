@@ -21,12 +21,23 @@ namespace ft {
 			/*
 			 * METHODS
 			 */
+			 // Default constructor
 			explicit vector(const allocator_type & alloc = allocator_type()) :
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0)
 			{
 //				this->_Data = new T[1000];
 //				std::cout << "Constructor: Vector" << std::endl;
+			};
+
+			// Copy constructor
+			vector (const vector & x):
+				_Data(x._Data), _Alloc(x._Alloc), _size(x._size), _capacity(x._capacity)
+			{
 			}
+
+
+			// Destructor
+			~vector() { _Alloc.deallocate(_Data, _capacity); };
 
 			size_type size() const { return this->_size; };
 
@@ -37,6 +48,12 @@ namespace ft {
 			reference operator[](size_type n) {	return _Data[n]; };
 
 			const_reference operator[](size_type n) const {	return _Data[n]; };
+
+			// Assignment operator
+//			vector& operator=(const vector &x)
+//			{
+//			}
+
 
 			reference at (size_type n)
 			{
