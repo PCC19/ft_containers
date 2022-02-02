@@ -30,14 +30,26 @@ namespace ft {
 			};
 
 			// Copy constructor
-			vector (const vector & x):
-				_Data(x._Data), _Alloc(x._Alloc), _size(x._size), _capacity(x._capacity)
+			vector (const vector & x)
 			{
+				_size = x._size;
+				_capacity = x._capacity;
+				_Alloc = x._Alloc;
+				_Data = _Alloc.allocate(_capacity);
+				*this = x;
 			}
 
 
 			// Destructor
-			~vector() { _Alloc.deallocate(_Data, _capacity); };
+//			~vector() { _Alloc.deallocate(_Data, _capacity); };
+//			~vector()
+//			{
+//				while (_size > 0)
+//					pop_back();
+//				_Alloc.deallocate(_Data, _capacity);
+//				_Data = nullptr;
+//				_size = 0;	// redundante, apos while size deve ser 0
+//			};
 
 			size_type size() const { return this->_size; };
 
