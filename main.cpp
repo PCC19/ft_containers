@@ -43,7 +43,6 @@ int main()
 	}
 	print_vector(my_vector);
 
-	
 	std::cout << "resize para menor!\n";
 	my_vector.resize(3,300);
 	print_vector(my_vector);
@@ -51,16 +50,43 @@ int main()
 	my_vector.resize(8,800);
 	print_vector(my_vector);
 
-
 	std::cout << "Is empty ? " << my_vector.empty() << std::endl;
 	
 	my_vector.pop_back();
 	std::cout << "pop_back !\n";
 	print_vector(my_vector);
 
-	my_vector.clear();
-	std::cout << "Clear !\n";
+	std::cout << "at 2\n";
+	std::cout << my_vector.at(2) << std::endl;
+//	std::cout << "at 200\n";
+//	std::cout << my_vector.at(200) << std::endl;
+
+//	my_vector.clear();
+//	std::cout << "Clear !\n";
+//	print_vector(my_vector);
+
+	N = 5;
+	for (i = 0; i < N; i++)
+	{
+		my_vector.push_back(i * 10);
+	}
+	std::cout << "My Vector:\n";
 	print_vector(my_vector);
+	
+	ft::vector<int> other_vector;
+	N = 8;
+	for (i = 0; i < N; i++)
+	{
+		other_vector.push_back(i * (-10));
+	}
+	std::cout << "Other Vector:\n";
+	print_vector(other_vector);
+	my_vector.swap(other_vector);
+	std::cout << "After swap !!\n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Other Vector:\n"; print_vector(other_vector);
+
+
 
 
 	// ==========================================

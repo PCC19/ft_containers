@@ -2,6 +2,7 @@
 #define FT_VECTOR_HPP
 
 #include <memory>
+#include <stdexcept>
 
 namespace ft {
 	template<typename T, class Allocator = std::allocator<T> >
@@ -33,9 +34,25 @@ namespace ft {
 
 			allocator_type get_allocator() const { return _Alloc; };
 
+			reference operator[](size_type n) {	return _Data[n]; };
+
 			const_reference operator[](size_type n) const {	return _Data[n]; };
 
-			reference operator[](size_type n) {	return _Data[n]; };
+			reference at (size_type n)
+			{
+				if (n >= _size)
+					throw std::out_of_range("vector");
+				else
+					return _Data[n];
+			}
+
+			const_reference at (size_type n) const
+			{
+				if (n >= _size)
+					throw std::out_of_range("vector");
+				else
+					return _Data[n];
+			}
 
 			bool empty () const {return (_size == 0); };
 
@@ -87,6 +104,25 @@ namespace ft {
 			void resize(size_type n, value_type val = value_type())
 			{
 				while (n < _size) pop_back(); while (n > _size) push_back(val);
+			}
+
+			void swap (vector& x)
+			{
+				value_type	*data_tmp;
+				size_type	size_tmp;
+				size_type	capacity_tmp;
+				
+				data_tmp = _Data;
+				_Data = x._Data;
+				x._Data = data_tmp;
+
+				size_tmp = _size;
+				_size = x._size;
+				x._size = size_tmp;
+
+				capacity_tmp = _capacity;
+				_capacity = x._capacity;
+				x._capacity = capacity_tmp;
 			}
 
 		private:
