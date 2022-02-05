@@ -75,7 +75,7 @@ int main()
 	print_vector(my_vector);
 	
 	ft::vector<int> other_vector;
-	N = 8;
+	N = 17;
 	for (i = 0; i < N; i++)
 	{
 		other_vector.push_back(i * (-10));
@@ -96,10 +96,21 @@ int main()
 	std::cout << "Sec Vector:\n"; print_vector(second_vector);
 
 	ft::vector<int>::iterator	it_1;
-//	it_1 = &my_vector;
-//	std::cout << "Iterator 1: " << it_1 << std::endl;
+	ft::vector<int>*			p;
+	p = &my_vector;
+	std::cout << "           my_vector: " << &my_vector << std::endl;
+	std::cout << "pointer to my_vector: " << p << std::endl;
+//	ft::vector<int>::iterator  it_2(p);
 
+	my_vector = second_vector; // assign para menor
+	std::cout << "my_vector = second_vector\n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Sec Vector:\n"; print_vector(second_vector);
 
+	my_vector = other_vector; // assign para maior
+	std::cout << "my_vector = other_vector\n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Other Vector:\n"; print_vector(other_vector);
 
 	// ==========================================
 	fin = clock();

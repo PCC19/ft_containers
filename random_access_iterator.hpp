@@ -9,8 +9,7 @@ namespace ft
 	class random_access_iterator
 	{
 		public:
-		typedef typename C::pointer			pointer;
-		typedef typename C::const_pointer	const_pointer;
+		typedef typename C::pointer				pointer;
 
 
 		// Methods

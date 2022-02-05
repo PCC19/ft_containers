@@ -30,26 +30,29 @@ namespace ft {
 			 */
 			 // Default constructor
 			explicit vector(const allocator_type & alloc = allocator_type()) :
-				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0)
+				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0) {};
+
+			// Assignment operator
+			vector & operator=(const vector & x)
 			{
-//				this->_Data = new T[1000];
-//				std::cout << "Constructor: Vector" << std::endl;
+				if (this != &x){
+					if(this->capacity() < x.size()){
+						this->_Alloc.deallocate(this->_Data, this->capacity());
+						this->_Data = this->_Alloc.allocate(x.size());
+						this->_capacity = x.size();
+					}
+					for (size_type i = 0; i < x.size(); i++){
+						this->_Alloc.construct(&_Data[i], x[i]);
+					}
+					this->_size = x.size();
+				}
+				return *this;
 			};
 
+
 			// Copy constructor
-			vector (const vector & x)
-			{
-				this->_size = x._size;
-				this->_capacity = x._capacity;
-				this->_Alloc = x._Alloc;
-				this->_Data = _Alloc.allocate(_capacity);
-				size_type i = 0;
-				while (i < _size)
-				{
-					_Data[i] = x._Data[i];
-					i++;
-				}
-			}
+			vector (const vector & x):_Data(nullptr), _Alloc(allocator_type()), _capacity(0)
+			{ *this = x; }
 
 			// Destructor
 			~vector() { 
@@ -66,11 +69,6 @@ namespace ft {
 			reference operator[](size_type n) {	return _Data[n]; };
 
 			const_reference operator[](size_type n) const {	return _Data[n]; };
-
-			// Assignment operator
-//			vector& operator=(const vector &x)
-//			{
-//			}
 
 
 			reference at (size_type n)
