@@ -6,6 +6,7 @@
 #endif
 #if V // ft
 	#include "vector.hpp"
+	#include "random_access_iterator.hpp"
 #else // stl
 	#include <vector>
 	namespace ft = std;
@@ -93,6 +94,10 @@ int main()
 	my_vector.push_back(1);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	std::cout << "Sec Vector:\n"; print_vector(second_vector);
+
+	ft::vector<int>::iterator	it_1;
+//	it_1 = &my_vector;
+//	std::cout << "Iterator 1: " << it_1 << std::endl;
 
 
 

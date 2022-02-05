@@ -11,7 +11,8 @@ SDIR =	./
 ODIR =	./
 
 #SRCS =	$(SDIR)main.cpp
-HEADERS = $(HEADER_DIR)vector.hpp
+HEADERS = $(HEADER_DIR)vector.hpp\
+			$(HEADER_DIR)random_access_iterator.hpp
 
 OBJS =	$(patsubst $(SDIR)%.cpp, $(ODIR)%.o, $(SRCS))
 
@@ -20,8 +21,8 @@ C_FLAGS = -Wall -Werror -Wextra -g -std=c++98
 C_SANIT = -fsanitize=address
 
 $(NAME):	$(OBJS) $(MAIN) $(HEADERS)
-	$(CC) -I $(HEADERS) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
-	$(CC) -I $(HEADERS) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=0 -o $(NAME2)
+	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
+	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=0 -o $(NAME2)
 	echo CONCLUIDO
 
 $(ODIR)%.o: $(SDIR)%.cpp

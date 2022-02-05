@@ -1,6 +1,7 @@
 #ifndef FT_VECTOR_HPP
 #define FT_VECTOR_HPP
 
+#include "random_access_iterator.hpp"
 #include <memory>
 #include <stdexcept>
 
@@ -17,6 +18,12 @@ namespace ft {
 			 typedef std::size_t							size_type;
 			 typedef typename Allocator::const_reference	const_reference;
 			 typedef typename Allocator::reference			reference;
+			 typedef typename Allocator::pointer			pointer;
+			 typedef typename Allocator::const_pointer		const_pointer;
+			 typedef ft::random_access_iterator<vector>		iterator;
+			 typedef ft::random_access_iterator<vector>		const_interator;
+
+
 
 			/*
 			 * METHODS
@@ -43,7 +50,6 @@ namespace ft {
 					i++;
 				}
 			}
-
 
 			// Destructor
 			~vector() { 
@@ -134,6 +140,7 @@ namespace ft {
 			{
 				// Versao Mac
 				// while (n < _size) pop_back(); while (n > _size) push_back(val);
+
 				// Versao Linux
 				while (n < _size) pop_back();
 				if (n > _capacity)
