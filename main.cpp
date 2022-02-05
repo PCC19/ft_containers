@@ -87,6 +87,7 @@ int main()
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	std::cout << "Other Vector:\n"; print_vector(other_vector);
 
+	std::cout << "ft::vector<int> second_vector(my_vector);\n";
 	ft::vector<int> second_vector(my_vector);
 	my_vector.push_back(99);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
@@ -111,6 +112,23 @@ int main()
 	std::cout << "my_vector = other_vector\n";
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	std::cout << "Other Vector:\n"; print_vector(other_vector);
+
+	ft::vector<int>::iterator itb;
+	ft::vector<int>::iterator ite;
+
+	std::cout << "ITERATORS: \n";
+	itb = my_vector.begin();
+	ite = my_vector.end();
+
+	--ite;
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "begin       element: " << *itb << std::endl;
+	std::cout << "  end       element: " << *(ite) << std::endl;
+	std::cout << "begin pos 1 element: " << *(itb++) << " : " << *itb << std::endl;
+	std::cout << "  end       element: " << *(ite) << std::endl;
+	std::cout << "begin pre 1 element: " << *(++itb) << std::endl;
+	std::cout << "  end       element: " << *(ite) << std::endl;
+
 
 	// ==========================================
 	fin = clock();

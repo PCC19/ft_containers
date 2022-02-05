@@ -74,6 +74,7 @@ Other Vector:
 |0|10|20|800|800|800|800|0|10|20|30|40|
 size: 12		capacity: 16
 -----------------------------------
+ft::vector<int> second_vector(my_vector);
 My Vector:
 -----------------------------------
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|99|
@@ -94,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffd8086a460
-pointer to my_vector: 0x7ffd8086a460
+           my_vector: 0x7ffc2d22d680
+pointer to my_vector: 0x7ffc2d22d680
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -118,4 +119,16 @@ Other Vector:
 |0|10|20|800|800|800|800|0|10|20|30|40|
 size: 12		capacity: 16
 -----------------------------------
-Elapsed time: 3.468ms
+ITERATORS: 
+My Vector:
+-----------------------------------
+|0|10|20|800|800|800|800|0|10|20|30|40|
+size: 12		capacity: 32
+-----------------------------------
+begin       element: 0
+  end       element: 40
+begin pos 1 element: 0 : 10
+  end       element: 40
+begin pre 1 element: 20
+  end       element: 40
+Elapsed time: 4.554ms

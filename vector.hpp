@@ -32,7 +32,7 @@ namespace ft {
 			explicit vector(const allocator_type & alloc = allocator_type()) :
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0) {};
 
-			// Assignment operator
+			// Assignment constructor
 			vector & operator=(const vector & x)
 			{
 				if (this != &x){
@@ -49,14 +49,12 @@ namespace ft {
 				return *this;
 			};
 
-
 			// Copy constructor
 			vector (const vector & x):_Data(nullptr), _Alloc(allocator_type()), _capacity(0)
 			{ *this = x; }
 
 			// Destructor
 			~vector() { 
-//				std::cout << "s: " << this->_size << " c: " << this->_capacity << std::endl;
 				_Alloc.deallocate(_Data, _capacity);
 				};
 
@@ -69,7 +67,6 @@ namespace ft {
 			reference operator[](size_type n) {	return _Data[n]; };
 
 			const_reference operator[](size_type n) const {	return _Data[n]; };
-
 
 			reference at (size_type n)
 			{
@@ -164,6 +161,17 @@ namespace ft {
 				_capacity = x._capacity;
 				x._capacity = capacity_tmp;
 			}
+
+			/*
+			 * ITERATORS
+			 */
+
+			iterator begin()		{ return iterator(_Data); };
+			iterator end()			{ return iterator(_Data + _size); };
+			iterator begin() const	{ return const_iterator(_Data); };
+			iterator end() const	{ return const_iterator(_Data + _size); };
+
+
 
 		private:
 			void allocate_if_needed(size_type n = 1)
