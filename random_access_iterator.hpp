@@ -8,12 +8,11 @@ namespace ft
 	class random_access_iterator
 	{
 		public:
+		// Types
 		typedef typename C::pointer				pointer;
 		typedef typename C::reference			reference;
 		typedef typename C::size_type			size_type;
 		typedef typename C::difference_type		difference_type;
-
-
 
 		// Methods
 		random_access_iterator ()									{};
@@ -40,13 +39,11 @@ namespace ft
 			this->_ptr++;
 			return *this;
 		}
-
 		random_access_iterator & operator-- ()
 		{
 			_ptr--;
 			return *this;
 		}
-
 		random_access_iterator operator++(int)
 		{
 			random_access_iterator tmp;
@@ -55,7 +52,6 @@ namespace ft
 			this->_ptr++;
 			return (tmp);
 		}
-
 		random_access_iterator operator--(int)
 		{
 			random_access_iterator tmp;
@@ -64,7 +60,6 @@ namespace ft
 			this->_ptr--;
 			return (tmp);
 		}
-
 
 		// Arithmetics:
 		random_access_iterator operator+(size_type n) const
@@ -120,6 +115,7 @@ namespace ft
 			return (_ptr <= x._ptr);
 		}
 			
+		// Atributes
 		protected:
 		pointer _ptr;
 
