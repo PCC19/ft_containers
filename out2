@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffc2d22d680
-pointer to my_vector: 0x7ffc2d22d680
+           my_vector: 0x7fff2a361060
+pointer to my_vector: 0x7fff2a361060
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -131,4 +131,36 @@ begin pos 1 element: 0 : 10
   end       element: 40
 begin pre 1 element: 20
   end       element: 40
-Elapsed time: 4.554ms
+Arithmetics: 
+it = itb + n: 
+begin       element: 0
+begin + 1: 10
+begin + 2: 20
+begin + 3: 800
+it += nbegin       element: 0
+begin += 1: 10
+it - begin: 1
+begin += 2: 20
+it - begin: 2
+begin += 3: 800
+it - begin: 3
+begin       element: 0
+begin[1]: 10
+begin[2]: 20
+begin[3]: 800
+Relational: 
+itb = begin   ite = end: 
+begin == end ? 0
+begin != end ? 1
+begin <  end ? 1
+begin >  end ? 0
+begin <= end ? 1
+begin >= end ? 0
+itb = begin   ite = begin: 
+begin == end ? 1
+begin != end ? 0
+begin <  end ? 0
+begin >  end ? 0
+begin <= end ? 1
+begin >= end ? 1
+Elapsed time: 5.299ms

@@ -129,6 +129,45 @@ int main()
 	std::cout << "begin pre 1 element: " << *(++itb) << std::endl;
 	std::cout << "  end       element: " << *(ite) << std::endl;
 
+	std::cout << "Arithmetics: \n";
+	ft::vector<int>::iterator it;
+	itb = my_vector.begin();
+	it = itb;
+	std::cout << "it = itb + n: \n";
+	std::cout << "begin       element: " << *itb << std::endl;
+	it = itb + 1; std::cout << "begin + 1: " << *(it) << std::endl;
+	it = itb + 2; std::cout << "begin + 2: " << *(it) << std::endl;
+	it = itb + 3; std::cout << "begin + 3: " << *(it) << std::endl;
+	std::cout << "it += n";
+	std::cout << "begin       element: " << *itb << std::endl;
+	it = itb; it+=1; std::cout << "begin += 1: " << *(it) << std::endl;
+	std::cout << "it - begin: " << (it - itb) << std::endl;
+	it = itb; it+=2; std::cout << "begin += 2: " << *(it) << std::endl;
+	std::cout << "it - begin: " << (it - itb) << std::endl;
+	it = itb; it+=3; std::cout << "begin += 3: " << *(it) << std::endl;
+	std::cout << "it - begin: " << (it - itb) << std::endl;
+	std::cout << "begin       element: " << *itb << std::endl;
+	std::cout << "begin[1]: " << (itb[1]) << std::endl;
+	std::cout << "begin[2]: " << (itb[2]) << std::endl;
+	std::cout << "begin[3]: " << (itb[3]) << std::endl;
+	std::cout << "Relational: \n";
+	std::cout << "itb = begin   ite = end: \n";
+	std::cout << "begin == end ? " << (itb == ite) << std::endl;
+	std::cout << "begin != end ? " << (itb != ite) << std::endl;
+	std::cout << "begin <  end ? " << (itb <  ite) << std::endl;
+	std::cout << "begin >  end ? " << (itb >  ite) << std::endl;
+	std::cout << "begin <= end ? " << (itb <= ite) << std::endl;
+	std::cout << "begin >= end ? " << (itb >= ite) << std::endl;
+	std::cout << "itb = begin   ite = begin: \n";
+	ite = itb;
+	std::cout << "begin == end ? " << (itb == ite) << std::endl;
+	std::cout << "begin != end ? " << (itb != ite) << std::endl;
+	std::cout << "begin <  end ? " << (itb <  ite) << std::endl;
+	std::cout << "begin >  end ? " << (itb >  ite) << std::endl;
+	std::cout << "begin <= end ? " << (itb <= ite) << std::endl;
+	std::cout << "begin >= end ? " << (itb >= ite) << std::endl;
+
+
 
 	// ==========================================
 	fin = clock();

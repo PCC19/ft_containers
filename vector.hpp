@@ -22,6 +22,7 @@ namespace ft {
 			 typedef typename Allocator::const_pointer		const_pointer;
 			 typedef ft::random_access_iterator<vector>		iterator;
 			 typedef ft::random_access_iterator<vector>		const_interator;
+			 typedef std::ptrdiff_t							difference_type;
 
 
 
