@@ -44,6 +44,9 @@ run:
 	./$(NAME)
 
 val:	$(OBJS)
-	$(CC) $(OBJS) $(C_FLAGS) $(HEADERS) $(L_FLAGS) -o $(NAME)
+	#$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
+	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
 	echo CONCLUIDO
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
+
+.phony: all clean fclean re run val

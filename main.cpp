@@ -7,6 +7,7 @@
 #if V // ft
 	#include "vector.hpp"
 	#include "random_access_iterator.hpp"
+	#include "reverse_iterator.hpp"
 #else // stl
 	#include <vector>
 	namespace ft = std;
@@ -167,7 +168,15 @@ int main()
 	std::cout << "begin <= end ? " << (itb <= ite) << std::endl;
 	std::cout << "begin >= end ? " << (itb >= ite) << std::endl;
 
-
+	std::cout << "Reverse Iterators: \n";
+	ft::vector<int>::reverse_iterator rit, ritb, rite;
+	ritb = my_vector.rbegin();
+	rite = my_vector.rend();
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Reversed: \n";
+	for (rit = ritb; rit != rite; rit++)
+		std::cout << *rit << "|";
+	std::cout << std::endl;
 
 	// ==========================================
 	fin = clock();

@@ -2,6 +2,7 @@
 #define FT_VECTOR_HPP
 
 #include "random_access_iterator.hpp"
+#include "reverse_iterator.hpp"
 #include <memory>
 #include <stdexcept>
 
@@ -23,6 +24,8 @@ namespace ft {
 			 typedef ft::random_access_iterator<vector>		iterator;
 			 typedef ft::random_access_iterator<vector>		const_interator;
 			 typedef std::ptrdiff_t							difference_type;
+			 typedef ft::reverse_iterator<vector>			reverse_iterator;
+			 typedef ft::reverse_iterator<vector>			const_reverse_interator;
 
 
 
@@ -172,6 +175,10 @@ namespace ft {
 			iterator begin() const	{ return const_iterator(_Data); };
 			iterator end() const	{ return const_iterator(_Data + _size); };
 
+			reverse_iterator rbegin()		{ return reverse_iterator(_Data + _size -1); };
+			reverse_iterator rend()			{ return reverse_iterator(_Data - 1); };
+			reverse_iterator rbegin() const	{ return reverse_iterator(_Data + _size -1); };
+			reverse_iterator rend() const	{ return reverse_iterator(_Data - 1); };
 
 
 		private:
