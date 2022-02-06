@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <typeinfo>
 #include "utils.hpp"
 #ifndef nullptr
 	#define nullptr NULL
@@ -177,6 +178,13 @@ int main()
 	for (rit = ritb; rit != rite; rit++)
 		std::cout << *rit << "|";
 	std::cout << std::endl;
+
+
+	std::cout << "Front and Back: \n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Front: " << my_vector.front() << " back: " << my_vector.back() << std::endl;
+	std::cout << "Sec  Vector:\n"; print_vector(second_vector);
+	std::cout << "Front: " << second_vector.front() << "\t\tback: " << second_vector.back() << std::endl;
 
 	// ==========================================
 	fin = clock();

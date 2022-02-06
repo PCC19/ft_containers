@@ -13,6 +13,7 @@ namespace ft
 		typedef typename C::reference			reference;
 		typedef typename C::size_type			size_type;
 		typedef typename C::difference_type		difference_type;
+		typedef typename C::iterator_category	iterator_category;
 
 		// Methods
 		random_access_iterator ()									{};

@@ -26,7 +26,7 @@ namespace ft {
 			 typedef std::ptrdiff_t							difference_type;
 			 typedef ft::reverse_iterator<vector>			reverse_iterator;
 			 typedef ft::reverse_iterator<vector>			const_reverse_interator;
-
+			 typedef std::random_access_iterator_tag		iterator_category;
 
 
 			/*
@@ -87,6 +87,11 @@ namespace ft {
 				else
 					return _Data[n];
 			}
+
+			reference front ()				{ return *begin(); };
+			const_reference front () const	{ return *begin(); };
+			reference back()				{ return *(end() -1); };
+			const_reference back() const	{ return *(end() -1); };
 
 			bool empty () const {return (_size == 0); };
 
