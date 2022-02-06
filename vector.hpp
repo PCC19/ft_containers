@@ -68,6 +68,7 @@ namespace ft {
 
 			allocator_type get_allocator() const { return _Alloc; };
 
+			// Element Access
 			reference operator[](size_type n) {	return _Data[n]; };
 
 			const_reference operator[](size_type n) const {	return _Data[n]; };

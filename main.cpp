@@ -179,7 +179,6 @@ int main()
 		std::cout << *rit << "|";
 	std::cout << std::endl;
 
-
 	std::cout << "Front and Back: \n";
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	std::cout << "Front: " << my_vector.front() << " back: " << my_vector.back() << std::endl;
