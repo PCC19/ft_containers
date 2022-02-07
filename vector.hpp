@@ -227,7 +227,6 @@ namespace ft {
 				_size = n;
 			};
 
-
 			iterator erase (iterator position)
 			{
 				iterator it;
@@ -241,6 +240,17 @@ namespace ft {
 				}
 				_size--;
 				return position;
+			}
+
+			iterator erase (iterator first, iterator last)
+			{
+				size_type n;
+				iterator it;
+
+				n = last - first;
+				it = first;
+				while (n-- > 0) it = erase(it);
+				return first;
 			}
 
 

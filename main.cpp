@@ -209,17 +209,29 @@ int main()
 //	std::cout << "From My Vector (+2 -2): \n"; print_vector(my_vector);
 
 
-	std::cout << "Erase: \n";
+	std::cout << "Erase position: \n";
 	my_vector.clear();
 	N = 10;
 	int j;
 	for (j = 1; j < N; j++) my_vector.push_back(j * 10);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
-	ft::vector<int>::iterator it_erase;
+	ft::vector<int>::iterator it_erase, aux;
 	it_erase = my_vector.begin();
 	it_erase += 3;
-	my_vector.erase(it_erase);
+	aux = my_vector.erase(it_erase);
 	std::cout << "My Vector erased:\n"; print_vector(my_vector);
+	std::cout << "Position :" << *aux << std::endl;
+
+	std::cout << "Erase range: \n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	ft::vector<int>::iterator it_erase_end;
+	it_erase = my_vector.begin();
+	it_erase += 3;
+	it_erase_end = it_erase;
+	it_erase_end += 2;
+	std::cout << "first: " << *it_erase << " last: " << *it_erase_end << std::endl;
+	my_vector.erase(it_erase, it_erase_end);
+	std::cout << "My Vector erased range :\n"; print_vector(my_vector);
 
 
 
