@@ -199,13 +199,27 @@ int main()
 	std::cout << "Fill  Vector (5 100):\n"; print_vector(fill_vector);
 
 
+//	my_vector.clear();
+//	N = 10;
+//	int j;
+//	for (j = 1; j < N; j++) my_vector.push_back(j * 10);
+//	std::cout << "My Vector:\n"; print_vector(my_vector);
+//	ft::vector<int> from_my_vector;
+//	from_my_vector.assign(my_vector.begin() + 2, my_vector.end() - 2);
+//	std::cout << "From My Vector (+2 -2): \n"; print_vector(my_vector);
+
+
+	std::cout << "Erase: \n";
 	my_vector.clear();
-	std::cout << "cleared My Vector:\n"; print_vector(my_vector);
 	N = 10;
 	int j;
-	for (j = 1; j < N; j++)
-		my_vector.push_back(j * 10);
+	for (j = 1; j < N; j++) my_vector.push_back(j * 10);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
+	ft::vector<int>::iterator it_erase;
+	it_erase = my_vector.begin();
+	it_erase += 3;
+	my_vector.erase(it_erase);
+	std::cout << "My Vector erased:\n"; print_vector(my_vector);
 
 
 

@@ -195,7 +195,24 @@ namespace ft {
 			reverse_iterator rend() const	{ return reverse_iterator(_Data - 1); };
 
 
-			void assign (size_type n, const value_type val)
+//			template <class InputIterator>
+//			void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
+//			{
+//				int i;
+//				_size = last - first;
+//				resize(_size);
+//				_capacity = _size;
+//				i = 0;
+//				while (first < last)
+//				{
+//					_Alloc.destroy(&_Data[i]);
+//					_Alloc.construct(&_Data[i], *first);
+//					i++;
+//					first++;
+//				}
+//			};
+
+			void assign (size_type n, const value_type &val)
 			{
 				size_type i;
 
@@ -210,22 +227,21 @@ namespace ft {
 				_size = n;
 			};
 
-//			template <class InputIterator>
-//			void assign (InputIterator first, InputIterator last)
-//			{
-//				int i;
-//				_size = last - first;
-//				resize(_size);
-//				_capacity = _size;
-//				i = 0;
-//				while (first < last)
-//				{
-//					_Alloc.destroy(&_Data[i]);
-//					_Alloc.construct(&_Data[i], first);
-//					i++;
-//					first++;
-//				}
-//			};
+
+			iterator erase (iterator position)
+			{
+				iterator it;
+				it = position;
+				it++;
+				while (it != end())
+				{
+					_Alloc.destroy(&(*(it-1)));
+					*(it-1) = *it;
+					it++;
+				}
+				_size--;
+				return position;
+			}
 
 
 
