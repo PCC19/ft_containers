@@ -210,6 +210,24 @@ namespace ft {
 				_size = n;
 			};
 
+//			template <class InputIterator>
+//			void assign (InputIterator first, InputIterator last)
+//			{
+//				int i;
+//				_size = last - first;
+//				resize(_size);
+//				_capacity = _size;
+//				i = 0;
+//				while (first < last)
+//				{
+//					_Alloc.destroy(&_Data[i]);
+//					_Alloc.construct(&_Data[i], first);
+//					i++;
+//					first++;
+//				}
+//			};
+
+
 
 		private:
 			void allocate_if_needed(size_type n = 1)
@@ -221,6 +239,8 @@ namespace ft {
 					new_capacity = 1;
 				else
 					new_capacity = _capacity;
+				if (_Data == nullptr)
+					_Data = _Alloc.allocate(new_capacity);
 				if (_size + n >= _capacity)
 				{
 					while (new_capacity < _size + n)

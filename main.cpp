@@ -199,6 +199,16 @@ int main()
 	std::cout << "Fill  Vector (5 100):\n"; print_vector(fill_vector);
 
 
+	my_vector.clear();
+	std::cout << "cleared My Vector:\n"; print_vector(my_vector);
+	N = 10;
+	int j;
+	for (j = 1; j < N; j++)
+		my_vector.push_back(j * 10);
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+
+
+
 
 	// ==========================================
 	fin = clock();
