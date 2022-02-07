@@ -227,6 +227,7 @@ namespace ft {
 				_size = n;
 			};
 
+			// Erase position
 			iterator erase (iterator position)
 			{
 				iterator it;
@@ -242,6 +243,7 @@ namespace ft {
 				return position;
 			}
 
+			// Erase range
 			iterator erase (iterator first, iterator last)
 			{
 				size_type n;
@@ -253,13 +255,13 @@ namespace ft {
 				return first;
 			}
 
+			// Insert position
 			iterator insert (iterator position, const value_type& val)
 			{
 				iterator it;
 
 				if (_size == _capacity) resize(_size);
 				it = end();
-				it--;
 				while (it != position)
 				{
 					*it = *(it -1);
@@ -271,6 +273,13 @@ namespace ft {
 
 				return position++;
 			};
+
+			// Insert fill
+			void insert (iterator position, size_type n, const value_type& val)
+			{ 
+				while (n-- > 0) insert(position, val);
+			};
+
 
 
 		private:

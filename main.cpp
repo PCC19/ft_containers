@@ -240,6 +240,9 @@ int main()
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	my_vector.insert(it_insert_position, 111);
 	std::cout << "My Vector insert 3:\n"; print_vector(my_vector);
+	std::cout << "Insert fill : \n";
+	my_vector.insert(it_insert_position, 3, 333);
+	std::cout << "My Vector insert 3, 3, 333:\n"; print_vector(my_vector);
 
 
 

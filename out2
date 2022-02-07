@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffe90b2e0e0
-pointer to my_vector: 0x7ffe90b2e0e0
+           my_vector: 0x7ffeaf0c9360
+pointer to my_vector: 0x7ffeaf0c9360
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -247,4 +247,10 @@ My Vector insert 3:
 |10|20|30|111|70|80|90|
 size: 7		capacity: 35
 -----------------------------------
-Elapsed time: 7.787ms
+Insert fill : 
+My Vector insert 3, 3, 333:
+-----------------------------------
+|10|20|30|333|333|333|111|70|80|90|
+size: 10		capacity: 35
+-----------------------------------
+Elapsed time: 7.897ms
