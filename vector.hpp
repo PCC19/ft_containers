@@ -187,6 +187,22 @@ namespace ft {
 			reverse_iterator rend() const	{ return reverse_iterator(_Data - 1); };
 
 
+			void assign (size_type n, const value_type val)
+			{
+				size_type i;
+
+				if (n > _capacity)
+					resize(n);
+				for (i = 0; i < _capacity; i++)
+				{
+					_Alloc.destroy(&_Data[i]);
+					if (i < n )
+						_Alloc.construct(&_Data[i], val);
+				}
+				_size = n;
+			};
+
+
 		private:
 			void allocate_if_needed(size_type n = 1)
 			{

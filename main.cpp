@@ -185,6 +185,16 @@ int main()
 	std::cout << "Sec  Vector:\n"; print_vector(second_vector);
 	std::cout << "Front: " << second_vector.front() << "\t\tback: " << second_vector.back() << std::endl;
 
+	std::cout << "Assign menor que capacity: \n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	my_vector.assign(3, 13);
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "Assign maior que capacity: \n";
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	my_vector.assign(35, 13);
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+
+
 	// ==========================================
 	fin = clock();
 	elapsed_time = 1000 * ((double) fin - (double) ini) / (double) (CLOCKS_PER_SEC);
