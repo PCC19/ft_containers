@@ -194,6 +194,11 @@ int main()
 	my_vector.assign(35, 13);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 
+	std::cout << "Fill Constructor: \n";
+	ft::vector<int> fill_vector(5, 100);
+	std::cout << "Fill  Vector (5 100):\n"; print_vector(fill_vector);
+
+
 
 	// ==========================================
 	fin = clock();

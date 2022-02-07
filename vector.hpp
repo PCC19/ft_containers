@@ -36,7 +36,15 @@ namespace ft {
 			explicit vector(const allocator_type & alloc = allocator_type()) :
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0) {};
 
-			// Assignment constructor
+			// Fill Constructor
+			explicit vector (size_type n, const value_type val = value_type(), 
+				const allocator_type & alloc = allocator_type()):
+				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0)
+			{
+				assign(n, val);
+			};
+
+			// Copy constructor
 			vector & operator=(const vector & x)
 			{
 				if (this != &x){
