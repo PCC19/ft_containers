@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7fff83784ce0
-pointer to my_vector: 0x7fff83784ce0
+           my_vector: 0x7fff35da0d60
+pointer to my_vector: 0x7fff35da0d60
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -236,4 +236,15 @@ My Vector erased range :
 |10|20|30|70|80|90|
 size: 6		capacity: 35
 -----------------------------------
-Elapsed time: 7.773ms
+Insert position: 
+My Vector:
+-----------------------------------
+|10|20|30|70|80|90|
+size: 6		capacity: 35
+-----------------------------------
+My Vector insert 3:
+-----------------------------------
+|10|20|30|111|70|80|90|
+size: 7		capacity: 35
+-----------------------------------
+Elapsed time: 7.788ms

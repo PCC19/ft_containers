@@ -233,6 +233,14 @@ int main()
 	my_vector.erase(it_erase, it_erase_end);
 	std::cout << "My Vector erased range :\n"; print_vector(my_vector);
 
+	std::cout << "Insert position: \n";
+	ft::vector<int>::iterator it_insert_position;
+	it_insert_position = my_vector.begin();
+	it_insert_position += 3;
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	my_vector.insert(it_insert_position, 111);
+	std::cout << "My Vector insert 3:\n"; print_vector(my_vector);
+
 
 
 

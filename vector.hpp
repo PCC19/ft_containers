@@ -253,6 +253,24 @@ namespace ft {
 				return first;
 			}
 
+			iterator insert (iterator position, const value_type& val)
+			{
+				iterator it;
+
+				if (_size == _capacity) resize(_size);
+				it = end();
+				it--;
+				while (it != position)
+				{
+					*it = *(it -1);
+					it--;
+				}
+				_Alloc.destroy(&(*position));
+				_Alloc.construct(&(*position), val);
+				_size++;
+
+				return position++;
+			};
 
 
 		private:
@@ -284,7 +302,6 @@ namespace ft {
 					_capacity = new_capacity;
 				}
 			}
-
 
 		protected:
 			value_type*		_Data;
