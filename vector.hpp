@@ -310,13 +310,52 @@ namespace ft {
 					_Data = tmp;
 					_capacity = new_capacity;
 				}
-			}
+			};
 
 		protected:
 			value_type*		_Data;
 			allocator_type	_Alloc;
 			size_type		_size;
 			size_type		_capacity;
+
+	};
+
+	/*
+	 * NON MEMBERS
+	 */
+
+	template <class iterator>
+	bool equal (iterator first1, iterator last1, iterator first2)
+	{
+		while (first1 != last1)
+		{
+			if (*first1 != *first2)
+				return false;
+			first1++;
+			first2++;
+		}
+		return true;
+	};
+
+	template <typename T, class Alloc>
+	bool  operator==(vector<T,Alloc>& lhs, vector<T,Alloc>& rhs)
+	{
+		if (lhs.size() == rhs.size())
+			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+		else
+			return false;
+	};
+
+	template <typename T, class Alloc>
+	bool  operator!=(vector<T,Alloc>& lhs, vector<T,Alloc>& rhs)
+	{
+		return !(lhs == rhs);
+	};
+
+	template <typename T, class Alloc>
+	void swap (vector<T,Alloc> & lhs, vector<T,Alloc> & rhs)
+	{
+		lhs.swap(rhs);
 	};
 }
 #endif

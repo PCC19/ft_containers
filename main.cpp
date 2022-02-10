@@ -245,6 +245,19 @@ int main()
 	std::cout << "My Vector insert 3, 3, 333:\n"; print_vector(my_vector);
 
 
+	std::cout << "Teste do equal :\n";
+	ft::vector<int> v1, v2;
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v2 = v1;
+	std::cout << "v1:\n"; print_vector(v1);
+	std::cout << "v2:\n"; print_vector(v2);
+	std::cout << "v1 == v2 ? : " << (v1 == v2) << std::endl;
+	v1.push_back(4);
+	std::cout << "v1:\n"; print_vector(v1);
+	std::cout << "v2:\n"; print_vector(v2);
+	std::cout << "v1 == v2 ? : " << (v1 == v2) << std::endl;
 
 
 	// ==========================================
