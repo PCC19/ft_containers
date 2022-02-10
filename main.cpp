@@ -258,6 +258,23 @@ int main()
 	std::cout << "v1:\n"; print_vector(v1);
 	std::cout << "v2:\n"; print_vector(v2);
 	std::cout << "v1 == v2 ? : " << (v1 == v2) << std::endl;
+	std::cout << "v1 != v2 ? : " << (v1 != v2) << std::endl;
+
+	std::cout << "Non Members overloads: \n";
+	v1.pop_back();
+	std::cout << "v1:\n"; print_vector(v1);
+	std::cout << "v2:\n"; print_vector(v2);
+	std::cout << "v1 <  v2 ? : " << (v1 < v2) << std::endl;
+	std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
+	std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
+	std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
+	v1.push_back(5);
+	std::cout << "v1:\n"; print_vector(v1);
+	std::cout << "v2:\n"; print_vector(v2);
+	std::cout << "v1 <  v2 ? : " << (v1 < v2) << std::endl;
+	std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
+	std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
+	std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
 
 
 	// ==========================================
