@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 17:38:43 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:18:26 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,11 +213,9 @@ namespace ft {
 			void assign (InputIterator first, InputIterator last,
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
 			{
-				std::cout << "ASSIGN RANGE\n";
 				int i;
-				_size = last - first;
-				std::cout << "size: " << _size << std::endl;
-				resize(_size);
+
+				resize(last - first);
 				_capacity = _size;
 				i = 0;
 				while (first < last)
@@ -231,7 +229,6 @@ namespace ft {
 
 			void assign (size_type n, const value_type &val)
 			{
-				std::cout << "ASSIGN SIMPLES\n";
 				size_type i;
 
 				if (n > _capacity)

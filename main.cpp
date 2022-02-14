@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 17:42:32 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:17:01 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int main()
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	ft::vector<int> from_my_vector;
 	from_my_vector.assign((my_vector.begin() + 2), (my_vector.end() - 2));
-	std::cout << "From My Vector (+2 -2): \n"; print_vector(my_vector);
+	std::cout << "From My Vector (+2 -2): \n"; print_vector(from_my_vector);
 
 
 	std::cout << "Erase position: \n";
