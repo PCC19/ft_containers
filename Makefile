@@ -12,7 +12,11 @@ ODIR =	./
 
 #SRCS =	$(SDIR)main.cpp
 HEADERS = $(HEADER_DIR)vector.hpp\
-			$(HEADER_DIR)random_access_iterator.hpp
+			$(HEADER_DIR)random_access_iterator.hpp\
+			$(HEADER_DIR)reverse_iterator.hpp\
+			$(HEADER_DIR)reverse_iterator.hpp\
+			$(HEADER_DIR)iterator_traits.hpp\
+			$(HEADER_DIR)type_traits.hpp
 
 OBJS =	$(patsubst $(SDIR)%.cpp, $(ODIR)%.o, $(SRCS))
 

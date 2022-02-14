@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/13 01:15:27 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/02/14 17:38:43 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "random_access_iterator.hpp"
 #include "reverse_iterator.hpp"
+#include "iterator_traits.hpp"
+#include "type_traits.hpp"
 #include <memory>
 #include <stdexcept>
 
@@ -207,25 +209,29 @@ namespace ft {
 			reverse_iterator rend() const	{ return reverse_iterator(_Data - 1); };
 
 
-//			template <class InputIterator>
-//			void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
-//			{
-//				int i;
-//				_size = last - first;
-//				resize(_size);
-//				_capacity = _size;
-//				i = 0;
-//				while (first < last)
-//				{
-//					_Alloc.destroy(&_Data[i]);
-//					_Alloc.construct(&_Data[i], *first);
-//					i++;
-//					first++;
-//				}
-//			};
+			template <class InputIterator>
+			void assign (InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
+			{
+				std::cout << "ASSIGN RANGE\n";
+				int i;
+				_size = last - first;
+				std::cout << "size: " << _size << std::endl;
+				resize(_size);
+				_capacity = _size;
+				i = 0;
+				while (first < last)
+				{
+					_Alloc.destroy(&_Data[i]);
+					_Alloc.construct(&_Data[i], *first);
+					i++;
+					first++;
+				}
+			};
 
 			void assign (size_type n, const value_type &val)
 			{
+				std::cout << "ASSIGN SIMPLES\n";
 				size_type i;
 
 				if (n > _capacity)

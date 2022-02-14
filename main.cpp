@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 17:08:02 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/02/14 17:42:32 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 	#include "vector.hpp"
 	#include "random_access_iterator.hpp"
 	#include "reverse_iterator.hpp"
-	#include "iterator_traits.hpp"
-	#include "type_traits.hpp"
 #else // stl
 	#include <vector>
 	namespace ft = std;
@@ -213,20 +211,21 @@ int main()
 	std::cout << "Fill  Vector (5 100):\n"; print_vector(fill_vector);
 
 
-//	my_vector.clear();
-//	N = 10;
-//	int j;
-//	for (j = 1; j < N; j++) my_vector.push_back(j * 10);
-//	std::cout << "My Vector:\n"; print_vector(my_vector);
-//	ft::vector<int> from_my_vector;
-//	from_my_vector.assign(my_vector.begin() + 2, my_vector.end() - 2);
-//	std::cout << "From My Vector (+2 -2): \n"; print_vector(my_vector);
+	// assign range
+	std::cout << "ASSIGN RANGE: \n";
+	my_vector.clear();
+	N = 10;
+	int j;
+	for (j = 1; j < N; j++) my_vector.push_back(j * 10);
+	std::cout << "My Vector:\n"; print_vector(my_vector);
+	ft::vector<int> from_my_vector;
+	from_my_vector.assign((my_vector.begin() + 2), (my_vector.end() - 2));
+	std::cout << "From My Vector (+2 -2): \n"; print_vector(my_vector);
 
 
 	std::cout << "Erase position: \n";
 	my_vector.clear();
 	N = 10;
-	int j;
 	for (j = 1; j < N; j++) my_vector.push_back(j * 10);
 	std::cout << "My Vector:\n"; print_vector(my_vector);
 	ft::vector<int>::iterator it_erase, aux;
