@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
+/*   Updated: 2022/02/14 17:08:02 by pcunha           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include <ctime>
 #include <typeinfo>
@@ -9,6 +21,8 @@
 	#include "vector.hpp"
 	#include "random_access_iterator.hpp"
 	#include "reverse_iterator.hpp"
+	#include "iterator_traits.hpp"
+	#include "type_traits.hpp"
 #else // stl
 	#include <vector>
 	namespace ft = std;
@@ -228,10 +242,11 @@ int main()
 	it_erase = my_vector.begin();
 	it_erase += 3;
 	it_erase_end = it_erase;
-	it_erase_end += 2;
+	it_erase_end += 4;
 	std::cout << "first: " << *it_erase << " last: " << *it_erase_end << std::endl;
-	my_vector.erase(it_erase, it_erase_end);
+	aux = my_vector.erase(it_erase, it_erase_end);
 	std::cout << "My Vector erased range :\n"; print_vector(my_vector);
+	std::cout << "Position :" << *aux << std::endl;
 
 	std::cout << "Insert position: \n";
 	ft::vector<int>::iterator it_insert_position;

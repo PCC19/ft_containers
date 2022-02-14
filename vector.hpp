@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
+/*   Updated: 2022/02/13 01:15:27 by pcunha           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_VECTOR_HPP
 #define FT_VECTOR_HPP
 
@@ -70,7 +82,7 @@ namespace ft {
 				_Alloc.deallocate(_Data, _capacity);
 				};
 
-			size_type size() const { return this->_size; };
+			size_type size() const { return (this->_size); };
 
 			size_type capacity() const { return this->_capacity; };
 
