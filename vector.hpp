@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 21:18:26 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:36:50 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,18 @@ namespace ft {
 				assign(n, val);
 			};
 
-			// Copy constructor
+			// Range constructor
+
+			template <class InputIterator>
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+				 typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0):
+					_Data(nullptr), _Alloc(alloc)
+			{
+				assign(first, last);
+			};
+
+
+			// Assignment operator
 			vector & operator=(const vector & x)
 			{
 				if (this != &x){

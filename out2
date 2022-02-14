@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffd43b07fc0
-pointer to my_vector: 0x7ffd43b07fc0
+           my_vector: 0x7ffc550eba00
+pointer to my_vector: 0x7ffc550eba00
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -223,6 +223,17 @@ From My Vector (+2 -2):
 |30|40|50|60|70|
 size: 5		capacity: 5
 -----------------------------------
+CONSTRUCTTOR RANGE: 
+My Vector:
+-----------------------------------
+|13|26|39|52|65|78|91|104|117|
+size: 9		capacity: 35
+-----------------------------------
+Range_Con_Vector (+2 -2): 
+-----------------------------------
+|39|52|65|78|91|
+size: 5		capacity: 5
+-----------------------------------
 Erase position: 
 My Vector:
 -----------------------------------
@@ -318,4 +329,4 @@ v1 <  v2 ? : 0
 v1 <= v2 ? : 0
 v1 >  v2 ? : 1
 v1 >= v2 ? : 1
-Elapsed time: 7.854ms
+Elapsed time: 8.588ms
