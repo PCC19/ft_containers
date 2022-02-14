@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 21:36:50 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/02/14 22:06:32 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ namespace ft {
 			 typedef ft::reverse_iterator<vector>			const_reverse_interator;
 			 typedef std::random_access_iterator_tag		iterator_category;
 
-
 			/*
 			 * METHODS
 			 */
@@ -50,7 +49,7 @@ namespace ft {
 			explicit vector(const allocator_type & alloc = allocator_type()) :
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0) {};
 
-			// Fill Constructor
+			// Fill Constructor (depends on assign method)
 			explicit vector (size_type n, const value_type val = value_type(), 
 				const allocator_type & alloc = allocator_type()):
 				_Data(nullptr), _Alloc(alloc), _size(0), _capacity(0)
@@ -58,8 +57,7 @@ namespace ft {
 				assign(n, val);
 			};
 
-			// Range constructor
-
+			// Range constructor (depends on assign method)
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
 				 typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0):
@@ -67,7 +65,6 @@ namespace ft {
 			{
 				assign(first, last);
 			};
-
 
 			// Assignment operator
 			vector & operator=(const vector & x)
@@ -95,6 +92,7 @@ namespace ft {
 				_Alloc.deallocate(_Data, _capacity);
 				};
 
+			// Getters
 			size_type size() const { return (this->_size); };
 
 			size_type capacity() const { return this->_capacity; };
@@ -102,9 +100,9 @@ namespace ft {
 			allocator_type get_allocator() const { return _Alloc; };
 
 			// Element Access
-			reference operator[](size_type n) {	return _Data[n]; };
+			reference operator[](size_type n)				{ return _Data[n]; };
 
-			const_reference operator[](size_type n) const {	return _Data[n]; };
+			const_reference operator[](size_type n) const	{ return _Data[n]; };
 
 			reference at (size_type n)
 			{
@@ -124,8 +122,8 @@ namespace ft {
 
 			reference front ()				{ return *begin(); };
 			const_reference front () const	{ return *begin(); };
-			reference back()				{ return *(end() -1); };
-			const_reference back() const	{ return *(end() -1); };
+			reference back()				{ return *(end() - 1); };
+			const_reference back() const	{ return *(end() - 1); };
 
 			bool empty () const {return (_size == 0); };
 
@@ -219,7 +217,6 @@ namespace ft {
 			reverse_iterator rbegin() const	{ return reverse_iterator(_Data + _size -1); };
 			reverse_iterator rend() const	{ return reverse_iterator(_Data - 1); };
 
-
 			template <class InputIterator>
 			void assign (InputIterator first, InputIterator last,
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
@@ -306,9 +303,17 @@ namespace ft {
 				while (n-- > 0) insert(position, val);
 			};
 
+			// Insert Range
+			template <class InputIterator>
+			void insert (iterator position, InputIterator first, InputIterator last,
+				 typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
+			{
+				while (first != last) insert(position++, 1, *(first++));
+			};
 
 
 		private:
+			// Allocation strategy: always double previous capacity
 			void allocate_if_needed(size_type n = 1)
 			{
 				size_type	new_capacity;
@@ -344,7 +349,7 @@ namespace ft {
 			size_type		_size;
 			size_type		_capacity;
 
-	};
+	}; // End of vector class definition
 
 	/*
 	 * NON MEMBERS
