@@ -16,7 +16,8 @@ HEADERS = $(HEADER_DIR)vector.hpp\
 			$(HEADER_DIR)reverse_iterator.hpp\
 			$(HEADER_DIR)reverse_iterator.hpp\
 			$(HEADER_DIR)iterator_traits.hpp\
-			$(HEADER_DIR)type_traits.hpp
+			$(HEADER_DIR)type_traits.hpp\
+			$(HEADER_DIR)pairs.hpp
 
 OBJS =	$(patsubst $(SDIR)%.cpp, $(ODIR)%.o, $(SRCS))
 

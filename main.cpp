@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 21:52:56 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/07 22:12:03 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 	#include "vector.hpp"
 	#include "random_access_iterator.hpp"
 	#include "reverse_iterator.hpp"
+	#include "pairs.hpp"
 #else // stl
 	#include <vector>
 	namespace ft = std;
@@ -311,6 +312,15 @@ int main()
 	std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
 	std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
 	std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
+
+	//Pair:
+	ft::pair<int, char>	par1;
+	ft::pair<int, std::string> par2;
+	std::cout << "pairs: \n";
+	par1(12,'a');
+	par2(3, "Paulo");
+	print_pair(par1);
+	print_pair(par2);
 
 
 	// ==========================================
