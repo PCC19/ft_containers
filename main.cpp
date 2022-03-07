@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/07 22:29:16 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/07 23:09:20 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,13 @@ int main()
 	std::cout << "pairs: \n";
 	print_pair(par1);
 	print_pair(par2);
+
+	// Make_pair
+	ft::pair<char, std::string> par;
+	std::cout << "make_pair: \n";
+	par = ft::make_pair('o', "paulo");
+	print_pair(par);
+
 
 
 	// ==========================================

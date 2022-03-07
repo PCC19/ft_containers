@@ -34,6 +34,58 @@ namespace ft
 				return (*this);
 			};
 	};
+
+	// OVERLOADS
+	template <class T1, class T2>
+	bool operator==(const pair<T1,T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		if (lhs.first == rhs.first && lhs.second == rhs.second)
+			return true;
+		else
+			return false;
+	}
+
+	template <class T1, class T2>
+	bool operator!=(const pair<T1,T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T1, class T2>
+	bool operator<(const pair<T1,T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		if (lhs.first < rhs.first)		return (true);
+		if (lhs.first > rhs.first)		return (false);
+		if (lhs.second < rhs.second)	return (true);
+		return (false);
+	}
+
+	template <class T1, class T2>
+	bool operator<=(const pair<T1,T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		if (lhs < rhs || lhs == rhs) return (true);
+		return (false);
+	}
+
+	template <class T1, class T2>
+	bool operator>(const pair<T1,T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class T1, class T2>
+	bool operator>=(const pair<T1,T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		if (lhs > rhs || lhs == rhs) return (true);
+		return (false);
+	}
+
+	template<typename T1, typename T2>
+	pair<T1,T2> make_pair(T1 x, T2 y)
+	{
+		return (pair<T1, T2>(x,y));
+	};
+
 };
 
 #endif
