@@ -33,8 +33,6 @@ namespace ft
 				second = other.second;
 				return (*this);
 			};
-
-
 	};
 };
 

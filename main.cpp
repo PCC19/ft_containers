@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/07 22:12:03 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/07 22:29:16 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,11 +314,9 @@ int main()
 	std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
 
 	//Pair:
-	ft::pair<int, char>	par1;
-	ft::pair<int, std::string> par2;
+	ft::pair<int, char>	par1(12, 'a');
+	ft::pair<int, std::string> par2(0, "Paulo");
 	std::cout << "pairs: \n";
-	par1(12,'a');
-	par2(3, "Paulo");
 	print_pair(par1);
 	print_pair(par2);
 

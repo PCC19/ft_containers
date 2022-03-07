@@ -6,11 +6,9 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/07 22:17:26 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/07 22:39:47 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "pairs.hpp"
 
 #ifndef UTILS_HPP
 # define UTILS_HPP
@@ -33,8 +31,8 @@ void	print_vector(T& vector_to_print)
 	std::cout << "-----------------------------------" << std::endl;
 }
 
-template <typename T1, typename T2>
-void print_pair(ft::pair<T1, T2> p)
+template <typename P>
+void print_pair(P &p)
 {
 	std::cout << "f: " << p.first << "\t\t s: " << p.second << std::endl;
 };
