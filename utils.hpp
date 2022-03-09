@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/07 23:08:03 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/09 02:08:44 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ template <typename P>
 void print_pair(P &p)
 {
 	std::cout << "f: " << p.first << "\t\t s: " << p.second << std::endl;
+};
+
+template <typename N>
+void print_node(N &node)
+{
+	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - \n";
+	print_pair(*(node.value));
+	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - \n";
 };
 
 #endif

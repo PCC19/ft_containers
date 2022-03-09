@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/07 23:09:20 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/09 02:09:31 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ctime>
 #include <typeinfo>
 #include "utils.hpp"
+#include "node.hpp"
 #ifndef nullptr
 	#define nullptr NULL
 #endif
@@ -327,13 +328,31 @@ int main()
 	print_pair(par);
 
 
+	// debug node
+		ft::pair<int, std::string> par_0(0, "Paulo");
+		ft::pair<int, std::string> par_1(1, "Roberto");
+		ft::pair<int, std::string> par_2(2, "Cunha");
+			print_pair(par_0);
+			print_pair(par_1);
+			print_pair(par_2);
+
+		typedef rbt_node<ft::pair<int, std::string> >  node;
+		node no_0(&par_0);
+		node no_1(&par_1);
+		node no_2(&par_2);
+
+		std::cout << "node: \n";
+		print_node(no_0);
+		print_node(no_1);
+		print_node(no_2);
+
 
 	// ==========================================
 	fin = clock();
 	elapsed_time = 1000 * ((double) fin - (double) ini) / (double) (CLOCKS_PER_SEC);
 	std::cout << "Elapsed time: " << elapsed_time << "ms" << std::endl;
 
-}
+};
 /*
 
 TESTS

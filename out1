@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffe96a7e7e0
-pointer to my_vector: 0x7ffe96a7e7e0
+           my_vector: 0x7ffd469e27a0
+pointer to my_vector: 0x7ffd469e27a0
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -349,4 +349,17 @@ f: 12		 s: a
 f: 0		 s: Paulo
 make_pair: 
 f: o		 s: paulo
-Elapsed time: 11.24ms
+f: 0		 s: Paulo
+f: 1		 s: Roberto
+f: 2		 s: Cunha
+node: 
+- - - - - - - - - - - - - - - - - - - - - - - 
+f: 0		 s: Paulo
+- - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - 
+f: 1		 s: Roberto
+- - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - 
+f: 2		 s: Cunha
+- - - - - - - - - - - - - - - - - - - - - - - 
+Elapsed time: 9.988ms
