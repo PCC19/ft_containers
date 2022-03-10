@@ -5,7 +5,7 @@
 template <typename T>
 struct rbt_node
 {
-	rbt_node(T* val = NULL): parent(NULL), left(NULL), right(NULL), color(RED), value(val) {};
+	rbt_node(T* val = NULL): parent(NULL), left(NULL), right(NULL), color(RED), content(val) {};
 	
 	rbt_node<T> operator=(rbt_node<T> const & rhs)
 	{
@@ -15,7 +15,7 @@ struct rbt_node
 			left = rhs.left;
 			right = rhs.right;
 			color = rhs.color;
-			value = rhs.value;
+			content = rhs.content;
 		};
 		return (*this);
 	};
@@ -25,7 +25,7 @@ struct rbt_node
 	rbt_node<T>	*left;
 	rbt_node<T>	*right;
 	COLORS		color;
-	T*			value;
+	T*			content;
 
 };
 #endif

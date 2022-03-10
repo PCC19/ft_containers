@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/09 02:08:44 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/10 23:37:29 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ template <typename N>
 void print_node(N &node)
 {
 	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - \n";
-	print_pair(*(node.value));
+	print_pair(*(node.content));
+	std::cout << "color: " << node.color << std::endl;
+	std::cout << "parent: " << node.parent << "\t\tleft: " << node.left << "\t\tright: " << node.right << std::endl;
+
 	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - \n";
 };
 
