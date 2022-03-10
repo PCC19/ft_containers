@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/10 23:19:28 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/11 00:14:18 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 	class map_iterator
 	{
 		public:
-		// Types
+		// Types ok
 		typedef value_type*									pointer;
 		typedef value_type&									reference;
 		typedef typename C::size_type						size_type;
@@ -30,9 +30,12 @@ namespace ft
 		typedef typename C::value_type						value_type;
 		typedef typename C::key_compare						key_compare;
 
-		// Methods
-		map_iterator ()									{};
-		map_iterator (pointer const p): _ptr(p)			{};
+		// Methods ok
+		map_iterator () : _comp(key_compare()), _node(NULL), _prev(NULL), _content(NULL) {}; 
+		map_iterator (rbt_node<value_type>* const node): _comp(key_compare()), _node(node)
+		{
+			if (node) _content = node.content;
+		};
 		map_iterator (map_iterator const & src) {*this = src;};
 
 		~map_iterator () {};
@@ -40,14 +43,18 @@ namespace ft
 		map_iterator & operator=(map_iterator const & rhs)
 		{
 			if (this != &rhs)
-				_ptr = rhs._ptr;
+			{
+				_comp = rhs._comp;
+				_node = rhs._node;
+				_prev = rhs._prev;
+				_content = rhs._content;
+			};
 			return *this;
 		};
 
-		// Dereferences
-		reference operator *()	const		{ return *_ptr; };
-		pointer operator ->()	const		{ return  _ptr; };
-//		reference operator[](size_type i)	{ return _ptr[i]; };
+		// Dereferences ok
+		reference operator*()	const	{ return *node->content;  };
+		pointer operator->()	const	{ return  &(operator*()); };
 
 		// Increments / decrements
 		map_iterator & operator++ ()
@@ -105,15 +112,17 @@ namespace ft
 //			return (_ptr - x._ptr);
 //		}
 
-		//Relational
+		//Relational ok
 		bool operator==(map_iterator const & x) const
 		{
-			return (_ptr == x._ptr);
-		}
+			if (_node == NULL || x._node == NULL)
+				return (false);
+			return ( *(_node->content) == *(x._node->content));
+		};
 		bool operator!=(map_iterator const & x) const
 		{
-			return (_ptr != x._ptr);
-		}
+			return (!(*this == x));;
+		};
 //		bool operator>(map_iterator const & x) const
 //		{
 //			return (_ptr > x._ptr);
@@ -132,7 +141,7 @@ namespace ft
 //		}
 			
 
-		// TODO fazer curr() e update()
+		// TODO fazer curr() e update() ??
 
 
 		// Atributes
@@ -140,7 +149,7 @@ namespace ft
 			key_compare				_comp;
 			rbt_node<value_type>*	_node;
 			rbt_node<value_type>*	_prev;
-			value_type*				_cache;
+			value_type*				_content;
 	};
 }
 #endif
