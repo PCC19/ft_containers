@@ -6,13 +6,14 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/09 02:09:31 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/11 04:01:06 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <ctime>
 #include <typeinfo>
+#include <map>
 #include "utils.hpp"
 #include "node.hpp"
 #ifndef nullptr
@@ -345,7 +346,27 @@ int main()
 		print_node(no_0);
 		print_node(no_1);
 		print_node(no_2);
+	
+	// simple map
+	std::map<int, int> mapa;
+	mapa[70] = 70;
+	mapa[50] = 50;
+	mapa[20] = 20;
+	mapa[10] = 10;
+	mapa[80] = 80;
+	mapa[40] = 40;
+	mapa[60] = 60;
+	mapa[30] = 30;
+	std::map<int, int>::iterator itm;
 
+	itm = mapa.begin();
+	while (itm != mapa.end())
+	{
+		std::cout << itm->first << std::endl;
+		itm++;
+	}
+
+	
 
 	// ==========================================
 	fin = clock();
