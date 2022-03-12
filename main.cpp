@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/11 04:01:06 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/12 23:08:42 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 	#include "random_access_iterator.hpp"
 	#include "reverse_iterator.hpp"
 	#include "pairs.hpp"
+	#include "map.hpp"
 #else // stl
 	#include <vector>
 	namespace ft = std;
@@ -366,7 +367,16 @@ int main()
 		itm++;
 	}
 
-	
+	// Teste primeiro insert
+	std::cout << "Teste primeiro insert\n";
+	ft::map<int, int>	mapa0;
+	ft::pair<int, int>	par_a;
+
+	par_a = ft::make_pair(10,100);
+	print_pair(par_a);
+
+//	ft::pair<ft::map_iterator< ft::map<int, int> >, bool> ret = mapa0.insert(par_a);
+	mapa0.insert(par_a);
 
 	// ==========================================
 	fin = clock();

@@ -18,8 +18,10 @@ HEADERS = $(HEADER_DIR)vector.hpp\
 			$(HEADER_DIR)iterator_traits.hpp\
 			$(HEADER_DIR)type_traits.hpp\
 			$(HEADER_DIR)utils.hpp\
+			$(HEADER_DIR)map_iterator.hpp\
 			$(HEADER_DIR)pairs.hpp\
-			$(HEADER_DIR)node.hpp
+			$(HEADER_DIR)node.hpp\
+			$(HEADER_DIR)map.hpp
 
 OBJS =	$(patsubst $(SDIR)%.cpp, $(ODIR)%.o, $(SRCS))
 
@@ -28,6 +30,7 @@ C_FLAGS = -Wall -Werror -Wextra -g -std=c++98
 C_SANIT = -fsanitize=address
 
 $(NAME):	$(OBJS) $(MAIN) $(HEADERS)
+	clear;
 	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
 	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=0 -o $(NAME2)
 	echo CONCLUIDO
