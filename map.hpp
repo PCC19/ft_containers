@@ -61,8 +61,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// Insert
 		pair<iterator, bool> insert (const value_type& val)
 		{
+			(void) val;
+			ft::pair<int, int> par;
+			par =ft::make_pair(1,2);
 			// Cria um novo node com o pair passado nos args (val)
-			rbt_node<value_type>* node(val);
+			rbt_node<pair<int, int> > node(&par);
 			print_node(node);
 			// Cria um iterator apontando para o node
 			iterator it;
@@ -70,8 +73,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// update root para apontar para o node
 			if (_root == NULL)
 			{
-				_root = &node;
+//				_root = &node;
 				std::cout << "inserido node na raiz\n";
+				print_pair(val);
 			}
 			else
 			{
