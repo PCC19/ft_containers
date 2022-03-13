@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/12 22:57:40 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/13 20:37:36 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ namespace ft
 		};
 
 		// Dereferences ok
-		reference operator*()	const	{ return *_node->content;  };
-		pointer operator->()	const	{ return  &(operator*()); };
+		reference operator*()	const	{ return (*_node->content); };
+		pointer operator->()	const	{ return  &(operator*());   };
 
 		// Increments / decrements
 		map_iterator & operator++ ()

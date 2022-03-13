@@ -71,23 +71,29 @@ template <class Key, class T, class Compare = std::less<Key>,
 			iterator it;
 			if (_root == NULL)
 			{
+				// SE ARVORE ESTIVER VAZIA
+				// Cria um novo pair (aux) com o pair passado nos args (val)
 				value_type *aux = _Alloc.allocate(1);
 				_Alloc.construct(aux, val);
 				// Cria um novo node com o pair passado nos args (val)
-	//			rbt_node<pair<const int, int> > node(aux);
 				rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
 				// Se o map estava vazio (root = NULL ou size == 0)
 					// update root para apontar para o node
 				_root = node;
+				_size++;
+				it = node;
 				std::cout << "inserido node na raiz\n";
 				print_node(*node);
 				print_node(*_root);
+				std::cout << "it: ";
+				print_pair(*it);
 			}
 			else
 			{
+				// SE ARVORE JA TEM NODES
+				// insere no no lugar certo da arvore
 				std::cout << "ja tem um no na arvore\n";
 			}
-				// insere no no lugar certo da arvore
 			// Retorna um pair contendo o iterator para o node
 			return (ft::make_pair(it, false));
 
