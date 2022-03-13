@@ -56,26 +56,32 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		// destructor
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
+		~map() // destrutor temporario.
+		{
+			delete (*_root).content;
+			delete (_root);
+		}
 
 
 		// Insert
 		pair<iterator, bool> insert (const value_type& val)
 		{
 			(void) val;
-			ft::pair<int, int> par;
-			par =ft::make_pair(1,2);
-			// Cria um novo node com o pair passado nos args (val)
-			rbt_node<pair<int, int> > node(&par);
-			print_node(node);
 			// Cria um iterator apontando para o node
 			iterator it;
-			// Se o map estava vazio (root = NULL ou size == 0)
-				// update root para apontar para o node
 			if (_root == NULL)
 			{
-//				_root = &node;
+				value_type *aux = _Alloc.allocate(1);
+				_Alloc.construct(aux, val);
+				// Cria um novo node com o pair passado nos args (val)
+	//			rbt_node<pair<const int, int> > node(aux);
+				rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
+				// Se o map estava vazio (root = NULL ou size == 0)
+					// update root para apontar para o node
+				_root = node;
 				std::cout << "inserido node na raiz\n";
-				print_pair(val);
+				print_node(*node);
+				print_node(*_root);
 			}
 			else
 			{

@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/11 04:18:32 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/13 19:48:47 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void print_node(N &node)
 {
 	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
 	std::cout << "Content: ";
-	print_pair(*(node.content));
+//	if (node.content == NULL)
+//		std::cout << "vazio!\n";
+//	else
+		print_pair(*(node.content));
 	std::cout << "color:\t\t" << node.color << std::endl;
 	std::cout << "parent:\t " << node.parent << "\t\tleft: " << node.left << "\t\tright: " << node.right << std::endl;
 
