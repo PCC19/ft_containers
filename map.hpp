@@ -58,8 +58,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
-			delete (*_root).content;
-			delete (_root);
+//			delete (*_root).content;
+//			delete (_root);
+			destroy_node(_root);
 		}
 
 
@@ -127,6 +128,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 			_Alloc.construct(aux, val);
 			rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
 			return (node);
+		};
+
+		void destroy_node(rbt_node<value_type> *node_to_destroy)
+		{
+			delete (*node_to_destroy).content;
+			delete (node_to_destroy);
 		};
 
 
