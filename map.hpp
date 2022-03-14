@@ -58,8 +58,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
-//			delete (*_root).content;
-//			delete (_root);
 			destroy_node(_root);
 		}
 
@@ -70,32 +68,56 @@ template <class Key, class T, class Compare = std::less<Key>,
 			(void) val;
 			// Cria um iterator apontando para o node
 			iterator it;
+			rbt_node<value_type> *node = create_new_node_with_val(val);
 			if (_root == NULL)
 			{
-//				// SE ARVORE ESTIVER VAZIA
-//				// Cria um novo pair (aux) com o pair passado nos args (val)
-//				value_type *aux = _Alloc.allocate(1);
-//				_Alloc.construct(aux, val);
-//				// Cria um novo node com o pair passado nos args (val)
-//				rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
-				rbt_node<value_type> *node;
-				node = create_new_node_with_val(val);
-				// Se o map estava vazio (root = NULL ou size == 0)
-					// update root para apontar para o node
 				_root = node;
 				_size++;
 				it = node;
-				std::cout << "inserido node na raiz\n";
-				print_node(*node);
-				print_node(*_root);
-				std::cout << "it: ";
-				print_pair(*it);
+				std::cout << "inserido  root: \n"; print_node(*node);
 			}
 			else
 			{
 				// SE ARVORE JA TEM NODES
-				// insere no no lugar certo da arvore
-				std::cout << "ja tem um no na arvore\n";
+				rbt_node<value_type>	*i;
+				i = _root;
+				while(1)
+				{
+					std::cout << "node: "; print_node(*node);
+					std::cout << "i:    "; print_node(*i);
+					std::cout << "node > i ?: " << ((*node).content > (*i).content) << std::endl;
+					if ((*node).content > (*i).content)
+					{
+						if ((*i).right == NULL)
+						{
+							(*i).right = node;
+							_size++;
+							it = node;
+							std::cout << "inserido right: \n"; print_node(*node);
+							break;
+						}
+						else
+							i = (*i).right;
+					};
+					if ((*node).content < (*i).content)
+					{
+						if ((*i).left == NULL)
+						{
+							(*i).left = node;
+							_size++;
+							it = node;
+							std::cout << "inserido  left: \n"; print_node(*node);
+							break;
+						}
+						else
+							i = (*i).left;
+					};
+				};
+
+				// se key < node atual
+					// se esquerda == null: insere
+					// se esquerda != null: incrementa i
+
 			}
 			// Retorna um pair contendo o iterator para o node
 			return (ft::make_pair(it, false));

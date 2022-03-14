@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/13 19:56:29 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/14 22:50:39 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,11 +280,6 @@ int main()
 	my_vector.insert((my_vector.begin() + 3), to_insert_range.begin(), to_insert_range.end());
 	std::cout << "Insert do vetor acima na pos 3 :\n"; print_vector(my_vector);
 
-
-
-
-
-
 	std::cout << "Teste do equal :\n";
 	ft::vector<int> v1, v2;
 	v1.push_back(1);
@@ -322,6 +317,36 @@ int main()
 	std::cout << "pairs: \n";
 	print_pair(par1);
 	print_pair(par2);
+	ft::pair<int, int> par3, par4;
+	par3 = ft::make_pair(10,100);
+	par4 = ft::make_pair(10,100);
+	std::cout << "10 100 | 10 100\n";
+	std::cout << "par3 < par4: " << (par3 < par4) << std::endl;
+	std::cout << "par3 > par4: " << (par3 > par4) << std::endl;
+	std::cout << "par3 == par4: " << (par3 == par4) << std::endl;
+	std::cout << "par3 != par4: " << (par3 != par4) << std::endl;
+	par3 = ft::make_pair(10,100);
+	par4 = ft::make_pair(10,200);
+	std::cout << "10 100 | 10 200\n";
+	std::cout << "par3 < par4: " << (par3 < par4) << std::endl;
+	std::cout << "par3 > par4: " << (par3 > par4) << std::endl;
+	std::cout << "par3 == par4: " << (par3 == par4) << std::endl;
+	std::cout << "par3 != par4: " << (par3 != par4) << std::endl;
+	par3 = ft::make_pair(1,100);
+	par4 = ft::make_pair(10,100);
+	std::cout << "1 100 | 10 100\n";
+	std::cout << "par3 < par4: " << (par3 < par4) << std::endl;
+	std::cout << "par3 > par4: " << (par3 > par4) << std::endl;
+	std::cout << "par3 == par4: " << (par3 == par4) << std::endl;
+	std::cout << "par3 != par4: " << (par3 != par4) << std::endl;
+	par3 = ft::make_pair(20,100);
+	par4 = ft::make_pair(10,100);
+	std::cout << "20 100 | 10 100\n";
+	std::cout << "par3 < par4: " << (par3 < par4) << std::endl;
+	std::cout << "par3 > par4: " << (par3 > par4) << std::endl;
+	std::cout << "par3 == par4: " << (par3 == par4) << std::endl;
+	std::cout << "par3 != par4: " << (par3 != par4) << std::endl;
+
 
 	// Make_pair
 	ft::pair<char, std::string> par;
