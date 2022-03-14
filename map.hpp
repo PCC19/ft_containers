@@ -75,6 +75,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				_size++;
 				it = node;
 				std::cout << "inserido  root: \n"; print_node(*node);
+				return (ft::make_pair(it, true));
 			}
 			else
 			{
@@ -83,10 +84,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				i = _root;
 				while(1)
 				{
-					std::cout << "node: "; print_node(*node);
-					std::cout << "i:    "; print_node(*i);
-					std::cout << "node > i ?: " << ((*node).content > (*i).content) << std::endl;
-					if ((*node).content > (*i).content)
+					if (*(*node).content > *(*i).content)
 					{
 						if ((*i).right == NULL)
 						{
@@ -94,12 +92,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 							_size++;
 							it = node;
 							std::cout << "inserido right: \n"; print_node(*node);
-							break;
+							return (ft::make_pair(it, true));
 						}
 						else
 							i = (*i).right;
 					};
-					if ((*node).content < (*i).content)
+					if (*(*node).content < *(*i).content)
 					{
 						if ((*i).left == NULL)
 						{
@@ -107,25 +105,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 							_size++;
 							it = node;
 							std::cout << "inserido  left: \n"; print_node(*node);
-							break;
+							return (ft::make_pair(it, true));
 						}
 						else
 							i = (*i).left;
 					};
+					if (*(*node).content == *(*i).content)
+					{
+						destroy_node(node);
+						break;
+					};
 				};
-
-				// se key < node atual
-					// se esquerda == null: insere
-					// se esquerda != null: incrementa i
-
 			}
-			// Retorna um pair contendo o iterator para o node
 			return (ft::make_pair(it, false));
 
-
-			// acha posicao certa para inserir
-			// se ja existe faz retorno do pair com iterator e false
-			// na nao existe insere
 			// ajusta arvore
 				// rotacao
 				// recolor

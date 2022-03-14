@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffdbbecc260
-pointer to my_vector: 0x7ffdbbecc260
+           my_vector: 0x7ffc502c8000
+pointer to my_vector: 0x7ffc502c8000
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -347,19 +347,55 @@ v1 >= v2 ? : 1
 pairs: 
 f: 12		 s: a
 f: 0		 s: Paulo
+10 100 | 10 100
+par3 < par4: 0
+par3 > par4: 0
+par3 == par4: 1
+par3 != par4: 0
+10 100 | 10 200
+par3 < par4: 1
+par3 > par4: 0
+par3 == par4: 0
+par3 != par4: 1
+1 100 | 10 100
+par3 < par4: 1
+par3 > par4: 0
+par3 == par4: 0
+par3 != par4: 1
+20 100 | 10 100
+par3 < par4: 0
+par3 > par4: 1
+par3 == par4: 0
+par3 != par4: 1
 make_pair: 
 f: o		 s: paulo
 f: 0		 s: Paulo
 f: 1		 s: Roberto
 f: 2		 s: Cunha
 node: 
-- - - - - - - - - - - - - - - - - - - - - - - 
-f: 0		 s: Paulo
-- - - - - - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - - - - - 
-f: 1		 s: Roberto
-- - - - - - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - - - - - 
-f: 2		 s: Cunha
-- - - - - - - - - - - - - - - - - - - - - - - 
-Elapsed time: 8.891ms
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Content: f: 0		 s: Paulo
+color:		0
+parent:	 0		left: 0		right: 0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Content: f: 1		 s: Roberto
+color:		0
+parent:	 0		left: 0		right: 0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Content: f: 2		 s: Cunha
+color:		0
+parent:	 0		left: 0		right: 0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+10
+20
+30
+40
+50
+60
+70
+80
+Teste primeiro insert
+f: 10		 s: 100
+Elapsed time: 9.709ms

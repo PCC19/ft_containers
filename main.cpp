@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/14 22:50:39 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/14 23:07:35 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,6 +402,7 @@ int main()
 
 //	ft::pair<ft::map_iterator< ft::map<int, int> >, bool> ret = mapa0.insert(par_a);
 	mapa0.insert(par_a);
+	par_a = ft::make_pair(20,100);
 	mapa0.insert(par_a);
 
 	// ==========================================
