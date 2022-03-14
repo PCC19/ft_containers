@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/14 23:43:25 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/15 00:08:19 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,11 +400,19 @@ int main()
 	par_a = ft::make_pair(10,100);
 	print_pair(par_a);
 
-//	ft::pair<ft::map_iterator< ft::map<int, int> >, bool> ret = mapa0.insert(par_a);
+	std::cout << "Teste begin e end\n";
 	mapa0.insert(par_a);
 	par_a = ft::make_pair(20,100);
 	mapa0.insert(par_a);
-	mapa0.insert(ft::make_pair(15,100));
+	mapa0.insert(ft::make_pair(5,100));
+	ft::map<int, int>::iterator it_mapa0;
+	it_mapa0 = mapa0.begin();
+	std::cout << "begin(): \n";
+	std::cout << it_mapa0->first << std::endl;
+	it_mapa0 = mapa0.end();
+	std::cout << "end(): \n";
+	std::cout << it_mapa0->first << std::endl;
+
 
 
 	// ==========================================

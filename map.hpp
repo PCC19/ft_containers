@@ -120,6 +120,51 @@ template <class Key, class T, class Compare = std::less<Key>,
 		size_type size()				{ return (_size); };
 		size_type max_size() const	{ return _Alloc.max_size(); };
 
+		iterator begin()
+		{
+			rbt_node<value_type> *i;
+			i = _root;
+			if (i != NULL)
+			{
+				while ((*i).left != NULL)
+					i = (*i).left;
+			};
+			return iterator(i);
+		};
+		const_iterator begin() const
+		{
+			rbt_node<value_type> *i;
+			i = _root;
+			if (i != NULL)
+			{
+				while ((*i).left != NULL)
+					i = (*i).left;
+			};
+			return iterator(i);
+		};
+		iterator end()
+		{
+			rbt_node<value_type> *i;
+			i = _root;
+			if (i != NULL)
+			{
+				while ((*i).right != NULL)
+					i = (*i).right;
+			};
+			return iterator(i);
+		};
+		const_iterator end() const
+		{
+			rbt_node<value_type> *i;
+			i = _root;
+			if (i != NULL)
+			{
+				while ((*i).right != NULL)
+					i = (*i).right;
+			};
+			return iterator(i);
+		};
+
 	protected:
 		// ATRIBUTES
 		rbt_node<value_type>*	_root;
