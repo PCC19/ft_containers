@@ -80,50 +80,41 @@ template <class Key, class T, class Compare = std::less<Key>,
 			else
 			{
 				// SE ARVORE JA TEM NODES
-				rbt_node<value_type>	*i;
+				rbt_node<value_type>	*i, *p;
 				i = _root;
-				while(1)
+				while(i != NULL) // avanca i para um apos local de insercao (p)
 				{
-					if (*(*node).content > *(*i).content)
-					{
-						if ((*i).right == NULL)
-						{
-							(*i).right = node;
-							_size++;
-							it = node;
-							std::cout << "inserido right: \n"; print_node(*node);
-							return (ft::make_pair(it, true));
-						}
-						else
-							i = (*i).right;
-					};
-					if (*(*node).content < *(*i).content)
-					{
-						if ((*i).left == NULL)
-						{
-							(*i).left = node;
-							_size++;
-							it = node;
-							std::cout << "inserido  left: \n"; print_node(*node);
-							return (ft::make_pair(it, true));
-						}
-						else
-							i = (*i).left;
-					};
+					p = i;
 					if (*(*node).content == *(*i).content)
 					{
 						destroy_node(node);
-						break;
+						return (ft::make_pair(it, false));
 					};
+					if (*(*node).content > *(*i).content)
+						i = (*i).right;
+					else
+						i = (*i).left;
 				};
+				// Faz a insercao
+				if (*(*node).content > *(*p).content)
+				{
+					(*p).right = node;
+					std::cout << "inserido right: \n"; print_node(*node);
+				}
+				else
+				{
+					(*p).left = node;
+					std::cout << "inserido  left: \n"; print_node(*node);
+				}
+				_size++;
+				it = node;
+				return (ft::make_pair(it, true));
 			}
-			return (ft::make_pair(it, false));
 
 			// ajusta arvore
 				// rotacao
 				// recolor
 		};
-
 
 		bool empty()					{ return (_size == 0); };
 		size_type size()				{ return (_size); };
