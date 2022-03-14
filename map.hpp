@@ -71,12 +71,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			iterator it;
 			if (_root == NULL)
 			{
-				// SE ARVORE ESTIVER VAZIA
-				// Cria um novo pair (aux) com o pair passado nos args (val)
-				value_type *aux = _Alloc.allocate(1);
-				_Alloc.construct(aux, val);
-				// Cria um novo node com o pair passado nos args (val)
-				rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
+//				// SE ARVORE ESTIVER VAZIA
+//				// Cria um novo pair (aux) com o pair passado nos args (val)
+//				value_type *aux = _Alloc.allocate(1);
+//				_Alloc.construct(aux, val);
+//				// Cria um novo node com o pair passado nos args (val)
+//				rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
+				rbt_node<value_type> *node;
+				node = create_new_node_with_val(val);
 				// Se o map estava vazio (root = NULL ou size == 0)
 					// update root para apontar para o node
 				_root = node;
@@ -111,14 +113,21 @@ template <class Key, class T, class Compare = std::less<Key>,
 		size_type size()				{ return (_size); };
 		size_type max_size() const	{ return _Alloc.max_size(); };
 
-
+	protected:
 		// ATRIBUTES
 		rbt_node<value_type>*	_root;
 		size_type				_size;
 		key_compare				_comp;
 		allocator_type			_Alloc;
 
-
+	private:
+		rbt_node<value_type> *create_new_node_with_val(const value_type& val)
+		{
+			value_type *aux = _Alloc.allocate(1);
+			_Alloc.construct(aux, val);
+			rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
+			return (node);
+		};
 
 
 	}; // class map
