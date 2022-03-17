@@ -99,14 +99,16 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// Faz a insercao
 				if (*(*node).content > *(*p).content)
 				{
-					(*p).right = node;
-					(*node).parent = p;
+//					(*p).right = node;
+//					(*node).parent = p;
+					connect(p, RIGHT, node);
 					std::cout << "inserido right: \n"; print_node(*node);
 				}
 				else
 				{
-					(*p).left = node;
-					(*node).parent = p;
+//					(*p).left = node;
+//					(*node).parent = p;
+					connect(p, LEFT, node);
 					std::cout << "inserido  left: \n"; print_node(*node);
 				}
 				_size++;
@@ -164,6 +166,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 		allocator_type			_Alloc;
 
 	private:
+		typedef enum {LEFT, RIGHT} direction;
+
 		rbt_node<value_type> *create_new_node_with_val(const value_type& val)
 		{
 			value_type *aux = _Alloc.allocate(1);
@@ -189,11 +193,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (r == NULL) return;
 			print_tree_infix_recursive((*r).left);
-//			print_node(*r);
-			std::cout << (*r).content->first << " ";
+			print_node(*r);								// long print
+//			std::cout << (*r).content->first << " ";	// short print
 			print_tree_infix_recursive((*r).right);
 		};
-
 
 		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
 		{
@@ -229,6 +232,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return true;
 			else
 				return false;
+		};
+
+		void connect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
+		{
+			if (d == LEFT)
+				(*p).left = c;
+			else
+				(*p).right = c;
+			(*c).parent = p;
 		};
 
 
