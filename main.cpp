@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/17 04:45:54 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/17 05:34:21 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,7 +413,7 @@ int main()
 	std::cout << "end(): \n";
 	std::cout << it_mapa0->first << std::endl;
 
-	std::cout << "Testa is_left/right_child \n";
+	mapa0.print_tree_infix();
 
 
 

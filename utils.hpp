@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/13 20:28:08 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/17 05:39:59 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ template <typename N>
 void print_node(N &node)
 {
 	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
-	std::cout << "Content: ";
-//	if (node.content == NULL)
-//		std::cout << "vazio!\n";
-//	else
-		print_pair(*(node.content));
+	std::cout << "parent:\t" << node.parent << std::endl;
+	std::cout << "node:  \t" << &node << std::endl;
+	std::cout << "Content:\t"; print_pair(*(node.content));
 	std::cout << "color:\t\t" << node.color << std::endl;
-	std::cout << "parent:\t " << node.parent << "\t\tleft: " << node.left << "\t\tright: " << node.right << std::endl;
+	std::cout << "left:\t\t" << node.left << "\tright:\t" << node.right << std::endl;
 
 	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
 };

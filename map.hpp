@@ -58,7 +58,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
-			destroy_node(_root);
+			destroy_tree_temp(_root);
+//			destroy_node(_root);
 		}
 
 
@@ -147,6 +148,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return iterator(max_subtree(_root));
 		};
 
+		void print_tree_infix()
+		{
+			std::cout << "TREE:\n";
+			print_tree_infix_recursive(_root);
+			std::cout << std::endl;
+		};
+
+
 	protected:
 		// ATRIBUTES
 		rbt_node<value_type>*	_root;
@@ -168,6 +177,22 @@ template <class Key, class T, class Compare = std::less<Key>,
 			delete (*node_to_destroy).content;
 			delete (node_to_destroy);
 		};
+		void destroy_tree_temp(rbt_node<value_type> *r)
+		{
+			if (r == NULL) return;
+			destroy_node((*r).left);
+			destroy_node((*r).right);
+			destroy_node(r);
+		};
+
+		void print_tree_infix_recursive(rbt_node<value_type> *r)
+		{
+			if (r == NULL) return;
+			print_tree_infix_recursive((*r).left);
+			print_node(*r);
+			print_tree_infix_recursive((*r).right);
+		};
+
 
 		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
 		{
