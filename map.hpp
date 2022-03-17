@@ -189,7 +189,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (r == NULL) return;
 			print_tree_infix_recursive((*r).left);
-			print_node(*r);
+//			print_node(*r);
+			std::cout << (*r).content->first << " ";
 			print_tree_infix_recursive((*r).right);
 		};
 
