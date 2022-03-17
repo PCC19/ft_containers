@@ -73,7 +73,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				_root = node;
 				_size++;
-				it = node;
+				it = node; // ???? Checar se esta correto isso !
 				std::cout << "inserido  root: \n"; print_node(*node);
 				return (ft::make_pair(it, true));
 			}
@@ -85,7 +85,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				while(i != NULL) // avanca i para um apos local de insercao (p)
 				{
 					p = i;
-					if (*(*node).content == *(*i).content)
+					if (*(*node).content == *(*i).content) // se encontra node nao insere
 					{
 						destroy_node(node);
 						return (ft::make_pair(it, false));
@@ -99,11 +99,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 				if (*(*node).content > *(*p).content)
 				{
 					(*p).right = node;
+					(*node).parent = p;
 					std::cout << "inserido right: \n"; print_node(*node);
 				}
 				else
 				{
 					(*p).left = node;
+					(*node).parent = p;
 					std::cout << "inserido  left: \n"; print_node(*node);
 				}
 				_size++;
@@ -118,51 +120,31 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool empty()					{ return (_size == 0); };
 		size_type size()				{ return (_size); };
-		size_type max_size() const	{ return _Alloc.max_size(); };
+		size_type max_size() const		{ return _Alloc.max_size(); };
 
 		iterator begin()
 		{
-			rbt_node<value_type> *i;
-			i = _root;
-			if (i != NULL)
-			{
-				while ((*i).left != NULL)
-					i = (*i).left;
-			};
-			return iterator(i);
+			if (is_left_child(min_subtree(_root)))
+				std::cout << "left  child \n";
+			else
+				std::cout << "right child \n";
+			return iterator(min_subtree(_root));
 		};
 		const_iterator begin() const
 		{
-			rbt_node<value_type> *i;
-			i = _root;
-			if (i != NULL)
-			{
-				while ((*i).left != NULL)
-					i = (*i).left;
-			};
-			return iterator(i);
+			return iterator(min_subtree(_root));
 		};
 		iterator end()
 		{
-			rbt_node<value_type> *i;
-			i = _root;
-			if (i != NULL)
-			{
-				while ((*i).right != NULL)
-					i = (*i).right;
-			};
-			return iterator(i);
+			if (is_right_child(max_subtree(_root)))
+				std::cout << "right  child \n";
+			else
+				std::cout << "left child \n";
+			return iterator(max_subtree(_root));
 		};
 		const_iterator end() const
 		{
-			rbt_node<value_type> *i;
-			i = _root;
-			if (i != NULL)
-			{
-				while ((*i).right != NULL)
-					i = (*i).right;
-			};
-			return iterator(i);
+			return iterator(max_subtree(_root));
 		};
 
 	protected:
@@ -185,6 +167,42 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			delete (*node_to_destroy).content;
 			delete (node_to_destroy);
+		};
+
+		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
+		{
+			if (i != NULL)
+			{
+				while ((*i).left != NULL)
+					i = (*i).left;
+			};
+			return i;
+		};
+
+		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i)
+		{
+			if (i != NULL)
+			{
+				while ((*i).right != NULL)
+					i = (*i).right;
+			};
+			return i;
+		};
+
+		bool is_left_child(rbt_node<value_type> *i)
+		{
+			if ((*i).parent != NULL && (*i).parent->left == i)
+				return true;
+			else
+				return false;
+		};
+
+		bool is_right_child(rbt_node<value_type> *i)
+		{
+			if ((*i).parent != NULL && (*i).parent->right == i)
+				return true;
+			else
+				return false;
 		};
 
 
