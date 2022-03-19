@@ -1,6 +1,8 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+#include <cmath>
+#include <vector>
 #include "map_iterator.hpp"
 
 namespace ft{
@@ -63,7 +65,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 
 		// Insert
-		pair<iterator, bool> insert (const value_type& val)
+		pair<iterator, bool> insert(const value_type& val)
 		{
 			(void) val;
 			// Cria um iterator apontando para o node
@@ -157,9 +159,66 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_infix()
 		{
-			std::cout << "TREE:\n";
+			std::cout << "TREE infix:\n";
 			print_tree_infix_recursive(_root);
 			std::cout << std::endl;
+		};
+
+		void print_tree_level()
+		{
+			print_tree_by_level(_root);
+		};
+
+		void print_tree_by_level(rbt_node<value_type> *n)
+		{
+			// Criar um vector de nodes
+			std::vector<rbt_node<value_type> > q;
+			rbt_node<value_type> *nn;
+
+			(void) nn;
+			size_type i = 0;
+
+			q.push_back(*n);
+			std::cout << "print node levelr: \n";
+//			print_node(q[0]);
+//			std::cout << (q[0]).left << std::endl;
+			while (i < q.size())
+			{
+				nn = (q[i].left);
+				std::cout << "nn null ? " << (nn == 0) << std::endl;
+				if (nn == NULL)
+					q.push_back(NULL);
+				else
+				{
+					q.push_back(*nn);
+					std::cout << "i: " << i; print_node(*nn);
+				};
+				nn = (q[i].right);
+				if (nn == NULL)
+					q.push_back(NULL);
+				else
+				{
+					q.push_back(*nn);
+					std::cout << "i: " << i; print_node(*nn);
+				};
+
+//				nn = (*q[i]).right;
+//				if (nn)
+//					q.push_back(nn);
+//				else
+//					q.push_back(NULL);
+				i++;
+			};
+			i = 0;
+			while (i < q.size())
+			{
+//				if (remainder(i , (log(i) / log(2)) 
+			// percorre vector imprimindo nodes
+				std::cout << (q[i]).content->first << " ";
+				// verificar se for potencia de 2 printa separador de linha
+				i++;
+			};
+			std::cout << "\n-----------------\n";
 		};
 
 		iterator find(const key_type &k)
@@ -222,6 +281,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			std::cout << (*r).content->first << " ";	// short print
 			print_tree_infix_recursive((*r).right);
 		};
+
 
 		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
 		{
