@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/13 20:37:36 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/19 21:22:20 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ namespace ft
 		map_iterator () : _comp(key_compare()), _node(NULL), _prev(NULL), _content(NULL) {}; 
 		map_iterator (rbt_node<value_type>* const node): _comp(key_compare()), _node(node)
 		{
-			if (node) _content = node->content;
+			if (node)
+				_content = node->content;
+			else
+				_content = NULL;
 		};
 		map_iterator (map_iterator const & src) {*this = src;};
 
@@ -111,6 +114,8 @@ namespace ft
 		//Relational ok
 		bool operator==(map_iterator const & x) const
 		{
+			if (_node == NULL && x._node == NULL)
+				return (true);
 			if (_node == NULL || x._node == NULL)
 				return (false);
 			return ( *(_node->content) == *(x._node->content));

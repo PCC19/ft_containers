@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffc502c8000
-pointer to my_vector: 0x7ffc502c8000
+           my_vector: 0x7ffd161c3f60
+pointer to my_vector: 0x7ffd161c3f60
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -374,19 +374,25 @@ f: 1		 s: Roberto
 f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-Content: f: 0		 s: Paulo
+parent:	0
+node:  	0x7ffd161c4d50
+Content:	f: 0		 s: Paulo
 color:		0
-parent:	 0		left: 0		right: 0
+left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-Content: f: 1		 s: Roberto
+parent:	0
+node:  	0x7ffd161c4da0
+Content:	f: 1		 s: Roberto
 color:		0
-parent:	 0		left: 0		right: 0
+left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-Content: f: 2		 s: Cunha
+parent:	0
+node:  	0x7ffd161c4df0
+Content:	f: 2		 s: Cunha
 color:		0
-parent:	 0		left: 0		right: 0
+left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 10
 20
@@ -398,4 +404,12 @@ parent:	 0		left: 0		right: 0
 80
 Teste primeiro insert
 f: 10		 s: 100
-Elapsed time: 9.709ms
+Teste begin e end
+begin(): 
+5
+end(): 
+Mapa para testes: 
+Teste find: 
+find(90): 900
+find(110): 1100
+Elapsed time: 12.05ms

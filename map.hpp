@@ -122,27 +122,37 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		iterator begin()
 		{
-			if (is_left_child(min_subtree(_root)))
-				std::cout << "left  child \n";
-			else
-				std::cout << "right child \n";
+//			if (is_left_child(min_subtree(_root)))
+//				std::cout << "left  child \n";
+//			else
+//				std::cout << "right child \n";
 			return iterator(min_subtree(_root));
 		};
 		const_iterator begin() const
 		{
-			return iterator(min_subtree(_root));
+			return const_iterator(min_subtree(_root));
 		};
 		iterator end()
 		{
-			if (is_right_child(max_subtree(_root)))
-				std::cout << "right  child \n";
-			else
-				std::cout << "left child \n";
-			return iterator(max_subtree(_root));
+			rbt_node<value_type>* n;
+			n = max_subtree(_root);
+//			if (is_right_child(n))
+//				std::cout << "right  child \n";
+//			else
+//				std::cout << "left child \n";
+			n = (*n).right;
+			return iterator(n);
 		};
 		const_iterator end() const
 		{
-			return iterator(max_subtree(_root));
+			rbt_node<value_type>* n;
+			n = max_subtree(_root);
+			if (is_right_child(n))
+				std::cout << "right  child \n";
+			else
+				std::cout << "left child \n";
+			n = (*n).right;
+			return const_iterator(n);
 		};
 
 		void print_tree_infix()
@@ -159,13 +169,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			while (p)
 			{
 				if (k == p->content->first)
-					return (iterator (p));
+					return (iterator(p));
 				if (_comp(k, p->content->first))
 					p = p->left;
 				else
 					p = p->right;
 			};
-			return (end);
+			return (end());
 		};
 
 

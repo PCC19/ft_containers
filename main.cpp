@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/19 20:44:37 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/19 21:27:05 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -411,10 +411,12 @@ int main()
 	std::cout << it_mapa0->first << std::endl;
 	it_mapa0 = mapa0.end();
 	std::cout << "end(): \n";
-	std::cout << it_mapa0->first << std::endl;
+//	std::cout << it_mapa0->first << std::endl;
 
 	// testa print da arvore
-	mapa0.print_tree_infix();
+	#if V
+		mapa0.print_tree_infix();
+	#endif
 
 	// Cria map para testes
 	std::cout << "Mapa para testes: \n";
@@ -440,8 +442,26 @@ int main()
 	mapa1.insert(ft::make_pair(130,1300));
 	mapa1.insert(ft::make_pair(135,1350));
 	mapa1.insert(ft::make_pair(125,1250));
-	std::map<int, int>::iterator itm1;
-	mapa1.print_tree_infix();
+	ft::map<int, int>::iterator itm1;
+	#if (V)
+		mapa1.print_tree_infix();
+	#endif
+
+	// Teste find
+	std::cout << "Teste find: \n";
+	int x;
+	x = 90;
+	itm1 = mapa1.find(x);
+	if (itm1 != mapa1.end())
+	std::cout << "find(" << x << "): " << itm1->second << std::endl;
+	x = 110;
+	itm1 = mapa1.find(x);
+	if (itm1 != mapa1.end())
+	std::cout << "find(" << x << "): " << itm1->second << std::endl;
+	x = 13;
+	itm1 = mapa1.find(x);
+	if (itm1 != mapa1.end())
+		std::cout << "find(" << x << "): " << itm1->second << std::endl;
 
 	// ==========================================
 	fin = clock();
