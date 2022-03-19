@@ -59,8 +59,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		~map() // destrutor temporario.
 		{
 			destroy_tree_temp(_root);
-//			destroy_node(_root);
-		}
+		};
 
 
 		// Insert
@@ -99,15 +98,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// Faz a insercao
 				if (*(*node).content > *(*p).content)
 				{
-//					(*p).right = node;
-//					(*node).parent = p;
 					connect(p, RIGHT, node);
 					std::cout << "inserido right: \n"; print_node(*node);
 				}
 				else
 				{
-//					(*p).left = node;
-//					(*node).parent = p;
 					connect(p, LEFT, node);
 					std::cout << "inserido  left: \n"; print_node(*node);
 				}
@@ -157,6 +152,23 @@ template <class Key, class T, class Compare = std::less<Key>,
 			std::cout << std::endl;
 		};
 
+		iterator find(const key_type &k)
+		{
+			rbt_node<value_type>* p;
+			p = _root;
+			while (p)
+			{
+				if (k == p->content->first)
+					return (iterator (p));
+				if (_comp(k, p->content->first))
+					p = p->left;
+				else
+					p = p->right;
+			};
+			return (end);
+		};
+
+
 
 	protected:
 		// ATRIBUTES
@@ -178,14 +190,17 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void destroy_node(rbt_node<value_type> *node_to_destroy)
 		{
-			delete (*node_to_destroy).content;
-			delete (node_to_destroy);
+			if (node_to_destroy)
+			{
+				delete (*node_to_destroy).content;
+				delete (node_to_destroy);
+			};
 		};
 		void destroy_tree_temp(rbt_node<value_type> *r)
 		{
 			if (r == NULL) return;
-			destroy_node((*r).left);
-			destroy_node((*r).right);
+			destroy_tree_temp((*r).left);
+			destroy_tree_temp((*r).right);
 			destroy_node(r);
 		};
 
@@ -193,8 +208,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (r == NULL) return;
 			print_tree_infix_recursive((*r).left);
-			print_node(*r);								// long print
-//			std::cout << (*r).content->first << " ";	// short print
+//			print_node(*r);								// long print
+			std::cout << (*r).content->first << " ";	// short print
 			print_tree_infix_recursive((*r).right);
 		};
 
@@ -242,7 +257,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				(*p).right = c;
 			(*c).parent = p;
 		};
-
+		
 
 	}; // class map
 }; // namespace

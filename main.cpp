@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/17 05:34:21 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/19 20:44:37 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,9 +413,35 @@ int main()
 	std::cout << "end(): \n";
 	std::cout << it_mapa0->first << std::endl;
 
+	// testa print da arvore
 	mapa0.print_tree_infix();
 
-
+	// Cria map para testes
+	std::cout << "Mapa para testes: \n";
+	ft::map<int, int> mapa1;
+	// 80 40 20 10 30 60 50 70 120 100 140 90 89 110 111 134 150 130 135 125
+	mapa1.insert(ft::make_pair(80,800));
+	mapa1.insert(ft::make_pair(40,400));
+	mapa1.insert(ft::make_pair(20,200));
+	mapa1.insert(ft::make_pair(10,1000));
+	mapa1.insert(ft::make_pair(30,300));
+	mapa1.insert(ft::make_pair(60,600));
+	mapa1.insert(ft::make_pair(50,500));
+	mapa1.insert(ft::make_pair(70,700));
+	mapa1.insert(ft::make_pair(120,1200));
+	mapa1.insert(ft::make_pair(100,1000));
+	mapa1.insert(ft::make_pair(140,1400));
+	mapa1.insert(ft::make_pair(90,900));
+	mapa1.insert(ft::make_pair(89,890));
+	mapa1.insert(ft::make_pair(110,1100));
+	mapa1.insert(ft::make_pair(111,1110));
+	mapa1.insert(ft::make_pair(134,1340));
+	mapa1.insert(ft::make_pair(150,1500));
+	mapa1.insert(ft::make_pair(130,1300));
+	mapa1.insert(ft::make_pair(135,1350));
+	mapa1.insert(ft::make_pair(125,1250));
+	std::map<int, int>::iterator itm1;
+	mapa1.print_tree_infix();
 
 	// ==========================================
 	fin = clock();
