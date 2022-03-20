@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 19:30:03 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:54:33 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,6 +528,10 @@ int main()
 	std::cout << "itm1:   " << itm1->first << std::endl;
 	std::cout << "itm1--: " << (itm1--)->first << std::endl;
 	std::cout << "itm1:   " << itm1->first << std::endl;
+
+	std::cout << "Teste count:\n";
+	std::cout << "30: " << mapa1.count(30) << std::endl;
+	std::cout << "31: " << mapa1.count(31) << std::endl;
 
 	// ==========================================
 	fin = clock();

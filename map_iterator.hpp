@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 19:33:05 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:40:35 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 	class map_iterator
 	{
 		public:
-		// Types ok
+		// Types
 		typedef typename C::value_type						value_type;
 		typedef value_type*									pointer;
 		typedef value_type&									reference;
@@ -30,7 +30,7 @@ namespace ft
 		typedef typename std::bidirectional_iterator_tag	iterator_category;
 		typedef typename C::key_compare						key_compare;
 
-		// Methods ok
+		// Methods
 		map_iterator () : _comp(key_compare()), _node(NULL), _prev(NULL), _content(NULL) {}; 
 		map_iterator (rbt_node<value_type>* const node): _comp(key_compare()), _node(node)
 		{
@@ -55,18 +55,18 @@ namespace ft
 			return *this;
 		};
 
-		// Dereferences ok
+		// Dereferences
 		reference operator*()	const	{ return (*_node->content); };
 		pointer operator->()	const	{ return  &(operator*());   };
 
-		// Increments / decrements ok
+		// Increments / decrements
 		map_iterator & operator++ ()
 		{
 			rbt_node<value_type> *p;
 
-			if (_node->right != NULL)
+			if (_node->right != NULL)	// go down
 				p = min_subtree(_node->right);
-			else
+			else						// or go up
 			{
 				p = _node;
 				while (p != NULL && is_right_child(p))
@@ -82,9 +82,9 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			if (_node->left != NULL)
+			if (_node->left != NULL)	// go down
 				p = max_subtree(_node->left);
-			else
+			else						// or go up
 			{
 				p = _node;
 				while (p != NULL && is_left_child(p))
@@ -114,7 +114,7 @@ namespace ft
 			return (tmp);
 		};
 
-		//Relational ok
+		//Relational
 		bool operator==(map_iterator const & x) const
 		{
 			if (_node == NULL && x._node == NULL)

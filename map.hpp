@@ -118,16 +118,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// recolor
 		};
 
+		// CAPACITY
 		bool empty()					{ return (_size == 0); };
 		size_type size()				{ return (_size); };
 		size_type max_size() const		{ return _Alloc.max_size(); };
 
+		// ITERATORS
 		iterator begin()
 		{
-//			if (is_left_child(min_subtree(_root)))
-//				std::cout << "left  child \n";
-//			else
-//				std::cout << "right child \n";
 			return iterator(min_subtree(_root));
 		};
 
@@ -140,10 +138,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			rbt_node<value_type>* n;
 			n = max_subtree(_root);
-//			if (is_right_child(n))
-//				std::cout << "right  child \n";
-//			else
-//				std::cout << "left child \n";
 			n = (*n).right;
 			return iterator(n);
 		};
@@ -152,15 +146,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			rbt_node<value_type>* n;
 			n = max_subtree(_root);
-			if (is_right_child(n))
-				std::cout << "right  child \n";
-			else
-				std::cout << "left child \n";
 			n = (*n).right;
 			return const_iterator(n);
 		};
-
-		iterator find(const key_type &k)
+		
+		// OPERATIONS
+		iterator find(const key_type &k) const
 		{
 			rbt_node<value_type>* p;
 			p = _root;
@@ -175,6 +166,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 			return (end());
 		};
+
+		size_type count (const key_type& k) const{
+			return !(find(k) == end());
+		};
+
+		// ALLOCATOR
+		allocator_type get_allocator() const{ return this->_Alloc; };
+
 
 		// AUXILIARY FUNCTIONS
 		void print_tree_infix()
@@ -276,7 +275,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			print_tree_infix_recursive((*r).right);
 		};
 
-		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
+		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i) const
 		{
 			if (i != NULL)
 			{
@@ -286,7 +285,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return i;
 		};
 
-		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i)
+		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i) const
 		{
 			if (i != NULL)
 			{
