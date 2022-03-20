@@ -171,7 +171,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_by_level(rbt_node<value_type> *n)
 		{
-			std::cout << "Print Node Level: \n";
+			std::cout << "Print Tree Level: \n";
 
 			ft::vector<rbt_node<value_type> >	q;
 			rbt_node<value_type>				*nn;

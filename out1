@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7fffc6a6a200
-pointer to my_vector: 0x7fffc6a6a200
+           my_vector: 0x7ffc9d785140
+pointer to my_vector: 0x7ffc9d785140
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fffc6a6b160
+node:  	0x7ffc9d7860a0
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fffc6a6b1b0
+node:  	0x7ffc9d7860f0
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fffc6a6b200
+node:  	0x7ffc9d786140
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -432,7 +432,7 @@ left:		0	right:	0
 begin(): 
 5
 end(): 
-TREE:
+TREE infix:
 5 10 20 
 Mapa para testes: 
 inserido  root: 
@@ -595,9 +595,17 @@ Content:	f: 125		 s: 1250
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-TREE:
+TREE infix:
 10 20 30 40 50 60 70 80 89 90 100 110 111 120 125 130 134 135 140 150 
 Teste find: 
 find(90): 900
 find(110): 1100
-Elapsed time: 15.554ms
+Print Tree Level: 
+80 
+40 120 
+20 60 100 140 
+10 30 50 70 90 110 134 150 
+89 111 130 135 
+125 
+-----------------
+Elapsed time: 21.892ms
