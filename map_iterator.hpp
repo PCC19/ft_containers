@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 19:23:06 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:33:05 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ namespace ft
 		reference operator*()	const	{ return (*_node->content); };
 		pointer operator->()	const	{ return  &(operator*());   };
 
-		// Increments / decrements
+		// Increments / decrements ok
 		map_iterator & operator++ ()
 		{
 			rbt_node<value_type> *p;
@@ -77,10 +77,25 @@ namespace ft
 			this->_content = p->content;
 			return (*this);
 		};
+
 		map_iterator & operator-- ()
 		{
-			return *this;
-		}
+			rbt_node<value_type> *p;
+
+			if (_node->left != NULL)
+				p = max_subtree(_node->left);
+			else
+			{
+				p = _node;
+				while (p != NULL && is_left_child(p))
+					p = p->parent;
+				p = p->parent;
+			};
+			this->_node = p;
+			this->_content = p->content;
+			return (*this);
+		};
+
 		map_iterator operator++(int)
 		{
 			map_iterator tmp;
@@ -88,42 +103,16 @@ namespace ft
 			tmp = *this;
 			this->operator++();
 			return (tmp);
-		}
+		};
+
 		map_iterator operator--(int)
 		{
 			map_iterator tmp;
 
 			tmp = *this;
+			this->operator--();
 			return (tmp);
-		}
-
-//		// Arithmetics:
-//		map_iterator operator+(size_type n) const
-//		{
-//			map_iterator tmp;
-//			tmp._ptr = _ptr + n;
-//			return (tmp);
-//		}
-//		map_iterator operator-(size_type n) const
-//		{
-//			map_iterator tmp;
-//			tmp._ptr = _ptr - n;
-//			return (tmp);
-//		}
-//		map_iterator operator+=(size_type n)
-//		{
-//			_ptr = _ptr + n;
-//			return (*this);
-//		}
-//		map_iterator operator-=(size_type n)
-//		{
-//			_ptr = _ptr - n;
-//			return (*this);
-//		}
-//		difference_type	operator-(map_iterator const & x) const
-//		{
-//			return (_ptr - x._ptr);
-//		}
+		};
 
 		//Relational ok
 		bool operator==(map_iterator const & x) const
@@ -138,22 +127,6 @@ namespace ft
 		{
 			return (!(*this == x));;
 		};
-//		bool operator>(map_iterator const & x) const
-//		{
-//			return (_ptr > x._ptr);
-//		}
-//		bool operator>=(map_iterator const & x) const
-//		{
-//			return (_ptr >= x._ptr);
-//		}
-//		bool operator<(map_iterator const & x) const
-//		{
-//			return (_ptr < x._ptr);
-//		}
-//		bool operator<=(map_iterator const & x) const
-//		{
-//			return (_ptr <= x._ptr);
-//		}
 			
 
 		// TODO  fazer curr() e update() ??

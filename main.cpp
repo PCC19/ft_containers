@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 19:25:37 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:30:03 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -498,6 +498,36 @@ int main()
 	std::cout << "itm1++: " << (itm1++)->first << std::endl;
 	std::cout << "itm1:   " << itm1->first << std::endl;
 
+	std::cout << "Teste operator --it:\n";
+	std::cout << "Tem filho direito:\n";
+	itm1 = mapa1.find(50);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "--itm1: " << (--itm1)->first << std::endl;
+	std::cout << "Nao Tem filho direito:\n";
+	itm1 = mapa1.find(40);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "--itm1: " << (--itm1)->first << std::endl;
+	std::cout << "Nao Tem filho direito:\n";
+	itm1 = mapa1.find(120);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "--itm1: " << (--itm1)->first << std::endl;
+
+	std::cout << "Teste operator it--:\n";
+	std::cout << "Tem filho direito:\n";
+	itm1 = mapa1.find(40);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "itm1--: " << (itm1--)->first << std::endl;
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "Nao Tem filho direito:\n";
+	itm1 = mapa1.find(30);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "itm1--: " << (itm1--)->first << std::endl;
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "Nao Tem filho direito:\n";
+	itm1 = mapa1.find(111);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "itm1--: " << (itm1--)->first << std::endl;
+	std::cout << "itm1:   " << itm1->first << std::endl;
 
 	// ==========================================
 	fin = clock();
