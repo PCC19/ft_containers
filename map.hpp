@@ -171,35 +171,39 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_by_level(rbt_node<value_type> *n)
 		{
-			// Criar um vector de nodes
+			std::cout << "Print Node Level: \n";
+
 			ft::vector<rbt_node<value_type> >	q;
 			rbt_node<value_type>				*nn;
-			ft::vector<int>						lb;
-
-			(void) nn;
-			size_type i = 0;
-
+			ft::vector<int>						lvl;
+			size_type							i;
+			
+			i = 0;
 			q.push_back(*n);
-			lb.push_back(1);
-			std::cout << "print node level: \n";
+			lvl.push_back(1);
 			while (i < q.size())
 			{
 				nn = (q[i].left);
-				std::cout << "nn null ? " << (nn == 0) << std::endl;
 				if (nn != NULL)
+				{
 					q.push_back(*nn);
+					lvl.push_back(lvl[i] + 1);
+				};
 				nn = (q[i].right);
 				if (nn != NULL)
+				{
 					q.push_back(*nn);
+					lvl.push_back(lvl[i] + 1);
+				};
 				i++;
 			};
 			i = 0;
+			std::cout << (q[i]).content->first << " ";
+			i++;
 			while (i < q.size())
 			{
-			// percorre vector imprimindo nodes
+				if (lvl[i] != lvl[i-1]) std::cout << std::endl;
 				std::cout << (q[i]).content->first << " ";
-				// verificar se for potencia de 2 printa separador de linha
-//				if (lb[i] == 1) std::cout << std::endl;
 				i++;
 			};
 			std::cout << "\n-----------------\n";
