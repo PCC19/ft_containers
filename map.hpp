@@ -172,50 +172,34 @@ template <class Key, class T, class Compare = std::less<Key>,
 		void print_tree_by_level(rbt_node<value_type> *n)
 		{
 			// Criar um vector de nodes
-			std::vector<rbt_node<value_type> > q;
-			rbt_node<value_type> *nn;
+			ft::vector<rbt_node<value_type> >	q;
+			rbt_node<value_type>				*nn;
+			ft::vector<int>						lb;
 
 			(void) nn;
 			size_type i = 0;
 
 			q.push_back(*n);
-			std::cout << "print node levelr: \n";
-//			print_node(q[0]);
-//			std::cout << (q[0]).left << std::endl;
+			lb.push_back(1);
+			std::cout << "print node level: \n";
 			while (i < q.size())
 			{
 				nn = (q[i].left);
 				std::cout << "nn null ? " << (nn == 0) << std::endl;
-				if (nn == NULL)
-					q.push_back(NULL);
-				else
-				{
+				if (nn != NULL)
 					q.push_back(*nn);
-					std::cout << "i: " << i; print_node(*nn);
-				};
 				nn = (q[i].right);
-				if (nn == NULL)
-					q.push_back(NULL);
-				else
-				{
+				if (nn != NULL)
 					q.push_back(*nn);
-					std::cout << "i: " << i; print_node(*nn);
-				};
-
-//				nn = (*q[i]).right;
-//				if (nn)
-//					q.push_back(nn);
-//				else
-//					q.push_back(NULL);
 				i++;
 			};
 			i = 0;
 			while (i < q.size())
 			{
-//				if (remainder(i , (log(i) / log(2)) 
 			// percorre vector imprimindo nodes
 				std::cout << (q[i]).content->first << " ";
 				// verificar se for potencia de 2 printa separador de linha
+//				if (lb[i] == 1) std::cout << std::endl;
 				i++;
 			};
 			std::cout << "\n-----------------\n";

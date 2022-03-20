@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 00:56:19 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 01:49:35 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,7 +463,7 @@ int main()
 	if (itm1 != mapa1.end())
 		std::cout << "find(" << x << "): " << itm1->second << std::endl;
 
-//	mapa0.print_tree_level();
+	mapa1.print_tree_level();
 
 	// ==========================================
 	fin = clock();
