@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 15:47:49 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:20:59 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -465,6 +465,22 @@ int main()
 	#if (V)
 		mapa1.print_tree_level();
 	#endif
+
+	// Teste operator ++
+	std::cout << "Teste operator ++it:\n";
+	std::cout << "Tem filho direito:\n";
+	itm1 = mapa1.find(40);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "itm1++: " << (++itm1)->first << std::endl;
+	std::cout << "Nao Tem filho direito:\n";
+	itm1 = mapa1.find(30);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "itm1++: " << (++itm1)->first << std::endl;
+	std::cout << "Nao Tem filho direito:\n";
+	itm1 = mapa1.find(111);
+	std::cout << "itm1:   " << itm1->first << std::endl;
+	std::cout << "itm1++: " << (++itm1)->first << std::endl;
+
 
 	// ==========================================
 	fin = clock();

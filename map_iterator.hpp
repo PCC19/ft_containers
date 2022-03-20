@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/19 21:22:20 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:16:02 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,23 @@ namespace ft
 		// Increments / decrements
 		map_iterator & operator++ ()
 		{
-			return *this;
-		}
+			rbt_node<value_type> *p;
+
+			// Se tem filho esquerdo go down
+			if (_node->right != NULL)
+				p = min_subtree(_node->right);
+			// Se nao go up
+			else
+			{
+				p = _node;
+				while (p != NULL && is_right_child(p))
+					p = p->parent;
+				p = p->parent;
+			};
+			this->_node = p;
+			this->_content = p->content;
+			return (*this);
+		};
 		map_iterator & operator-- ()
 		{
 			return *this;
@@ -151,6 +166,43 @@ namespace ft
 			rbt_node<value_type>*	_node;
 			rbt_node<value_type>*	_prev;
 			value_type*				_content;
+
+		private:
+		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
+		{
+			if (i != NULL)
+			{
+				while ((*i).left != NULL)
+					i = (*i).left;
+			};
+			return i;
+		};
+
+		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i)
+		{
+			if (i != NULL)
+			{
+				while ((*i).right != NULL)
+					i = (*i).right;
+			};
+			return i;
+		};
+
+		bool is_left_child(rbt_node<value_type> *i)
+		{
+			if ((*i).parent != NULL && (*i).parent->left == i)
+				return true;
+			else
+				return false;
+		};
+
+		bool is_right_child(rbt_node<value_type> *i)
+		{
+			if ((*i).parent != NULL && (*i).parent->right == i)
+				return true;
+			else
+				return false;
+		};
 	};
 };
 #endif

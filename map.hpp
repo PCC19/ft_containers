@@ -130,10 +130,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 //				std::cout << "right child \n";
 			return iterator(min_subtree(_root));
 		};
+
 		const_iterator begin() const
 		{
 			return const_iterator(min_subtree(_root));
 		};
+
 		iterator end()
 		{
 			rbt_node<value_type>* n;
@@ -145,6 +147,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			n = (*n).right;
 			return iterator(n);
 		};
+
 		const_iterator end() const
 		{
 			rbt_node<value_type>* n;
@@ -157,6 +160,23 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return const_iterator(n);
 		};
 
+		iterator find(const key_type &k)
+		{
+			rbt_node<value_type>* p;
+			p = _root;
+			while (p)
+			{
+				if (k == p->content->first)
+					return (iterator(p));
+				if (_comp(k, p->content->first))
+					p = p->left;
+				else
+					p = p->right;
+			};
+			return (end());
+		};
+
+		// AUXILIARY FUNCTIONS
 		void print_tree_infix()
 		{
 			std::cout << "TREE infix:\n";
@@ -208,22 +228,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 			std::cout << "\n-----------------\n";
 		};
+		
 
-		iterator find(const key_type &k)
-		{
-			rbt_node<value_type>* p;
-			p = _root;
-			while (p)
-			{
-				if (k == p->content->first)
-					return (iterator(p));
-				if (_comp(k, p->content->first))
-					p = p->left;
-				else
-					p = p->right;
-			};
-			return (end());
-		};
 
 
 
@@ -269,7 +275,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			std::cout << (*r).content->first << " ";	// short print
 			print_tree_infix_recursive((*r).right);
 		};
-
 
 		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
 		{
