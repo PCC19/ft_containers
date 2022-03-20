@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 19:16:02 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/20 19:23:06 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,8 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			// Se tem filho esquerdo go down
 			if (_node->right != NULL)
 				p = min_subtree(_node->right);
-			// Se nao go up
 			else
 			{
 				p = _node;
@@ -88,6 +86,7 @@ namespace ft
 			map_iterator tmp;
 
 			tmp = *this;
+			this->operator++();
 			return (tmp);
 		}
 		map_iterator operator--(int)
