@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffd38014960
-pointer to my_vector: 0x7ffd38014960
+           my_vector: 0x7fff86538620
+pointer to my_vector: 0x7fff86538620
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd38015750
+node:  	0x7fff86539410
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd380157a0
+node:  	0x7fff86539460
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd380157f0
+node:  	0x7fff865394b0
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -412,4 +412,75 @@ Mapa para testes:
 Teste find: 
 find(90): 900
 find(110): 1100
-Elapsed time: 11.695ms
+Teste operator ++it:
+Tem filho direito:
+itm1:   40
+++itm1: 50
+Nao Tem filho direito:
+itm1:   30
+++itm1: 40
+Nao Tem filho direito:
+itm1:   111
+++itm1: 120
+Teste operator it++:
+Tem filho direito:
+itm1:   40
+itm1++: 40
+itm1:   50
+Nao Tem filho direito:
+itm1:   30
+itm1++: 30
+itm1:   40
+Nao Tem filho direito:
+itm1:   111
+itm1++: 111
+itm1:   120
+Teste operator --it:
+Tem filho direito:
+itm1:   50
+--itm1: 40
+Nao Tem filho direito:
+itm1:   40
+--itm1: 30
+Nao Tem filho direito:
+itm1:   120
+--itm1: 111
+Teste operator it--:
+Tem filho direito:
+itm1:   40
+itm1--: 40
+itm1:   30
+Nao Tem filho direito:
+itm1:   30
+itm1--: 30
+itm1:   20
+Nao Tem filho direito:
+itm1:   111
+itm1--: 111
+itm1:   110
+Teste count:
+30: 1
+31: 0
+Teste iterators, ++ e --
+aux_end: 
+itm: 10 p: 20
+itm: 20 a: 10 p: 30
+itm: 30 a: 20 p: 40
+itm: 40 a: 30 p: 50
+itm: 50 a: 40 p: 60
+itm: 60 a: 50 p: 70
+itm: 70 a: 60 p: 80
+itm: 80 a: 70 p: 89
+itm: 89 a: 80 p: 90
+itm: 90 a: 89 p: 100
+itm: 100 a: 90 p: 110
+itm: 110 a: 100 p: 111
+itm: 111 a: 110 p: 120
+itm: 120 a: 111 p: 125
+itm: 125 a: 120 p: 130
+itm: 130 a: 125 p: 134
+itm: 134 a: 130 p: 135
+itm: 135 a: 134 p: 140
+itm: 140 a: 135 p: 150
+itm: 150 a: 140
+Elapsed time: 16.015ms

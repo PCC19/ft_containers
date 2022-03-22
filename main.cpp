@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/20 19:54:33 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/22 22:26:07 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -532,6 +532,37 @@ int main()
 	std::cout << "Teste count:\n";
 	std::cout << "30: " << mapa1.count(30) << std::endl;
 	std::cout << "31: " << mapa1.count(31) << std::endl;
+
+
+	std::cout << "Teste iterators, ++ e --\n";
+	ft::map<int, int>::iterator aux_end;
+
+	std::cout << "aux_end: \n";
+	aux_end = mapa1.end();
+	aux_end--;
+	for (itm1 = mapa1.begin(); itm1 != mapa1.end(); itm1++)
+	{
+		std::cout << "itm: " << itm1->first;
+		if (itm1 != mapa1.begin())
+		{
+			std::cout << " a: " << (--itm1)->first; ++itm1;
+		};
+		if (itm1 != aux_end)
+		{
+			std::cout << " p: " << (++itm1)->first; --itm1;
+		};
+		std::cout << std::endl;
+	};
+
+		
+
+
+
+
+
+
+
+
 
 	// ==========================================
 	fin = clock();

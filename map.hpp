@@ -4,6 +4,7 @@
 #include <cmath>
 #include <vector>
 #include "map_iterator.hpp"
+#include "reverse_map_iterator.hpp"
 
 namespace ft{
 
@@ -26,8 +27,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 		typedef typename Allocator::const_pointer		const_pointer;
 		typedef ft::map_iterator< ft::map<key_type, mapped_type> >			iterator;
 		typedef ft::map_iterator< ft::map<key_type, mapped_type> >			const_iterator;
-//		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	reverse_iterator;
-//		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	const_reverse_iterator;
+		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	reverse_iterator;
+		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	const_reverse_iterator;
 	
 		class value_compare
 		{
@@ -138,16 +139,38 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			rbt_node<value_type>* n;
 			n = max_subtree(_root);
-			n = (*n).right;
-			return iterator(n);
+			return ++iterator(n);
 		};
 
 		const_iterator end() const
 		{
 			rbt_node<value_type>* n;
 			n = max_subtree(_root);
-			n = (*n).right;
-			return const_iterator(n);
+			return ++const_iterator(n);
+		};
+
+		reverse_iterator rbegin()
+		{
+			rbt_node<value_type>* n;
+			n = max_subtree(_root);
+			return reverse_iterator(n);
+		};
+
+		const_reverse_iterator rbegin() const
+		{
+			rbt_node<value_type>* n;
+			n = max_subtree(_root);
+			return const_reverse_iterator(n);
+		};
+
+		reverse_iterator rend()
+		{
+			return reverse_iterator(--begin());
+		};
+
+		const_reverse_iterator rend() const
+		{
+			return const_reverse_iterator(--begin());
 		};
 		
 		// OBSERVERS
@@ -274,8 +297,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (r == NULL) return;
 			print_tree_infix_recursive((*r).left);
-//			print_node(*r);								// long print
-			std::cout << (*r).content->first << " ";	// short print
+			print_node(*r);								// long print
+//			std::cout << (*r).content->first << " ";	// short print
 			print_tree_infix_recursive((*r).right);
 		};
 

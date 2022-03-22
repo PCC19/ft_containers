@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffc9d785140
-pointer to my_vector: 0x7ffc9d785140
+           my_vector: 0x7ffe6a644fa0
+pointer to my_vector: 0x7ffe6a644fa0
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc9d7860a0
+node:  	0x7ffe6a645f00
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc9d7860f0
+node:  	0x7ffe6a645f50
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc9d786140
+node:  	0x7ffe6a645fa0
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -433,7 +433,28 @@ begin():
 5
 end(): 
 TREE infix:
-5 10 20 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000290
+node:  	0x604000000310
+Content:	f: 5		 s: 100
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0
+node:  	0x604000000290
+Content:	f: 10		 s: 100
+color:		0
+left:		0x604000000310	right:	0x6040000002d0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000290
+node:  	0x6040000002d0
+Content:	f: 20		 s: 100
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 Mapa para testes: 
 inserido  root: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -596,7 +617,147 @@ color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 TREE infix:
-10 20 30 40 50 60 70 80 89 90 100 110 111 120 125 130 134 135 140 150 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x6040000003d0
+node:  	0x604000000410
+Content:	f: 10		 s: 1000
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000390
+node:  	0x6040000003d0
+Content:	f: 20		 s: 200
+color:		0
+left:		0x604000000410	right:	0x604000000450
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x6040000003d0
+node:  	0x604000000450
+Content:	f: 30		 s: 300
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000350
+node:  	0x604000000390
+Content:	f: 40		 s: 400
+color:		0
+left:		0x6040000003d0	right:	0x604000000490
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000490
+node:  	0x6040000004d0
+Content:	f: 50		 s: 500
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000390
+node:  	0x604000000490
+Content:	f: 60		 s: 600
+color:		0
+left:		0x6040000004d0	right:	0x604000000510
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000490
+node:  	0x604000000510
+Content:	f: 70		 s: 700
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0
+node:  	0x604000000350
+Content:	f: 80		 s: 800
+color:		0
+left:		0x604000000390	right:	0x604000000550
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000610
+node:  	0x604000000650
+Content:	f: 89		 s: 890
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000590
+node:  	0x604000000610
+Content:	f: 90		 s: 900
+color:		0
+left:		0x604000000650	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000550
+node:  	0x604000000590
+Content:	f: 100		 s: 1000
+color:		0
+left:		0x604000000610	right:	0x604000000690
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000590
+node:  	0x604000000690
+Content:	f: 110		 s: 1100
+color:		0
+left:		0	right:	0x6040000006d0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000690
+node:  	0x6040000006d0
+Content:	f: 111		 s: 1110
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000350
+node:  	0x604000000550
+Content:	f: 120		 s: 1200
+color:		0
+left:		0x604000000590	right:	0x6040000005d0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000790
+node:  	0x604000000810
+Content:	f: 125		 s: 1250
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000710
+node:  	0x604000000790
+Content:	f: 130		 s: 1300
+color:		0
+left:		0x604000000810	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x6040000005d0
+node:  	0x604000000710
+Content:	f: 134		 s: 1340
+color:		0
+left:		0x604000000790	right:	0x6040000007d0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000710
+node:  	0x6040000007d0
+Content:	f: 135		 s: 1350
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x604000000550
+node:  	0x6040000005d0
+Content:	f: 140		 s: 1400
+color:		0
+left:		0x604000000710	right:	0x604000000750
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+parent:	0x6040000005d0
+node:  	0x604000000750
+Content:	f: 150		 s: 1500
+color:		0
+left:		0	right:	0
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 Teste find: 
 find(90): 900
 find(110): 1100
@@ -608,4 +769,75 @@ Print Tree Level:
 89 111 130 135 
 125 
 -----------------
-Elapsed time: 21.892ms
+Teste operator ++it:
+Tem filho direito:
+itm1:   40
+++itm1: 50
+Nao Tem filho direito:
+itm1:   30
+++itm1: 40
+Nao Tem filho direito:
+itm1:   111
+++itm1: 120
+Teste operator it++:
+Tem filho direito:
+itm1:   40
+itm1++: 40
+itm1:   50
+Nao Tem filho direito:
+itm1:   30
+itm1++: 30
+itm1:   40
+Nao Tem filho direito:
+itm1:   111
+itm1++: 111
+itm1:   120
+Teste operator --it:
+Tem filho direito:
+itm1:   50
+--itm1: 40
+Nao Tem filho direito:
+itm1:   40
+--itm1: 30
+Nao Tem filho direito:
+itm1:   120
+--itm1: 111
+Teste operator it--:
+Tem filho direito:
+itm1:   40
+itm1--: 40
+itm1:   30
+Nao Tem filho direito:
+itm1:   30
+itm1--: 30
+itm1:   20
+Nao Tem filho direito:
+itm1:   111
+itm1--: 111
+itm1:   110
+Teste count:
+30: 1
+31: 0
+Teste iterators, ++ e --
+aux_end: 
+itm: 10 p: 20
+itm: 20 a: 10 p: 30
+itm: 30 a: 20 p: 40
+itm: 40 a: 30 p: 50
+itm: 50 a: 40 p: 60
+itm: 60 a: 50 p: 70
+itm: 70 a: 60 p: 80
+itm: 80 a: 70 p: 89
+itm: 89 a: 80 p: 90
+itm: 90 a: 89 p: 100
+itm: 100 a: 90 p: 110
+itm: 110 a: 100 p: 111
+itm: 111 a: 110 p: 120
+itm: 120 a: 111 p: 125
+itm: 125 a: 120 p: 130
+itm: 130 a: 125 p: 134
+itm: 134 a: 130 p: 135
+itm: 135 a: 134 p: 140
+itm: 140 a: 135 p: 150
+itm: 150 a: 140
+Elapsed time: 31.493ms

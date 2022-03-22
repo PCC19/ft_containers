@@ -14,11 +14,11 @@ ODIR =	./
 HEADERS = $(HEADER_DIR)vector.hpp\
 			$(HEADER_DIR)random_access_iterator.hpp\
 			$(HEADER_DIR)reverse_iterator.hpp\
-			$(HEADER_DIR)reverse_iterator.hpp\
 			$(HEADER_DIR)iterator_traits.hpp\
 			$(HEADER_DIR)type_traits.hpp\
 			$(HEADER_DIR)utils.hpp\
 			$(HEADER_DIR)map_iterator.hpp\
+			$(HEADER_DIR)reverse_map_iterator.hpp\
 			$(HEADER_DIR)pairs.hpp\
 			$(HEADER_DIR)node.hpp\
 			$(HEADER_DIR)map.hpp
