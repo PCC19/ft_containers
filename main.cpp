@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/22 22:26:07 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/22 23:03:51 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -536,8 +536,6 @@ int main()
 
 	std::cout << "Teste iterators, ++ e --\n";
 	ft::map<int, int>::iterator aux_end;
-
-	std::cout << "aux_end: \n";
 	aux_end = mapa1.end();
 	aux_end--;
 	for (itm1 = mapa1.begin(); itm1 != mapa1.end(); itm1++)
@@ -553,6 +551,22 @@ int main()
 		};
 		std::cout << std::endl;
 	};
+	std::cout << "Teste reverse iterator: \n";
+
+	ft::map<int, int>::reverse_iterator itm1_r;
+	itm1_r = mapa1.rbegin();
+	std::cout << itm1_r->first << std::endl;
+	itm1_r = mapa1.rend();
+	itm1_r--;
+	std::cout << itm1_r->first << std::endl;
+
+
+
+	for (itm1_r = mapa1.rbegin(); itm1_r != mapa1.rend(); itm1_r++)
+		std::cout << itm1_r->first << " | ";
+	std::cout << std::endl;
+
+	
 
 		
 

@@ -165,12 +165,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		reverse_iterator rend()
 		{
-			return reverse_iterator(--begin());
+			return ++reverse_iterator(min_subtree(_root));
 		};
 
 		const_reverse_iterator rend() const
 		{
-			return const_reverse_iterator(--begin());
+			return ++const_reverse_iterator(min_subtree(_root));
 		};
 		
 		// OBSERVERS

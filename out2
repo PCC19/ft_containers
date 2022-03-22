@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7fff86538620
-pointer to my_vector: 0x7fff86538620
+           my_vector: 0x7ffe9c035ea0
+pointer to my_vector: 0x7ffe9c035ea0
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fff86539410
+node:  	0x7ffe9c036c90
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fff86539460
+node:  	0x7ffe9c036ce0
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fff865394b0
+node:  	0x7ffe9c036d30
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -462,7 +462,6 @@ Teste count:
 30: 1
 31: 0
 Teste iterators, ++ e --
-aux_end: 
 itm: 10 p: 20
 itm: 20 a: 10 p: 30
 itm: 30 a: 20 p: 40
@@ -483,4 +482,8 @@ itm: 134 a: 130 p: 135
 itm: 135 a: 134 p: 140
 itm: 140 a: 135 p: 150
 itm: 150 a: 140
-Elapsed time: 16.015ms
+Teste reverse iterator: 
+150
+10
+150 | 140 | 135 | 134 | 130 | 125 | 120 | 111 | 110 | 100 | 90 | 89 | 80 | 70 | 60 | 50 | 40 | 30 | 20 | 10 | 
+Elapsed time: 14.4ms

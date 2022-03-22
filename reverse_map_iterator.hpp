@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 19:23:32 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/22 19:35:51 by pcunha           ###   ########.fr       */
+/*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
+/*   Updated: 2022/03/23 00:00:16 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,17 @@ namespace ft
 		reverse_map_iterator (rbt_node<value_type>* const node): _comp(key_compare()), _node(node)
 		{
 			if (node)
+			{
 				_content = node->content;
+				_prev = prev_node(_node);
+			}
 			else
+			{
 				_content = NULL;
+				_prev = NULL;
+			};
+
+
 		};
 		reverse_map_iterator (reverse_map_iterator const & src) {*this = src;};
 
@@ -60,43 +68,43 @@ namespace ft
 		pointer operator->()	const	{ return  &(operator*());   };
 
 		// Increments / decrements
-		reverse_map_iterator & operator-- ()
-		{
-			rbt_node<value_type> *p;
-
-			if (_node->right != NULL)	// go down
-				p = min_subtree(_node->right);
-			else						// or go up
-			{
-				p = _node;
-				while (p != NULL && is_right_child(p))
-					p = p->parent;
-				p = p->parent;
-			};
-			this->_node = p;
-			this->_content = p->content;
-			return (*this);
-		};
-
 		reverse_map_iterator & operator++ ()
 		{
 			rbt_node<value_type> *p;
 
-			if (_node->left != NULL)	// go down
-				p = max_subtree(_node->left);
-			else						// or go up
-			{
-				p = _node;
-				while (p != NULL && is_left_child(p))
-					p = p->parent;
-				p = p->parent;
-			};
+			if (_node == NULL) return (*this);
+			_prev = _node;
+			p = prev_node(_node);
 			this->_node = p;
-			this->_content = p->content;
+			if(p)
+				this->_content = p->content;
+			else
+				this->_content = NULL;
 			return (*this);
 		};
 
-		reverse_map_iterator operator--(int)
+		reverse_map_iterator & operator-- ()
+		{
+			rbt_node<value_type> *p;
+
+			if (_node == NULL)
+			{
+				this->_node = _prev;
+				if (_prev)
+					this->_content = (*_prev).content;
+				return (*this);
+			};
+			_prev = _node;
+			p = next_node(_node);
+			this->_node = p;
+			if(p)
+				this->_content = p->content;
+			else
+				this->_content = NULL;
+			return (*this);
+		};
+
+		reverse_map_iterator operator++(int)
 		{
 			reverse_map_iterator tmp;
 
@@ -105,7 +113,7 @@ namespace ft
 			return (tmp);
 		};
 
-		reverse_map_iterator operator++(int)
+		reverse_map_iterator operator--(int)
 		{
 			reverse_map_iterator tmp;
 
@@ -175,6 +183,50 @@ namespace ft
 			else
 				return false;
 		};
+
+		rbt_node<value_type> *next_node(rbt_node<value_type> *n)
+		{
+			rbt_node<value_type> *p;
+
+			if (n->right != NULL)	// go down
+				p = min_subtree(n->right);
+			else						// or go up
+			{
+				p = n;
+				while (p != NULL && is_right_child(p))
+					p = p->parent;
+				p = p->parent;
+			};
+			return (p);
+		};
+
+		rbt_node<value_type> *prev_node(rbt_node<value_type> *n)
+		{
+			rbt_node<value_type> *p;
+
+			if (n->left != NULL)	// go down
+				p = max_subtree(n->left);
+			else						// or go up
+			{
+				p = n;
+				while (p != NULL && is_left_child(p))
+					p = p->parent;
+				p = p->parent;
+			};
+			return (p);
+		};
+
+		void print_iterator()
+		{
+			std::cout << "\n=================================================";
+			std::cout << "\niterator _node: ";
+			if (_node) print_node(*_node); else std::cout << " NULL";
+			std::cout << "\niterator _prev: ";
+			if (_prev) print_node(*_prev); else std::cout << " NULL";
+			std::cout << std::endl;
+			std::cout << "=================================================\n";
+		};
+
 	};
 };
 #endif
