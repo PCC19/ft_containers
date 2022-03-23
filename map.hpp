@@ -346,6 +346,24 @@ template <class Key, class T, class Compare = std::less<Key>,
 				(*p).right = c;
 			(*c).parent = p;
 		};
+
+		rbt_node<value_type> * disconnect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
+		{
+			rbt_node<value_type> *temp;
+
+			if (d == LEFT)
+			{
+				temp = (*p).left;
+				(*p).left = NULL;
+			};
+			if (d == RIGHT)
+			{
+				temp = (*p).right;
+				(*p).right = NULL;
+			};
+			(*c).parent = NULL;
+			return (temp);
+		};
 		
 
 	}; // class map
