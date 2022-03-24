@@ -249,10 +249,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 			std::cout << "\n-----------------\n";
 		};
 
-		void teste_delete_node()
+		void teste_delete_node(const key_type &k)
 		{
 			rbt_node<value_type> *p;
-			p = find_node(70);
+			p = find_node(k);
 			delete_node(p);
 		};
 
@@ -383,6 +383,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void delete_node(rbt_node<value_type> *n)
 		{
+			rbt_node <value_type> *p, *c;
 			// sem filhos
 			if ((*n).left == NULL && (*n).right == NULL)
 			{
@@ -395,6 +396,29 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 
 			// um filho
+			if (((*n).left && !(*n).right) || (!(*n).left && (*n).right) )
+			{
+				p = (*n).parent;
+				// disconecta n de seu filho
+				if ((*n).left)
+					c = disconnect(n, LEFT,(*n).left);
+				else
+					c = disconnect(n, RIGHT,(*n).right);
+				// disconecta n de seu pai
+				if (is_left_child(n))
+				{
+					disconnect((*n).parent, LEFT, n);
+					connect(p, LEFT, c);
+				}
+				else
+				{
+					disconnect((*n).parent, RIGHT, n);
+					connect(p, RIGHT, c);
+				};
+				// destroi n
+				destroy_node(n);
+			};
+
 
 			// dois filhos
 		};
