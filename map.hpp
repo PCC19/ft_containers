@@ -365,6 +365,38 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (temp);
 		};
 
+		rbt_node<value_type> *next_node(rbt_node<value_type> *n)
+		{
+			rbt_node<value_type> *p;
+
+			if (n->right != NULL)	// go down
+				p = min_subtree(n->right);
+			else						// or go up
+			{
+				p = n;
+				while (p != NULL && is_right_child(p))
+					p = p->parent;
+				p = p->parent;
+			};
+			return (p);
+		};
+
+		rbt_node<value_type> *prev_node(rbt_node<value_type> *n)
+		{
+			rbt_node<value_type> *p;
+
+			if (n->left != NULL)	// go down
+				p = max_subtree(n->left);
+			else						// or go up
+			{
+				p = n;
+				while (p != NULL && is_left_child(p))
+					p = p->parent;
+				p = p->parent;
+			};
+			return (p);
+		};
+
 		rbt_node<value_type> *find_node(const key_type &k) const
 		{
 			rbt_node<value_type>* p;
@@ -383,7 +415,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void delete_node(rbt_node<value_type> *n)
 		{
-			rbt_node <value_type> *p, *c;
 			// sem filhos
 			if ((*n).left == NULL && (*n).right == NULL)
 			{
@@ -398,6 +429,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// um filho
 			if (((*n).left && !(*n).right) || (!(*n).left && (*n).right) )
 			{
+				rbt_node <value_type> *p, *c;
+
 				p = (*n).parent;
 				// disconecta n de seu filho
 				if ((*n).left)
@@ -417,10 +450,37 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 				// destroi n
 				destroy_node(n);
+				return;
 			};
-
-
 			// dois filhos
+			if ((*n).left && (*n).right)
+			{
+				rbt_node <value_type> *p, *lc, *rc, *s, *temp;
+				direction dir;
+
+				// decobre se n eh left or right child
+				p = (*n).parent;
+				if (is_left_child(n))
+					dir = LEFT;
+				else
+					dir = RIGHT;
+				// desconecta sucessor
+				s = next_node(n);
+				if (is_left_child(s))
+					temp = disconnect((*s).parent, LEFT,  s);
+				else
+					temp = disconnect((*s).parent, RIGHT, s);
+				// deconecta n
+				lc = disconnect((*n).parent, LEFT,  n);
+				rc = disconnect((*n).parent, RIGHT, n);
+				// reconecta
+				connect(temp, LEFT,  lc);
+				connect(temp, RIGHT, rc);
+				connect(p, dir, temp);
+				// destroi n
+				destroy_node(n);
+				return;
+			};
 		};
 
 		
