@@ -181,17 +181,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 		iterator find(const key_type &k) const
 		{
 			rbt_node<value_type>* p;
-			p = _root;
-			while (p)
-			{
-				if (k == p->content->first)
-					return (iterator(p));
-				if (_comp(k, p->content->first))
-					p = p->left;
-				else
-					p = p->right;
-			};
-			return (end());
+			p = find_node(k);
+			if (p)
+				return (iterator(p));
+			else
+				return (end());
 		};
 
 		size_type count (const key_type& k) const{
@@ -364,6 +358,41 @@ template <class Key, class T, class Compare = std::less<Key>,
 			(*c).parent = NULL;
 			return (temp);
 		};
+
+		rbt_node<value_type> *find_node(const key_type &k) const
+		{
+			rbt_node<value_type>* p;
+			p = _root;
+			while (p)
+			{
+				if (k == p->content->first)
+					return (p);
+				if (_comp(k, p->content->first))
+					p = p->left;
+				else
+					p = p->right;
+			};
+			return (NULL);
+		};
+
+		void delete_node(rbt_node<value_type> *n)
+		{
+			// sem filhos
+			if ((*n).left == NULL && (*n).right == NULL)
+			{
+				if (is_left_child(n))
+					disconnect((*n).parent, LEFT, n);
+				else
+					disconnect((*n).parent, RIGHT, n);
+				destroy_node(n);
+				return;
+			};
+
+			// um filho
+
+			// dois filhos
+		};
+
 		
 
 	}; // class map

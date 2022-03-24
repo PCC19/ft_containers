@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/22 23:03:51 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/24 21:46:45 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -559,12 +559,11 @@ int main()
 	itm1_r = mapa1.rend();
 	itm1_r--;
 	std::cout << itm1_r->first << std::endl;
-
-
-
 	for (itm1_r = mapa1.rbegin(); itm1_r != mapa1.rend(); itm1_r++)
 		std::cout << itm1_r->first << " | ";
 	std::cout << std::endl;
+
+	std::cout << "Teste delete_node: \n";
 
 	
 
@@ -584,47 +583,3 @@ int main()
 	std::cout << "Elapsed time: " << elapsed_time << "ms" << std::endl;
 
 };
-/*
-
-TESTS
-Constructors
-	Default Constructor
-	Fill Constructor
-	Range Constructor
-	Copy Constructor
-	Assign Overload
-Iterators
-	Assign elements with iterator (from beginn e from end)
-	Assign and read elements with iterator (from beginn e from end)
-Capacity
-	Max size
-	Empty
-	Resize to more
-	Resize to less
-	Reserve
-Element access
-	At
-	Out of Range
-	Front
-	Back
-Modifiers
-	push_back
-	pop_back
-	assign fill
-	assign range
-	insert single
-	insert fill
-	insert range
-	erase single
-	erase range
-	swap
-	clear
-
-util:
-ok	print_vector
-
-
-
-
-*/
-
