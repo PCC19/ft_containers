@@ -475,7 +475,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 				connect(temp, LEFT,  lc);
 				connect(temp, RIGHT, rc);
 				if (p == NULL)
+				{
 					(*temp).parent = NULL;
+					_root = temp;
+				}
 				else
 					connect(p, dir, temp);
 				// destroi n
