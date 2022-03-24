@@ -248,7 +248,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 			std::cout << "\n-----------------\n";
 		};
-		
+
+		void teste_delete_node()
+		{
+			rbt_node<value_type> *p;
+			p = find_node(70);
+			delete_node(p);
+		};
 
 
 
