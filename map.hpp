@@ -347,16 +347,16 @@ template <class Key, class T, class Compare = std::less<Key>,
 			(*c).parent = p;
 		};
 
-		rbt_node<value_type> * disconnect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
+		rbt_node<value_type> * disconnect(rbt_node<value_type> *p, rbt_node<value_type> *c)
 		{
 			rbt_node<value_type> *temp;
 
-			if (d == LEFT)
+			if (is_left_child(c))
 			{
 				temp = (*p).left;
 				(*p).left = NULL;
 			};
-			if (d == RIGHT)
+			if (is_right_child(c))
 			{
 				temp = (*p).right;
 				(*p).right = NULL;
@@ -418,10 +418,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// sem filhos
 			if ((*n).left == NULL && (*n).right == NULL)
 			{
-				if (is_left_child(n))
-					disconnect((*n).parent, LEFT, n);
-				else
-					disconnect((*n).parent, RIGHT, n);
+				disconnect((*n).parent, n);
 				destroy_node(n);
 				return;
 			};
@@ -432,20 +429,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 				rbt_node <value_type> *p, *c;
 
 				p = (*n).parent;
-				// disconecta n de seu filho
+				// desconecta n de seu filho
 				if ((*n).left)
-					c = disconnect(n, LEFT,(*n).left);
+					c = disconnect(n, (*n).left);
 				else
-					c = disconnect(n, RIGHT,(*n).right);
-				// disconecta n de seu pai
+					c = disconnect(n, (*n).right);
+				// desconecta n de seu pai
 				if (is_left_child(n))
 				{
-					disconnect((*n).parent, LEFT, n);
+					disconnect((*n).parent, n);
 					connect(p, LEFT, c);
 				}
 				else
 				{
-					disconnect((*n).parent, RIGHT, n);
+					disconnect((*n).parent, n);
 					connect(p, RIGHT, c);
 				};
 				// destroi n
@@ -466,14 +463,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 					dir = RIGHT;
 				// desconecta sucessor
 				s = next_node(n);
-				if (is_left_child(s))
-					temp = disconnect((*s).parent, LEFT,  s);
-				else
-					temp = disconnect((*s).parent, RIGHT, s);
-				// deconecta n
-				lc = disconnect((*n).parent, LEFT,  n);
-				rc = disconnect((*n).parent, RIGHT, n);
-				// reconecta
+				temp = disconnect((*s).parent, s);
+				// desconecta n
+				lc = disconnect(n, (*n).left);
+				rc = disconnect(n, (*n).right);
+				disconnect((*n).parent, n);
+				// reconecta temp no lugar de n
 				connect(temp, LEFT,  lc);
 				connect(temp, RIGHT, rc);
 				connect(p, dir, temp);
