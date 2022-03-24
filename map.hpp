@@ -340,10 +340,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void connect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
 		{
-			if (d == LEFT)
-				(*p).left = c;
-			else
-				(*p).right = c;
+			if (p)
+			{
+				if (d == LEFT)
+					(*p).left = c;
+				else
+					(*p).right = c;
+			};
 			(*c).parent = p;
 		};
 
@@ -471,7 +474,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// reconecta temp no lugar de n
 				connect(temp, LEFT,  lc);
 				connect(temp, RIGHT, rc);
-				connect(p, dir, temp);
+				if (p == NULL)
+					(*temp).parent = NULL;
+				else
+					connect(p, dir, temp);
 				// destroi n
 				destroy_node(n);
 				return;
