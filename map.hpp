@@ -261,6 +261,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			rbt_node<value_type> *n;
 			n = find_node(position->first);
 			delete_node(n);
+			_size--;
 		};
 
 
