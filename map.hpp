@@ -155,12 +155,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			while(i != last)
 			{
 				j = i;
-					std::cout << "j: "; j.print_iterator();
+//					std::cout << "j: "; j.print_iterator();
 					std::cout << "i: "; i.print_iterator();
 				i++;
-					std::cout << "i++: "; i.print_iterator();
+//					std::cout << "i++: "; i.print_iterator();
 				erase(j);
-					std::cout << "i apos erase: "; i.print_iterator();
+//					std::cout << "i apos erase: "; i.print_iterator();
+					print_tree_level();
 				_size--;
 					std::cout << "Next Iteration\n";
 			};
@@ -419,7 +420,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 				temp = p->right;
 				p->right = NULL;
 			};
-			c->parent = NULL;
+			if (c)
+				c->parent = NULL;
 			return (temp);
 		};
 
@@ -473,10 +475,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		size_type	delete_node(rbt_node<value_type> *n)
 		{
+			if (!n) return (0);
 			// sem filhos
 			if (n->left == NULL && n->right == NULL)
 			{
-				disconnect((*n).parent, n);
+				if (is_root(n))
+					_root = NULL;
+				else
+					disconnect(n->parent, n);
 				destroy_node(n);
 				return (1);
 			};
@@ -492,15 +498,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 					c = disconnect(n, n->left);
 				else
 					c = disconnect(n, n->right);
-				// desconecta n de seu pai
+				// desconecta n de seu pai e conecta no neto
+				if (is_root(n))
+				{
+					_root = c;
+				};
 				if (is_left_child(n))
 				{
-					disconnect(n->parent, n);
+					disconnect(p, n);
 					connect(p, LEFT, c);
 				}
-				else
+				if (is_right_child(n))
 				{
-					disconnect(n->parent, n);
+					disconnect(p, n);
 					connect(p, RIGHT, c);
 				};
 				// destroi n
@@ -508,6 +518,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (1);
 			};
 			// dois filhos
+			// desconecta n dos lc, rc e p
+				// tratar se n == root (p == NULL)
+			// achar sucessor
+			// desconectar sucessor (de seu pai, do filho esq e filho dir)
+			// conectar sucessor no lugar de n
+				// tratar root
+			// conectar orfaos de s no lugar certo
+
 			if (n->left && n->right)
 			{
 				rbt_node <value_type> *p, *lc, *rc, *s, *temp;
@@ -525,13 +543,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// desconecta n
 				lc = disconnect(n, n->left);
 				rc = disconnect(n, n->right);
-				disconnect((*n).parent, n);
+				disconnect(p, n);
 				// reconecta temp no lugar de n
 				connect(temp, LEFT,  lc);
 				connect(temp, RIGHT, rc);
 				if (p == NULL)
 				{
-					(*temp).parent = NULL;
+					temp->parent = NULL;
 					_root = temp;
 				}
 				else

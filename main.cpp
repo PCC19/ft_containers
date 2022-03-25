@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/25 20:55:20 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/25 23:50:09 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -567,6 +567,10 @@ int main()
 	std::cout << "Deleting 80 (two children)\n";
 		mapa1.print_tree_level();
 		mapa1.teste_delete_node(80);
+		mapa1.print_tree_level();
+	std::cout << "Deleting 89 (two children)\n";
+		mapa1.print_tree_level();
+		mapa1.teste_delete_node(89);
 		mapa1.print_tree_level();
 	std::cout << "Deleting 70 (no child)\n";
 		mapa1.print_tree_level();
