@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/25 20:05:46 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/25 20:23:32 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -592,6 +592,18 @@ int main()
 	i_pos = mapa1.find(120);
 	mapa1.erase(i_pos);
 	mapa1.print_tree_level();
+	std::cout << "Teste do Erase (key)\n";
+	mapa1.erase(100);
+	mapa1.print_tree_level();
+
+	std::cout << "Teste do Erase (first, last)\n";
+	ft::map<int, int>::iterator i_f, i_l;
+	i_f = mapa1.find(10);
+	i_l = mapa1.find(30);
+	mapa1.erase(i_f, i_l);
+	mapa1.print_tree_level();
+
+	
 
 
 

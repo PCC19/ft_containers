@@ -259,12 +259,33 @@ template <class Key, class T, class Compare = std::less<Key>,
 		void erase(iterator position)
 		{
 			rbt_node<value_type> *n;
+
 			n = find_node(position->first);
 			delete_node(n);
 			_size--;
 		};
 
+		size_type erase(const key_type &k)
+		{
+			rbt_node<value_type> *n;
 
+			n = find_node(k);
+			if (delete_node(n))
+			{
+				_size--;
+				return (1);
+			};
+			return (0);
+		};
+
+		void erase(iterator first, iterator last)
+		{
+			while(first != last)
+			{
+				erase(first++);
+				_size--;
+			};
+		};
 
 
 	protected:
@@ -429,14 +450,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (NULL);
 		};
 
-		void delete_node(rbt_node<value_type> *n)
+		size_type	delete_node(rbt_node<value_type> *n)
 		{
 			// sem filhos
 			if ((*n).left == NULL && (*n).right == NULL)
 			{
 				disconnect((*n).parent, n);
 				destroy_node(n);
-				return;
+				return (1);
 			};
 
 			// um filho
@@ -463,7 +484,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 				// destroi n
 				destroy_node(n);
-				return;
+				return (1);
 			};
 			// dois filhos
 			if ((*n).left && (*n).right)
@@ -496,8 +517,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 					connect(p, dir, temp);
 				// destroi n
 				destroy_node(n);
-				return;
+				return (1);
 			};
+			return(0);
 		};
 
 		
