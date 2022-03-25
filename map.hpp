@@ -65,6 +65,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 
 
+		// CAPACITY
+		bool empty()					{ return (_size == 0); };
+		size_type size()				{ return (_size); };
+		size_type max_size() const		{ return _Alloc.max_size(); };
+
+		// MODIFIERS
 		// Insert
 		pair<iterator, bool> insert(const value_type& val)
 		{
@@ -119,10 +125,55 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// recolor
 		};
 
-		// CAPACITY
-		bool empty()					{ return (_size == 0); };
-		size_type size()				{ return (_size); };
-		size_type max_size() const		{ return _Alloc.max_size(); };
+		void erase(iterator position)
+		{
+			rbt_node<value_type> *n;
+
+			n = find_node(position->first);
+			delete_node(n);
+			_size--;
+		};
+
+		size_type erase(const key_type &k)
+		{
+			rbt_node<value_type> *n;
+
+			n = find_node(k);
+			if (delete_node(n))
+			{
+				_size--;
+				return (1);
+			};
+			return (0);
+		};
+
+		void erase(iterator first, iterator last)
+		{
+			iterator i, j;
+
+			i = first;
+			while(i != last)
+			{
+				j = i;
+					std::cout << "j: "; j.print_iterator();
+					std::cout << "i: "; i.print_iterator();
+				i++;
+					std::cout << "i++: "; i.print_iterator();
+				erase(j);
+					std::cout << "i apos erase: "; i.print_iterator();
+				_size--;
+					std::cout << "Next Iteration\n";
+			};
+		};
+
+		void clear()
+		{
+			iterator i, j;
+
+			i = begin();
+			j = end();
+			erase(i ,j);
+		};
 
 		// ITERATORS
 		iterator begin()
@@ -256,36 +307,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			delete_node(p);
 		};
 
-		void erase(iterator position)
-		{
-			rbt_node<value_type> *n;
-
-			n = find_node(position->first);
-			delete_node(n);
-			_size--;
-		};
-
-		size_type erase(const key_type &k)
-		{
-			rbt_node<value_type> *n;
-
-			n = find_node(k);
-			if (delete_node(n))
-			{
-				_size--;
-				return (1);
-			};
-			return (0);
-		};
-
-		void erase(iterator first, iterator last)
-		{
-			while(first != last)
-			{
-				erase(first++);
-				_size--;
-			};
-		};
 
 
 	protected:
@@ -317,26 +338,26 @@ template <class Key, class T, class Compare = std::less<Key>,
 		void destroy_tree_temp(rbt_node<value_type> *r)
 		{
 			if (r == NULL) return;
-			destroy_tree_temp((*r).left);
-			destroy_tree_temp((*r).right);
+			destroy_tree_temp(r->left);
+			destroy_tree_temp(r->right);
 			destroy_node(r);
 		};
 
 		void print_tree_infix_recursive(rbt_node<value_type> *r)
 		{
 			if (r == NULL) return;
-			print_tree_infix_recursive((*r).left);
+			print_tree_infix_recursive(r->left);
 			print_node(*r);								// long print
 //			std::cout << (*r).content->first << " ";	// short print
-			print_tree_infix_recursive((*r).right);
+			print_tree_infix_recursive(r->right);
 		};
 
 		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i) const
 		{
 			if (i != NULL)
 			{
-				while ((*i).left != NULL)
-					i = (*i).left;
+				while (i->left != NULL)
+					i = i->left;
 			};
 			return i;
 		};
@@ -345,15 +366,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (i != NULL)
 			{
-				while ((*i).right != NULL)
-					i = (*i).right;
+				while (i->right != NULL)
+					i = i->right;
 			};
 			return i;
 		};
 
 		bool is_left_child(rbt_node<value_type> *i)
 		{
-			if ((*i).parent != NULL && (*i).parent->left == i)
+			if (i->parent != NULL && i->parent->left == i)
 				return true;
 			else
 				return false;
@@ -361,7 +382,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_right_child(rbt_node<value_type> *i)
 		{
-			if ((*i).parent != NULL && (*i).parent->right == i)
+			if (i->parent != NULL && i->parent->right == i)
 				return true;
 			else
 				return false;
@@ -369,7 +390,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_root(rbt_node<value_type> *n)
 		{
-			return ((*n).parent == NULL);
+			return (n->parent == NULL);
 		};
 
 		void connect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
@@ -377,11 +398,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (p)
 			{
 				if (d == LEFT)
-					(*p).left = c;
+					p->left = c;
 				else
-					(*p).right = c;
+					p->right = c;
 			};
-			(*c).parent = p;
+			c->parent = p;
 		};
 
 		rbt_node<value_type> * disconnect(rbt_node<value_type> *p, rbt_node<value_type> *c)
@@ -390,15 +411,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			if (is_left_child(c))
 			{
-				temp = (*p).left;
-				(*p).left = NULL;
+				temp = p->left;
+				p->left = NULL;
 			};
 			if (is_right_child(c))
 			{
-				temp = (*p).right;
-				(*p).right = NULL;
+				temp = p->right;
+				p->right = NULL;
 			};
-			(*c).parent = NULL;
+			c->parent = NULL;
 			return (temp);
 		};
 
@@ -453,7 +474,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		size_type	delete_node(rbt_node<value_type> *n)
 		{
 			// sem filhos
-			if ((*n).left == NULL && (*n).right == NULL)
+			if (n->left == NULL && n->right == NULL)
 			{
 				disconnect((*n).parent, n);
 				destroy_node(n);
@@ -461,25 +482,25 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 
 			// um filho
-			if (((*n).left && !(*n).right) || (!(*n).left && (*n).right) )
+			if ((n->left && !n->right) || (!n->left && n->right))
 			{
 				rbt_node <value_type> *p, *c;
 
-				p = (*n).parent;
+				p = n->parent;
 				// desconecta n de seu filho
-				if ((*n).left)
-					c = disconnect(n, (*n).left);
+				if (n->left)
+					c = disconnect(n, n->left);
 				else
-					c = disconnect(n, (*n).right);
+					c = disconnect(n, n->right);
 				// desconecta n de seu pai
 				if (is_left_child(n))
 				{
-					disconnect((*n).parent, n);
+					disconnect(n->parent, n);
 					connect(p, LEFT, c);
 				}
 				else
 				{
-					disconnect((*n).parent, n);
+					disconnect(n->parent, n);
 					connect(p, RIGHT, c);
 				};
 				// destroi n
@@ -487,23 +508,23 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (1);
 			};
 			// dois filhos
-			if ((*n).left && (*n).right)
+			if (n->left && n->right)
 			{
 				rbt_node <value_type> *p, *lc, *rc, *s, *temp;
 				direction dir;
 
 				// decobre se n eh left or right child
-				p = (*n).parent;
+				p = n->parent;
 				if (is_left_child(n))
 					dir = LEFT;
 				else
 					dir = RIGHT;
 				// desconecta sucessor
 				s = next_node(n);
-				temp = disconnect((*s).parent, s);
+				temp = disconnect(s->parent, s);
 				// desconecta n
-				lc = disconnect(n, (*n).left);
-				rc = disconnect(n, (*n).right);
+				lc = disconnect(n, n->left);
+				rc = disconnect(n, n->right);
 				disconnect((*n).parent, n);
 				// reconecta temp no lugar de n
 				connect(temp, LEFT,  lc);
