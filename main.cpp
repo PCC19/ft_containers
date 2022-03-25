@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/24 23:44:12 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/25 20:05:46 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -586,8 +586,13 @@ int main()
 		mapa1.print_tree_level();
 
 
+	std::cout << "Teste do Erase (position)\n";
+	ft::map<int, int>::iterator i_pos;
 
-// debugar delete do root
+	i_pos = mapa1.find(120);
+	mapa1.erase(i_pos);
+	mapa1.print_tree_level();
+
 
 
 

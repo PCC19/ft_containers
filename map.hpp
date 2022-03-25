@@ -256,6 +256,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			delete_node(p);
 		};
 
+		void erase(iterator position)
+		{
+			rbt_node<value_type> *n;
+			n = find_node(position->first);
+			delete_node(n);
+		};
+
 
 
 
@@ -336,6 +343,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return true;
 			else
 				return false;
+		};
+
+		bool is_root(rbt_node<value_type> *n)
+		{
+			return ((*n).parent == NULL);
 		};
 
 		void connect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
