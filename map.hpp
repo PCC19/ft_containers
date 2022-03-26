@@ -161,7 +161,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 //					std::cout << "i++: "; i.print_iterator();
 				erase(j);
 //					std::cout << "i apos erase: "; i.print_iterator();
-					print_tree_level();
 				_size--;
 					std::cout << "Next Iteration\n";
 			};
@@ -332,10 +331,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (node_to_destroy)
 			{
-				delete (*node_to_destroy).content;
+				delete (node_to_destroy->content);
 				delete (node_to_destroy);
 			};
 		};
+
 		void destroy_tree_temp(rbt_node<value_type> *r)
 		{
 			if (r == NULL) return;
@@ -525,38 +525,25 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// conectar sucessor no lugar de n
 				// tratar root
 			// conectar orfaos de s no lugar certo
+			//
+			// acha no para deletar
+			// acha sucessor
+			// copia conteudo do sucessor para o no a deletar
+			// deleta o sucessor (que sera um delete min)
 
 			if (n->left && n->right)
 			{
-				rbt_node <value_type> *p, *lc, *rc, *s, *temp;
-				direction dir;
+				rbt_node<value_type> *s;
 
-				// decobre se n eh left or right child
-				p = n->parent;
-				if (is_left_child(n))
-					dir = LEFT;
-				else
-					dir = RIGHT;
-				// desconecta sucessor
+				// acha sucessor
 				s = next_node(n);
-				temp = disconnect(s->parent, s);
-				// desconecta n
-				lc = disconnect(n, n->left);
-				rc = disconnect(n, n->right);
-				disconnect(p, n);
-				// reconecta temp no lugar de n
-				connect(temp, LEFT,  lc);
-				connect(temp, RIGHT, rc);
-				if (p == NULL)
-				{
-					temp->parent = NULL;
-					_root = temp;
-				}
-				else
-					connect(p, dir, temp);
-				// destroi n
-				destroy_node(n);
-				return (1);
+				// copia conteudo do sucessor para n (no a deletar)
+				delete n->content;
+				n->content = s->content;
+				/// deleta sucessor
+				disconnect(s->parent, s);
+				delete s;
+				return(1);
 			};
 			return(0);
 		};
