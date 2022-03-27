@@ -61,7 +61,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
-			destroy_tree_temp(_root);
+			clear();
 		};
 
 
@@ -242,36 +242,42 @@ template <class Key, class T, class Compare = std::less<Key>,
 //itm: 135 a: 134 p: 140
 //itm: 140 a: 135 p: 150
 //itm: 150 a: 140
-			key_type i, j;
-			rbt_node<value_type> *nnn;
+			key_type key_first, key_last;
+			iterator i;
 
-			i = first->first;
-			while(i != last->first)
+			key_first = first->first;
+			key_last = last->first;
+			while(1)
 			{
-				j = i;
-//					std::cout << "i: " << &i; i.print_iterator();
-					std::cout << "i: " << i;
-					print_tree_level();
-					nnn = next_node(find_node(i));
-					i = nnn->content->first;
-//					std::cout << "i++: " << &i; i.print_iterator();
-					std::cout << "i++: " << i;
-					std::cout << "j: " << j;
-//					std::cout << "j: " << &j; j.print_iterator();
-				erase(j);
-//					std::cout << "i: " << &i; i.print_iterator();
-				_size--;
-					std::cout << "Next Iteration\n";
+				i = begin();
+				if(i->first == key_last)
+					return;
+				while (i->first < key_first) i++;
+				erase(i);
 			};
+
+//			while(i != last->first)
+//			{
+//				j = i;
+////					std::cout << "i: " << &i; i.print_iterator();
+//					std::cout << "i: " << i;
+//					print_tree_level();
+//					nnn = next_node(find_node(i));
+//					i = nnn->content->first;
+////					std::cout << "i++: " << &i; i.print_iterator();
+//					std::cout << "i++: " << i;
+//					std::cout << "j: " << j;
+////					std::cout << "j: " << &j; j.print_iterator();
+//				erase(j);
+////					std::cout << "i: " << &i; i.print_iterator();
+//				_size--;
+//					std::cout << "Next Iteration\n";
+//			};
 		};
 
 		void clear()
 		{
-			iterator i, j;
-
-			i = begin();
-			j = end();
-			erase(i ,j);
+			destroy_tree_temp(_root);
 		};
 
 		// ITERATORS
@@ -356,7 +362,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_level()
 		{
-			print_tree_by_level(_root);
+			std::cout << "root: " << _root;
+			if (!_root)
+				std::cout << "EMPTY TREE\n";
+			else
+				print_tree_by_level(_root);
 		};
 
 		void print_tree_by_level(rbt_node<value_type> *n)
@@ -441,6 +451,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			destroy_tree_temp(r->left);
 			destroy_tree_temp(r->right);
 			destroy_node(r);
+			_root = NULL;
 		};
 
 		void print_tree_infix_recursive(rbt_node<value_type> *r)
@@ -582,6 +593,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void copy_node_content(const value_type& val, rbt_node<value_type> *dest)
 		{
+			delete (dest->content);
 			value_type *aux = _Alloc.allocate(1);
 			_Alloc.construct(aux, val);
 			dest->content = aux;
