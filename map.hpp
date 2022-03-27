@@ -161,118 +161,34 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void erase(iterator first, iterator last)
 		{
-//			(void) first;
-//			(void) last;
+
+//			key_type key_first, key_last;
+//			iterator i;
 //
-			rbt_node<value_type> *n;
-			(void) n;
-			int k; (void) k;
-			iterator nn;
+//			key_first = first->first;
+//			key_last = last->first;
+//			while(1)
+//			{
+//				i = begin();
+//				if(i->first == key_last)
+//					return;
+//				while (i->first < key_first) i++;
+//				erase(i);
+//			};
 
-//			k = 10;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			nn = find(k);
-//			nn.print_iterator();
-//			erase(nn);
-//			k = 20;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			nn = find(k);
-//			nn.print_iterator();
-//			erase(nn);
-//			k = 30;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			nn = find(k);
-//			nn.print_iterator();
-//			erase(nn);
-//			k = 50;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			nn = find(k);
-//			nn.print_iterator();
-//			erase(nn);
-
-//			remove_node(nn);
-//			std::cout << "Despois:\n"; print_tree_level();
-//			k = 20;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			n = find_node(k);
-//			remove_node(n);
-//			std::cout << "Despois:\n"; print_tree_level();
-//			k = 30;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			n = find_node(k);
-//			remove_node(n);
-//			std::cout << "Despois:\n"; print_tree_level();
-//			k = 40;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			n = find_node(k);
-//			remove_node(n);
-//			std::cout << "Despois:\n"; print_tree_level();
-//			k = 50;
-//			std::cout << "k: " << k << std::endl;
-//			std::cout << "Antes:\n"; print_tree_level();
-//			n = find_node(k);
-//			remove_node(n);
-//			std::cout << "Despois:\n"; print_tree_level();
-
-
-//itm: 10 p: 20
-//itm: 20 a: 10 p: 30
-//itm: 30 a: 20 p: 40
-//itm: 40 a: 30 p: 50
-//itm: 50 a: 40 p: 60
-//itm: 60 a: 50 p: 70
-//itm: 70 a: 60 p: 80
-//itm: 80 a: 70 p: 89
-//itm: 89 a: 80 p: 90
-//itm: 90 a: 89 p: 100
-//itm: 100 a: 90 p: 110
-//itm: 110 a: 100 p: 111
-//itm: 111 a: 110 p: 120
-//itm: 120 a: 111 p: 125
-//itm: 125 a: 120 p: 130
-//itm: 130 a: 125 p: 134
-//itm: 134 a: 130 p: 135
-//itm: 135 a: 134 p: 140
-//itm: 140 a: 135 p: 150
-//itm: 150 a: 140
-			key_type key_first, key_last;
+			key_type key_first, key_last, next_key, curr_key;
 			iterator i;
 
 			key_first = first->first;
 			key_last = last->first;
-			while(1)
+			curr_key = key_first;
+			while (curr_key != key_last)
 			{
-				i = begin();
-				if(i->first == key_last)
-					return;
-				while (i->first < key_first) i++;
-				erase(i);
+				i = find(curr_key);
+				next_key = (find((++i)->first))->first;
+				erase(curr_key);
+				curr_key = next_key;
 			};
-
-//			while(i != last->first)
-//			{
-//				j = i;
-////					std::cout << "i: " << &i; i.print_iterator();
-//					std::cout << "i: " << i;
-//					print_tree_level();
-//					nnn = next_node(find_node(i));
-//					i = nnn->content->first;
-////					std::cout << "i++: " << &i; i.print_iterator();
-//					std::cout << "i++: " << i;
-//					std::cout << "j: " << j;
-////					std::cout << "j: " << &j; j.print_iterator();
-//				erase(j);
-////					std::cout << "i: " << &i; i.print_iterator();
-//				_size--;
-//					std::cout << "Next Iteration\n";
-//			};
 		};
 
 		void clear()
@@ -362,7 +278,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_level()
 		{
-			std::cout << "root: " << _root;
+			std::cout << "root: " << _root << std::endl;
 			if (!_root)
 				std::cout << "EMPTY TREE\n";
 			else
@@ -598,13 +514,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			_Alloc.construct(aux, val);
 			dest->content = aux;
 		};
-//		void copy_node_content(rbt_node<value_type> *source, rbt_node<value_type> *dest)
-//		{
-//			value_type par(source->content->first, source->content->second);
-//			delete (dest->content);
-//			dest->content = _Alloc.allocate(1);
-//			_Alloc.construct(dest->content, par);
-//		};
 		
 		void remove_node(rbt_node<value_type> *n)
 		{
@@ -623,24 +532,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return;
 			}
 			else	
-			// se nao for folha
+			// se nao for folha, chama recursivo no prox node
 			{
-				// acha sucessor
 				s = next_node(n);
-				// copia conteudo de sucessor para no
-
-					std::cout << "Antes: \n";
-					std::cout << "n: " << n << " content: " << n->content << " " << n->content->first << std::endl;
-					std::cout << "s: " << s << " content: " << s->content << std::endl;
 				copy_node_content(*s->content, n);
-					std::cout << "Depois: \n";
-					std::cout << "n: " << n << " content: " << n->content << " " << n->content->first << std::endl;
-					std::cout << "s: " << s << " content: " << s->content << std::endl;
-				// deleta (sucessor)
 				remove_node(s);
 			};
 		};
-
 
 		
 
