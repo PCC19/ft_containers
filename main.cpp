@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/27 18:44:48 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/27 19:03:35 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -614,9 +614,6 @@ int main()
 	std::cout << "Teste do clear \n";
 	mapa1.clear();
 	mapa1.print_tree_level();
-
-	
-
 
 
 

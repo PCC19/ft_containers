@@ -132,8 +132,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			n = find_node(position->first);
 			if (n)
 			{
-				std::cout << "Achou\n";
-				std::cout << "deleting: " << n << std::endl;
 				remove_node(n);
 				_size--;
 				print_tree_level();
