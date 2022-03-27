@@ -130,8 +130,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 			rbt_node<value_type> *n;
 
 			n = find_node(position->first);
-			delete_node(n);
-			_size--;
+			if (n)
+			{
+				remove_node(n);
+				_size--;
+			};
 		};
 
 		size_type erase(const key_type &k)
@@ -139,12 +142,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			rbt_node<value_type> *n;
 
 			n = find_node(k);
-			if (delete_node(n))
+			if (n)
 			{
+				remove_node(n);
 				_size--;
 				return (1);
-			};
-			return (0);
+			}
+			else
+				return (0);
 		};
 
 		void erase(iterator first, iterator last)
@@ -155,12 +160,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			while(i != last)
 			{
 				j = i;
-//					std::cout << "j: "; j.print_iterator();
 					std::cout << "i: "; i.print_iterator();
 				i++;
-//					std::cout << "i++: "; i.print_iterator();
 				erase(j);
-//					std::cout << "i apos erase: "; i.print_iterator();
 				_size--;
 					std::cout << "Next Iteration\n";
 			};
@@ -304,7 +306,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			rbt_node<value_type> *p;
 			p = find_node(k);
-			delete_node(p);
+			remove_node(p);
 		};
 
 
@@ -473,80 +475,48 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (NULL);
 		};
 
-		size_type	delete_node(rbt_node<value_type> *n)
+		bool is_leaf(rbt_node<value_type> *n)
 		{
-			if (!n) return (0);
-			// sem filhos
-			if (n->left == NULL && n->right == NULL)
+			if (!n->left && !n->right)
+				return (1);
+			else
+				return (0);
+		};
+
+		void copy_node_content(rbt_node<value_type> *source, rbt_node<value_type> *dest)
+		{
+			value_type *aux_pair = _Alloc.allocate(1);
+			_Alloc.construct(aux_pair, *source->content);
+			delete (dest->content);
+			dest->content = aux_pair;
+		};
+		
+		void remove_node(rbt_node<value_type> *n)
+		{
+			rbt_node<value_type> *s;
+
+			// se for folha, deleta
+			if (is_leaf(n))
 			{
 				if (is_root(n))
 					_root = NULL;
 				else
 					disconnect(n->parent, n);
 				destroy_node(n);
-				return (1);
-			};
-
-			// um filho
-			if ((n->left && !n->right) || (!n->left && n->right))
+				return;
+			}
+			else	
+			// se nao for folha
 			{
-				rbt_node <value_type> *p, *c;
-
-				p = n->parent;
-				// desconecta n de seu filho
-				if (n->left)
-					c = disconnect(n, n->left);
-				else
-					c = disconnect(n, n->right);
-				// desconecta n de seu pai e conecta no neto
-				if (is_root(n))
-				{
-					_root = c;
-				};
-				if (is_left_child(n))
-				{
-					disconnect(p, n);
-					connect(p, LEFT, c);
-				}
-				if (is_right_child(n))
-				{
-					disconnect(p, n);
-					connect(p, RIGHT, c);
-				};
-				// destroi n
-				destroy_node(n);
-				return (1);
-			};
-			// dois filhos
-			// desconecta n dos lc, rc e p
-				// tratar se n == root (p == NULL)
-			// achar sucessor
-			// desconectar sucessor (de seu pai, do filho esq e filho dir)
-			// conectar sucessor no lugar de n
-				// tratar root
-			// conectar orfaos de s no lugar certo
-			//
-			// acha no para deletar
-			// acha sucessor
-			// copia conteudo do sucessor para o no a deletar
-			// deleta o sucessor (que sera um delete min)
-
-			if (n->left && n->right)
-			{
-				rbt_node<value_type> *s;
-
 				// acha sucessor
 				s = next_node(n);
-				// copia conteudo do sucessor para n (no a deletar)
-				delete n->content;
-				n->content = s->content;
-				/// deleta sucessor
-				disconnect(s->parent, s);
-				delete s;
-				return(1);
+				// copia conteudo de sucessor para no
+				copy_node_content(s, n);
+				// deleta (sucessor)
+				remove_node(s);
 			};
-			return(0);
 		};
+
 
 		
 
