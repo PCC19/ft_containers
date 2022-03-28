@@ -6,12 +6,13 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/27 19:03:18 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/28 23:05:13 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 # define UTILS_HPP
+
 
 template <typename T>
 void	print_vector(T& vector_to_print)
@@ -50,15 +51,17 @@ void print_node(N &node)
 	std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n";
 };
 
-//void print_map(ft::map &m)
-//{
-//	m::iterator i;
-//	i = m.begin();
-//	while (i != m.last())
-//	{
-//		std::cout << "(" << i->first << "," << i->second << ")\n";
-//		i++;
-//	};
-//	std::cout << std::endl;
+template<typename K,typename Val>
+void print_map(ft::map<K,Val> &m)
+{
+	typename ft::map<K,Val>::iterator i;
+	i = m.begin();
+	while (i != m.end())
+	{
+		std::cout << "(" << i->first << "," << i->second << ")\n";
+		i++;
+	};
+	std::cout << std::endl;
+};
 
 #endif

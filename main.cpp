@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/27 19:03:35 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/28 23:04:23 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <ctime>
 #include <typeinfo>
 #include <map>
-#include "utils.hpp"
 #include "node.hpp"
 #ifndef nullptr
 	#define nullptr NULL
@@ -29,6 +28,7 @@
 	#include <vector>
 	namespace ft = std;
 #endif
+#include "utils.hpp"
 
 int main()
 {
@@ -612,8 +612,11 @@ int main()
 	mapa1.print_tree_level();
 
 	std::cout << "Teste do clear \n";
+	print_map(mapa1);
 	mapa1.clear();
 	mapa1.print_tree_level();
+
+
 
 
 
