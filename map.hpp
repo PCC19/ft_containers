@@ -83,7 +83,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 				_root = node;
 				_size++;
 				it = node; // ???? Checar se esta correto isso !
-				std::cout << "inserido  root: \n"; print_node(*node);
 				return (ft::make_pair(it, true));
 			}
 			else
@@ -94,26 +93,24 @@ template <class Key, class T, class Compare = std::less<Key>,
 				while(i != NULL) // avanca i para um apos local de insercao (p)
 				{
 					p = i;
-					if (*(*node).content == *(*i).content) // se encontra node nao insere
+					if (*(node->content) == *(i->content)) // se encontra node nao insere
 					{
 						destroy_node(node);
 						return (ft::make_pair(it, false));
 					};
-					if (*(*node).content > *(*i).content)
-						i = (*i).right;
+					if (*(node->content) > *(i->content))
+						i = i->right;
 					else
-						i = (*i).left;
+						i = i->left;
 				};
 				// Faz a insercao
-				if (*(*node).content > *(*p).content)
+				if (*(node->content) > *(p->content))
 				{
 					connect(p, RIGHT, node);
-					std::cout << "inserido right: \n"; print_node(*node);
 				}
 				else
 				{
 					connect(p, LEFT, node);
-					std::cout << "inserido  left: \n"; print_node(*node);
 				}
 				_size++;
 				it = node;
@@ -283,46 +280,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 //				print_tree_by_level(_root);
 				print_tree_by_level_color(_root);
 		};
-
-//		void print_tree_by_level(rbt_node<value_type> *n)
-//		{
-//			std::cout << "Print Tree Level: \n";
-//
-//			ft::vector<rbt_node<value_type> >	q;
-//			rbt_node<value_type>				*nn;
-//			ft::vector<int>						lvl;
-//			size_type							i;
-//			
-//			i = 0;
-//			q.push_back(*n);
-//			lvl.push_back(1);
-//			while (i < q.size())
-//			{
-//				nn = (q[i].left);
-//				if (nn != NULL)
-//				{
-//					q.push_back(*nn);
-//					lvl.push_back(lvl[i] + 1);
-//				};
-//				nn = (q[i].right);
-//				if (nn != NULL)
-//				{
-//					q.push_back(*nn);
-//					lvl.push_back(lvl[i] + 1);
-//				};
-//				i++;
-//			};
-//			i = 0;
-//			std::cout << (q[i]).content->first << " ";
-//			i++;
-//			while (i < q.size())
-//			{
-//				if (lvl[i] != lvl[i-1]) std::cout << std::endl;
-//				std::cout << (q[i]).content->first << " ";
-//				i++;
-//			};
-//			std::cout << "\n-----------------\n";
-//		};
 
 		void teste_delete_node(const key_type &k)
 		{
@@ -538,9 +495,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				remove_node(s);
 			};
 		};
-
-		
-
 	}; // class map
+
 }; // namespace
 #endif
