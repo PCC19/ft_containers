@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/28 23:04:23 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/28 23:39:03 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <ctime>
 #include <typeinfo>
 #include <map>
+
+#define CYAN			"\e[0;36m"
+#define C_RED			"\e[0;31m"
+#define RESET			"\e[0m"
+#define BOLD			"\e[1m"
+
 #include "node.hpp"
 #ifndef nullptr
 	#define nullptr NULL
@@ -29,6 +35,8 @@
 	namespace ft = std;
 #endif
 #include "utils.hpp"
+
+
 
 int main()
 {

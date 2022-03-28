@@ -280,48 +280,49 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (!_root)
 				std::cout << "EMPTY TREE\n";
 			else
-				print_tree_by_level(_root);
+//				print_tree_by_level(_root);
+				print_tree_by_level_color(_root);
 		};
 
-		void print_tree_by_level(rbt_node<value_type> *n)
-		{
-			std::cout << "Print Tree Level: \n";
-
-			ft::vector<rbt_node<value_type> >	q;
-			rbt_node<value_type>				*nn;
-			ft::vector<int>						lvl;
-			size_type							i;
-			
-			i = 0;
-			q.push_back(*n);
-			lvl.push_back(1);
-			while (i < q.size())
-			{
-				nn = (q[i].left);
-				if (nn != NULL)
-				{
-					q.push_back(*nn);
-					lvl.push_back(lvl[i] + 1);
-				};
-				nn = (q[i].right);
-				if (nn != NULL)
-				{
-					q.push_back(*nn);
-					lvl.push_back(lvl[i] + 1);
-				};
-				i++;
-			};
-			i = 0;
-			std::cout << (q[i]).content->first << " ";
-			i++;
-			while (i < q.size())
-			{
-				if (lvl[i] != lvl[i-1]) std::cout << std::endl;
-				std::cout << (q[i]).content->first << " ";
-				i++;
-			};
-			std::cout << "\n-----------------\n";
-		};
+//		void print_tree_by_level(rbt_node<value_type> *n)
+//		{
+//			std::cout << "Print Tree Level: \n";
+//
+//			ft::vector<rbt_node<value_type> >	q;
+//			rbt_node<value_type>				*nn;
+//			ft::vector<int>						lvl;
+//			size_type							i;
+//			
+//			i = 0;
+//			q.push_back(*n);
+//			lvl.push_back(1);
+//			while (i < q.size())
+//			{
+//				nn = (q[i].left);
+//				if (nn != NULL)
+//				{
+//					q.push_back(*nn);
+//					lvl.push_back(lvl[i] + 1);
+//				};
+//				nn = (q[i].right);
+//				if (nn != NULL)
+//				{
+//					q.push_back(*nn);
+//					lvl.push_back(lvl[i] + 1);
+//				};
+//				i++;
+//			};
+//			i = 0;
+//			std::cout << (q[i]).content->first << " ";
+//			i++;
+//			while (i < q.size())
+//			{
+//				if (lvl[i] != lvl[i-1]) std::cout << std::endl;
+//				std::cout << (q[i]).content->first << " ";
+//				i++;
+//			};
+//			std::cout << "\n-----------------\n";
+//		};
 
 		void teste_delete_node(const key_type &k)
 		{

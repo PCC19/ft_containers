@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/28 23:05:13 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/28 23:54:45 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,106 @@ void print_map(ft::map<K,Val> &m)
 		std::cout << "(" << i->first << "," << i->second << ")\n";
 		i++;
 	};
+	std::cout << std::endl;
+};
+
+template<typename T>
+void print_tree_by_level(rbt_node<T> *n)
+{
+	std::cout << "Print Tree Level: \n";
+
+	ft::vector<rbt_node<T> >					q;
+	rbt_node<T>									*nn;
+	ft::vector<int>								lvl;
+//	typename ft::map::size_type						i;
+	size_t										i;
+
+	i = 0;
+	q.push_back(*n);
+	lvl.push_back(1);
+	while (i < q.size())
+	{
+		nn = (q[i].left);
+		if (nn != NULL)
+		{
+			q.push_back(*nn);
+			lvl.push_back(lvl[i] + 1);
+		};
+		nn = (q[i].right);
+		if (nn != NULL)
+		{
+			q.push_back(*nn);
+			lvl.push_back(lvl[i] + 1);
+		};
+		i++;
+	};
+	i = 0;
+	std::cout << (q[i]).content->first << " ";
+	i++;
+	while (i < q.size())
+	{
+		if (lvl[i] != lvl[i-1]) std::cout << std::endl;
+		std::cout << (q[i]).content->first << " ";
+		i++;
+	};
+	std::cout << "\n-----------------\n";
+};
+
+template<typename T>
+void print_tree_by_level_color(rbt_node<T> *n)
+{
+	std::cout << "Print Tree Level: \n";
+
+	ft::vector<rbt_node<T> >					q;
+	rbt_node<T>									*nn;
+	ft::vector<int>								lvl;
+//	typename ft::map::size_type						i;
+	size_t										i;
+
+	i = 0;
+	q.push_back(*n);
+	lvl.push_back(1);
+	while (i < q.size())
+	{
+		nn = (q[i].left);
+		if (nn != NULL)
+		{
+			q.push_back(*nn);
+			lvl.push_back(lvl[i] + 1);
+		};
+		nn = (q[i].right);
+		if (nn != NULL)
+		{
+			q.push_back(*nn);
+			lvl.push_back(lvl[i] + 1);
+		};
+		i++;
+	};
+	// [key] color p: parent lvl: l
+	i = 0;
+	print_node_in_a_line(q[i], lvl[i]);
+	i++;
+	while (i < q.size())
+	{
+		if (lvl[i] != lvl[i-1]) std::cout << std::endl;
+		print_node_in_a_line(q[i], lvl[i]);
+		i++;
+	};
+	std::cout << "\n-----------------\n";
+};
+
+template <typename T>
+void print_node_in_a_line(rbt_node<T> q, int lvl)
+{
+	if (q.color == 0)
+		std::cout << C_RED << "[" << q.content->first << "]" << RESET;
+	else
+		std::cout << "[" << q.content->first << "]";
+	if (q.parent)
+		std::cout << "\t\t p: " << (q.parent)->content->first;
+	else
+		std::cout << "\t\t root";
+	std::cout << "\t\tlvl: " << lvl;
 	std::cout << std::endl;
 };
 
