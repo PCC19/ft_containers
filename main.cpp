@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 00:09:10 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 00:31:26 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 	#include "map.hpp"
 #else // stl
 	#include <vector>
+	#include <map>
 	namespace ft = std;
 #endif
 #include "utils.hpp"
@@ -421,11 +422,6 @@ int main()
 	std::cout << "end(): \n";
 //	std::cout << it_mapa0->first << std::endl;
 
-	// testa print da arvore
-	#if V
-		mapa0.print_tree_infix();
-	#endif
-
 	// Cria map para testes
 	std::cout << "Mapa para testes: \n";
 	ft::map<int, int> mapa1;
@@ -451,9 +447,6 @@ int main()
 	mapa1.insert(ft::make_pair(135,1350));
 	mapa1.insert(ft::make_pair(125,1250));
 	ft::map<int, int>::iterator itm1;
-	#if (V)
-		mapa1.print_tree_infix();
-	#endif
 
 	// Teste find
 	std::cout << "Teste find: \n";
@@ -573,29 +566,17 @@ int main()
 
 	std::cout << "Teste delete_node: \n";
 	std::cout << "Deleting 80 (two children)\n";
-//		mapa1.print_tree_level();
-		mapa1.teste_delete_node(80);
-//		mapa1.print_tree_level();
+		print_map(mapa1); mapa1.erase(80); print_map(mapa1);
 	std::cout << "Deleting 89 (two children)\n";
-//		mapa1.print_tree_level();
-		mapa1.teste_delete_node(89);
-//		mapa1.print_tree_level();
+		print_map(mapa1); mapa1.erase(89); print_map(mapa1);
 	std::cout << "Deleting 70 (no child)\n";
-//		mapa1.print_tree_level();
-		mapa1.teste_delete_node(70);
-//		mapa1.print_tree_level();
+		print_map(mapa1); mapa1.erase(70); print_map(mapa1);
 	std::cout << "Deleting 90 (one child)\n";
-//		mapa1.print_tree_level();
-		mapa1.teste_delete_node(90);
-//		mapa1.print_tree_level();
+		print_map(mapa1); mapa1.erase(90); print_map(mapa1);
 	std::cout << "Deleting 110 (one child)\n";
-//		mapa1.print_tree_level();
-		mapa1.teste_delete_node(110);
-//		mapa1.print_tree_level();
+		print_map(mapa1); mapa1.erase(110); print_map(mapa1);
 	std::cout << "Deleting 40 (two children)\n";
-//		mapa1.print_tree_level();
-		mapa1.teste_delete_node(40);
-//		mapa1.print_tree_level();
+		print_map(mapa1); mapa1.erase(40); print_map(mapa1);
 
 
 	std::cout << "Teste do Erase (position) 120\n";

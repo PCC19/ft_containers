@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 00:09:35 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 00:26:24 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ void print_tree_by_level_color(rbt_node<T> *n)
 		};
 		i++;
 	};
-	// [key] color p: parent lvl: l
 	i = 0;
 	print_node_in_a_line(q[i], lvl[i]);
 	i++;
