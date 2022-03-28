@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffc43e296a0
-pointer to my_vector: 0x7ffc43e296a0
+           my_vector: 0x7ffe46391d00
+pointer to my_vector: 0x7ffe46391d00
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc43e2a600
+node:  	0x7ffe46392c60
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc43e2a650
+node:  	0x7ffe46392cb0
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc43e2a6a0
+node:  	0x7ffe46392d00
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -732,46 +732,6 @@ Print Tree Level:
 
 -----------------
 Teste do Erase (first, last)
-root: 0x604000000350
-Print Tree Level: 
-[0;31m[100][0m		 root		lvl: 1
-
-[0;31m[50][0m		 p: 100		lvl: 2
-[0;31m[125][0m		 p: 100		lvl: 2
-
-[0;31m[20][0m		 p: 50		lvl: 3
-[0;31m[60][0m		 p: 50		lvl: 3
-[0;31m[111][0m		 p: 125		lvl: 3
-[0;31m[140][0m		 p: 125		lvl: 3
-
-[0;31m[10][0m		 p: 20		lvl: 4
-[0;31m[30][0m		 p: 20		lvl: 4
-[0;31m[134][0m		 p: 140		lvl: 4
-[0;31m[150][0m		 p: 140		lvl: 4
-
-[0;31m[130][0m		 p: 134		lvl: 5
-[0;31m[135][0m		 p: 134		lvl: 5
-
------------------
-root: 0x604000000350
-Print Tree Level: 
-[0;31m[100][0m		 root		lvl: 1
-
-[0;31m[50][0m		 p: 100		lvl: 2
-[0;31m[125][0m		 p: 100		lvl: 2
-
-[0;31m[30][0m		 p: 50		lvl: 3
-[0;31m[60][0m		 p: 50		lvl: 3
-[0;31m[111][0m		 p: 125		lvl: 3
-[0;31m[140][0m		 p: 125		lvl: 3
-
-[0;31m[134][0m		 p: 140		lvl: 4
-[0;31m[150][0m		 p: 140		lvl: 4
-
-[0;31m[130][0m		 p: 134		lvl: 5
-[0;31m[135][0m		 p: 134		lvl: 5
-
------------------
 Teste do clear 
 (30,300)
 (50,500)
@@ -785,4 +745,4 @@ Teste do clear
 (140,1400)
 (150,1500)
 
-Elapsed time: 23.899ms
+Elapsed time: 15.696ms
