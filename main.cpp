@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 00:40:29 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 01:26:28 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -604,8 +604,35 @@ int main()
 	mapa1.clear();
 
 
+	std::cout << "Teste do rotate left: \n";
+	ft::map<int, int> mapa2;
+	// 80 40 20 10 30 60 50 70 120 100 140 90 89 110 111 134 150 130 135 125
+	mapa2.insert(ft::make_pair(80,800));
+	mapa2.insert(ft::make_pair(40,400));
+	mapa2.insert(ft::make_pair(20,200));
+	mapa2.insert(ft::make_pair(10,1000));
+	mapa2.insert(ft::make_pair(30,300));
+	mapa2.insert(ft::make_pair(60,600));
+	mapa2.insert(ft::make_pair(50,500));
+	mapa2.insert(ft::make_pair(70,700));
+	mapa2.insert(ft::make_pair(120,1200));
+	mapa2.insert(ft::make_pair(100,1000));
+	mapa2.insert(ft::make_pair(140,1400));
+	mapa2.insert(ft::make_pair(90,900));
+	mapa2.insert(ft::make_pair(89,890));
+	mapa2.insert(ft::make_pair(110,1100));
+	mapa2.insert(ft::make_pair(111,1110));
+	mapa2.insert(ft::make_pair(134,1340));
+	mapa2.insert(ft::make_pair(150,1500));
+	mapa2.insert(ft::make_pair(130,1300));
+	mapa2.insert(ft::make_pair(135,1350));
+	mapa2.insert(ft::make_pair(125,1250));
 
 
+	mapa2.print_tree_level();
+	std::cout << "rotate left 40: \n";
+	mapa2.teste_rotate_left(40);
+	mapa2.print_tree_level();
 
 	
 

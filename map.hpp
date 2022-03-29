@@ -271,14 +271,18 @@ template <class Key, class T, class Compare = std::less<Key>,
 			std::cout << std::endl;
 		};
 
-		void print_tree_level()
+		void print_tree_level(int flag = 1)
 		{
 			std::cout << "root: " << _root << std::endl;
 			if (!_root)
 				std::cout << "EMPTY TREE\n";
 			else
-//				print_tree_by_level(_root);
-				print_tree_by_level_color(_root);
+			{
+				if (flag == 0)
+					print_tree_by_level(_root);
+				else
+					print_tree_by_level_color(_root);
+			};
 		};
 
 		void teste_delete_node(const key_type &k)
@@ -286,6 +290,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			rbt_node<value_type> *p;
 			p = find_node(k);
 			remove_node(p);
+		};
+
+		void teste_rotate_left(const key_type &k)
+		{
+			rbt_node<value_type> *p;
+			p = find_node(k);
+			rotate_left(p);
 		};
 
 
@@ -494,6 +505,34 @@ template <class Key, class T, class Compare = std::less<Key>,
 				copy_node_content(*s->content, n);
 				remove_node(s);
 			};
+		};
+
+		void rotate_left(rbt_node<value_type> *n)
+		{
+			//  1 desconect n do pai
+			//  2 desconect n do filho direito
+			//  3
+			//  4 desconect neto esq do filho direito
+			//  5 conecta n esq neto
+			//  6
+			//  7 conecta pai de n no filho direito
+			//  8 conecta filho direito no n
+
+			rbt_node<value_type> *p, *rc, *lgc;
+
+			p = n->parent;
+			rc = n->right;
+			lgc = rc->left;
+
+			disconnect(p, n);
+			disconnect(n, rc);
+			disconnect(rc, lgc);
+
+			connect(n, LEFT, lgc);
+			connect(p, RIGHT, rc);
+			connect(rc, LEFT, n);
+
+			_root = rc;
 		};
 	}; // class map
 
