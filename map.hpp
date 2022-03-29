@@ -368,6 +368,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_left_child(rbt_node<value_type> *i)
 		{
+			if (!i)
+				return false;
 			if (i->parent != NULL && i->parent->left == i)
 				return true;
 			else
@@ -376,6 +378,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_right_child(rbt_node<value_type> *i)
 		{
+			if (!i)
+				return false;
 			if (i->parent != NULL && i->parent->right == i)
 				return true;
 			else
@@ -396,19 +400,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 				else
 					p->right = c;
 			};
-			c->parent = p;
+			if (c)
+				c->parent = p;
 		};
 
 		rbt_node<value_type> * disconnect(rbt_node<value_type> *p, rbt_node<value_type> *c)
 		{
 			rbt_node<value_type> *temp;
 
-			if (is_left_child(c))
+			if (is_left_child(c) && p)
 			{
 				temp = p->left;
 				p->left = NULL;
 			};
-			if (is_right_child(c))
+			if (is_right_child(c) && p)
 			{
 				temp = p->right;
 				p->right = NULL;
@@ -509,30 +514,32 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void rotate_left(rbt_node<value_type> *n)
 		{
-			//  1 desconect n do pai
-			//  2 desconect n do filho direito
-			//  3
-			//  4 desconect neto esq do filho direito
-			//  5 conecta n esq neto
-			//  6
-			//  7 conecta pai de n no filho direito
-			//  8 conecta filho direito no n
-
 			rbt_node<value_type> *p, *rc, *lgc;
+			direction d;
 
+			// so roda se tiver filho direito
+			if (!n->right)
+				return;
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
 			p = n->parent;
 			rc = n->right;
 			lgc = rc->left;
 
+			// desconecta 3 nodes
 			disconnect(p, n);
 			disconnect(n, rc);
 			disconnect(rc, lgc);
 
-			connect(n, LEFT, lgc);
-			connect(p, RIGHT, rc);
+			// reconecta 3 nodes
+			connect(n, RIGHT, lgc);
 			connect(rc, LEFT, n);
+			connect(p, d, rc);
 
-			_root = rc;
+			if (p == NULL)
+				_root = rc;
 		};
 	}; // class map
 

@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 01:26:28 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 06:14:06 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -630,9 +630,35 @@ int main()
 
 
 	mapa2.print_tree_level();
-	std::cout << "rotate left 40: \n";
-	mapa2.teste_rotate_left(40);
+	int numero;
+	numero = 120;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
 	mapa2.print_tree_level();
+//	numero = 20;
+//	std::cout << "rotate left :" << numero << std::endl;
+//	mapa2.teste_rotate_left(numero);
+//	mapa2.print_tree_level();
+//	numero = 30;
+//	std::cout << "rotate left :" << numero << std::endl;
+//	mapa2.teste_rotate_left(numero);
+//	mapa2.print_tree_level();
+//	numero = 40;
+//	std::cout << "rotate left :" << numero << std::endl;
+//	mapa2.teste_rotate_left(numero);
+//	mapa2.print_tree_level();
+//	numero = 80;
+//	std::cout << "rotate left :" << numero << std::endl;
+//	mapa2.teste_rotate_left(numero);
+//	mapa2.print_tree_level();
+//	numero = 120;
+//	std::cout << "rotate left :" << numero << std::endl;
+//	mapa2.teste_rotate_left(numero);
+//	mapa2.print_tree_level();
+//	numero = 150;
+//	std::cout << "rotate left :" << numero << std::endl;
+//	mapa2.teste_rotate_left(numero);
+//	mapa2.print_tree_level();
 
 	
 
