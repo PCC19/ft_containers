@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 06:31:12 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 21:44:14 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -420,7 +420,9 @@ int main()
 	std::cout << it_mapa0->first << std::endl;
 	it_mapa0 = mapa0.end();
 	std::cout << "end(): \n";
-//	std::cout << it_mapa0->first << std::endl;
+	std::cout << (--it_mapa0)->first << std::endl;
+
+
 
 	// Cria map para testes
 	std::cout << "Mapa para testes: \n";

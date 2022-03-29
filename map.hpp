@@ -30,7 +30,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	reverse_iterator;
 		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	const_reverse_iterator;
 		typedef rbt_node<value_type>					node_ptr;
-	
+
 		class value_compare
 		{
 			protected:
@@ -75,16 +75,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// Insert
 		pair<iterator, bool> insert(const value_type& val)
 		{
-			// Cria um iterator apontando para o node
+			// Cria um iterator apontando vazio
 			iterator it;
 			node_ptr *node = create_new_node_with_val(val);
 
 			if (_root == NULL)
 			{
-				_root = node;
-				_size++;
-				it = iterator(node); // ???? Checar se esta correto isso !
-				return (ft::make_pair(it, true));
+				insert_at_root(node);
+				return (ft::make_pair(iterator(_root), true));
 			}
 			else
 			{
@@ -103,13 +101,26 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 				// Faz a insercao
 				insert_node_at_position(p, node);
-				it = iterator(node);
-				return (ft::make_pair(it, true));
+				return (ft::make_pair(iterator(node), true));
 			}
 
 			// ajusta arvore
 				// rotacao
 				// recolor
+		};
+
+		bool is_red(node_ptr *node)
+		{
+			if (node == NULL)			return false;
+			if (node->color == RED)		return true;
+			return false;
+		};
+
+		void flip_colors(node_ptr *node)
+		{
+			node->color = RED;
+			node->left->color = BLACK;
+			node->right->color = BLACK;
 		};
 
 			
@@ -586,6 +597,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 				connect(p, LEFT, node);
 			_size++;
 		};
+
+		void insert_at_root(node_ptr *node)
+		{
+			node->color = BLACK;
+			_root = node;
+			_size++;
+		};
+
 	}; // class map
 
 }; // namespace
