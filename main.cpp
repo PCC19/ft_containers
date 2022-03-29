@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 21:44:14 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 22:10:21 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -606,6 +606,7 @@ int main()
 	mapa1.clear();
 
 
+	std::cout << "//////////////////////////////////////////////\n";
 	std::cout << "Teste do rotate left: \n";
 	ft::map<int, int> mapa2;
 	// 80 40 20 10 30 60 50 70 120 100 140 90 89 110 111 134 150 130 135 125
@@ -633,7 +634,7 @@ int main()
 
 	mapa2.print_tree_level();
 	int numero;
-	numero = 140;
+	numero = 80;
 	std::cout << "rotate right:" << numero << std::endl;
 	mapa2.teste_rotate_right(numero);
 	mapa2.print_tree_level();

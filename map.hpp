@@ -82,6 +82,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (_root == NULL)
 			{
 				insert_at_root(node);
+					std::cout << "[" << node->content->first << "]  "; print_tree_level();
 				return (ft::make_pair(iterator(_root), true));
 			}
 			else
@@ -101,12 +102,34 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 				// Faz a insercao
 				insert_node_at_position(p, node);
+				fix_tree(_root);
+			
+					std::cout << "[" << node->content->first << "]  "; print_tree_level();
 				return (ft::make_pair(iterator(node), true));
-			}
+			};
 
-			// ajusta arvore
-				// rotacao
-				// recolor
+	// ajusta arvore
+		// rotacao
+		// recolor
+		};
+
+
+		void fix_tree(node_ptr *node)
+		{
+				node_ptr *lc, *rc;
+
+				if (!node) return;
+				rc = node->right;
+				lc = node->left;
+				// Ajusta arvore
+				if (is_red(node->right) && is_black(node->left))
+					{node = rotate_left(node); std::cout << "A\n";};
+				if (is_red(node->left) && is_red(node->left->left))
+					{node = rotate_right(node); std::cout << "B\n";};
+				if (is_red(node->left) && is_red(node->right))
+					{flip_colors(node); std::cout << "C\n";};
+				fix_tree(rc);
+				fix_tree(lc);
 		};
 
 		bool is_red(node_ptr *node)
@@ -114,6 +137,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (node == NULL)			return false;
 			if (node->color == RED)		return true;
 			return false;
+		};
+
+		bool is_black(node_ptr *node)
+		{
+			return (!is_red(node));
 		};
 
 		void flip_colors(node_ptr *node)
@@ -275,7 +303,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_level(int flag = 1)
 		{
-			std::cout << "root: " << _root << std::endl;
+//			std::cout << "root: " << _root << std::endl;
 			if (!_root)
 				std::cout << "EMPTY TREE\n";
 			else
@@ -294,7 +322,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			remove_node(p);
 		};
 
-		void teste_rotate_left(const key_type &k)
+		void teste_uotate_left(const key_type &k)
 		{
 			node_ptr *p;
 			p = find_node(k);
@@ -521,14 +549,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 		};
 
-		void rotate_left(node_ptr *n)
+		node_ptr *rotate_left(node_ptr *n)
 		{
 			node_ptr *p, *rc, *lgc;
 			direction d;
 
 			// so roda se tiver filho direito
 			if (!n->right)
-				return;
+				return (n);
 			if (is_left_child(n)) d = LEFT;
 			if (is_right_child(n)) d = RIGHT;
 
@@ -549,16 +577,18 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			if (p == NULL)
 				_root = rc;
+
+			return (rc);
 		};
 
-		void rotate_right(node_ptr *n)
+		node_ptr *rotate_right(node_ptr *n)
 		{
 			node_ptr *p, *lc, *rgc;
 			direction d;
 
 			// so roda se tiver filho direito
 			if (!n->left)
-				return;
+				return (n);
 			if (is_left_child(n)) d = LEFT;
 			if (is_right_child(n)) d = RIGHT;
 
@@ -579,6 +609,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			if (p == NULL)
 				_root = lc;
+
+			return (lc);
 		};
 
 		node_ptr *increment_pointer(node_ptr *i, node_ptr *node)
