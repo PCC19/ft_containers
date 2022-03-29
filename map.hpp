@@ -299,6 +299,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			rotate_left(p);
 		};
 
+		void teste_rotate_right(const key_type &k)
+		{
+			rbt_node<value_type> *p;
+			p = find_node(k);
+			rotate_right(p);
+		};
+
 
 
 	protected:
@@ -540,6 +547,36 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			if (p == NULL)
 				_root = rc;
+		};
+
+		void rotate_right(rbt_node<value_type> *n)
+		{
+			rbt_node<value_type> *p, *lc, *rgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (!n->left)
+				return;
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			lc = n->left;
+			rgc = lc->right;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, lc);
+			disconnect(lc, rgc);
+
+			// reconecta 3 nodes
+			connect(n, LEFT, rgc);
+			connect(lc, RIGHT, n);
+			connect(p, d, lc);
+
+			if (p == NULL)
+				_root = lc;
 		};
 	}; // class map
 

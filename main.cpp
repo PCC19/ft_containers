@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 06:14:06 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/29 06:31:12 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -631,9 +631,9 @@ int main()
 
 	mapa2.print_tree_level();
 	int numero;
-	numero = 120;
-	std::cout << "rotate left :" << numero << std::endl;
-	mapa2.teste_rotate_left(numero);
+	numero = 140;
+	std::cout << "rotate right:" << numero << std::endl;
+	mapa2.teste_rotate_right(numero);
 	mapa2.print_tree_level();
 //	numero = 20;
 //	std::cout << "rotate left :" << numero << std::endl;
