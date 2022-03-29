@@ -29,6 +29,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		typedef ft::map_iterator< ft::map<key_type, mapped_type> >			const_iterator;
 		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	reverse_iterator;
 		typedef ft::reverse_map_iterator< ft::map<key_type, mapped_type> >	const_reverse_iterator;
+		typedef rbt_node<value_type>					node_ptr;
 	
 		class value_compare
 		{
@@ -74,15 +75,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// Insert
 		pair<iterator, bool> insert(const value_type& val)
 		{
-			(void) val;
 			// Cria um iterator apontando para o node
 			iterator it;
 			rbt_node<value_type> *node = create_new_node_with_val(val);
+
 			if (_root == NULL)
 			{
 				_root = node;
 				_size++;
-				it = node; // ???? Checar se esta correto isso !
+				it = iterator(node); // ???? Checar se esta correto isso !
 				return (ft::make_pair(it, true));
 			}
 			else
@@ -98,18 +99,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 						destroy_node(node);
 						return (ft::make_pair(it, false));
 					};
-					if (_comp(i->content->first, node->content->first))
-						i = i->right;
-					else
-						i = i->left;
+					i = increment_pointer(i, node);
 				};
 				// Faz a insercao
-				if (_comp(p->content->first, node->content->first))
-					connect(p, RIGHT, node);
-				else
-					connect(p, LEFT, node);
-				_size++;
-				it = node;
+				insert_node_at_position(p, node);
+				it = iterator(node);
 				return (ft::make_pair(it, true));
 			}
 
@@ -118,6 +112,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// recolor
 		};
 
+			
 		void erase(iterator position)
 		{
 			rbt_node<value_type> *n;
@@ -573,6 +568,23 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			if (p == NULL)
 				_root = lc;
+		};
+
+		rbt_node<value_type> *increment_pointer(rbt_node<value_type> *i, rbt_node<value_type> *node)
+		{
+			if (_comp(i->content->first, node->content->first))
+				return (i->right);
+			else
+				return (i->left);
+		};
+		
+		void insert_node_at_position (rbt_node<value_type> *p, rbt_node<value_type> *node)
+		{
+			if (_comp(p->content->first, node->content->first))
+				connect(p, RIGHT, node);
+			else
+				connect(p, LEFT, node);
+			_size++;
 		};
 	}; // class map
 
