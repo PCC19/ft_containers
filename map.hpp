@@ -77,7 +77,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			// Cria um iterator apontando para o node
 			iterator it;
-			rbt_node<value_type> *node = create_new_node_with_val(val);
+			node_ptr *node = create_new_node_with_val(val);
 
 			if (_root == NULL)
 			{
@@ -89,7 +89,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			else
 			{
 				// SE ARVORE JA TEM NODES
-				rbt_node<value_type>	*i, *p;
+				node_ptr	*i, *p;
 				i = _root;
 				while(i != NULL) // avanca i para um apos local de insercao (p)
 				{
@@ -115,7 +115,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			
 		void erase(iterator position)
 		{
-			rbt_node<value_type> *n;
+			node_ptr *n;
 
 			n = find_node(position->first);
 			if (n)
@@ -130,7 +130,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		size_type erase(const key_type &k)
 		{
-			rbt_node<value_type> *n;
+			node_ptr *n;
 
 			n = find_node(k);
 			if (n)
@@ -195,28 +195,28 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		iterator end()
 		{
-			rbt_node<value_type>* n;
+			node_ptr* n;
 			n = max_subtree(_root);
 			return ++iterator(n);
 		};
 
 		const_iterator end() const
 		{
-			rbt_node<value_type>* n;
+			node_ptr* n;
 			n = max_subtree(_root);
 			return ++const_iterator(n);
 		};
 
 		reverse_iterator rbegin()
 		{
-			rbt_node<value_type>* n;
+			node_ptr* n;
 			n = max_subtree(_root);
 			return reverse_iterator(n);
 		};
 
 		const_reverse_iterator rbegin() const
 		{
-			rbt_node<value_type>* n;
+			node_ptr* n;
 			n = max_subtree(_root);
 			return const_reverse_iterator(n);
 		};
@@ -238,7 +238,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// OPERATIONS
 		iterator find(const key_type &k) const
 		{
-			rbt_node<value_type>* p;
+			node_ptr* p;
 			p = find_node(k);
 			if (p)
 				return (iterator(p));
@@ -278,21 +278,21 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void teste_delete_node(const key_type &k)
 		{
-			rbt_node<value_type> *p;
+			node_ptr *p;
 			p = find_node(k);
 			remove_node(p);
 		};
 
 		void teste_rotate_left(const key_type &k)
 		{
-			rbt_node<value_type> *p;
+			node_ptr *p;
 			p = find_node(k);
 			rotate_left(p);
 		};
 
 		void teste_rotate_right(const key_type &k)
 		{
-			rbt_node<value_type> *p;
+			node_ptr *p;
 			p = find_node(k);
 			rotate_right(p);
 		};
@@ -301,7 +301,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 	protected:
 		// ATRIBUTES
-		rbt_node<value_type>*	_root;
+		node_ptr*	_root;
 		size_type				_size;
 		key_compare				_comp;
 		allocator_type			_Alloc;
@@ -309,15 +309,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 	private:
 		typedef enum {LEFT, RIGHT} direction;
 
-		rbt_node<value_type> *create_new_node_with_val(const value_type& val)
+		node_ptr *create_new_node_with_val(const value_type& val)
 		{
 			value_type *aux = _Alloc.allocate(1);
 			_Alloc.construct(aux, val);
-			rbt_node<value_type> *node =  new rbt_node<value_type>(aux);
+			node_ptr *node =  new node_ptr(aux);
 			return (node);
 		};
 
-		void destroy_node(rbt_node<value_type> *node_to_destroy)
+		void destroy_node(node_ptr *node_to_destroy)
 		{
 			if (node_to_destroy)
 			{
@@ -326,7 +326,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 		};
 
-		void destroy_tree_temp(rbt_node<value_type> *r)
+		void destroy_tree_temp(node_ptr *r)
 		{
 			if (r == NULL) return;
 			destroy_tree_temp(r->left);
@@ -335,7 +335,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			_root = NULL;
 		};
 
-		void print_tree_infix_recursive(rbt_node<value_type> *r)
+		void print_tree_infix_recursive(node_ptr *r)
 		{
 			if (r == NULL) return;
 			print_tree_infix_recursive(r->left);
@@ -344,7 +344,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			print_tree_infix_recursive(r->right);
 		};
 
-		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i) const
+		node_ptr * min_subtree(node_ptr *i) const
 		{
 			if (i != NULL)
 			{
@@ -354,7 +354,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return i;
 		};
 
-		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i) const
+		node_ptr * max_subtree(node_ptr *i) const
 		{
 			if (i != NULL)
 			{
@@ -364,7 +364,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return i;
 		};
 
-		bool is_left_child(rbt_node<value_type> *i)
+		bool is_left_child(node_ptr *i)
 		{
 			if (!i)
 				return false;
@@ -374,7 +374,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return false;
 		};
 
-		bool is_right_child(rbt_node<value_type> *i)
+		bool is_right_child(node_ptr *i)
 		{
 			if (!i)
 				return false;
@@ -384,12 +384,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return false;
 		};
 
-		bool is_root(rbt_node<value_type> *n)
+		bool is_root(node_ptr *n)
 		{
 			return (n->parent == NULL);
 		};
 
-		void connect(rbt_node<value_type> *p, direction d, rbt_node<value_type> *c)
+		void connect(node_ptr *p, direction d, node_ptr *c)
 		{
 			if (p)
 			{
@@ -402,9 +402,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 				c->parent = p;
 		};
 
-		rbt_node<value_type> * disconnect(rbt_node<value_type> *p, rbt_node<value_type> *c)
+		node_ptr * disconnect(node_ptr *p, node_ptr *c)
 		{
-			rbt_node<value_type> *temp;
+			node_ptr *temp;
 
 			if (is_left_child(c) && p)
 			{
@@ -421,9 +421,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (temp);
 		};
 
-		rbt_node<value_type> *next_node(rbt_node<value_type> *n)
+		node_ptr *next_node(node_ptr *n)
 		{
-			rbt_node<value_type> *p;
+			node_ptr *p;
 
 			if (n->right != NULL)	// go down
 				p = min_subtree(n->right);
@@ -437,9 +437,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (p);
 		};
 
-		rbt_node<value_type> *prev_node(rbt_node<value_type> *n)
+		node_ptr *prev_node(node_ptr *n)
 		{
-			rbt_node<value_type> *p;
+			node_ptr *p;
 
 			if (n->left != NULL)	// go down
 				p = max_subtree(n->left);
@@ -453,9 +453,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (p);
 		};
 
-		rbt_node<value_type> *find_node(const key_type &k) const
+		node_ptr *find_node(const key_type &k) const
 		{
-			rbt_node<value_type>* p;
+			node_ptr* p;
 			p = _root;
 			while (p)
 			{
@@ -469,7 +469,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (NULL);
 		};
 
-		bool is_leaf(rbt_node<value_type> *n)
+		bool is_leaf(node_ptr *n)
 		{
 			if (!n->left && !n->right)
 				return (1);
@@ -477,7 +477,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (0);
 		};
 
-		void copy_node_content(const value_type& val, rbt_node<value_type> *dest)
+		void copy_node_content(const value_type& val, node_ptr *dest)
 		{
 			delete (dest->content);
 			value_type *aux = _Alloc.allocate(1);
@@ -485,9 +485,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			dest->content = aux;
 		};
 		
-		void remove_node(rbt_node<value_type> *n)
+		void remove_node(node_ptr *n)
 		{
-			rbt_node<value_type> *s;
+			node_ptr *s;
 
 			if (!n) return;
 
@@ -510,9 +510,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			};
 		};
 
-		void rotate_left(rbt_node<value_type> *n)
+		void rotate_left(node_ptr *n)
 		{
-			rbt_node<value_type> *p, *rc, *lgc;
+			node_ptr *p, *rc, *lgc;
 			direction d;
 
 			// so roda se tiver filho direito
@@ -540,9 +540,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 				_root = rc;
 		};
 
-		void rotate_right(rbt_node<value_type> *n)
+		void rotate_right(node_ptr *n)
 		{
-			rbt_node<value_type> *p, *lc, *rgc;
+			node_ptr *p, *lc, *rgc;
 			direction d;
 
 			// so roda se tiver filho direito
@@ -570,7 +570,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				_root = lc;
 		};
 
-		rbt_node<value_type> *increment_pointer(rbt_node<value_type> *i, rbt_node<value_type> *node)
+		node_ptr *increment_pointer(node_ptr *i, node_ptr *node)
 		{
 			if (_comp(i->content->first, node->content->first))
 				return (i->right);
@@ -578,7 +578,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (i->left);
 		};
 		
-		void insert_node_at_position (rbt_node<value_type> *p, rbt_node<value_type> *node)
+		void insert_node_at_position (node_ptr *p, node_ptr *node)
 		{
 			if (_comp(p->content->first, node->content->first))
 				connect(p, RIGHT, node);
