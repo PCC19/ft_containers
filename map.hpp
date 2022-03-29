@@ -98,20 +98,16 @@ template <class Key, class T, class Compare = std::less<Key>,
 						destroy_node(node);
 						return (ft::make_pair(it, false));
 					};
-					if (*(node->content) > *(i->content))
+					if (_comp(i->content->first, node->content->first))
 						i = i->right;
 					else
 						i = i->left;
 				};
 				// Faz a insercao
-				if (*(node->content) > *(p->content))
-				{
+				if (_comp(p->content->first, node->content->first))
 					connect(p, RIGHT, node);
-				}
 				else
-				{
 					connect(p, LEFT, node);
-				}
 				_size++;
 				it = node;
 				return (ft::make_pair(it, true));
