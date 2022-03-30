@@ -259,6 +259,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return end();
 		};
 
+		pair<iterator,iterator> equal_range (const key_type& k){
+			return ft::make_pair(lower_bound(k), upper_bound(k));
+		};
+
+		pair<const_iterator,const_iterator> equal_range (const key_type& k) const{
+			return ft::make_pair(lower_bound(k), upper_bound(k));
+		};
 
 		
 		// OBSERVERS
