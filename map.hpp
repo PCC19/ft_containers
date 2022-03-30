@@ -102,9 +102,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 				// Faz a insercao
 				insert_node_at_position(p, node);
+					std::cout << "inserting: " << node->content->first << "\n  ";
+					std::cout << "antes fix:\n";
+					print_tree_level();
+
 				fix_tree(_root);
+					std::cout << "depois fix;\n";
+					print_tree_level();
+
 			
-					std::cout << "[" << node->content->first << "]  "; print_tree_level();
 				return (ft::make_pair(iterator(node), true));
 			};
 
@@ -116,20 +122,21 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void fix_tree(node_ptr *node)
 		{
-				node_ptr *lc, *rc;
+			node_ptr *lc, *rc;
 
-				if (!node) return;
-				rc = node->right;
-				lc = node->left;
-				// Ajusta arvore
-				if (is_red(node->right) && is_black(node->left))
-					{node = rotate_left(node); std::cout << "A\n";};
-				if (is_red(node->left) && is_red(node->left->left))
-					{node = rotate_right(node); std::cout << "B\n";};
-				if (is_red(node->left) && is_red(node->right))
-					{flip_colors(node); std::cout << "C\n";};
-				fix_tree(rc);
-				fix_tree(lc);
+			if (!node) return;
+			rc = node->right;
+			lc = node->left;
+
+			fix_tree(lc);
+			// Ajusta arvore
+			if (is_red(node->right) && is_black(node->left))
+				{node = rotate_left(node); std::cout << "A\n";};
+			if (is_red(node->left) && is_red(node->left->left))
+				{node = rotate_right(node); std::cout << "B\n";};
+			if (is_red(node->left) && is_red(node->right))
+				{flip_colors(node); std::cout << "C\n";};
+			fix_tree(rc);
 		};
 
 		bool is_red(node_ptr *node)
@@ -150,7 +157,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node->left->color = BLACK;
 			node->right->color = BLACK;
 		};
-
 			
 		void erase(iterator position)
 		{
@@ -322,7 +328,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			remove_node(p);
 		};
 
-		void teste_uotate_left(const key_type &k)
+		void teste_rotate_left(const key_type &k)
 		{
 			node_ptr *p;
 			p = find_node(k);
@@ -578,6 +584,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (p == NULL)
 				_root = rc;
 
+			rc->color = n->color;
+			n->color = RED;
+
 			return (rc);
 		};
 
@@ -609,6 +618,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			if (p == NULL)
 				_root = lc;
+
+			lc->color = n->color;
+			n->color = RED;
 
 			return (lc);
 		};
