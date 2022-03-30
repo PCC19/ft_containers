@@ -106,7 +106,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 					std::cout << "antes fix:\n";
 					print_tree_level();
 
-				fix_tree(_root);
+				fix_tree1(node);
 					std::cout << "depois fix;\n";
 					print_tree_level();
 
@@ -120,23 +120,92 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 
 
-		void fix_tree(node_ptr *node)
+		void fix_tree1(node_ptr *n)
 		{
-			node_ptr *lc, *rc;
+			if (is_root(n))
+				n->color = BLACK;
+			else
+				fix_tree2(n);
+		};
 
-			if (!node) return;
-			rc = node->right;
-			lc = node->left;
+		void fix_tree2(node_ptr *n)
+		{
+			if (n->parent->color == BLACK)
+				return;
+			else
+				fix_tree3(n);
+		};
 
-			fix_tree(lc);
-			// Ajusta arvore
-			if (is_red(node->right) && is_black(node->left))
-				{node = rotate_left(node); std::cout << "A\n";};
-			if (is_red(node->left) && is_red(node->left->left))
-				{node = rotate_right(node); std::cout << "B\n";};
-			if (is_red(node->left) && is_red(node->right))
-				{flip_colors(node); std::cout << "C\n";};
-			fix_tree(rc);
+		void fix_tree3(node_ptr *n)
+		{
+			if (uncle(n) && (uncle(n))->color == RED)
+			{
+				n->parent->color = BLACK;
+				uncle(n)->color = BLACK;
+				grandparent(n)->color = RED;
+				fix_tree1(grandparent(n));
+			}
+			else
+				fix_tree4(n);
+		};
+	
+		void fix_tree4(node_ptr *n)
+		{
+			if (n == n->parent->right && n->parent == grandparent(n)->left)
+			{
+				rotate_left(n->parent);
+				n = n->left;
+			}
+			else if (n == n->parent->left && n->parent == grandparent(n)->right)
+			{
+				rotate_right(n->parent);
+				n = n->right;
+			};
+			fix_tree5(n);
+		};
+
+		void fix_tree5(node_ptr *n)
+		{
+			n->parent->color = BLACK;
+			grandparent(n)->color = RED;
+			if (n == n->parent->left && n->parent == grandparent(n)->left)
+			{
+				rotate_right(grandparent(n));
+			}
+			else
+			{
+				if (n == n->parent->right && n->parent == grandparent(n)->right)
+				rotate_left(grandparent(n));
+			};
+		};
+
+		node_ptr *grandparent(node_ptr *n)
+		{
+			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
+				return (n->parent->parent);
+			else
+				return NULL;
+		};
+
+		node_ptr *sibling(node_ptr *n)
+		{
+			if (n != NULL && n->parent != NULL)
+			{
+				if (is_left_child(n))
+					return (n->parent->right);
+				else
+					return (n->parent->left);
+			}
+			else
+				return NULL;
+		};
+
+		node_ptr *uncle(node_ptr *n)
+		{
+			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
+				return (sibling(n->parent));
+			else
+				return NULL;
 		};
 
 		bool is_red(node_ptr *node)
