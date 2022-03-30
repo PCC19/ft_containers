@@ -65,7 +65,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			clear();
 		};
 
-
 		// CAPACITY
 		bool empty()					{ return (_size == 0); };
 		size_type size()				{ return (_size); };
@@ -110,136 +109,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 					std::cout << "depois fix;\n";
 					print_tree_level();
 
-			
 				return (ft::make_pair(iterator(node), true));
 			};
-
-	// ajusta arvore
-		// rotacao
-		// recolor
-		};
-
-
-		void fix_tree1(node_ptr *n)
-		{
-			if (is_root(n))
-				n->color = BLACK;
-			else
-				fix_tree2(n);
-		};
-
-		void fix_tree2(node_ptr *n)
-		{
-			if (n->parent->color == BLACK)
-				return;
-			else
-				fix_tree3(n);
-		};
-
-		void fix_tree3(node_ptr *n)
-		{
-			if (uncle(n) && (uncle(n))->color == RED)
-			{
-				n->parent->color = BLACK;
-				uncle(n)->color = BLACK;
-				grandparent(n)->color = RED;
-				fix_tree1(grandparent(n));
-			}
-			else
-				fix_tree4(n);
-		};
-	
-		void fix_tree4(node_ptr *n)
-		{
-			if (n == n->parent->right && n->parent == grandparent(n)->left)
-			{
-				rotate_left(n->parent);
-				n = n->left;
-			}
-			else if (n == n->parent->left && n->parent == grandparent(n)->right)
-			{
-				rotate_right(n->parent);
-				n = n->right;
-			};
-			fix_tree5(n);
-		};
-
-		void fix_tree5(node_ptr *n)
-		{
-			n->parent->color = BLACK;
-			grandparent(n)->color = RED;
-			if (n == n->parent->left && n->parent == grandparent(n)->left)
-			{
-				rotate_right(grandparent(n));
-			}
-			else
-			{
-				if (n == n->parent->right && n->parent == grandparent(n)->right)
-				rotate_left(grandparent(n));
-			};
-		};
-
-		node_ptr *grandparent(node_ptr *n)
-		{
-			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
-				return (n->parent->parent);
-			else
-				return NULL;
-		};
-
-		node_ptr *sibling(node_ptr *n)
-		{
-			if (n != NULL && n->parent != NULL)
-			{
-				if (is_left_child(n))
-					return (n->parent->right);
-				else
-					return (n->parent->left);
-			}
-			else
-				return NULL;
-		};
-
-		node_ptr *uncle(node_ptr *n)
-		{
-			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
-				return (sibling(n->parent));
-			else
-				return NULL;
-		};
-
-		bool is_red(node_ptr *node)
-		{
-			if (node == NULL)			return false;
-			if (node->color == RED)		return true;
-			return false;
-		};
-
-		bool is_black(node_ptr *node)
-		{
-			return (!is_red(node));
-		};
-
-		void flip_colors(node_ptr *node)
-		{
-			node->color = RED;
-			node->left->color = BLACK;
-			node->right->color = BLACK;
-		};
-			
-		void erase(iterator position)
-		{
-			node_ptr *n;
-
-			n = find_node(position->first);
-			if (n)
-			{
-				remove_node(n);
-				_size--;
-				print_tree_level();
-			}
-			else
-				std::cout << "Nao Achou \n";
 		};
 
 		size_type erase(const key_type &k)
@@ -257,6 +128,21 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				return (0);
 			};
+		};
+
+		void erase(iterator position)
+		{
+			node_ptr *n;
+
+			n = find_node(position->first);
+			if (n)
+			{
+				remove_node(n);
+				_size--;
+				print_tree_level();
+			}
+			else
+				std::cout << "Nao Achou \n";
 		};
 
 		void erase(iterator first, iterator last)
@@ -378,7 +264,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void print_tree_level(int flag = 1)
 		{
-//			std::cout << "root: " << _root << std::endl;
 			if (!_root)
 				std::cout << "EMPTY TREE\n";
 			else
@@ -410,8 +295,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			p = find_node(k);
 			rotate_right(p);
 		};
-
-
 
 	protected:
 		// ATRIBUTES
@@ -539,9 +422,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr *p;
 
-			if (n->right != NULL)	// go down
+			if (n->right != NULL)			// go down
 				p = min_subtree(n->right);
-			else						// or go up
+			else							// or go up
 			{
 				p = n;
 				while (p != NULL && is_right_child(p))
@@ -555,9 +438,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr *p;
 
-			if (n->left != NULL)	// go down
+			if (n->left != NULL)			// go down
 				p = max_subtree(n->left);
-			else						// or go up
+			else							// or go up
 			{
 				p = n;
 				while (p != NULL && is_left_child(p))
@@ -653,9 +536,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (p == NULL)
 				_root = rc;
 
-			rc->color = n->color;
-			n->color = RED;
-
 			return (rc);
 		};
 
@@ -688,9 +568,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (p == NULL)
 				_root = lc;
 
-			lc->color = n->color;
-			n->color = RED;
-
 			return (lc);
 		};
 
@@ -716,6 +593,106 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node->color = BLACK;
 			_root = node;
 			_size++;
+		};
+
+		void fix_tree1(node_ptr *n)
+		{
+			if (is_root(n))
+				n->color = BLACK;
+			else
+				fix_tree2(n);
+		};
+
+		void fix_tree2(node_ptr *n)
+		{
+			if (n->parent->color == BLACK)
+				return;
+			else
+				fix_tree3(n);
+		};
+
+		void fix_tree3(node_ptr *n)
+		{
+			if (uncle(n) && (uncle(n))->color == RED)
+			{
+				n->parent->color = BLACK;
+				uncle(n)->color = BLACK;
+				grandparent(n)->color = RED;
+				fix_tree1(grandparent(n));
+			}
+			else
+				fix_tree4(n);
+		};
+	
+		void fix_tree4(node_ptr *n)
+		{
+			if (n == n->parent->right && n->parent == grandparent(n)->left)
+			{
+				rotate_left(n->parent);
+				n = n->left;
+			}
+			else if (n == n->parent->left && n->parent == grandparent(n)->right)
+			{
+				rotate_right(n->parent);
+				n = n->right;
+			};
+			fix_tree5(n);
+		};
+
+		void fix_tree5(node_ptr *n)
+		{
+			n->parent->color = BLACK;
+			grandparent(n)->color = RED;
+			if (n == n->parent->left && n->parent == grandparent(n)->left)
+			{
+				rotate_right(grandparent(n));
+			}
+			else
+			{
+				if (n == n->parent->right && n->parent == grandparent(n)->right)
+				rotate_left(grandparent(n));
+			};
+		};
+
+		node_ptr *grandparent(node_ptr *n)
+		{
+			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
+				return (n->parent->parent);
+			else
+				return NULL;
+		};
+
+		node_ptr *sibling(node_ptr *n)
+		{
+			if (n != NULL && n->parent != NULL)
+			{
+				if (is_left_child(n))
+					return (n->parent->right);
+				else
+					return (n->parent->left);
+			}
+			else
+				return NULL;
+		};
+
+		node_ptr *uncle(node_ptr *n)
+		{
+			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
+				return (sibling(n->parent));
+			else
+				return NULL;
+		};
+
+		bool is_red(node_ptr *node)
+		{
+			if (node == NULL)			return false;
+			if (node->color == RED)		return true;
+			return false;
+		};
+
+		bool is_black(node_ptr *node)
+		{
+			return (!is_red(node));
 		};
 
 	}; // class map
