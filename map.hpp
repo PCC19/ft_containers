@@ -230,6 +230,36 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			return ++const_reverse_iterator(min_subtree(_root));
 		};
+
+		iterator lower_bound (const key_type &k)
+		{
+			for (iterator it = begin(); it != end(); ++it)
+				if (!_comp(it->first, k)) return it;
+			return end();
+		};
+
+		const_iterator lower_bound (const key_type &k) const
+		{
+			for (const_iterator it = begin(); it != end(); ++it)
+				if (!_comp(it->first, k)) return it;
+			return end();
+		};
+		
+		iterator upper_bound(const key_type &k)
+		{
+			for (iterator it = begin(); it != end(); ++it)
+				if (_comp(k,  it->first)) return it;
+			return end();
+		};
+
+		const iterator upper_bound(const key_type &k) const
+		{
+			for (iterator it = begin(); it != end(); ++it)
+				if (_comp(k,  it->first)) return it;
+			return end();
+		};
+
+
 		
 		// OBSERVERS
 		key_compare		key_comp() const		{ return _comp; };

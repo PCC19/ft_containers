@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffd9cc84620
-pointer to my_vector: 0x7ffd9cc84620
+           my_vector: 0x7fff747b2b60
+pointer to my_vector: 0x7fff747b2b60
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd9cc85410
+node:  	0x7fff747b3950
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd9cc85460
+node:  	0x7fff747b39a0
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd9cc854b0
+node:  	0x7fff747b39f0
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -408,6 +408,7 @@ Teste begin e end
 begin(): 
 5
 end(): 
+20
 Mapa para testes: 
 Teste find: 
 find(90): 900
@@ -724,4 +725,16 @@ Teste do clear
 (140,1400)
 (150,1500)
 
-Elapsed time: 13.139ms
+//////////////////////////////////////////////
+Teste do rotate left: 
+rotate right:80
+Teste lower_bound & upper_bound
+lb: 5---> 10
+lb: 45---> 50
+lb: 50---> 50
+lb: 200---> end !
+ub: 5---> 10
+ub: 45---> 50
+ub: 50---> 60
+ub: 200---> end !
+Elapsed time: 12.558ms

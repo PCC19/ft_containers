@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffe46391d00
-pointer to my_vector: 0x7ffe46391d00
+           my_vector: 0x7ffc2f3c6fe0
+pointer to my_vector: 0x7ffc2f3c6fe0
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffe46392c60
+node:  	0x7ffc2f3c7f40
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffe46392cb0
+node:  	0x7ffc2f3c7f90
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffe46392d00
+node:  	0x7ffc2f3c7fe0
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -405,10 +405,769 @@ left:		0	right:	0
 Teste primeiro insert
 f: 10		 s: 100
 Teste begin e end
+[10]  Print Tree Level: 
+[10]		 root		lvl: 1
+
+-----------------
+inserting: 20
+  antes fix:
+Print Tree Level: 
+[10]		 root		lvl: 1
+
+[0;31m[20][0m		 p: 10		lvl: 2
+
+-----------------
+depois fix;
+Print Tree Level: 
+[10]		 root		lvl: 1
+
+[0;31m[20][0m		 p: 10		lvl: 2
+
+-----------------
+inserting: 5
+  antes fix:
+Print Tree Level: 
+[10]		 root		lvl: 1
+
+[0;31m[5][0m		 p: 10		lvl: 2
+[0;31m[20][0m		 p: 10		lvl: 2
+
+-----------------
+depois fix;
+Print Tree Level: 
+[10]		 root		lvl: 1
+
+[0;31m[5][0m		 p: 10		lvl: 2
+[0;31m[20][0m		 p: 10		lvl: 2
+
+-----------------
 begin(): 
 5
 end(): 
+20
 Mapa para testes: 
+[80]  Print Tree Level: 
+[80]		 root		lvl: 1
+
+-----------------
+inserting: 40
+  antes fix:
+Print Tree Level: 
+[80]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 80		lvl: 2
+
+-----------------
+depois fix;
+Print Tree Level: 
+[80]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 80		lvl: 2
+
+-----------------
+inserting: 20
+  antes fix:
+Print Tree Level: 
+[80]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 80		lvl: 2
+
+[0;31m[20][0m		 p: 40		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[0;31m[20][0m		 p: 40		lvl: 2
+[0;31m[80][0m		 p: 40		lvl: 2
+
+-----------------
+inserting: 10
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[0;31m[20][0m		 p: 40		lvl: 2
+[0;31m[80][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+
+-----------------
+inserting: 30
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+
+-----------------
+inserting: 60
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[60][0m		 p: 80		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[60][0m		 p: 80		lvl: 3
+
+-----------------
+inserting: 50
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[60][0m		 p: 80		lvl: 3
+
+[0;31m[50][0m		 p: 60		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[60]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[50][0m		 p: 60		lvl: 3
+[0;31m[80][0m		 p: 60		lvl: 3
+
+-----------------
+inserting: 70
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[60]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[50][0m		 p: 60		lvl: 3
+[0;31m[80][0m		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+
+-----------------
+inserting: 120
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 80		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 80		lvl: 4
+
+-----------------
+inserting: 100
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 80		lvl: 4
+
+[0;31m[100][0m		 p: 120		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+
+-----------------
+inserting: 140
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+-----------------
+inserting: 90
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[90][0m		 p: 100		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[90][0m		 p: 100		lvl: 5
+
+-----------------
+inserting: 89
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[90][0m		 p: 100		lvl: 5
+
+[0;31m[89][0m		 p: 90		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[90]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[89][0m		 p: 90		lvl: 5
+[0;31m[100][0m		 p: 90		lvl: 5
+
+-----------------
+inserting: 110
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[90]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[89][0m		 p: 90		lvl: 5
+[0;31m[100][0m		 p: 90		lvl: 5
+
+[0;31m[110][0m		 p: 100		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[110][0m		 p: 100		lvl: 5
+
+-----------------
+inserting: 111
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[110][0m		 p: 100		lvl: 5
+
+[0;31m[111][0m		 p: 110		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+
+-----------------
+inserting: 134
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+
+-----------------
+inserting: 150
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+[0;31m[150][0m		 p: 140		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+[0;31m[150][0m		 p: 140		lvl: 5
+
+-----------------
+inserting: 130
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+[0;31m[150][0m		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+
+-----------------
+inserting: 135
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+[0;31m[135][0m		 p: 134		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+[0;31m[135][0m		 p: 134		lvl: 6
+
+-----------------
+inserting: 125
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+[0;31m[135][0m		 p: 134		lvl: 6
+
+[0;31m[125][0m		 p: 130		lvl: 7
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[134]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 134		lvl: 4
+[0;31m[140][0m		 p: 134		lvl: 4
+
+[110]		 p: 120		lvl: 5
+[130]		 p: 120		lvl: 5
+[135]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[100][0m		 p: 110		lvl: 6
+[0;31m[111][0m		 p: 110		lvl: 6
+[0;31m[125][0m		 p: 130		lvl: 6
+
+-----------------
 Teste find: 
 find(90): 900
 find(110): 1100
@@ -710,25 +1469,24 @@ Deleting 40 (two children)
 (150,1500)
 
 Teste do Erase (position) 120
-root: 0x604000000350
 Print Tree Level: 
-[0;31m[100][0m		 root		lvl: 1
+[60]		 root		lvl: 1
 
-[0;31m[50][0m		 p: 100		lvl: 2
-[0;31m[125][0m		 p: 100		lvl: 2
+[50]		 p: 60		lvl: 2
+[0;31m[100][0m		 p: 60		lvl: 2
 
-[0;31m[20][0m		 p: 50		lvl: 3
-[0;31m[60][0m		 p: 50		lvl: 3
-[0;31m[111][0m		 p: 125		lvl: 3
-[0;31m[140][0m		 p: 125		lvl: 3
+[20]		 p: 50		lvl: 3
+[134]		 p: 100		lvl: 3
 
 [0;31m[10][0m		 p: 20		lvl: 4
 [0;31m[30][0m		 p: 20		lvl: 4
-[0;31m[134][0m		 p: 140		lvl: 4
-[0;31m[150][0m		 p: 140		lvl: 4
+[0;31m[125][0m		 p: 134		lvl: 4
+[0;31m[140][0m		 p: 134		lvl: 4
 
-[0;31m[130][0m		 p: 134		lvl: 5
-[0;31m[135][0m		 p: 134		lvl: 5
+[111]		 p: 125		lvl: 5
+[130]		 p: 125		lvl: 5
+[135]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
 
 -----------------
 Teste do Erase (first, last)
@@ -745,4 +1503,738 @@ Teste do clear
 (140,1400)
 (150,1500)
 
-Elapsed time: 15.696ms
+//////////////////////////////////////////////
+Teste do rotate left: 
+[80]  Print Tree Level: 
+[80]		 root		lvl: 1
+
+-----------------
+inserting: 40
+  antes fix:
+Print Tree Level: 
+[80]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 80		lvl: 2
+
+-----------------
+depois fix;
+Print Tree Level: 
+[80]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 80		lvl: 2
+
+-----------------
+inserting: 20
+  antes fix:
+Print Tree Level: 
+[80]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 80		lvl: 2
+
+[0;31m[20][0m		 p: 40		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[0;31m[20][0m		 p: 40		lvl: 2
+[0;31m[80][0m		 p: 40		lvl: 2
+
+-----------------
+inserting: 10
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[0;31m[20][0m		 p: 40		lvl: 2
+[0;31m[80][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+
+-----------------
+inserting: 30
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+
+-----------------
+inserting: 60
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[60][0m		 p: 80		lvl: 3
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[60][0m		 p: 80		lvl: 3
+
+-----------------
+inserting: 50
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[80]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[60][0m		 p: 80		lvl: 3
+
+[0;31m[50][0m		 p: 60		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[60]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[50][0m		 p: 60		lvl: 3
+[0;31m[80][0m		 p: 60		lvl: 3
+
+-----------------
+inserting: 70
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[60]		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[0;31m[50][0m		 p: 60		lvl: 3
+[0;31m[80][0m		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+
+-----------------
+inserting: 120
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 80		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 80		lvl: 4
+
+-----------------
+inserting: 100
+  antes fix:
+Print Tree Level: 
+[40]		 root		lvl: 1
+
+[20]		 p: 40		lvl: 2
+[0;31m[60][0m		 p: 40		lvl: 2
+
+[0;31m[10][0m		 p: 20		lvl: 3
+[0;31m[30][0m		 p: 20		lvl: 3
+[50]		 p: 60		lvl: 3
+[80]		 p: 60		lvl: 3
+
+[0;31m[70][0m		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 80		lvl: 4
+
+[0;31m[100][0m		 p: 120		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+
+-----------------
+inserting: 140
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+-----------------
+inserting: 90
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[0;31m[40][0m		 p: 60		lvl: 2
+[0;31m[80][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[120]		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[0;31m[100][0m		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[90][0m		 p: 100		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[90][0m		 p: 100		lvl: 5
+
+-----------------
+inserting: 89
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[90][0m		 p: 100		lvl: 5
+
+[0;31m[89][0m		 p: 90		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[90]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[89][0m		 p: 90		lvl: 5
+[0;31m[100][0m		 p: 90		lvl: 5
+
+-----------------
+inserting: 110
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[80]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[70]		 p: 80		lvl: 3
+[0;31m[120][0m		 p: 80		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[90]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[89][0m		 p: 90		lvl: 5
+[0;31m[100][0m		 p: 90		lvl: 5
+
+[0;31m[110][0m		 p: 100		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[110][0m		 p: 100		lvl: 5
+
+-----------------
+inserting: 111
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[100]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[110][0m		 p: 100		lvl: 5
+
+[0;31m[111][0m		 p: 110		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+
+-----------------
+inserting: 134
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+
+-----------------
+inserting: 150
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+[0;31m[150][0m		 p: 140		lvl: 5
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+[0;31m[150][0m		 p: 140		lvl: 5
+
+-----------------
+inserting: 130
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[90]		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[0;31m[80][0m		 p: 90		lvl: 3
+[0;31m[120][0m		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[140]		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[0;31m[134][0m		 p: 140		lvl: 5
+[0;31m[150][0m		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+
+-----------------
+inserting: 135
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+[0;31m[135][0m		 p: 134		lvl: 6
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+[0;31m[135][0m		 p: 134		lvl: 6
+
+-----------------
+inserting: 125
+  antes fix:
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[120]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[110]		 p: 120		lvl: 4
+[0;31m[140][0m		 p: 120		lvl: 4
+
+[0;31m[100][0m		 p: 110		lvl: 5
+[0;31m[111][0m		 p: 110		lvl: 5
+[134]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[130][0m		 p: 134		lvl: 6
+[0;31m[135][0m		 p: 134		lvl: 6
+
+[0;31m[125][0m		 p: 130		lvl: 7
+
+-----------------
+depois fix;
+Print Tree Level: 
+[60]		 root		lvl: 1
+
+[40]		 p: 60		lvl: 2
+[0;31m[90][0m		 p: 60		lvl: 2
+
+[20]		 p: 40		lvl: 3
+[50]		 p: 40		lvl: 3
+[80]		 p: 90		lvl: 3
+[134]		 p: 90		lvl: 3
+
+[0;31m[10][0m		 p: 20		lvl: 4
+[0;31m[30][0m		 p: 20		lvl: 4
+[70]		 p: 80		lvl: 4
+[89]		 p: 80		lvl: 4
+[0;31m[120][0m		 p: 134		lvl: 4
+[0;31m[140][0m		 p: 134		lvl: 4
+
+[110]		 p: 120		lvl: 5
+[130]		 p: 120		lvl: 5
+[135]		 p: 140		lvl: 5
+[150]		 p: 140		lvl: 5
+
+[0;31m[100][0m		 p: 110		lvl: 6
+[0;31m[111][0m		 p: 110		lvl: 6
+[0;31m[125][0m		 p: 130		lvl: 6
+
+-----------------
+rotate right:80
+Teste lower_bound & upper_bound
+lb: 5---> 10
+lb: 45---> 50
+lb: 50---> 50
+lb: 200---> end !
+ub: 5---> 10
+ub: 45---> 50
+ub: 50---> 60
+ub: 200---> end !
+Elapsed time: 49.882ms

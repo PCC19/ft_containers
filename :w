@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/31 00:17:29 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/31 00:16:21 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -671,50 +671,50 @@ int main()
 	numero = 5;
 	itm_bound = mapa2.lower_bound(numero);
 	std::cout << "lb: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 	numero = 45;
 	itm_bound = mapa2.lower_bound(numero);
 	std::cout << "lb: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 	numero = 50;
 	itm_bound = mapa2.lower_bound(numero);
 	std::cout << "lb: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 	numero = 200;
 	itm_bound = mapa2.lower_bound(numero);
 	std::cout << "lb: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 
 	numero = 5;
 	itm_bound = mapa2.upper_bound(numero);
 	std::cout << "ub: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 	numero = 45;
 	itm_bound = mapa2.upper_bound(numero);
 	std::cout << "ub: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 	numero = 50;
 	itm_bound = mapa2.upper_bound(numero);
 	std::cout << "ub: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 	numero = 200;
 	itm_bound = mapa2.upper_bound(numero);
 	std::cout << "ub: " << numero <<  "---> ";
-	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n;
 	else
 		 std::cout << itm_bound->first << std::endl;
 //	std::cout << "lb: 45 ---> " << mapa2.lower_bound(45) << std::endl;
