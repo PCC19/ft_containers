@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/31 00:17:29 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/31 00:36:19 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -717,16 +717,20 @@ int main()
 	if (itm_bound == mapa2.end()) std::cout << "end !\n";
 	else
 		 std::cout << itm_bound->first << std::endl;
-//	std::cout << "lb: 45 ---> " << mapa2.lower_bound(45) << std::endl;
-//	std::cout << "lb: 40 ---> " << mapa2.lower_bound(40) << std::endl;
-//	std::cout << "lb: 200 ---> " << mapa2.lower_bound(200) << std::endl;
-//	std::cout << "ub: 5 ---> " << mapa2.upper_bound(5) << std::endl;
-//	std::cout << "ub: 45 ---> " << mapa2.upper_bound(45) << std::endl;
-//	std::cout << "ub: 40 ---> " << mapa2.upper_bound(40) << std::endl;
-//	std::cout << "ub: 200 ---> " << mapa2.upper_bound(200) << std::endl;
+
+	
+	std::cout << "Teste swap:\n";
+
+	ft::map<int,int> mapa_a(mapa0), mapa_b(mapa2);
+	std::cout << "mapa_a: \n"; print_map(mapa_a);
+	std::cout << "mapa_b: \n"; print_map(mapa_b);
+	std::cout << "Apos Swap: \n";
+	std::cout << "mapa_a: \n"; print_map(mapa_a);
+	std::cout << "mapa_b: \n"; print_map(mapa_b);
 
 
 
+	
 
 
 

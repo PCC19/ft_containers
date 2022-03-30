@@ -182,6 +182,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 			destroy_tree_temp(_root);
 		};
 
+		void swap(map& other)
+		{
+			map<key_type, mapped_type> tmp(*this);
+			*this = other;
+			other = tmp;
+			tmp.clear();
+		};
+
 		// ITERATORS
 		iterator begin()
 		{
