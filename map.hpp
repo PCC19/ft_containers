@@ -558,69 +558,73 @@ template <class Key, class T, class Compare = std::less<Key>,
 				fix_remove_node(n);
 		};
 
-		void fix_remove_node(node_ptr *x)
+		void fix_remove_node(node_ptr *n)
 		{
+			std::cout << "fix: " << n->content->first << std::endl;
+
 			node_ptr *w;
-			while (x != _root && x->color == BLACK)
+			while (n != _root && is_black(n))
 			{
-				if (x == x->parent->left)
+				if (n == n->parent->left)
 				{
-					w = x->parent->right;
-					if (w->color == RED)
+					w = n->parent->right;
+					if (is_red(w))
 					{
 						w->color = BLACK;
-						x->parent->color = RED;
-						rotate_left(x->parent);
-						w = x->parent->right;
+						n->parent->color = RED;
+						rotate_left(n->parent);
+						w = n->parent->right;
 					}
-				if (w->left->color == BLACK && w->right->color == BLACK)
-				{
-					w->color = RED;
-					x = x->parent;
-				}
-				else if (w->right->color == BLACK)
-				{
-					w->left->color = BLACK;
-					w->color = RED;
-					rotate_right(w);
-					w = x->parent->right;
-				}
-					w->color = x->parent->color;
-					x->parent->color = BLACK;
+					std::cout << "w: " << n->content->first << std::endl;
+//					print_tree_level();
+					if (is_black(w->left) && is_black(w->right))
+					{
+						w->color = RED;
+						n = n->parent;
+					}
+					else if (is_black(w->right))
+					{
+						w->left->color = BLACK;
+						w->color = RED;
+						rotate_right(w);
+						w = n->parent->right;
+					}
+					w->color = n->parent->color;
+					n->parent->color = BLACK;
 					w->right->color = BLACK;
-					rotate_left(x->parent);
-					x = _root;
+					rotate_left(n->parent);
+					n = _root;
 				}
 				else
 				{
-					w = x->parent->left;
-					if (w->color == RED)
+					w = n->parent->left;
+					if (is_red(w))
 					{
-						 w->color = BLACK;
-						 x->parent->color = RED;
-						 rotate_right(x->parent);
-						 w = x->parent->left;
+						w->color = BLACK;
+						n->parent->color = RED;
+						rotate_right(n->parent);
+						w = n->parent->left;
 					}
-					if (w->right->color == BLACK && w->left->color == BLACK)
+					if (is_black(w->right) && is_black(w->left))
 					{
-					  w->color = RED;
-					  x = x->parent;
+						w->color = RED;
+						n = n->parent;
 					}
-					else if (w->left->color == BLACK)
+					else if (is_black(w->left))
 					{
-					  w->right->color = BLACK;
-					  w->color = RED;
-					  rotate_left(w);
-					  w = x->parent->left;
+						w->right->color = BLACK;
+						w->color = RED;
+						rotate_left(w);
+						w = n->parent->left;
 					}
-					w->color = x->parent->color;
-					x->parent->color = BLACK;
+					w->color = n->parent->color;
+					n->parent->color = BLACK;
 					w->left->color = BLACK;
-					rotate_right(x->parent);
-					x = _root;
+					rotate_right(n->parent);
+					n = _root;
 				}
 			}
-			x->color = BLACK;
+			n->color = BLACK;
 		};
 
 		node_ptr *rotate_left(node_ptr *n)
