@@ -120,6 +120,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			n = find_node(k);
 			if (n)
 			{
+				std::cout << "n: " << n->content->first << std::endl;
 				remove_node(n);
 				_size--;
 				return (1);
@@ -172,6 +173,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				i = find(curr_key);
 				next_key = (find((++i)->first))->first;
+				std::cout << "curr key: " << curr_key << std::endl;
 				erase(curr_key);
 				curr_key = next_key;
 			};
@@ -306,6 +308,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			std::cout << std::endl;
 		};
 
+		public:
 		void print_tree_level(int flag = 1)
 		{
 			if (!_root)
@@ -528,38 +531,107 @@ template <class Key, class T, class Compare = std::less<Key>,
 			dest->content = aux;
 		};
 		
-		void remove_node(node_ptr *n)
-		{
-			node_ptr *s;
-			int	original_color;
+//		void remove_node(node_ptr *n)
+//		{
+//			node_ptr *s;
+//			int	original_color;
+//
+//			if (!n) return;
+//
+//			original_color = n->color;
+//
+//			// se for folha, deleta
+//			if (is_leaf(n))
+//			{
+//				if (is_root(n))
+//					_root = NULL;
+//				else
+//					disconnect(n->parent, n);
+//				destroy_node(n);
+//				return;
+//			}
+//			else	
+//			// se nao for folha, chama recursivo no prox node
+//			{
+//				s = next_node(n);
+//				copy_node_content(*s->content, n);
+//				remove_node(s);
+//			};
+//			if (original_color == BLACK)
+//				fix_remove_node(n);
+//		};
 
-			if (!n) return;
+		void remove_node(node_ptr *z)
+		{ 
+			node_ptr *x;
+			node_ptr *y;
+			y = z;
+			int y_original_color = y->color;
 
-			original_color = n->color;
-
-			// se for folha, deleta
-			if (is_leaf(n))
+			if (z->left == NULL)
 			{
-				if (is_root(n))
-					_root = NULL;
-				else
-					disconnect(n->parent, n);
-				destroy_node(n);
-				return;
+				x = z->right;
+				transplant(z, z->right);
 			}
-			else	
-			// se nao for folha, chama recursivo no prox node
+			else if (z->right == NULL)
 			{
-				s = next_node(n);
-				copy_node_content(*s->content, n);
-				remove_node(s);
+				x = z->left;
+				transplant(z, z->left);
+			}
+			else
+			{
+				y = minimum(z->right);
+				y_original_color = y->color;
+				x = y->right;
+				if (y->parent == z && x)
+				{
+					x->parent = y;
+				}
+				else
+				{
+					transplant(y, y->right);
+					y->right = z->right;
+					if (y->right)
+						y->right->parent = y;
+				}
+				transplant(z, y);
+				y->left = z->left;
+				y->left->parent = y;
+				y->color = z->color;
 			};
-			if (original_color == BLACK)
-				fix_remove_node(n);
+			if (y_original_color == BLACK)
+				fix_remove_node(x);
+		};
+
+		void transplant(node_ptr *u, node_ptr *v)
+		{
+			if (u->parent == NULL)
+			{
+				_root = v;
+			}
+			else if (is_left_child(u))
+			{
+				u->parent->left = v;
+			}
+			else
+			{
+				u->parent->right = v;
+			}
+			if (v)
+				v->parent = u->parent;
+		};
+
+		node_ptr *minimum(node_ptr *node) const
+		{
+			while (node->left != NULL)
+			  node = node->left;
+			return node;
 		};
 
 		void fix_remove_node(node_ptr *n)
 		{
+			if (!n) return;
+
 			std::cout << "fix: " << n->content->first << std::endl;
 
 			node_ptr *w;
@@ -576,7 +648,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 						w = n->parent->right;
 					}
 					std::cout << "w: " << n->content->first << std::endl;
-//					print_tree_level();
+					print_tree_level();
 					if (is_black(w->left) && is_black(w->right))
 					{
 						w->color = RED;
