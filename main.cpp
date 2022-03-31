@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/31 05:10:57 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/01 00:42:05 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -635,6 +635,7 @@ int main()
 
 //		mapa2.print_tree_level();
 
+	std::cout << "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n";
 	std::cout << "DEBUG FIX REMOVE\n";
 	std::cout << "Inicial: \n"; mapa2.print_tree_level();
 	int dd;
