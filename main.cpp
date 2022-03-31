@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/31 00:36:19 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/03/31 03:11:55 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -719,14 +719,14 @@ int main()
 		 std::cout << itm_bound->first << std::endl;
 
 	
-	std::cout << "Teste swap:\n";
-
-	ft::map<int,int> mapa_a(mapa0), mapa_b(mapa2);
-	std::cout << "mapa_a: \n"; print_map(mapa_a);
-	std::cout << "mapa_b: \n"; print_map(mapa_b);
-	std::cout << "Apos Swap: \n";
-	std::cout << "mapa_a: \n"; print_map(mapa_a);
-	std::cout << "mapa_b: \n"; print_map(mapa_b);
+//	std::cout << "Teste swap:\n";
+//
+//	ft::map<int,int> mapa_a(mapa0), mapa_b(mapa2);
+//	std::cout << "mapa_a: \n"; print_map(mapa_a);
+//	std::cout << "mapa_b: \n"; print_map(mapa_b);
+//	std::cout << "Apos Swap: \n";
+//	std::cout << "mapa_a: \n"; print_map(mapa_a);
+//	std::cout << "mapa_b: \n"; print_map(mapa_b);
 
 
 

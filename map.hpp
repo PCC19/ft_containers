@@ -105,7 +105,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 					std::cout << "antes fix:\n";
 					print_tree_level();
 
-				fix_tree1(node);
+				fix_insert1(node);
 					std::cout << "depois fix;\n";
 					print_tree_level();
 
@@ -187,7 +187,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			map<key_type, mapped_type> tmp(*this);
 			*this = other;
 			other = tmp;
-			tmp.clear();
 		};
 
 		// ITERATORS
@@ -363,7 +362,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (node_to_destroy)
 			{
-				delete (node_to_destroy->content);
+//				delete (node_to_destroy->content);
+				_Alloc.destroy(node_to_destroy->content);
+				_Alloc.deallocate(node_to_destroy->content, 1);
 				delete (node_to_destroy);
 			};
 		};
@@ -530,8 +531,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 		void remove_node(node_ptr *n)
 		{
 			node_ptr *s;
+			int	original_color;
 
 			if (!n) return;
+
+			original_color = n->color;
 
 			// se for folha, deleta
 			if (is_leaf(n))
@@ -550,6 +554,73 @@ template <class Key, class T, class Compare = std::less<Key>,
 				copy_node_content(*s->content, n);
 				remove_node(s);
 			};
+			if (original_color == BLACK)
+				fix_remove_node(n);
+		};
+
+		void fix_remove_node(node_ptr *x)
+		{
+			node_ptr *w;
+			while (x != _root && x->color == BLACK)
+			{
+				if (x == x->parent->left)
+				{
+					w = x->parent->right;
+					if (w->color == RED)
+					{
+						w->color = BLACK;
+						x->parent->color = RED;
+						rotate_left(x->parent);
+						w = x->parent->right;
+					}
+				if (w->left->color == BLACK && w->right->color == BLACK)
+				{
+					w->color = RED;
+					x = x->parent;
+				}
+				else if (w->right->color == BLACK)
+				{
+					w->left->color = BLACK;
+					w->color = RED;
+					rotate_right(w);
+					w = x->parent->right;
+				}
+					w->color = x->parent->color;
+					x->parent->color = BLACK;
+					w->right->color = BLACK;
+					rotate_left(x->parent);
+					x = _root;
+				}
+				else
+				{
+					w = x->parent->left;
+					if (w->color == RED)
+					{
+						 w->color = BLACK;
+						 x->parent->color = RED;
+						 rotate_right(x->parent);
+						 w = x->parent->left;
+					}
+					if (w->right->color == BLACK && w->left->color == BLACK)
+					{
+					  w->color = RED;
+					  x = x->parent;
+					}
+					else if (w->left->color == BLACK)
+					{
+					  w->right->color = BLACK;
+					  w->color = RED;
+					  rotate_left(w);
+					  w = x->parent->left;
+					}
+					w->color = x->parent->color;
+					x->parent->color = BLACK;
+					w->left->color = BLACK;
+					rotate_right(x->parent);
+					x = _root;
+				}
+			}
+			x->color = BLACK;
 		};
 
 		node_ptr *rotate_left(node_ptr *n)
@@ -640,36 +711,36 @@ template <class Key, class T, class Compare = std::less<Key>,
 			_size++;
 		};
 
-		void fix_tree1(node_ptr *n)
+		void fix_insert1(node_ptr *n)
 		{
 			if (is_root(n))
 				n->color = BLACK;
 			else
-				fix_tree2(n);
+				fix_insert2(n);
 		};
 
-		void fix_tree2(node_ptr *n)
+		void fix_insert2(node_ptr *n)
 		{
 			if (n->parent->color == BLACK)
 				return;
 			else
-				fix_tree3(n);
+				fix_insert3(n);
 		};
 
-		void fix_tree3(node_ptr *n)
+		void fix_insert3(node_ptr *n)
 		{
 			if (uncle(n) && (uncle(n))->color == RED)
 			{
 				n->parent->color = BLACK;
 				uncle(n)->color = BLACK;
 				grandparent(n)->color = RED;
-				fix_tree1(grandparent(n));
+				fix_insert1(grandparent(n));
 			}
 			else
-				fix_tree4(n);
+				fix_insert4(n);
 		};
 	
-		void fix_tree4(node_ptr *n)
+		void fix_insert4(node_ptr *n)
 		{
 			if (n == n->parent->right && n->parent == grandparent(n)->left)
 			{
@@ -681,10 +752,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 				rotate_right(n->parent);
 				n = n->right;
 			};
-			fix_tree5(n);
+			fix_insert5(n);
 		};
 
-		void fix_tree5(node_ptr *n)
+		void fix_insert5(node_ptr *n)
 		{
 			n->parent->color = BLACK;
 			grandparent(n)->color = RED;
