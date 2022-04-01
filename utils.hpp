@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/29 02:07:13 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/02 01:33:09 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_vector(T& vector_to_print)
 template <typename P>
 void print_pair(P &p)
 {
-	std::cout << "f: " << p.first << "\t\t s: " << p.second << std::endl;
+		std::cout << "f: " << p.first << "\t\t s: " << p.second << std::endl;
 };
 
 template <typename N>
@@ -105,7 +105,7 @@ void print_tree_by_level(rbt_node<T> *n)
 };
 
 template<typename T>
-void print_tree_by_level_color(rbt_node<T> *n)
+void print_tree_by_level_color(rbt_node<T> *n, rbt_node<T> *nil)
 {
 	std::cout << "Print Tree Level: \n";
 
@@ -125,13 +125,13 @@ void print_tree_by_level_color(rbt_node<T> *n)
 	while (i < q.size())
 	{
 		nn = (q[i].left);
-		if (nn != NULL)
+		if (nn != nil)
 		{
 			q.push_back(*nn);
 			lvl.push_back(lvl[i] + 1);
 		};
 		nn = (q[i].right);
-		if (nn != NULL)
+		if (nn != nil)
 		{
 			q.push_back(*nn);
 			lvl.push_back(lvl[i] + 1);
@@ -139,20 +139,23 @@ void print_tree_by_level_color(rbt_node<T> *n)
 		i++;
 	};
 	i = 0;
-	print_node_in_a_line(q[i], lvl[i]);
+	print_node_in_a_line(q[i], lvl[i], nil);
 	i++;
 	while (i < q.size())
 	{
 		if (lvl[i] != lvl[i-1]) std::cout << std::endl;
-		print_node_in_a_line(q[i], lvl[i]);
+		print_node_in_a_line(q[i], lvl[i], nil);
 		i++;
 	};
 	std::cout << "\n-----------------\n";
 };
 
 template <typename T>
-void print_node_in_a_line(rbt_node<T> q, int lvl)
+void print_node_in_a_line(rbt_node<T> q, int lvl, rbt_node<T> *nil)
 {
+	if (&q == nil)
+		return;
+
 	if (q.color == 0)
 		std::cout << C_RED << "[" << q.content->first << "]" << RESET;
 	else

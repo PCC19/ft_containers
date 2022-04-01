@@ -51,8 +51,16 @@ template <class Key, class T, class Compare = std::less<Key>,
 		explicit map (const key_compare& comp = key_compare(),
 						const allocator_type& alloc = allocator_type()) :
 			_root(NULL), _size(0), _comp(comp), _Alloc(alloc)
-		{};
+		{
+			create_nil_node();
+		};
 
+		void create_nil_node()
+		{
+			_nil  =  new node_ptr(NULL);
+			_nil->parent = _root;
+			_nil->content = NULL;
+		};
 
 		// range constructor
 			// depende de iterators e insert
@@ -62,6 +70,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
+			delete (_nil);
 			clear();
 		};
 
@@ -89,7 +98,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				// SE ARVORE JA TEM NODES
 				node_ptr	*i, *p;
 				i = _root;
-				while(i != NULL) // avanca i para um apos local de insercao (p)
+				while(i != _nil) // avanca i para um apos local de insercao (p)
 				{
 					p = i;
 					if (*(node->content) == *(i->content)) // se encontra node nao insere
@@ -105,12 +114,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 					std::cout << "antes fix:\n";
 					print_tree_level();
 
-				fix_insert1(node);
+//				fix_insert1(node);
 					std::cout << "depois fix;\n";
 					print_tree_level();
 
+				update_nil_node();
 				return (ft::make_pair(iterator(node), true));
 			};
+		};
+
+		void	update_nil_node()
+		{
+			_nil->parent = _root;
+			_nil->left = minimum(_root);
+			_nil->right = maximum(_root);
 		};
 
 		size_type erase(const key_type &k)
@@ -318,7 +335,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				if (flag == 0)
 					print_tree_by_level(_root);
 				else
-					print_tree_by_level_color(_root);
+					print_tree_by_level_color(_root, _nil);
 			};
 		};
 
@@ -345,7 +362,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 	protected:
 		// ATRIBUTES
-		node_ptr*	_root;
+		node_ptr				*_root;
+		node_ptr				*_nil;
 		size_type				_size;
 		key_compare				_comp;
 		allocator_type			_Alloc;
@@ -358,6 +376,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 			value_type *aux = _Alloc.allocate(1);
 			_Alloc.construct(aux, val);
 			node_ptr *node =  new node_ptr(aux);
+			node->left = _nil;
+			node->right = _nil;
 			return (node);
 		};
 
@@ -533,35 +553,35 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 // ==================== ORIGINAL ===========================================
 		
-//		void remove_node(node_ptr *n)
-//		{
-//			node_ptr *s;
-//			int	original_color;
-//
-//			if (!n) return;
-//
-//			original_color = n->color;
-//
-//			// se for folha, deleta
-//			if (is_leaf(n))
-//			{
-//				if (is_root(n))
-//					_root = NULL;
-//				else
-//					disconnect(n->parent, n);
-//				destroy_node(n);
-//				return;
-//			}
-//			else	
-//			// se nao for folha, chama recursivo no prox node
-//			{
-//				s = next_node(n);
-//				copy_node_content(*s->content, n);
-//				remove_node(s);
-//			};
-//			if (original_color == BLACK)
-//				fix_remove_node(n);
-//		};
+		void remove_node(node_ptr *n)
+		{
+			node_ptr *s;
+			int	original_color;
+
+			if (!n) return;
+
+			original_color = n->color;
+
+			// se for folha, deleta
+			if (is_leaf(n))
+			{
+				if (is_root(n))
+					_root = NULL;
+				else
+					disconnect(n->parent, n);
+				destroy_node(n);
+				return;
+			}
+			else	
+			// se nao for folha, chama recursivo no prox node
+			{
+				s = next_node(n);
+				copy_node_content(*s->content, n);
+				remove_node(s);
+			};
+			if (original_color == BLACK)
+				rb_delete_fixup(n);
+		};
 // ========================================================================
 
 
@@ -822,8 +842,14 @@ v->parent = u->parent;
 };
 
 node_ptr* minimum(node_ptr *x) {
-while(x->left != NULL)
+while(x->left != _nil)
   x = x->left;
+return x;
+};
+
+node_ptr* maximum(node_ptr *x) {
+while(x->right != _nil)
+  x = x->right;
 return x;
 };
 
@@ -885,40 +911,40 @@ while(x != _root && x->color == BLACK) {
 x->color = BLACK;
 };
 
-void remove_node(node_ptr *z) {
-node_ptr *y = z;
-node_ptr *x;
-int y_orignal_color;
-
-y_orignal_color = y->color;
-if(z->left == NULL) {
-  x = z->right;
-  rb_transplant(z, z->right);
-}
-else if(z->right == NULL) {
-  x = z->left;
-  rb_transplant(z, z->left);
-}
-else {
-  y = minimum(z->right);
-  y_orignal_color = y->color;
-  x = y->right;
-  if(y->parent == z) {
-    x->parent = z;
-  }
-  else {
-    rb_transplant(y, y->right);
-    y->right = z->right;
-    y->right->parent = y;
-  }
-  rb_transplant(z, y);
-  y->left = z->left;
-  y->left->parent = y;
-  y->color = z->color;
-}
-if(y_orignal_color == BLACK)
-  rb_delete_fixup(x);
-};
+//void remove_node(node_ptr *z) {
+//node_ptr *y = z;
+//node_ptr *x;
+//int y_orignal_color;
+//
+//y_orignal_color = y->color;
+//if(z->left == NULL) {
+//  x = z->right;
+//  rb_transplant(z, z->right);
+//}
+//else if(z->right == NULL) {
+//  x = z->left;
+//  rb_transplant(z, z->left);
+//}
+//else {
+//  y = minimum(z->right);
+//  y_orignal_color = y->color;
+//  x = y->right;
+//  if(y->parent == z) {
+//    x->parent = z;
+//  }
+//  else {
+//    rb_transplant(y, y->right);
+//    y->right = z->right;
+//    y->right->parent = y;
+//  }
+//  rb_transplant(z, y);
+//  y->left = z->left;
+//  y->left->parent = y;
+//  y->color = z->color;
+//}
+//if(y_orignal_color == BLACK)
+//  rb_delete_fixup(x);
+//};
 
 
 // ========================================================================
@@ -936,9 +962,15 @@ if(y_orignal_color == BLACK)
 		void insert_node_at_position (node_ptr *p, node_ptr *node)
 		{
 			if (_comp(p->content->first, node->content->first))
+			{
 				connect(p, RIGHT, node);
+				node->left = _nil;
+			}
 			else
+			{
 				connect(p, LEFT, node);
+				node->right = _nil;
+			};
 			_size++;
 		};
 
@@ -946,6 +978,8 @@ if(y_orignal_color == BLACK)
 		{
 			node->color = BLACK;
 			_root = node;
+			_root->left = _nil;
+			_root->right = _nil;
 			_size++;
 		};
 
@@ -1048,6 +1082,7 @@ if(y_orignal_color == BLACK)
 		{
 			return (!is_red(node));
 		};
+
 
 	}; // class map
 
