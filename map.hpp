@@ -70,8 +70,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
-			delete (_nil);
 			clear();
+			delete (_nil);
 		};
 
 		// CAPACITY
@@ -328,7 +328,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		public:
 		void print_tree_level(int flag = 1)
 		{
-			if (!_root)
+			if (_root == _nil)
 				std::cout << "EMPTY TREE\n";
 			else
 			{
@@ -497,9 +497,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 			else							// or go up
 			{
 				p = n;
-				while (p != _nil && is_right_child(p))
+				while (p != NULL && is_right_child(p))
 					p = p->parent;
-				p = p->parent;
+				if (p->parent != NULL)
+					p = p->parent;
 			};
 			return (p);
 		};
@@ -508,14 +509,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr *p;
 
-			if (n->left != NULL)			// go down
+			if (n->left != _nil)			// go down
 				p = max_subtree(n->left);
 			else							// or go up
 			{
 				p = n;
 				while (p != NULL && is_left_child(p))
 					p = p->parent;
-				p = p->parent;
+				if (p->parent != NULL)
+					p = p->parent;
 			};
 			return (p);
 		};
@@ -553,365 +555,373 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 
 // ==================== ORIGINAL ===========================================
-		
-		void remove_node(node_ptr *n)
-		{
-			node_ptr *s;
-			int	original_color;
-
-			if (n == _nil) return;
-
-			original_color = n->color;
-
-			// se for folha, deleta
-			if (is_leaf(n))
-			{
-				if (is_root(n))
-					_root = NULL;
-				else
-					disconnect(n->parent, n);
-				destroy_node(n);
-				return;
-			}
-			else	
-			// se nao for folha, chama recursivo no prox node
-			{
-				s = next_node(n);
-				copy_node_content(*s->content, n);
-				remove_node(s);
-			};
-//			if (original_color == BLACK)
-//				rb_delete_fixup(n);
-		};
+//		
+//		void remove_node(node_ptr *n)
+//		{
+//			node_ptr *s;
+//			int	original_color;
+//
+//			if (n == _nil) return;
+//
+//			original_color = n->color;
+//
+//			// se for folha, deleta
+//			if (is_leaf(n))
+//			{
+//				if (is_root(n))
+//					_root = NULL;
+//				else
+//					disconnect(n->parent, n);
+//				destroy_node(n);
+//				return;
+//			}
+//			else	
+//			// se nao for folha, chama recursivo no prox node
+//			{
+//				s = next_node(n);
+//				if (n != s)
+//					copy_node_content(*s->content, n);
+//				remove_node(s);
+//			};
+////			if (original_color == BLACK)
+////				rb_delete_fixup(n);
+//		};
 // ========================================================================
 
 
 // ======================== LIVRO ================================================
-//
-//		void remove_node(node_ptr *z)
-//		{ 
-//			node_ptr *x;
-//			node_ptr *y;
-//			y = z;
-//			int y_original_color = y->color;
-//
-//			if (z->left == NULL)
-//			{
-//				x = z->right;
-//				transplant(z, z->right);
-//			}
-//			else if (z->right == NULL)
-//			{
-//				x = z->left;
-//				transplant(z, z->left);
-//			}
-//			else
-//			{
-//				y = minimum(z->right);
-//				y_original_color = y->color;
-//				x = y->right;
-//				if (y->parent == z && x)
-//				{
-//					x->parent = y;
-//				}
-//				else
-//				{
-//					transplant(y, y->right);
-//					y->right = z->right;
-//					if (y->right)
-//						y->right->parent = y;
-//				}
-//				transplant(z, y);
-//				y->left = z->left;
-//				y->left->parent = y;
-//				y->color = z->color;
-//			};
+
+		void remove_node(node_ptr *z)
+		{ 
+			node_ptr *x;
+			node_ptr *y;
+			y = z;
+			int y_original_color = y->color;
+
+			if (z->left == _nil)
+			{
+				x = z->right;
+				transplant(z, z->right);
+			}
+			else if (z->right == _nil)
+			{
+				x = z->left;
+				transplant(z, z->left);
+			}
+			else
+			{
+				y = minimum(z->right);
+				y_original_color = y->color;
+				x = y->right;
+				if (y->parent == z && x)
+				{
+					x->parent = y;
+				}
+				else
+				{
+					transplant(y, y->right);
+					y->right = z->right;
+					if (y->right)
+						y->right->parent = y;
+				}
+				transplant(z, y);
+				y->left = z->left;
+				y->left->parent = y;
+				y->color = z->color;
+			};
 //			if (y_original_color == BLACK)
 //				fix_remove_node(x);
-//		};
-//
-//		void transplant(node_ptr *u, node_ptr *v)
-//		{
-//			if (u->parent == NULL)
-//			{
-//				_root = v;
-//			}
-//			else if (is_left_child(u))
-//			{
-//				u->parent->left = v;
-//			}
-//			else
-//			{
-//				u->parent->right = v;
-//			}
-//			if (v)
-//				v->parent = u->parent;
-//		};
-//
-//		node_ptr *minimum(node_ptr *node) const
-//		{
-//			while (node->left != NULL)
-//			  node = node->left;
-//			return node;
-//		};
-//
-//		void fix_remove_node(node_ptr *n)
-//		{
-//			if (!n) return;
-//
-//			std::cout << "fix: " << n->content->first << std::endl;
-//
-//			node_ptr *w;
-//			while (n != _root && is_black(n))
-//			{
-//				if (n == n->parent->left)
-//				{
-//					w = n->parent->right;
-//					if (is_red(w))
-//					{
-//						w->color = BLACK;
-//						n->parent->color = RED;
-//						rotate_left(n->parent);
-//						w = n->parent->right;
-//					}
-//					std::cout << "w: " << n->content->first << std::endl;
-//					print_tree_level();
-//					if (is_black(w->left) && is_black(w->right))
-//					{
-//						w->color = RED;
-//						n = n->parent;
-//					}
-//					else if (is_black(w->right))
-//					{
-//						w->left->color = BLACK;
-//						w->color = RED;
-//						rotate_right(w);
-//						w = n->parent->right;
-//					}
-//					w->color = n->parent->color;
-//					n->parent->color = BLACK;
-//					w->right->color = BLACK;
-//					rotate_left(n->parent);
-//					n = _root;
-//				}
-//				else
-//				{
-//					w = n->parent->left;
-//					if (is_red(w))
-//					{
-//						w->color = BLACK;
-//						n->parent->color = RED;
-//						rotate_right(n->parent);
-//						w = n->parent->left;
-//					}
-//					if (is_black(w->right) && is_black(w->left))
-//					{
-//						w->color = RED;
-//						n = n->parent;
-//					}
-//					else if (is_black(w->left))
-//					{
-//						w->right->color = BLACK;
-//						w->color = RED;
-//						rotate_left(w);
-//						w = n->parent->left;
-//					}
-//					w->color = n->parent->color;
-//					n->parent->color = BLACK;
-//					w->left->color = BLACK;
-//					rotate_right(n->parent);
-//					n = _root;
-//				}
-//			}
-//			n->color = BLACK;
-//		};
-//
-//		node_ptr *rotate_left(node_ptr *n)
-//		{
-//			node_ptr *p, *rc, *lgc;
-//			direction d;
-//
-//			// so roda se tiver filho direito
-//			if (!n->right)
-//				return (n);
-//			if (is_left_child(n)) d = LEFT;
-//			if (is_right_child(n)) d = RIGHT;
-//
-//			// salva ponteiros
-//			p = n->parent;
-//			rc = n->right;
-//			lgc = rc->left;
-//
-//			// desconecta 3 nodes
-//			disconnect(p, n);
-//			disconnect(n, rc);
-//			disconnect(rc, lgc);
-//
-//			// reconecta 3 nodes
-//			connect(n, RIGHT, lgc);
-//			connect(rc, LEFT, n);
-//			connect(p, d, rc);
-//
-//			if (p == NULL)
-//				_root = rc;
-//
-//			return (rc);
-//		};
-//
-//		node_ptr *rotate_right(node_ptr *n)
-//		{
-//			node_ptr *p, *lc, *rgc;
-//			direction d;
-//
-//			// so roda se tiver filho direito
-//			if (!n->left)
-//				return (n);
-//			if (is_left_child(n)) d = LEFT;
-//			if (is_right_child(n)) d = RIGHT;
-//
-//			// salva ponteiros
-//			p = n->parent;
-//			lc = n->left;
-//			rgc = lc->right;
-//
-//			// desconecta 3 nodes
-//			disconnect(p, n);
-//			disconnect(n, lc);
-//			disconnect(lc, rgc);
-//
-//			// reconecta 3 nodes
-//			connect(n, LEFT, rgc);
-//			connect(lc, RIGHT, n);
-//			connect(p, d, lc);
-//
-//			if (p == NULL)
-//				_root = lc;
-//
-//			return (lc);
-//		};
+		};
+
+		void transplant(node_ptr *u, node_ptr *v)
+		{
+			if (u->parent == NULL)
+			{
+				_root = v;
+			}
+			else if (is_left_child(u))
+			{
+				u->parent->left = v;
+			}
+			else
+			{
+				u->parent->right = v;
+			}
+			if (v)
+				v->parent = u->parent;
+		};
+
+		node_ptr *minimum(node_ptr *node) const
+		{
+			while (node->left != _nil)
+			  node = node->left;
+			return node;
+		};
+
+		node_ptr *maximum(node_ptr *node) const
+		{
+			while (node->right != _nil)
+			  node = node->right;
+			return node;
+		};
+
+		void fix_remove_node(node_ptr *n)
+		{
+			if (!n) return;
+
+			std::cout << "fix: " << n->content->first << std::endl;
+
+			node_ptr *w;
+			while (n != _root && is_black(n))
+			{
+				if (n == n->parent->left)
+				{
+					w = n->parent->right;
+					if (is_red(w))
+					{
+						w->color = BLACK;
+						n->parent->color = RED;
+						rotate_left(n->parent);
+						w = n->parent->right;
+					}
+					std::cout << "w: " << n->content->first << std::endl;
+					print_tree_level();
+					if (is_black(w->left) && is_black(w->right))
+					{
+						w->color = RED;
+						n = n->parent;
+					}
+					else if (is_black(w->right))
+					{
+						w->left->color = BLACK;
+						w->color = RED;
+						rotate_right(w);
+						w = n->parent->right;
+					}
+					w->color = n->parent->color;
+					n->parent->color = BLACK;
+					w->right->color = BLACK;
+					rotate_left(n->parent);
+					n = _root;
+				}
+				else
+				{
+					w = n->parent->left;
+					if (is_red(w))
+					{
+						w->color = BLACK;
+						n->parent->color = RED;
+						rotate_right(n->parent);
+						w = n->parent->left;
+					}
+					if (is_black(w->right) && is_black(w->left))
+					{
+						w->color = RED;
+						n = n->parent;
+					}
+					else if (is_black(w->left))
+					{
+						w->right->color = BLACK;
+						w->color = RED;
+						rotate_left(w);
+						w = n->parent->left;
+					}
+					w->color = n->parent->color;
+					n->parent->color = BLACK;
+					w->left->color = BLACK;
+					rotate_right(n->parent);
+					n = _root;
+				}
+			}
+			n->color = BLACK;
+		};
+
+		node_ptr *rotate_left(node_ptr *n)
+		{
+			node_ptr *p, *rc, *lgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (!n->right)
+				return (n);
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			rc = n->right;
+			lgc = rc->left;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, rc);
+			disconnect(rc, lgc);
+
+			// reconecta 3 nodes
+			connect(n, RIGHT, lgc);
+			connect(rc, LEFT, n);
+			connect(p, d, rc);
+
+			if (p == NULL)
+				_root = rc;
+
+			return (rc);
+		};
+
+		node_ptr *rotate_right(node_ptr *n)
+		{
+			node_ptr *p, *lc, *rgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (!n->left)
+				return (n);
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			lc = n->left;
+			rgc = lc->right;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, lc);
+			disconnect(lc, rgc);
+
+			// reconecta 3 nodes
+			connect(n, LEFT, rgc);
+			connect(lc, RIGHT, n);
+			connect(p, d, lc);
+
+			if (p == NULL)
+				_root = lc;
+
+			return (lc);
+		};
 // ========================================================================
 
 // ============================ SITE ============================================
-void rotate_left(node_ptr *x) {
-node_ptr *y = x->right;
-x->right = y->left;
-if(y->left != NULL) {
-  y->left->parent = x;
-}
-y->parent = x->parent;
-if(x->parent == NULL) { //x is root
-  _root = y;
-}
-else if(x == x->parent->left) { //x is left child
-  x->parent->left = y;
-}
-else { //x is right child
-  x->parent->right = y;
-}
-y->left = x;
-x->parent = y;
-};
-
-void rotate_right(node_ptr *x) {
-node_ptr *y = x->left;
-x->left = y->right;
-if(y->right != NULL) {
-  y->right->parent = x;
-}
-y->parent = x->parent;
-if(x->parent == NULL) { //x is root
-  _root = y;
-}
-else if(x == x->parent->right) { //x is left child
-  x->parent->right = y;
-}
-else { //x is right child
-  x->parent->left = y;
-}
-y->right = x;
-x->parent = y;
-};
-
-void rb_transplant(node_ptr *u, node_ptr *v) {
-if(u->parent == NULL)
-  _root = v;
-else if(u == u->parent->left)
-  u->parent->left = v;
-else
-  u->parent->right = v;
-v->parent = u->parent;
-};
-
-node_ptr* minimum(node_ptr *x) {
-while(x->left != _nil)
-  x = x->left;
-return x;
-};
-
-node_ptr* maximum(node_ptr *x) {
-while(x->right != _nil)
-  x = x->right;
-return x;
-};
-
-void rb_delete_fixup(node_ptr *x) {
-while(x != _root && x->color == BLACK) {
-  if(x == x->parent->left) {
-    node_ptr *w = x->parent->right;
-    if(w->color == RED) {
-      w->color = BLACK;
-      x->parent->color = RED;
-      rotate_left(x->parent);
-      w = x->parent->right;
-    }
-    if(w->left->color == BLACK && w->right->color == BLACK) {
-      w->color = RED;
-      x = x->parent;
-    }
-    else {
-      if(w->right->color == BLACK) {
-        w->left->color = BLACK;
-        w->color = RED;
-        rotate_right(w);
-        w = x->parent->right;
-      }
-      w->color = x->parent->color;
-      x->parent->color = BLACK;
-      w->right->color = BLACK;
-      rotate_left(x->parent);
-      x = _root;
-    }
-  }
-  else {
-    node_ptr *w = x->parent->left;
-    if(w->color == RED) {
-      w->color = BLACK;
-      x->parent->color = RED;
-      rotate_right(x->parent);
-      w = x->parent->left;
-    }
-    if(w->right->color == BLACK && w->left->color == BLACK) {
-      w->color = RED;
-      x = x->parent;
-    }
-    else {
-      if(w->left->color == BLACK) {
-        w->right->color = BLACK;
-        w->color = RED;
-        rotate_left(w);
-        w = x->parent->left;
-      }
-      w->color = x->parent->color;
-      x->parent->color = BLACK;
-      w->left->color = BLACK;
-      rotate_right(x->parent);
-      x = _root;
-    }
-  }
-}
-x->color = BLACK;
-};
-
+//void rotate_left(node_ptr *x) {
+//node_ptr *y = x->right;
+//x->right = y->left;
+//if(y->left != NULL) {
+//  y->left->parent = x;
+//}
+//y->parent = x->parent;
+//if(x->parent == NULL) { //x is root
+//  _root = y;
+//}
+//else if(x == x->parent->left) { //x is left child
+//  x->parent->left = y;
+//}
+//else { //x is right child
+//  x->parent->right = y;
+//}
+//y->left = x;
+//x->parent = y;
+//};
+//
+//void rotate_right(node_ptr *x) {
+//node_ptr *y = x->left;
+//x->left = y->right;
+//if(y->right != NULL) {
+//  y->right->parent = x;
+//}
+//y->parent = x->parent;
+//if(x->parent == NULL) { //x is root
+//  _root = y;
+//}
+//else if(x == x->parent->right) { //x is left child
+//  x->parent->right = y;
+//}
+//else { //x is right child
+//  x->parent->left = y;
+//}
+//y->right = x;
+//x->parent = y;
+//};
+//
+//void rb_transplant(node_ptr *u, node_ptr *v) {
+//if(u->parent == NULL)
+//  _root = v;
+//else if(u == u->parent->left)
+//  u->parent->left = v;
+//else
+//  u->parent->right = v;
+//v->parent = u->parent;
+//};
+//
+//node_ptr* minimum(node_ptr *x) {
+//while(x->left != _nil)
+//  x = x->left;
+//return x;
+//};
+//
+//node_ptr* maximum(node_ptr *x) {
+//while(x->right != _nil)
+//  x = x->right;
+//return x;
+//};
+//
+//void rb_delete_fixup(node_ptr *x) {
+//while(x != _root && x->color == BLACK) {
+//  if(x == x->parent->left) {
+//    node_ptr *w = x->parent->right;
+//    if(w->color == RED) {
+//      w->color = BLACK;
+//      x->parent->color = RED;
+//      rotate_left(x->parent);
+//      w = x->parent->right;
+//    }
+//    if(w->left->color == BLACK && w->right->color == BLACK) {
+//      w->color = RED;
+//      x = x->parent;
+//    }
+//    else {
+//      if(w->right->color == BLACK) {
+//        w->left->color = BLACK;
+//        w->color = RED;
+//        rotate_right(w);
+//        w = x->parent->right;
+//      }
+//      w->color = x->parent->color;
+//      x->parent->color = BLACK;
+//      w->right->color = BLACK;
+//      rotate_left(x->parent);
+//      x = _root;
+//    }
+//  }
+//  else {
+//    node_ptr *w = x->parent->left;
+//    if(w->color == RED) {
+//      w->color = BLACK;
+//      x->parent->color = RED;
+//      rotate_right(x->parent);
+//      w = x->parent->left;
+//    }
+//    if(w->right->color == BLACK && w->left->color == BLACK) {
+//      w->color = RED;
+//      x = x->parent;
+//    }
+//    else {
+//      if(w->left->color == BLACK) {
+//        w->right->color = BLACK;
+//        w->color = RED;
+//        rotate_left(w);
+//        w = x->parent->left;
+//      }
+//      w->color = x->parent->color;
+//      x->parent->color = BLACK;
+//      w->left->color = BLACK;
+//      rotate_right(x->parent);
+//      x = _root;
+//    }
+//  }
+//}
+//x->color = BLACK;
+//};
+//
 //void remove_node(node_ptr *z) {
 //node_ptr *y = z;
 //node_ptr *x;
