@@ -303,7 +303,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr* p;
 			p = find_node(k);
-			if (p)
+			if (p != _nil)
 				return (iterator(p, _nil));
 			else
 				return (end());
@@ -523,7 +523,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr* p;
 			p = _root;
-			while (p)
+			while (p != _nil)
 			{
 				if (k == p->content->first)
 					return (p);
@@ -532,7 +532,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				else
 					p = p->right;
 			};
-			return (NULL);
+			return (_nil);
 		};
 
 		bool is_leaf(node_ptr *n)

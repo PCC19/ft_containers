@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/02 03:24:15 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/02 03:44:56 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ namespace ft
 			if (node)
 			{
 				_content = node->content;
-				_prev = prev_node(_node, leaf);
 				_leaf = leaf;
+				_prev = prev_node(_node);
 			}
 			else
 			{
@@ -79,7 +79,7 @@ namespace ft
 			if (_node == NULL) return (*this);
 			
 			_prev = _node;
-			p = next_node(_node, _leaf);
+			p = next_node(_node);
 			this->_node = p;
 			if(p)
 				this->_content = p->content;
@@ -101,7 +101,7 @@ namespace ft
 			};
 
 			_prev = _node;
-			p = prev_node(_node, _leaf);
+			p = prev_node(_node);
 			this->_node = p;
 			if(p)
 				this->_content = p->content;
@@ -191,32 +191,32 @@ namespace ft
 				return false;
 		};
 
-		rbt_node<value_type> *next_node(rbt_node<value_type> *n, rbt_node<value_type> *nil)
+		rbt_node<value_type> *next_node(rbt_node<value_type> *n)
 		{
 			rbt_node<value_type> *p;
 
-			if (n->right != nil)	// go down
+			if (n->right != _leaf)	// go down
 				p = min_subtree(n->right, _leaf);
 			else						// or go up
 			{
 				p = n;
-				while (p != nil && is_right_child(p))
+				while (p != _leaf && is_right_child(p))
 					p = p->parent;
 				p = p->parent;
 			};
 			return (p);
 		};
 
-		rbt_node<value_type> *prev_node(rbt_node<value_type> *n, rbt_node<value_type> *nil)
+		rbt_node<value_type> *prev_node(rbt_node<value_type> *n)
 		{
 			rbt_node<value_type> *p;
 
-			if (n->left != nil)	// go down
+			if (n->left != _leaf)	// go down
 				p = max_subtree(n->left, _leaf);
 			else						// or go up
 			{
 				p = n;
-				while (p != nil && is_left_child(p))
+				while (p != _leaf && is_left_child(p))
 					p = p->parent;
 				p = p->parent;
 			};
