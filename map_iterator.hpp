@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/02 03:03:04 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/02 03:24:15 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,21 +155,21 @@ namespace ft
 			value_type*				_content;
 
 		private:
-		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
+		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i, rbt_node<value_type> *leaf)
 		{
-			if (i != NULL)
+			if (i != leaf)
 			{
-				while ((*i).left != NULL)
+				while ((*i).left != leaf)
 					i = (*i).left;
 			};
 			return i;
 		};
 
-		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i)
+		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i, rbt_node<value_type> *leaf)
 		{
-			if (i != NULL)
+			if (i != leaf)
 			{
-				while ((*i).right != NULL)
+				while ((*i).right != leaf)
 					i = (*i).right;
 			};
 			return i;
@@ -177,7 +177,7 @@ namespace ft
 
 		bool is_left_child(rbt_node<value_type> *i)
 		{
-			if ((*i).parent != NULL && (*i).parent->left == i)
+			if (i->parent != NULL && i->parent->left == i)
 				return true;
 			else
 				return false;
@@ -185,7 +185,7 @@ namespace ft
 
 		bool is_right_child(rbt_node<value_type> *i)
 		{
-			if ((*i).parent != NULL && (*i).parent->right == i)
+			if (i->parent != NULL && i->parent->right == i)
 				return true;
 			else
 				return false;
@@ -196,7 +196,7 @@ namespace ft
 			rbt_node<value_type> *p;
 
 			if (n->right != nil)	// go down
-				p = min_subtree(n->right);
+				p = min_subtree(n->right, _leaf);
 			else						// or go up
 			{
 				p = n;
@@ -212,7 +212,7 @@ namespace ft
 			rbt_node<value_type> *p;
 
 			if (n->left != nil)	// go down
-				p = max_subtree(n->left);
+				p = max_subtree(n->left, _leaf);
 			else						// or go up
 			{
 				p = n;
