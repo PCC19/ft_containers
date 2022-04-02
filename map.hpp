@@ -433,9 +433,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_left_child(node_ptr *i)
 		{
-			if (i == _nil)
+			if (i == _nil || i == NULL )
 				return false;
-			if (i->parent != _nil && i->parent->left == i)
+			if (i->parent != NULL && i->parent->left == i)
 				return true;
 			else
 				return false;
@@ -443,9 +443,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_right_child(node_ptr *i)
 		{
-			if (i == _nil)
+			if (i == _nil || i == NULL)
 				return false;
-			if (i->parent != _nil && i->parent->right == i)
+			if (i->parent != NULL && i->parent->right == i)
 				return true;
 			else
 				return false;
@@ -473,12 +473,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr *temp;
 
-			if (is_left_child(c) && p)
+			if (is_left_child(c) && p != _nil)
 			{
 				temp = p->left;
 				p->left = NULL;
 			};
-			if (is_right_child(c) && p)
+			if (is_right_child(c) && p != _nil)
 			{
 				temp = p->right;
 				p->right = NULL;
@@ -559,7 +559,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr *s;
 			int	original_color;
 
-			if (n != _nil) return;
+			if (n == _nil) return;
 
 			original_color = n->color;
 
