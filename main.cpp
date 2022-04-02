@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/02 23:58:28 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/03 00:54:17 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -619,10 +619,10 @@ int main()
 	mapa2.insert(ft::make_pair(40,400));
 	mapa2.insert(ft::make_pair(20,200));
 	mapa2.insert(ft::make_pair(10,1000));
-//	mapa2.insert(ft::make_pair(30,300));
-//	mapa2.insert(ft::make_pair(60,600));
-//	mapa2.insert(ft::make_pair(50,500));
-//	mapa2.insert(ft::make_pair(70,700));
+	mapa2.insert(ft::make_pair(30,300));
+	mapa2.insert(ft::make_pair(60,600));
+	mapa2.insert(ft::make_pair(50,500));
+	mapa2.insert(ft::make_pair(70,700));
 //	mapa2.insert(ft::make_pair(120,1200));
 //	mapa2.insert(ft::make_pair(100,1000));
 //	mapa2.insert(ft::make_pair(140,1400));
@@ -648,10 +648,10 @@ int main()
 	dd = 40; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 	dd = 20; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 	dd = 10; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 30; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 60; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 50; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 70; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 30; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 60; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 50; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 70; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 //	dd = 120; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 //	dd = 100; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 //	dd = 140; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();

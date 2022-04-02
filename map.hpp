@@ -629,8 +629,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 				y->left->parent = y;
 				y->color = z->color;
 			};
-//			if (y_original_color == BLACK)
-//				fix_remove_node(x);
+			if (y_original_color == BLACK)
+				fix_remove_node(x);
 		};
 
 		void transplant(node_ptr *u, node_ptr *v)
@@ -667,31 +667,25 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void fix_remove_node(node_ptr *n)
 		{
-			if (!n) return;
-
-			std::cout << "fix: " << n->content->first << std::endl;
-
 			node_ptr *w;
-			while (n != _root && is_black(n))
+			while (n != _root && n->color == BLACK)
 			{
 				if (n == n->parent->left)
 				{
 					w = n->parent->right;
-					if (is_red(w))
+					if (w->color == RED)
 					{
 						w->color = BLACK;
 						n->parent->color = RED;
 						rotate_left(n->parent);
 						w = n->parent->right;
 					}
-					std::cout << "w: " << n->content->first << std::endl;
-					print_tree_level();
-					if (is_black(w->left) && is_black(w->right))
+					if (w->left->color == BLACK && w->right->color == BLACK)
 					{
 						w->color = RED;
 						n = n->parent;
 					}
-					else if (is_black(w->right))
+					else if (w->right->color == BLACK)
 					{
 						w->left->color = BLACK;
 						w->color = RED;
@@ -707,19 +701,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 				else
 				{
 					w = n->parent->left;
-					if (is_red(w))
+					if (w->color == RED)
 					{
 						w->color = BLACK;
 						n->parent->color = RED;
 						rotate_right(n->parent);
 						w = n->parent->left;
 					}
-					if (is_black(w->right) && is_black(w->left))
+					if (w->right->color == BLACK && w->left->color == BLACK)
 					{
 						w->color = RED;
 						n = n->parent;
 					}
-					else if (is_black(w->left))
+					else if (w->left->color == BLACK)
 					{
 						w->right->color = BLACK;
 						w->color = RED;
