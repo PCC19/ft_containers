@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/02 03:44:56 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/02 22:59:19 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,8 @@ namespace ft
 		{
 			if (i != leaf)
 			{
-				while ((*i).left != leaf)
-					i = (*i).left;
+				while (i->left != leaf)
+					i = i->left;
 			};
 			return i;
 		};
@@ -169,8 +169,8 @@ namespace ft
 		{
 			if (i != leaf)
 			{
-				while ((*i).right != leaf)
-					i = (*i).right;
+				while (i->right != leaf)
+					i = i->right;
 			};
 			return i;
 		};

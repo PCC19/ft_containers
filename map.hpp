@@ -135,7 +135,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr *n;
 
 			n = find_node(k);
-			if (n)
+			if (n != _nil)
 			{
 				std::cout << "n: " << n->content->first << std::endl;
 				remove_node(n);
@@ -394,6 +394,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void destroy_tree_temp(node_ptr *r)
 		{
+			if (r == _nil) return;
 			if (r == NULL) return;
 			destroy_tree_temp(r->left);
 			destroy_tree_temp(r->right);
@@ -412,7 +413,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr * min_subtree(node_ptr *i) const
 		{
-			if (i != NULL)
+			if (i != _nil)
 			{
 				while (i->left != _nil)
 					i = i->left;
@@ -422,7 +423,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr * max_subtree(node_ptr *i) const
 		{
-			if (i != NULL)
+			if (i != _nil)
 			{
 				while (i->right != _nil)
 					i = i->right;
@@ -432,9 +433,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_left_child(node_ptr *i)
 		{
-			if (!i)
+			if (i == _nil)
 				return false;
-			if (i->parent != NULL && i->parent->left == i)
+			if (i->parent != _nil && i->parent->left == i)
 				return true;
 			else
 				return false;
@@ -442,9 +443,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_right_child(node_ptr *i)
 		{
-			if (!i)
+			if (i == _nil)
 				return false;
-			if (i->parent != NULL && i->parent->right == i)
+			if (i->parent != _nil && i->parent->right == i)
 				return true;
 			else
 				return false;
@@ -491,12 +492,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr *p;
 
-			if (n->right != NULL)			// go down
+			if (n->right != _nil)			// go down
 				p = min_subtree(n->right);
 			else							// or go up
 			{
 				p = n;
-				while (p != NULL && is_right_child(p))
+				while (p != _nil && is_right_child(p))
 					p = p->parent;
 				p = p->parent;
 			};
@@ -537,7 +538,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		bool is_leaf(node_ptr *n)
 		{
-			if (!n->left && !n->right)
+			if (n->left == _nil && n->right == _nil)
 				return (1);
 			else
 				return (0);
@@ -558,7 +559,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr *s;
 			int	original_color;
 
-			if (!n) return;
+			if (n != _nil) return;
 
 			original_color = n->color;
 
@@ -579,8 +580,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 				copy_node_content(*s->content, n);
 				remove_node(s);
 			};
-			if (original_color == BLACK)
-				rb_delete_fixup(n);
+//			if (original_color == BLACK)
+//				rb_delete_fixup(n);
 		};
 // ========================================================================
 
