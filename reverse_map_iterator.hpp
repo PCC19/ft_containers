@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/23 00:00:16 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/02 22:42:17 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,21 @@ namespace ft
 		typedef typename C::key_compare						key_compare;
 
 		// Methods
-		reverse_map_iterator () : _comp(key_compare()), _node(NULL), _prev(NULL), _content(NULL) {}; 
-		reverse_map_iterator (rbt_node<value_type>* const node): _comp(key_compare()), _node(node)
+		reverse_map_iterator () : _comp(key_compare()), _node(NULL), _leaf(NULL), _prev(NULL), _content(NULL) {}; 
+		reverse_map_iterator (rbt_node<value_type>* const node,
+						rbt_node<value_type>* leaf): _comp(key_compare()), _node(node)
 		{
 			if (node)
 			{
 				_content = node->content;
+				_leaf = leaf;
 				_prev = prev_node(_node);
 			}
 			else
 			{
 				_content = NULL;
 				_prev = NULL;
+				_leaf = NULL;
 			};
 
 
@@ -57,6 +60,7 @@ namespace ft
 			{
 				_comp = rhs._comp;
 				_node = rhs._node;
+				_leaf = rhs._leaf;
 				_prev = rhs._prev;
 				_content = rhs._content;
 			};
@@ -144,25 +148,26 @@ namespace ft
 		protected:
 			key_compare				_comp;
 			rbt_node<value_type>*	_node;
+			rbt_node<value_type>*	_leaf;
 			rbt_node<value_type>*	_prev;
 			value_type*				_content;
 
 		private:
-		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i)
+		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i, rbt_node<value_type> *leaf)
 		{
-			if (i != NULL)
+			if (i != leaf)
 			{
-				while ((*i).left != NULL)
+				while ((*i).left != leaf)
 					i = (*i).left;
 			};
 			return i;
 		};
 
-		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i)
+		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i, rbt_node<value_type> *leaf)
 		{
-			if (i != NULL)
+			if (i != leaf)
 			{
-				while ((*i).right != NULL)
+				while ((*i).right != leaf)
 					i = (*i).right;
 			};
 			return i;
@@ -188,12 +193,12 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			if (n->right != NULL)	// go down
-				p = min_subtree(n->right);
+			if (n->right != _leaf)	// go down
+				p = min_subtree(n->right, _leaf);
 			else						// or go up
 			{
 				p = n;
-				while (p != NULL && is_right_child(p))
+				while (p != _leaf && is_right_child(p))
 					p = p->parent;
 				p = p->parent;
 			};
@@ -204,12 +209,12 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			if (n->left != NULL)	// go down
-				p = max_subtree(n->left);
+			if (n->left != _leaf)	// go down
+				p = max_subtree(n->left, _leaf);
 			else						// or go up
 			{
 				p = n;
-				while (p != NULL && is_left_child(p))
+				while (p != _leaf && is_left_child(p))
 					p = p->parent;
 				p = p->parent;
 			};

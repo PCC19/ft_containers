@@ -237,19 +237,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			node_ptr* n;
 			n = max_subtree(_root);
-			return reverse_iterator(n);
+			return reverse_iterator(n, _nil);
 		};
 
 		const_reverse_iterator rbegin() const
 		{
 			node_ptr* n;
 			n = max_subtree(_root);
-			return const_reverse_iterator(n);
+			return const_reverse_iterator(n, _nil);
 		};
 
 		reverse_iterator rend()
 		{
-			return ++reverse_iterator(min_subtree(_root));
+			return ++reverse_iterator(min_subtree(_root), _nil);
 		};
 
 		const_reverse_iterator rend() const
