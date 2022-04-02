@@ -91,7 +91,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				insert_at_root(node);
 					std::cout << "[" << node->content->first << "]  "; print_tree_level();
-				return (ft::make_pair(iterator(_root), true));
+				return (ft::make_pair(iterator(_root, _nil), true));
 			}
 			else
 			{
@@ -114,12 +114,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 					std::cout << "antes fix:\n";
 					print_tree_level();
 
-//				fix_insert1(node);
+				fix_insert1(node);
 					std::cout << "depois fix;\n";
 					print_tree_level();
 
 				update_nil_node();
-				return (ft::make_pair(iterator(node), true));
+				return (ft::make_pair(iterator(node, _nil), true));
 			};
 		};
 
@@ -211,26 +211,26 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// ITERATORS
 		iterator begin()
 		{
-			return iterator(min_subtree(_root));
+			return iterator(min_subtree(_root), _nil);
 		};
 
 		const_iterator begin() const
 		{
-			return const_iterator(min_subtree(_root));
+			return const_iterator(min_subtree(_root, _nil));
 		};
 
 		iterator end()
 		{
 			node_ptr* n;
 			n = max_subtree(_root);
-			return ++iterator(n);
+			return ++iterator(n, _nil);
 		};
 
 		const_iterator end() const
 		{
 			node_ptr* n;
 			n = max_subtree(_root);
-			return ++const_iterator(n);
+			return ++const_iterator(n, _nil);
 		};
 
 		reverse_iterator rbegin()
@@ -304,7 +304,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr* p;
 			p = find_node(k);
 			if (p)
-				return (iterator(p));
+				return (iterator(p, _nil));
 			else
 				return (end());
 		};
@@ -414,7 +414,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (i != NULL)
 			{
-				while (i->left != NULL)
+				while (i->left != _nil)
 					i = i->left;
 			};
 			return i;
@@ -424,7 +424,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (i != NULL)
 			{
-				while (i->right != NULL)
+				while (i->right != _nil)
 					i = i->right;
 			};
 			return i;
@@ -985,6 +985,7 @@ x->color = BLACK;
 
 		void fix_insert1(node_ptr *n)
 		{
+			std::cout << "1\n";
 			if (is_root(n))
 				n->color = BLACK;
 			else
@@ -993,6 +994,7 @@ x->color = BLACK;
 
 		void fix_insert2(node_ptr *n)
 		{
+			std::cout << "2\n";
 			if (n->parent->color == BLACK)
 				return;
 			else
@@ -1001,6 +1003,7 @@ x->color = BLACK;
 
 		void fix_insert3(node_ptr *n)
 		{
+			std::cout << "3\n";
 			if (uncle(n) && (uncle(n))->color == RED)
 			{
 				n->parent->color = BLACK;
@@ -1014,6 +1017,7 @@ x->color = BLACK;
 	
 		void fix_insert4(node_ptr *n)
 		{
+			std::cout << "4\n";
 			if (n == n->parent->right && n->parent == grandparent(n)->left)
 			{
 				rotate_left(n->parent);
@@ -1029,6 +1033,7 @@ x->color = BLACK;
 
 		void fix_insert5(node_ptr *n)
 		{
+			std::cout << "5\n";
 			n->parent->color = BLACK;
 			grandparent(n)->color = RED;
 			if (n == n->parent->left && n->parent == grandparent(n)->left)
@@ -1044,10 +1049,10 @@ x->color = BLACK;
 
 		node_ptr *grandparent(node_ptr *n)
 		{
-			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
+			if (n != _nil && n->parent != _nil && n->parent->parent != _nil)
 				return (n->parent->parent);
 			else
-				return NULL;
+				return _nil;
 		};
 
 		node_ptr *sibling(node_ptr *n)

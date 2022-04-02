@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/03/27 18:47:04 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/02 03:03:04 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,21 @@ namespace ft
 		typedef typename C::key_compare						key_compare;
 
 		// Methods
-		map_iterator () : _comp(key_compare()), _node(NULL), _prev(NULL), _content(NULL) {}; 
-		map_iterator (rbt_node<value_type>* const node): _comp(key_compare()), _node(node)
+		map_iterator () : _comp(key_compare()), _node(NULL), _leaf(NULL), _prev(NULL), _content(NULL) {}; 
+		map_iterator (rbt_node<value_type>* const node,
+						rbt_node<value_type>* leaf): _comp(key_compare()), _node(node)
 		{
 			if (node)
 			{
 				_content = node->content;
-				_prev = prev_node(_node);
+				_prev = prev_node(_node, leaf);
+				_leaf = leaf;
 			}
 			else
 			{
 				_content = NULL;
 				_prev = NULL;
+				_leaf = NULL;
 			};
 
 
@@ -57,6 +60,7 @@ namespace ft
 			{
 				_comp = rhs._comp;
 				_node = rhs._node;
+				_leaf = rhs._leaf;
 				_prev = rhs._prev;
 				_content = rhs._content;
 			};
@@ -75,7 +79,7 @@ namespace ft
 			if (_node == NULL) return (*this);
 			
 			_prev = _node;
-			p = next_node(_node);
+			p = next_node(_node, _leaf);
 			this->_node = p;
 			if(p)
 				this->_content = p->content;
@@ -97,7 +101,7 @@ namespace ft
 			};
 
 			_prev = _node;
-			p = prev_node(_node);
+			p = prev_node(_node, _leaf);
 			this->_node = p;
 			if(p)
 				this->_content = p->content;
@@ -146,6 +150,7 @@ namespace ft
 		protected:
 			key_compare				_comp;
 			rbt_node<value_type>*	_node;
+			rbt_node<value_type>*	_leaf;
 			rbt_node<value_type>*	_prev;
 			value_type*				_content;
 
@@ -186,32 +191,32 @@ namespace ft
 				return false;
 		};
 
-		rbt_node<value_type> *next_node(rbt_node<value_type> *n)
+		rbt_node<value_type> *next_node(rbt_node<value_type> *n, rbt_node<value_type> *nil)
 		{
 			rbt_node<value_type> *p;
 
-			if (n->right != NULL)	// go down
+			if (n->right != nil)	// go down
 				p = min_subtree(n->right);
 			else						// or go up
 			{
 				p = n;
-				while (p != NULL && is_right_child(p))
+				while (p != nil && is_right_child(p))
 					p = p->parent;
 				p = p->parent;
 			};
 			return (p);
 		};
 
-		rbt_node<value_type> *prev_node(rbt_node<value_type> *n)
+		rbt_node<value_type> *prev_node(rbt_node<value_type> *n, rbt_node<value_type> *nil)
 		{
 			rbt_node<value_type> *p;
 
-			if (n->left != NULL)	// go down
+			if (n->left != nil)	// go down
 				p = max_subtree(n->left);
 			else						// or go up
 			{
 				p = n;
-				while (p != NULL && is_left_child(p))
+				while (p != nil && is_left_child(p))
 					p = p->parent;
 				p = p->parent;
 			};
