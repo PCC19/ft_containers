@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/04 00:04:38 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/04 01:28:50 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -623,22 +623,22 @@ int main()
 	mapa2.insert(ft::make_pair(60,600));
 	mapa2.insert(ft::make_pair(50,500));
 	mapa2.insert(ft::make_pair(70,700));
-//	mapa2.insert(ft::make_pair(120,1200));
-//	mapa2.insert(ft::make_pair(100,1000));
-//	mapa2.insert(ft::make_pair(140,1400));
-//	mapa2.insert(ft::make_pair(90,900));
-//	mapa2.insert(ft::make_pair(89,890));
-//	mapa2.insert(ft::make_pair(110,1100));
-//	mapa2.insert(ft::make_pair(111,1110));
-//	mapa2.insert(ft::make_pair(134,1340));
-//	mapa2.insert(ft::make_pair(150,1500));
-//	mapa2.insert(ft::make_pair(130,1300));
-//	mapa2.insert(ft::make_pair(135,1350));
-//	mapa2.insert(ft::make_pair(125,1250));
+	mapa2.insert(ft::make_pair(120,1200));
+	mapa2.insert(ft::make_pair(100,1000));
+	mapa2.insert(ft::make_pair(140,1400));
+	mapa2.insert(ft::make_pair(90,900));
+	mapa2.insert(ft::make_pair(89,890));
+	mapa2.insert(ft::make_pair(110,1100));
+	mapa2.insert(ft::make_pair(111,1110));
+	mapa2.insert(ft::make_pair(134,1340));
+	mapa2.insert(ft::make_pair(150,1500));
+	mapa2.insert(ft::make_pair(130,1300));
+	mapa2.insert(ft::make_pair(135,1350));
+	mapa2.insert(ft::make_pair(125,1250));
 
 
 //		mapa2.print_tree_level();
-
+return 0;
 	std::cout << "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n";
 	std::cout << "DEBUG FIX REMOVE\n";
 	std::cout << "Inicial: \n"; mapa2.print_tree_level();

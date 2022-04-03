@@ -60,6 +60,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			_nil  =  new node_ptr(NULL);
 			_nil->parent = _root;
 			_nil->content = NULL;
+			_nil->left = NULL;
+			_nil->right = NULL;
+			_nil->color = BLACK;
 		};
 
 		// range constructor
@@ -753,105 +756,105 @@ template <class Key, class T, class Compare = std::less<Key>,
 			n->color = BLACK;
 		};
 
-  void rotate_left(node_ptr *x) {
-    node_ptr *y = x->right;
-    x->right = y->left;
-    if (y->left != _nil)
-      y->left->parent = x;
-    y->parent = x->parent;
-    if (x->parent == _nil)
-      _root = y;
-    else if (x == x->parent->left)
-      x->parent->left = y;
-    else
-      x->parent->right = y;
-    y->left = x;
-    x->parent = y;
-  };
-
-    void rotate_right(node_ptr *x) {
-    node_ptr *y = x->left;
-    x->left = y->right;
-    if (y->right != _nil)
-      y->right->parent = x;
-    y->parent = x->parent;
-    if (x->parent == _nil)
-      _root = y;
-    else if (x == x->parent->right)
-      x->parent->right = y;
-    else
-      x->parent->left = y;
-    y->right = x;
-    x->parent = y;
- }; 
+//  void rotate_left(node_ptr *x) {
+//    node_ptr *y = x->right;
+//    x->right = y->left;
+//    if (y->left != _nil)
+//      y->left->parent = x;
+//    y->parent = x->parent;
+//    if (x->parent == _nil)
+//      _root = y;
+//    else if (x == x->parent->left)
+//      x->parent->left = y;
+//    else
+//      x->parent->right = y;
+//    y->left = x;
+//    x->parent = y;
+//  };
+//
+//    void rotate_right(node_ptr *x) {
+//    node_ptr *y = x->left;
+//    x->left = y->right;
+//    if (y->right != _nil)
+//      y->right->parent = x;
+//    y->parent = x->parent;
+//    if (x->parent == _nil)
+//      _root = y;
+//    else if (x == x->parent->right)
+//      x->parent->right = y;
+//    else
+//      x->parent->left = y;
+//    y->right = x;
+//    x->parent = y;
+// }; 
 
 
 // ^^^^^^^^^^^^^^^^^^ END LIVRO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 // vvvvvvvvvvvvvvvvvv ORIGINAL  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-//		node_ptr *rotate_left(node_ptr *n)
-//		{
-//			node_ptr *p, *rc, *lgc;
-//			direction d;
-//
-//			// so roda se tiver filho direito
-//			if (n->right == _nil)
-//				return (n);
-//			if (is_left_child(n)) d = LEFT;
-//			if (is_right_child(n)) d = RIGHT;
-//
-//			// salva ponteiros
-//			p = n->parent;
-//			rc = n->right;
-//			lgc = rc->left;
-//
-//			// desconecta 3 nodes
-//			disconnect(p, n);
-//			disconnect(n, rc);
-//			disconnect(rc, lgc);
-//
-//			// reconecta 3 nodes
-//			connect(n, RIGHT, lgc);
-//			connect(rc, LEFT, n);
-//			connect(p, d, rc);
-//
-//			if (p == NULL)
-//				_root = rc;
-//
-//			return (rc);
-//		};
-//
-//		node_ptr *rotate_right(node_ptr *n)
-//		{
-//			node_ptr *p, *lc, *rgc;
-//			direction d;
-//
-//			// so roda se tiver filho direito
-//			if (n->left == _nil)
-//				return (n);
-//			if (is_left_child(n)) d = LEFT;
-//			if (is_right_child(n)) d = RIGHT;
-//
-//			// salva ponteiros
-//			p = n->parent;
-//			lc = n->left;
-//			rgc = lc->right;
-//
-//			// desconecta 3 nodes
-//			disconnect(p, n);
-//			disconnect(n, lc);
-//			disconnect(lc, rgc);
-//
-//			// reconecta 3 nodes
-//			connect(n, LEFT, rgc);
-//			connect(lc, RIGHT, n);
-//			connect(p, d, lc);
-//
-//			if (p == NULL)
-//				_root = lc;
-//
-//			return (lc);
-//		};
+		node_ptr *rotate_left(node_ptr *n)
+		{
+			node_ptr *p, *rc, *lgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (n->right == _nil)
+				return (n);
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			rc = n->right;
+			lgc = rc->left;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, rc);
+			disconnect(rc, lgc);
+
+			// reconecta 3 nodes
+			connect(n, RIGHT, lgc);
+			connect(rc, LEFT, n);
+			connect(p, d, rc);
+
+			if (p == NULL)
+				_root = rc;
+
+			return (rc);
+		};
+
+		node_ptr *rotate_right(node_ptr *n)
+		{
+			node_ptr *p, *lc, *rgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (n->left == _nil)
+				return (n);
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			lc = n->left;
+			rgc = lc->right;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, lc);
+			disconnect(lc, rgc);
+
+			// reconecta 3 nodes
+			connect(n, LEFT, rgc);
+			connect(lc, RIGHT, n);
+			connect(p, d, lc);
+
+			if (p == NULL)
+				_root = lc;
+
+			return (lc);
+		};
 // ^^^^^^^^^^^^^^^^^^ END ORIGINAL  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -890,7 +893,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv FIX INSERT LIVRO  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv==
 	void fix_insert1(node_ptr *z)
 	{
-		while (z->parent->color == RED)
+		while (z != _root && z->parent->color == RED)
 		{
 			if (z->parent == z->parent->parent->left)
 			{
@@ -898,21 +901,28 @@ template <class Key, class T, class Compare = std::less<Key>,
 				if (y->color == RED)
 				{
 					std::cout << "Case 1a\n";
+//					print_tree_level();
 					z->parent->color = BLACK;
 					y->color = BLACK;
 					z->parent->parent->color = RED;
 					z = z->parent->parent;
 				}
-				else if (z == z->parent->right)
+				else
 				{
-					std::cout << "Case 2a\n";
-					z = z->parent;
-					rotate_left(z);
+					if (z == z->parent->right)
+					{
+						std::cout << "Case 2a\n";
+						z = z->parent;
+						rotate_left(z);
+//						print_tree_level();
+					}
+					std::cout << "Case 3a\n";
+					std::cout << "z: " << z->content->first << std::endl;
+					z->parent->color = BLACK;
+					z->parent->parent->color = RED;
+					rotate_right(z->parent->parent);
+//					print_tree_level();
 				}
-				std::cout << "Case 3a\n";
-				z->parent->color = BLACK;
-				z->parent->parent->color = RED;
-				rotate_right(z->parent->parent);
 			}
 			else
 			{
@@ -925,20 +935,24 @@ template <class Key, class T, class Compare = std::less<Key>,
 					z->parent->parent->color = RED;
 					z = z->parent->parent;
 				}
-				else if (z == z->parent->left)
+				else
 				{
-					std::cout << "Case 2b\n";
-					z = z->parent;
-					rotate_right(z);
-				}
-				std::cout << "Case 3b\n";
-				z->parent->color = BLACK;
-				z->parent->parent->color = RED;
-				rotate_left(z->parent->parent);
+					if (z == z->parent->left)
+					{
+						std::cout << "Case 2b\n";
+						z = z->parent;
+						rotate_right(z);
+					}
+					std::cout << "Case 3b\n";
+					z->parent->color = BLACK;
+					z->parent->parent->color = RED;
+					rotate_left(z->parent->parent);
+				};
 			};		
+			_root->color = BLACK;
+			std::cout << "Case 0\n";
+//			print_tree_level();
 		};
-		std::cout << "Case 0\n";
-		_root->color = BLACK;
 	};
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END FIX INSERT LIVRO  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^==
 
