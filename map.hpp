@@ -66,12 +66,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 			// depende de iterators e insert
 		// copy constructor
 
-		// destructor
-			// depende do clear, que depende do erase + begin + end, que depende do iterator(e do seu incremento)
 		~map() // destrutor temporario.
 		{
+			std::cout << "Destrutor MAP\n";
 			clear();
-			delete (_nil);
 		};
 
 		// CAPACITY
@@ -125,9 +123,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void	update_nil_node()
 		{
-			_nil->parent = _root;
-			_nil->left = minimum(_root);
-			_nil->right = maximum(_root);
+			if (_nil != NULL)
+			{
+				_nil->parent = _root;
+				_nil->left = minimum(_root);
+				_nil->right = maximum(_root);
+			};
 		};
 
 		size_type erase(const key_type &k)
@@ -139,7 +140,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				std::cout << "n: " << n->content->first << std::endl;
 				remove_node(n);
-				_size--;
 				return (1);
 			}
 			else
@@ -156,7 +156,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			if (n)
 			{
 				remove_node(n);
-				_size--;
 				print_tree_level();
 			}
 			else
@@ -199,6 +198,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		void clear()
 		{
 			destroy_tree_temp(_root);
+			destroy_node(_nil);
 		};
 
 		void swap(map& other)
@@ -328,6 +328,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		public:
 		void print_tree_level(int flag = 1)
 		{
+			std::cout << "size: " << _size << std::endl;
 			if (_root == _nil)
 				std::cout << "EMPTY TREE\n";
 			else
@@ -381,25 +382,24 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (node);
 		};
 
+		void destroy_tree_temp(node_ptr *r)
+		{
+			if (r == _nil)
+				return;
+			destroy_tree_temp(r->left);
+			destroy_tree_temp(r->right);
+			destroy_node(r);
+//				_root = NULL;
+		};
+
 		void destroy_node(node_ptr *node_to_destroy)
 		{
 			if (node_to_destroy)
 			{
-//				delete (node_to_destroy->content);
 				_Alloc.destroy(node_to_destroy->content);
 				_Alloc.deallocate(node_to_destroy->content, 1);
 				delete (node_to_destroy);
 			};
-		};
-
-		void destroy_tree_temp(node_ptr *r)
-		{
-			if (r == _nil) return;
-			if (r == NULL) return;
-			destroy_tree_temp(r->left);
-			destroy_tree_temp(r->right);
-			destroy_node(r);
-			_root = NULL;
 		};
 
 		void print_tree_infix_recursive(node_ptr *r)
@@ -598,6 +598,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 			y = z;
 			int y_original_color = y->color;
 
+			if (z == _root && _size == 1)
+			{
+				destroy_node(z);
+				_root = _nil;
+				_nil->left = _root;
+				_nil->right = _root;
+				_size--;
+				return;
+			};
 			if (z->left == _nil)
 			{
 				x = z->right;
@@ -629,8 +638,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 				y->left->parent = y;
 				y->color = z->color;
 			};
-			if (y_original_color == BLACK)
-				fix_remove_node(x);
+//			if (y_original_color == BLACK)
+//				fix_remove_node(x);
+			if (z != _nil)
+			{
+				destroy_node(z);
+				_size--;
+				update_nil_node();
+			};
 		};
 
 		void transplant(node_ptr *u, node_ptr *v)

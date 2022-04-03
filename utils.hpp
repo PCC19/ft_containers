@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/02 01:33:09 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/03 21:10:47 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,10 @@ void print_tree_by_level_color(rbt_node<T> *n, rbt_node<T> *nil)
 	rbt_node<T>									*nn;
 	ft::vector<int>								lvl;
 
-	ft::map<int, int>								lixo;
 	typename ft::map<int, int>::size_type						i;
 //	size_t										i;
 //	typename ft::vector<rbt_node<T> >::size_type					i;
 
-	(void) lixo;
 	i = 0;
 	q.push_back(*n);
 	lvl.push_back(1);
