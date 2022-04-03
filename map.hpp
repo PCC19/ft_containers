@@ -903,19 +903,16 @@ template <class Key, class T, class Compare = std::less<Key>,
 					z->parent->parent->color = RED;
 					z = z->parent->parent;
 				}
-				else
+				else if (z == z->parent->right)
 				{
-					if (z == z->parent->right)
-					{
-						std::cout << "Case 2a\n";
-						z = z->parent;
-						rotate_left(z);
-					}
+					std::cout << "Case 2a\n";
+					z = z->parent;
+					rotate_left(z);
+				}
 				std::cout << "Case 3a\n";
 				z->parent->color = BLACK;
 				z->parent->parent->color = RED;
 				rotate_right(z->parent->parent);
-				};
 			}
 			else
 			{
@@ -928,21 +925,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 					z->parent->parent->color = RED;
 					z = z->parent->parent;
 				}
-				else
+				else if (z == z->parent->left)
 				{
-					if (z == z->parent->left)
-					{
-						std::cout << "Case 2b\n";
-						z = z->parent;
-						rotate_right(z);
-					}
-					std::cout << "Case 3b\n";
-					z->parent->color = BLACK;
-					z->parent->parent->color = RED;
-					rotate_left(z->parent->parent);
-				};	
+					std::cout << "Case 2b\n";
+					z = z->parent;
+					rotate_right(z);
+				}
+				std::cout << "Case 3b\n";
+				z->parent->color = BLACK;
+				z->parent->parent->color = RED;
+				rotate_left(z->parent->parent);
 			};		
 		};
+		std::cout << "Case 0\n";
 		_root->color = BLACK;
 	};
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END FIX INSERT LIVRO  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^==
