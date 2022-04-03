@@ -138,7 +138,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			n = find_node(k);
 			if (n != _nil)
 			{
-				std::cout << "n: " << n->content->first << std::endl;
 				remove_node(n);
 				return (1);
 			}
@@ -638,8 +637,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 				y->left->parent = y;
 				y->color = z->color;
 			};
-//			if (y_original_color == BLACK)
-//				fix_remove_node(x);
+			if (y_original_color == BLACK)
+				fix_remove_node(x);
 			if (z != _nil)
 			{
 				destroy_node(z);
@@ -687,6 +686,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				if (n == n->parent->left)
 				{
+					std::cout << "Case 1a\n";
 					w = n->parent->right;
 					if (w->color == RED)
 					{
@@ -697,16 +697,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 					}
 					if (w->left->color == BLACK && w->right->color == BLACK)
 					{
+						std::cout << "Case 2a\n";
 						w->color = RED;
 						n = n->parent;
 					}
 					else if (w->right->color == BLACK)
 					{
+						std::cout << "Case 3a\n";
 						w->left->color = BLACK;
 						w->color = RED;
 						rotate_right(w);
 						w = n->parent->right;
 					}
+					std::cout << "Case 4a\n";
 					w->color = n->parent->color;
 					n->parent->color = BLACK;
 					w->right->color = BLACK;
@@ -718,6 +721,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 					w = n->parent->left;
 					if (w->color == RED)
 					{
+						std::cout << "Case 1b\n";
 						w->color = BLACK;
 						n->parent->color = RED;
 						rotate_right(n->parent);
@@ -725,16 +729,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 					}
 					if (w->right->color == BLACK && w->left->color == BLACK)
 					{
+						std::cout << "Case 2b\n";
 						w->color = RED;
 						n = n->parent;
 					}
 					else if (w->left->color == BLACK)
 					{
+						std::cout << "Case 3b\n";
 						w->right->color = BLACK;
 						w->color = RED;
 						rotate_left(w);
 						w = n->parent->left;
 					}
+					std::cout << "Case 4b\n";
 					w->color = n->parent->color;
 					n->parent->color = BLACK;
 					w->left->color = BLACK;
