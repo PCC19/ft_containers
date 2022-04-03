@@ -815,167 +815,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			return (lc);
 		};
-// ========================================================================
-
-// ============================ SITE ============================================
-//void rotate_left(node_ptr *x) {
-//node_ptr *y = x->right;
-//x->right = y->left;
-//if(y->left != NULL) {
-//  y->left->parent = x;
-//}
-//y->parent = x->parent;
-//if(x->parent == NULL) { //x is root
-//  _root = y;
-//}
-//else if(x == x->parent->left) { //x is left child
-//  x->parent->left = y;
-//}
-//else { //x is right child
-//  x->parent->right = y;
-//}
-//y->left = x;
-//x->parent = y;
-//};
-//
-//void rotate_right(node_ptr *x) {
-//node_ptr *y = x->left;
-//x->left = y->right;
-//if(y->right != NULL) {
-//  y->right->parent = x;
-//}
-//y->parent = x->parent;
-//if(x->parent == NULL) { //x is root
-//  _root = y;
-//}
-//else if(x == x->parent->right) { //x is left child
-//  x->parent->right = y;
-//}
-//else { //x is right child
-//  x->parent->left = y;
-//}
-//y->right = x;
-//x->parent = y;
-//};
-//
-//void rb_transplant(node_ptr *u, node_ptr *v) {
-//if(u->parent == NULL)
-//  _root = v;
-//else if(u == u->parent->left)
-//  u->parent->left = v;
-//else
-//  u->parent->right = v;
-//v->parent = u->parent;
-//};
-//
-//node_ptr* minimum(node_ptr *x) {
-//while(x->left != _nil)
-//  x = x->left;
-//return x;
-//};
-//
-//node_ptr* maximum(node_ptr *x) {
-//while(x->right != _nil)
-//  x = x->right;
-//return x;
-//};
-//
-//void rb_delete_fixup(node_ptr *x) {
-//while(x != _root && x->color == BLACK) {
-//  if(x == x->parent->left) {
-//    node_ptr *w = x->parent->right;
-//    if(w->color == RED) {
-//      w->color = BLACK;
-//      x->parent->color = RED;
-//      rotate_left(x->parent);
-//      w = x->parent->right;
-//    }
-//    if(w->left->color == BLACK && w->right->color == BLACK) {
-//      w->color = RED;
-//      x = x->parent;
-//    }
-//    else {
-//      if(w->right->color == BLACK) {
-//        w->left->color = BLACK;
-//        w->color = RED;
-//        rotate_right(w);
-//        w = x->parent->right;
-//      }
-//      w->color = x->parent->color;
-//      x->parent->color = BLACK;
-//      w->right->color = BLACK;
-//      rotate_left(x->parent);
-//      x = _root;
-//    }
-//  }
-//  else {
-//    node_ptr *w = x->parent->left;
-//    if(w->color == RED) {
-//      w->color = BLACK;
-//      x->parent->color = RED;
-//      rotate_right(x->parent);
-//      w = x->parent->left;
-//    }
-//    if(w->right->color == BLACK && w->left->color == BLACK) {
-//      w->color = RED;
-//      x = x->parent;
-//    }
-//    else {
-//      if(w->left->color == BLACK) {
-//        w->right->color = BLACK;
-//        w->color = RED;
-//        rotate_left(w);
-//        w = x->parent->left;
-//      }
-//      w->color = x->parent->color;
-//      x->parent->color = BLACK;
-//      w->left->color = BLACK;
-//      rotate_right(x->parent);
-//      x = _root;
-//    }
-//  }
-//}
-//x->color = BLACK;
-//};
-//
-//void remove_node(node_ptr *z) {
-//node_ptr *y = z;
-//node_ptr *x;
-//int y_orignal_color;
-//
-//y_orignal_color = y->color;
-//if(z->left == NULL) {
-//  x = z->right;
-//  rb_transplant(z, z->right);
-//}
-//else if(z->right == NULL) {
-//  x = z->left;
-//  rb_transplant(z, z->left);
-//}
-//else {
-//  y = minimum(z->right);
-//  y_orignal_color = y->color;
-//  x = y->right;
-//  if(y->parent == z) {
-//    x->parent = z;
-//  }
-//  else {
-//    rb_transplant(y, y->right);
-//    y->right = z->right;
-//    y->right->parent = y;
-//  }
-//  rb_transplant(z, y);
-//  y->left = z->left;
-//  y->left->parent = y;
-//  y->color = z->color;
-//}
-//if(y_orignal_color == BLACK)
-//  rb_delete_fixup(x);
-//};
-
-
-// ========================================================================
-
+// ================== END LIVRO ======================================================
 
 
 		node_ptr *increment_pointer(node_ptr *i, node_ptr *node)
@@ -1010,98 +850,158 @@ template <class Key, class T, class Compare = std::less<Key>,
 			_size++;
 		};
 
-		void fix_insert1(node_ptr *n)
+// ======================================== FIX LIVRO  ==========================================
+	void fix_insert1(node_ptr *z)
+	{
+		while (z->parent->color == RED)
 		{
-			std::cout << "1\n";
-			if (is_root(n))
-				n->color = BLACK;
-			else
-				fix_insert2(n);
-		};
-
-		void fix_insert2(node_ptr *n)
-		{
-			std::cout << "2\n";
-			if (n->parent->color == BLACK)
-				return;
-			else
-				fix_insert3(n);
-		};
-
-		void fix_insert3(node_ptr *n)
-		{
-			std::cout << "3\n";
-			if (uncle(n) && (uncle(n))->color == RED)
+			if (z->parent == z->parent->parent->left)
 			{
-				n->parent->color = BLACK;
-				uncle(n)->color = BLACK;
-				grandparent(n)->color = RED;
-				fix_insert1(grandparent(n));
-			}
-			else
-				fix_insert4(n);
-		};
-	
-		void fix_insert4(node_ptr *n)
-		{
-			std::cout << "4\n";
-			if (n == n->parent->right && n->parent == grandparent(n)->left)
-			{
-				rotate_left(n->parent);
-				n = n->left;
-			}
-			else if (n == n->parent->left && n->parent == grandparent(n)->right)
-			{
-				rotate_right(n->parent);
-				n = n->right;
-			};
-			fix_insert5(n);
-		};
-
-		void fix_insert5(node_ptr *n)
-		{
-			std::cout << "5\n";
-			n->parent->color = BLACK;
-			grandparent(n)->color = RED;
-			if (n == n->parent->left && n->parent == grandparent(n)->left)
-			{
-				rotate_right(grandparent(n));
-			}
-			else
-			{
-				if (n == n->parent->right && n->parent == grandparent(n)->right)
-				rotate_left(grandparent(n));
-			};
-		};
-
-		node_ptr *grandparent(node_ptr *n)
-		{
-			if (n != _nil && n->parent != _nil && n->parent->parent != _nil)
-				return (n->parent->parent);
-			else
-				return _nil;
-		};
-
-		node_ptr *sibling(node_ptr *n)
-		{
-			if (n != NULL && n->parent != NULL)
-			{
-				if (is_left_child(n))
-					return (n->parent->right);
+				node_ptr *y = z->parent->parent->right;
+				if (y->color == RED)
+				{
+					z->parent->color = BLACK;
+					y->color = BLACK;
+					z->parent->parent->color = RED;
+					z = z->parent->parent;
+				}
 				else
-					return (n->parent->left);
+				{
+					if (z == z->parent->right)
+					{
+						z = z->parent;
+						rotate_left(z);
+					}
+				z->parent->color = BLACK;
+				z->parent->parent->color = RED;
+				rotate_right(z->parent->parent);
+				}
 			}
 			else
-				return NULL;
-		};
+			{
+				node_ptr *y = z->parent->parent->left;
+				if (y->color == RED)
+				{
+					z->parent->color = BLACK;
+					y->color = BLACK;
+					z->parent->parent->color = RED;
+					z = z->parent->parent;
+				}
+				else
+				{
+					if (z == z->parent->left)
+					{
+						z = z->parent;
+						rotate_right(z);
+					}
+					z->parent->color = BLACK;
+					z->parent->parent->color = RED;
+					rotate_left(z->parent->parent);
+				}	
+			};		
+		}
+		_root->color = BLACK;
+	};
 
-		node_ptr *uncle(node_ptr *n)
-		{
-			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
-				return (sibling(n->parent));
-			else
-				return NULL;
-		};
+
+
+// ======================================== END FIX LIVRO  ==========================================
+
+// ======================================== FIX SITE  ==========================================
+//
+//		void fix_insert1(node_ptr *n)
+//		{
+//			std::cout << "1\n";
+//			if (is_root(n))
+//				n->color = BLACK;
+//			else
+//				fix_insert2(n);
+//		};
+//
+//		void fix_insert2(node_ptr *n)
+//		{
+//			std::cout << "2\n";
+//			if (n->parent->color == BLACK)
+//				return;
+//			else
+//				fix_insert3(n);
+//		};
+//
+//		void fix_insert3(node_ptr *n)
+//		{
+//			std::cout << "3\n";
+//			if (uncle(n) && (uncle(n))->color == RED)
+//			{
+//				n->parent->color = BLACK;
+//				uncle(n)->color = BLACK;
+//				grandparent(n)->color = RED;
+//				fix_insert1(grandparent(n));
+//			}
+//			else
+//				fix_insert4(n);
+//		};
+//	
+//		void fix_insert4(node_ptr *n)
+//		{
+//			std::cout << "4\n";
+//			if (n == n->parent->right && n->parent == grandparent(n)->left)
+//			{
+//				rotate_left(n->parent);
+//				n = n->left;
+//			}
+//			else if (n == n->parent->left && n->parent == grandparent(n)->right)
+//			{
+//				rotate_right(n->parent);
+//				n = n->right;
+//			};
+//			fix_insert5(n);
+//		};
+//
+//		void fix_insert5(node_ptr *n)
+//		{
+//			std::cout << "5\n";
+//			n->parent->color = BLACK;
+//			grandparent(n)->color = RED;
+//			if (n == n->parent->left && n->parent == grandparent(n)->left)
+//			{
+//				rotate_right(grandparent(n));
+//			}
+//			else
+//			{
+//				if (n == n->parent->right && n->parent == grandparent(n)->right)
+//				rotate_left(grandparent(n));
+//			};
+//		};
+//
+//		node_ptr *grandparent(node_ptr *n)
+//		{
+//			if (n != _nil && n->parent != _nil && n->parent->parent != _nil)
+//				return (n->parent->parent);
+//			else
+//				return _nil;
+//		};
+//
+//		node_ptr *sibling(node_ptr *n)
+//		{
+//			if (n != NULL && n->parent != NULL)
+//			{
+//				if (is_left_child(n))
+//					return (n->parent->right);
+//				else
+//					return (n->parent->left);
+//			}
+//			else
+//				return NULL;
+//		};
+//
+//		node_ptr *uncle(node_ptr *n)
+//		{
+//			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
+//				return (sibling(n->parent));
+//			else
+//				return NULL;
+//		};
+// ======================================== END FIX SITE  ==========================================
 
 		bool is_red(node_ptr *node)
 		{
