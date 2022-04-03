@@ -857,7 +857,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 // ^^^^^^^^^^^^^^^^^^ END ORIGINAL  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
 		node_ptr *increment_pointer(node_ptr *i, node_ptr *node)
 		{
 			if (_comp(i->content->first, node->content->first))
@@ -900,8 +899,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				node_ptr *y = z->parent->parent->right;
 				if (y->color == RED)
 				{
-					std::cout << "Case 1a\n";
-//					print_tree_level();
+					//std::cout << "Case 1a\n";
 					z->parent->color = BLACK;
 					y->color = BLACK;
 					z->parent->parent->color = RED;
@@ -911,17 +909,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 				{
 					if (z == z->parent->right)
 					{
-						std::cout << "Case 2a\n";
+						//std::cout << "Case 2a\n";
 						z = z->parent;
 						rotate_left(z);
-//						print_tree_level();
 					}
-					std::cout << "Case 3a\n";
-					std::cout << "z: " << z->content->first << std::endl;
+					//std::cout << "Case 3a\n";
 					z->parent->color = BLACK;
 					z->parent->parent->color = RED;
 					rotate_right(z->parent->parent);
-//					print_tree_level();
 				}
 			}
 			else
@@ -929,7 +924,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				node_ptr *y = z->parent->parent->left;
 				if (y->color == RED)
 				{
-					std::cout << "Case 1b\n";
+					//std::cout << "Case 1b\n";
 					z->parent->color = BLACK;
 					y->color = BLACK;
 					z->parent->parent->color = RED;
@@ -939,19 +934,18 @@ template <class Key, class T, class Compare = std::less<Key>,
 				{
 					if (z == z->parent->left)
 					{
-						std::cout << "Case 2b\n";
+						//std::cout << "Case 2b\n";
 						z = z->parent;
 						rotate_right(z);
 					}
-					std::cout << "Case 3b\n";
+					// std::cout << "Case 3b\n";
 					z->parent->color = BLACK;
 					z->parent->parent->color = RED;
 					rotate_left(z->parent->parent);
 				};
 			};		
+			// std::cout << "Case 0\n";
 			_root->color = BLACK;
-			std::cout << "Case 0\n";
-//			print_tree_level();
 		};
 	};
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END FIX INSERT LIVRO  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^==
