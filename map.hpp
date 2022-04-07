@@ -199,8 +199,37 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void clear()
 		{
+			if (_root == NULL)
+				return;
 			destroy_tree_temp(_root);
 			destroy_node(_nil);
+			_root = NULL;
+		};
+
+		void destroy_tree_temp(node_ptr *r)
+		{
+			if (r == NULL)
+				return;
+			if (r == _nil)
+				return;
+			destroy_tree_temp(r->left);
+			destroy_tree_temp(r->right);
+			destroy_node(r);
+		};
+
+		void destroy_node(node_ptr *node_to_destroy)
+		{
+			if (node_to_destroy)
+			{
+				_Alloc.destroy(node_to_destroy->content);
+				_Alloc.deallocate(node_to_destroy->content, 1);
+				if (is_left_child(node_to_destroy))
+					node_to_destroy->left = _nil;
+				else
+					node_to_destroy->right = _nil;
+				delete (node_to_destroy);
+				node_to_destroy = NULL;
+			};
 		};
 
 		void swap(map& other)
@@ -385,25 +414,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (node);
 		};
 
-		void destroy_tree_temp(node_ptr *r)
-		{
-			if (r == _nil)
-				return;
-			destroy_tree_temp(r->left);
-			destroy_tree_temp(r->right);
-			destroy_node(r);
-//				_root = NULL;
-		};
-
-		void destroy_node(node_ptr *node_to_destroy)
-		{
-			if (node_to_destroy)
-			{
-				_Alloc.destroy(node_to_destroy->content);
-				_Alloc.deallocate(node_to_destroy->content, 1);
-				delete (node_to_destroy);
-			};
-		};
 
 		void print_tree_infix_recursive(node_ptr *r)
 		{
@@ -671,6 +681,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr *minimum(node_ptr *node) const
 		{
+			if (!node)
+				return node;
 			while (node->left != _nil)
 			  node = node->left;
 			return node;
@@ -678,6 +690,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr *maximum(node_ptr *node) const
 		{
+			if (!node)
+				return node;
 			while (node->right != _nil)
 			  node = node->right;
 			return node;
