@@ -201,6 +201,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (_root == NULL)
 				return;
+				std::cout << "nil: " << _nil << std::endl;
+				std::cout << "root: " << _root << std::endl;
 			destroy_tree_temp(_root);
 			destroy_node(_nil);
 			_root = NULL;
@@ -212,23 +214,34 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return;
 			if (r == _nil)
 				return;
+//			std::cout << "rc: " << r->content->first << "\tr: " << r;
+//			std::cout << "\trl: " << r->left;
+//			std::cout << "\trr: " << r->right;
+//			std::cout << "\trp: " << r->parent;
+//			std::cout << std::endl;
 			destroy_tree_temp(r->left);
 			destroy_tree_temp(r->right);
+			std::cout << "\tr: " << r;
 			destroy_node(r);
+			r = NULL;
+			std::cout << "\tr: " << r;
+			std::cout << std::endl;
 		};
 
 		void destroy_node(node_ptr *node_to_destroy)
 		{
 			if (node_to_destroy)
 			{
-				_Alloc.destroy(node_to_destroy->content);
-				_Alloc.deallocate(node_to_destroy->content, 1);
+				if (node_to_destroy != _nil)
+				{
+					_Alloc.destroy(node_to_destroy->content);
+					_Alloc.deallocate(node_to_destroy->content, 1);
+				};
 				if (is_left_child(node_to_destroy))
 					node_to_destroy->left = _nil;
 				else
 					node_to_destroy->right = _nil;
 				delete (node_to_destroy);
-				node_to_destroy = NULL;
 			};
 		};
 

@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/07 23:34:09 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/08 00:54:57 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -616,25 +616,113 @@ int main()
 	ft::map<int, int> mapa2;
 	// 80 40 20 10 30 60 50 70 120 100 140 90 89 110 111 134 150 130 135 125
 	mapa2.insert(ft::make_pair(80,800));
-//	mapa2.insert(ft::make_pair(40,400));
-//	mapa2.insert(ft::make_pair(20,200));
-//	mapa2.insert(ft::make_pair(10,1000));
-//	mapa2.insert(ft::make_pair(30,300));
-//	mapa2.insert(ft::make_pair(60,600));
-//	mapa2.insert(ft::make_pair(50,500));
-//	mapa2.insert(ft::make_pair(70,700));
-//	mapa2.insert(ft::make_pair(120,1200));
-//	mapa2.insert(ft::make_pair(100,1000));
-//	mapa2.insert(ft::make_pair(140,1400));
-//	mapa2.insert(ft::make_pair(90,900));
-//	mapa2.insert(ft::make_pair(89,890));
-//	mapa2.insert(ft::make_pair(110,1100));
-//	mapa2.insert(ft::make_pair(111,1110));
-//	mapa2.insert(ft::make_pair(134,1340));
-//	mapa2.insert(ft::make_pair(150,1500));
-//	mapa2.insert(ft::make_pair(130,1300));
-//	mapa2.insert(ft::make_pair(135,1350));
-//	mapa2.insert(ft::make_pair(125,1250));
+	mapa2.insert(ft::make_pair(40,400));
+	mapa2.insert(ft::make_pair(20,200));
+	mapa2.insert(ft::make_pair(10,1000));
+	mapa2.insert(ft::make_pair(30,300));
+	mapa2.insert(ft::make_pair(60,600));
+	mapa2.insert(ft::make_pair(50,500));
+	mapa2.insert(ft::make_pair(70,700));
+	mapa2.insert(ft::make_pair(120,1200));
+	mapa2.insert(ft::make_pair(100,1000));
+	mapa2.insert(ft::make_pair(140,1400));
+	mapa2.insert(ft::make_pair(90,900));
+	mapa2.insert(ft::make_pair(89,890));
+	mapa2.insert(ft::make_pair(110,1100));
+	mapa2.insert(ft::make_pair(111,1110));
+	mapa2.insert(ft::make_pair(134,1340));
+	mapa2.insert(ft::make_pair(150,1500));
+	mapa2.insert(ft::make_pair(130,1300));
+	mapa2.insert(ft::make_pair(135,1350));
+	mapa2.insert(ft::make_pair(125,1250));
+
+
+
+	int numero;
+	numero = 80;
+	std::cout << "rotate right:" << numero << std::endl;
+		mapa2.teste_rotate_right(numero);
+		mapa2.print_tree_level();
+	numero = 20;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
+	mapa2.print_tree_level();
+	numero = 30;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
+	mapa2.print_tree_level();
+	numero = 40;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
+	mapa2.print_tree_level();
+	numero = 80;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
+	mapa2.print_tree_level();
+	numero = 120;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
+	mapa2.print_tree_level();
+	numero = 150;
+	std::cout << "rotate left :" << numero << std::endl;
+	mapa2.teste_rotate_left(numero);
+	mapa2.print_tree_level();
+
+	
+
+	std::cout << "Teste lower_bound & upper_bound\n";
+
+	ft::map<int, int>::iterator itm_bound;
+	numero = 5;
+	itm_bound = mapa2.lower_bound(numero);
+	std::cout << "lb: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+	numero = 45;
+	itm_bound = mapa2.lower_bound(numero);
+	std::cout << "lb: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+	numero = 50;
+	itm_bound = mapa2.lower_bound(numero);
+	std::cout << "lb: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+	numero = 200;
+	itm_bound = mapa2.lower_bound(numero);
+	std::cout << "lb: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+
+	numero = 5;
+	itm_bound = mapa2.upper_bound(numero);
+	std::cout << "ub: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+	numero = 45;
+	itm_bound = mapa2.upper_bound(numero);
+	std::cout << "ub: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+	numero = 50;
+	itm_bound = mapa2.upper_bound(numero);
+	std::cout << "ub: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+	numero = 200;
+	itm_bound = mapa2.upper_bound(numero);
+	std::cout << "ub: " << numero <<  "---> ";
+	if (itm_bound == mapa2.end()) std::cout << "end !\n";
+	else
+		 std::cout << itm_bound->first << std::endl;
+
 
 
 		mapa2.print_tree_level();
@@ -645,113 +733,25 @@ int main()
 	(void) dd;
 	// 80 40 20 10 30 60 50 70 120 100 140 90 89 110 111 134 150 130 135 125
 	dd = 80; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 40; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 20; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 10; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 30; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 60; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 50; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 70; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 120; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 100; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 140; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 90; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 89; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 110; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 111; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 134; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 150; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 130; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 135; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-//	dd = 125; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
-
-	return 0;
-
-
-//	int numero;
-//	numero = 80;
-//	std::cout << "rotate right:" << numero << std::endl;
-//		mapa2.teste_rotate_right(numero);
-//		mapa2.print_tree_level();
-//	numero = 20;
-//	std::cout << "rotate left :" << numero << std::endl;
-//	mapa2.teste_rotate_left(numero);
-//	mapa2.print_tree_level();
-//	numero = 30;
-//	std::cout << "rotate left :" << numero << std::endl;
-//	mapa2.teste_rotate_left(numero);
-//	mapa2.print_tree_level();
-//	numero = 40;
-//	std::cout << "rotate left :" << numero << std::endl;
-//	mapa2.teste_rotate_left(numero);
-//	mapa2.print_tree_level();
-//	numero = 80;
-//	std::cout << "rotate left :" << numero << std::endl;
-//	mapa2.teste_rotate_left(numero);
-//	mapa2.print_tree_level();
-//	numero = 120;
-//	std::cout << "rotate left :" << numero << std::endl;
-//	mapa2.teste_rotate_left(numero);
-//	mapa2.print_tree_level();
-//	numero = 150;
-//	std::cout << "rotate left :" << numero << std::endl;
-//	mapa2.teste_rotate_left(numero);
-//	mapa2.print_tree_level();
-//
-//	
-//
-//	std::cout << "Teste lower_bound & upper_bound\n";
-//
-//	ft::map<int, int>::iterator itm_bound;
-//	numero = 5;
-//	itm_bound = mapa2.lower_bound(numero);
-//	std::cout << "lb: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//	numero = 45;
-//	itm_bound = mapa2.lower_bound(numero);
-//	std::cout << "lb: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//	numero = 50;
-//	itm_bound = mapa2.lower_bound(numero);
-//	std::cout << "lb: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//	numero = 200;
-//	itm_bound = mapa2.lower_bound(numero);
-//	std::cout << "lb: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//
-//	numero = 5;
-//	itm_bound = mapa2.upper_bound(numero);
-//	std::cout << "ub: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//	numero = 45;
-//	itm_bound = mapa2.upper_bound(numero);
-//	std::cout << "ub: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//	numero = 50;
-//	itm_bound = mapa2.upper_bound(numero);
-//	std::cout << "ub: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
-//	numero = 200;
-//	itm_bound = mapa2.upper_bound(numero);
-//	std::cout << "ub: " << numero <<  "---> ";
-//	if (itm_bound == mapa2.end()) std::cout << "end !\n";
-//	else
-//		 std::cout << itm_bound->first << std::endl;
+	dd = 40; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 20; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 10; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 30; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 60; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 50; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 70; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 120; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 100; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 140; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 90; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 89; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 110; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 111; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 134; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 150; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 130; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 135; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
+	dd = 125; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 
 	
 //	std::cout << "Teste swap:\n";
