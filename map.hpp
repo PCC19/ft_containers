@@ -683,77 +683,84 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return node;
 		};
 
-		void fix_remove_node(node_ptr *n)
+		void fix_remove_node(node_ptr *z)
 		{
 			node_ptr *w;
-			while (n != _root && n->color == BLACK)
+			while (z != _root && z->color == BLACK)
 			{
-				if (n == n->parent->left)
+				if (z == z->parent->left)
 				{
 					std::cout << "Case 1a\n";
-					w = n->parent->right;
+					w = z->parent->right;
 					if (w->color == RED)
 					{
 						w->color = BLACK;
-						n->parent->color = RED;
-						rotate_left(n->parent);
-						w = n->parent->right;
+						z->parent->color = RED;
+						rotate_left(z->parent);
+						w = z->parent->right;
 					}
 					if (w->left->color == BLACK && w->right->color == BLACK)
 					{
 						std::cout << "Case 2a\n";
 						w->color = RED;
-						n = n->parent;
+						z = z->parent;
 					}
-					else if (w->right->color == BLACK)
+					else
 					{
-						std::cout << "Case 3a\n";
-						w->left->color = BLACK;
-						w->color = RED;
-						rotate_right(w);
-						w = n->parent->right;
+						if (w->right->color == BLACK)
+						{
+							std::cout << "Case 3a\n";
+							w->left->color = BLACK;
+							w->color = RED;
+							rotate_right(w);
+							w = z->parent->right;
+						}
+						std::cout << "Case 4a\n";
+						w->color = z->parent->color;
+						z->parent->color = BLACK;
+						w->right->color = BLACK;
+						rotate_left(z->parent);
+						z = _root;
 					}
-					std::cout << "Case 4a\n";
-					w->color = n->parent->color;
-					n->parent->color = BLACK;
-					w->right->color = BLACK;
-					rotate_left(n->parent);
-					n = _root;
 				}
 				else
 				{
-					w = n->parent->left;
+					w = z->parent->left;
 					if (w->color == RED)
 					{
 						std::cout << "Case 1b\n";
 						w->color = BLACK;
-						n->parent->color = RED;
-						rotate_right(n->parent);
-						w = n->parent->left;
+						z->parent->color = RED;
+						rotate_right(z->parent);
+						w = z->parent->left;
 					}
 					if (w->right->color == BLACK && w->left->color == BLACK)
 					{
 						std::cout << "Case 2b\n";
 						w->color = RED;
-						n = n->parent;
+						z = z->parent;
 					}
-					else if (w->left->color == BLACK)
+					else
 					{
-						std::cout << "Case 3b\n";
-						w->right->color = BLACK;
-						w->color = RED;
-						rotate_left(w);
-						w = n->parent->left;
+						if (w->left->color == BLACK)
+						{
+							std::cout << "Case 3b\n";
+							w->right->color = BLACK;
+							w->color = RED;
+							rotate_left(w);
+							w = z->parent->left;
+						}
+						std::cout << "Case 4b\n";
+						w->color = z->parent->color;
+						z->parent->color = BLACK;
+						w->left->color = BLACK;
+						rotate_right(z->parent);
+						z = _root;
 					}
-					std::cout << "Case 4b\n";
-					w->color = n->parent->color;
-					n->parent->color = BLACK;
-					w->left->color = BLACK;
-					rotate_right(n->parent);
-					n = _root;
 				}
 			}
-			n->color = BLACK;
+			std::cout << "Case 5 - root\n";
+			z->color = BLACK;
 		};
 
 //  void rotate_left(node_ptr *x) {
@@ -949,101 +956,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 	};
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END FIX INSERT LIVRO  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^==
-
-// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv FIX INSERT SITE  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv==
-//		void fix_insert1(node_ptr *n)
-//		{
-//			std::cout << "1\n";
-//			if (is_root(n))
-//				n->color = BLACK;
-//			else
-//				fix_insert2(n);
-//		};
-//
-//		void fix_insert2(node_ptr *n)
-//		{
-//			std::cout << "2\n";
-//			if (n->parent->color == BLACK)
-//				return;
-//			else
-//				fix_insert3(n);
-//		};
-//
-//		void fix_insert3(node_ptr *n)
-//		{
-//			std::cout << "3\n";
-//			if (uncle(n) && (uncle(n))->color == RED)
-//			{
-//				n->parent->color = BLACK;
-//				uncle(n)->color = BLACK;
-//				grandparent(n)->color = RED;
-//				fix_insert1(grandparent(n));
-//			}
-//			else
-//				fix_insert4(n);
-//		};
-//	
-//		void fix_insert4(node_ptr *n)
-//		{
-//			std::cout << "4\n";
-//			if (n == n->parent->right && n->parent == grandparent(n)->left)
-//			{
-//				rotate_left(n->parent);
-//				n = n->left;
-//			}
-//			else if (n == n->parent->left && n->parent == grandparent(n)->right)
-//			{
-//				rotate_right(n->parent);
-//				n = n->right;
-//			};
-//			fix_insert5(n);
-//		};
-//
-//		void fix_insert5(node_ptr *n)
-//		{
-//			std::cout << "5\n";
-//			n->parent->color = BLACK;
-//			grandparent(n)->color = RED;
-//			if (n == n->parent->left && n->parent == grandparent(n)->left)
-//			{
-//				rotate_right(grandparent(n));
-//			}
-//			else
-//			{
-//				if (n == n->parent->right && n->parent == grandparent(n)->right)
-//				rotate_left(grandparent(n));
-//			};
-//		};
-//
-//		node_ptr *grandparent(node_ptr *n)
-//		{
-//			if (n != _nil && n->parent != _nil && n->parent->parent != _nil)
-//				return (n->parent->parent);
-//			else
-//				return _nil;
-//		};
-//
-//		node_ptr *sibling(node_ptr *n)
-//		{
-//			if (n != NULL && n->parent != NULL)
-//			{
-//				if (is_left_child(n))
-//					return (n->parent->right);
-//				else
-//					return (n->parent->left);
-//			}
-//			else
-//				return NULL;
-//		};
-//
-//		node_ptr *uncle(node_ptr *n)
-//		{
-//			if (n != NULL && n->parent != NULL && n->parent->parent != NULL)
-//				return (sibling(n->parent));
-//			else
-//				return NULL;
-//		};
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END FIX SITE  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 		bool is_red(node_ptr *node)
 		{
