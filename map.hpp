@@ -736,8 +736,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 					if (w->left->color == BLACK && w->right->color == BLACK)
 					{
 						std::cout << "Case 2a\n";
+							std::cout << "w: ";print_node(*w);
+							std::cout << "z: ";print_node(*z);
 						w->color = RED;
 						z = z->parent;
+							print_tree_level();
 					}
 					else
 					{
