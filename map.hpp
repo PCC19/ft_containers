@@ -71,7 +71,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		~map() // destrutor temporario.
 		{
-			std::cout << "Destrutor MAP\n";
 			clear();
 		};
 
@@ -115,22 +114,12 @@ template <class Key, class T, class Compare = std::less<Key>,
 					std::cout << "antes fix:\n";
 					print_tree_level();
 
-				fix_insert1(node);
+				fix_insert_node(node);
 					std::cout << "depois fix;\n";
 					print_tree_level();
 
 				update_nil_node();
 				return (ft::make_pair(iterator(node, _nil), true));
-			};
-		};
-
-		void	update_nil_node()
-		{
-			if (_nil != NULL)
-			{
-				_nil->parent = _root;
-				_nil->left = minimum(_root);
-				_nil->right = maximum(_root);
 			};
 		};
 
@@ -145,9 +134,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (1);
 			}
 			else
-			{
 				return (0);
-			};
 		};
 
 		void erase(iterator position)
@@ -201,8 +188,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			if (_root == NULL)
 				return;
-				std::cout << "nil: " << _nil << std::endl;
-				std::cout << "root: " << _root << std::endl;
 			destroy_tree_temp(_root);
 			destroy_node(_nil);
 			_root = NULL;
@@ -214,18 +199,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return;
 			if (r == _nil)
 				return;
-//			std::cout << "rc: " << r->content->first << "\tr: " << r;
-//			std::cout << "\trl: " << r->left;
-//			std::cout << "\trr: " << r->right;
-//			std::cout << "\trp: " << r->parent;
-//			std::cout << std::endl;
 			destroy_tree_temp(r->left);
 			destroy_tree_temp(r->right);
-			std::cout << "\tr: " << r;
 			destroy_node(r);
 			r = NULL;
-			std::cout << "\tr: " << r;
-			std::cout << std::endl;
 		};
 
 		void destroy_node(node_ptr *node_to_destroy)
@@ -361,59 +338,18 @@ template <class Key, class T, class Compare = std::less<Key>,
 		allocator_type get_allocator() const{ return this->_Alloc; };
 
 
-		// AUXILIARY FUNCTIONS
-		void print_tree_infix()
-		{
-			std::cout << "TREE infix:\n";
-			print_tree_infix_recursive(_root);
-			std::cout << std::endl;
-		};
-
-		public:
-		void print_tree_level(int flag = 1)
-		{
-			std::cout << "size: " << _size << std::endl;
-			if (_root == _nil)
-				std::cout << "EMPTY TREE\n";
-			else
-			{
-				if (flag == 0)
-					print_tree_by_level(_root);
-				else
-					print_tree_by_level_color(_root, _nil);
-			};
-		};
-
-		void teste_delete_node(const key_type &k)
-		{
-			node_ptr *p;
-			p = find_node(k);
-			remove_node(p);
-		};
-
-		void teste_rotate_left(const key_type &k)
-		{
-			node_ptr *p;
-			p = find_node(k);
-			rotate_left(p);
-		};
-
-		void teste_rotate_right(const key_type &k)
-		{
-			node_ptr *p;
-			p = find_node(k);
-			rotate_right(p);
-		};
-
-	protected:
+		protected:
 		// ATRIBUTES
-		node_ptr				*_root;
-		node_ptr				*_nil;
-		size_type				_size;
-		key_compare				_comp;
-		allocator_type			_Alloc;
+			node_ptr				*_root;
+			node_ptr				*_nil;
+			size_type				_size;
+			key_compare				_comp;
+			allocator_type			_Alloc;
 
-	private:
+// =================================================================================
+//						TREE FUNCTIONS
+// =================================================================================
+		private:
 		typedef enum {LEFT, RIGHT} direction;
 
 		node_ptr *create_new_node_with_val(const value_type& val)
@@ -427,14 +363,313 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (node);
 		};
 
-
-		void print_tree_infix_recursive(node_ptr *r)
+		void	update_nil_node()
 		{
-			if (r == NULL) return;
-			print_tree_infix_recursive(r->left);
-			print_node(*r);								// long print
-//			std::cout << (*r).content->first << " ";	// short print
-			print_tree_infix_recursive(r->right);
+			if (_nil != NULL)
+			{
+				_nil->parent = _root;
+				_nil->left = min_subtree(_root);
+				_nil->right = max_subtree(_root);
+			};
+		};
+
+		void remove_node(node_ptr *z)
+		{ 
+			node_ptr *x;
+			node_ptr *y;
+			y = z;
+			int y_original_color = y->color;
+
+			if (z == _root && _size == 1)
+			{
+				destroy_node(z);
+				_root = _nil;
+				_nil->left = _root;
+				_nil->right = _root;
+				_size--;
+				return;
+			};
+			if (z->left == _nil)			// no children or only right
+			{
+				x = z->right;
+				transplant(z, z->right);
+			}
+			else if (z->right == _nil)		// only left child
+			{
+				x = z->left;
+				transplant(z, z->left);
+			}
+			else							// both children
+			{
+//				y = minimum(z->right);
+				y = min_subtree(z->right);
+				y_original_color = y->color;
+				x = y->right;
+				if (y->parent == z)
+				{
+					x->parent = y;
+				}
+				else
+				{
+					transplant(y, y->right);
+					y->right = z->right;
+					y->right->parent = y;
+				}
+				transplant(z, y);
+				y->left = z->left;
+				y->left->parent = y;
+				y->color = z->color;
+			};
+			if (y_original_color == BLACK)
+				fix_remove_node(x);
+			if (z != _nil)
+			{
+				destroy_node(z);
+				_size--;
+				update_nil_node();
+			};
+		};
+
+		void fix_remove_node(node_ptr *z)
+		{
+			node_ptr *w;
+			while (z != _root && z->color == BLACK)
+			{
+				if (z == z->parent->left)
+				{
+					w = z->parent->right;
+					if (w->color == RED)
+					{
+						//std::cout << "Case 1a\n";
+						w->color = BLACK;
+						z->parent->color = RED;
+						rotate_left(z->parent);
+						w = z->parent->right;
+					}
+						print_tree_level();
+					if (w->left->color == BLACK && w->right->color == BLACK)
+					{
+						//std::cout << "Case 2a\n";
+						w->color = RED;
+						z = z->parent;
+							print_tree_level();
+					}
+					else
+					{
+						if (w->right->color == BLACK)
+						{
+							//std::cout << "Case 3a\n";
+							w->left->color = BLACK;
+							w->color = RED;
+							rotate_right(w);
+							w = z->parent->right;
+								print_tree_level();
+						}
+						//std::cout << "Case 4a\n";
+						w->color = z->parent->color;
+						z->parent->color = BLACK;
+						w->right->color = BLACK;
+						rotate_left(z->parent);
+						z = _root;
+					}
+				}
+				else
+				{
+					w = z->parent->left;
+					if (w->color == RED)
+					{
+						//std::cout << "Case 1b\n";
+						w->color = BLACK;
+						z->parent->color = RED;
+						rotate_right(z->parent);
+						w = z->parent->left;
+					}
+					if (w->right->color == BLACK && w->left->color == BLACK)
+					{
+						//std::cout << "Case 2b\n";
+						w->color = RED;
+						z = z->parent;
+					}
+					else
+					{
+						if (w->left->color == BLACK)
+						{
+							//std::cout << "Case 3b\n";
+							w->right->color = BLACK;
+							w->color = RED;
+							rotate_left(w);
+							w = z->parent->left;
+						}
+						//std::cout << "Case 4b\n";
+						w->color = z->parent->color;
+						z->parent->color = BLACK;
+						w->left->color = BLACK;
+						rotate_right(z->parent);
+						z = _root;
+					}
+				}
+			}
+			//std::cout << "Case 5 - root\n";
+			z->color = BLACK;
+		};
+
+		void insert_node_at_position (node_ptr *p, node_ptr *node)
+		{
+			if (_comp(p->content->first, node->content->first))
+			{
+				connect(p, RIGHT, node);
+				node->left = _nil;
+			}
+			else
+			{
+				connect(p, LEFT, node);
+				node->right = _nil;
+			};
+			_size++;
+		};
+
+		void insert_at_root(node_ptr *node)
+		{
+			node->color = BLACK;
+			_root = node;
+			_root->left = _nil;
+			_root->right = _nil;
+			_size++;
+		};
+
+		void fix_insert_node(node_ptr *z)
+		{
+			while (z != _root && z->parent->color == RED)
+			{
+				if (z->parent == z->parent->parent->left)
+				{
+					node_ptr *y = z->parent->parent->right;
+					if (y->color == RED)
+					{
+						//std::cout << "Case 1a\n";
+						z->parent->color = BLACK;
+						y->color = BLACK;
+						z->parent->parent->color = RED;
+						z = z->parent->parent;
+					}
+					else
+					{
+						if (z == z->parent->right)
+						{
+							//std::cout << "Case 2a\n";
+							z = z->parent;
+							rotate_left(z);
+						}
+						//std::cout << "Case 3a\n";
+						z->parent->color = BLACK;
+						z->parent->parent->color = RED;
+						rotate_right(z->parent->parent);
+					}
+				}
+				else
+				{
+					node_ptr *y = z->parent->parent->left;
+					if (y->color == RED)
+					{
+						//std::cout << "Case 1b\n";
+						z->parent->color = BLACK;
+						y->color = BLACK;
+						z->parent->parent->color = RED;
+						z = z->parent->parent;
+					}
+					else
+					{
+						if (z == z->parent->left)
+						{
+							//std::cout << "Case 2b\n";
+							z = z->parent;
+							rotate_right(z);
+						}
+						// std::cout << "Case 3b\n";
+						z->parent->color = BLACK;
+						z->parent->parent->color = RED;
+						rotate_left(z->parent->parent);
+					};
+				};		
+				// std::cout << "Case 0\n";
+				_root->color = BLACK;
+			};
+		};
+
+		void transplant(node_ptr *u, node_ptr *v)
+		{
+			if (u->parent == NULL)
+				_root = v;
+			else if (is_left_child(u))
+				u->parent->left = v;
+			else
+				u->parent->right = v;
+			if (v)
+				v->parent = u->parent;
+		};
+
+		node_ptr *rotate_left(node_ptr *n)
+		{
+			node_ptr *p, *rc, *lgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (n->right == _nil)
+				return (n);
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			rc = n->right;
+			lgc = rc->left;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, rc);
+			disconnect(rc, lgc);
+
+			// reconecta 3 nodes
+			connect(n, RIGHT, lgc);
+			connect(rc, LEFT, n);
+			connect(p, d, rc);
+
+			if (p == NULL)
+				_root = rc;
+
+			return (rc);
+		};
+
+		node_ptr *rotate_right(node_ptr *n)
+		{
+			node_ptr *p, *lc, *rgc;
+			direction d;
+
+			// so roda se tiver filho direito
+			if (n->left == _nil)
+				return (n);
+			if (is_left_child(n)) d = LEFT;
+			if (is_right_child(n)) d = RIGHT;
+
+			// salva ponteiros
+			p = n->parent;
+			lc = n->left;
+			rgc = lc->right;
+
+			// desconecta 3 nodes
+			disconnect(p, n);
+			disconnect(n, lc);
+			disconnect(lc, rgc);
+
+			// reconecta 3 nodes
+			connect(n, LEFT, rgc);
+			connect(lc, RIGHT, n);
+			connect(p, d, lc);
+
+			if (p == NULL)
+				_root = lc;
+
+			return (lc);
 		};
 
 		node_ptr * min_subtree(node_ptr *i) const
@@ -457,6 +692,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return i;
 		};
 
+// =================================================================================
+//						AUXILIARY FUNCTIONS
+// =================================================================================
 		bool is_left_child(node_ptr *i)
 		{
 			if (i == _nil || i == NULL )
@@ -480,6 +718,26 @@ template <class Key, class T, class Compare = std::less<Key>,
 		bool is_root(node_ptr *n)
 		{
 			return (n->parent == NULL);
+		};
+
+		bool is_leaf(node_ptr *n)
+		{
+			if (n->left == _nil && n->right == _nil)
+				return (1);
+			else
+				return (0);
+		};
+
+		bool is_red(node_ptr *node)
+		{
+			if (node == NULL)			return false;
+			if (node->color == RED)		return true;
+			return false;
+		};
+
+		bool is_black(node_ptr *node)
+		{
+			return (!is_red(node));
 		};
 
 		void connect(node_ptr *p, direction d, node_ptr *c)
@@ -564,349 +822,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (_nil);
 		};
 
-		bool is_leaf(node_ptr *n)
-		{
-			if (n->left == _nil && n->right == _nil)
-				return (1);
-			else
-				return (0);
-		};
-
-		void copy_node_content(const value_type& val, node_ptr *dest)
-		{
-			delete (dest->content);
-			value_type *aux = _Alloc.allocate(1);
-			_Alloc.construct(aux, val);
-			dest->content = aux;
-		};
-
-// vvvvvvvvvvvvvvvvvvvv ORIGINAL vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-//		
-//		void remove_node(node_ptr *n)
-//		{
-//			node_ptr *s;
-//			int	original_color;
-//
-//			if (n == _nil) return;
-//
-//			original_color = n->color;
-//
-//			// se for folha, deleta
-//			if (is_leaf(n))
-//			{
-//				if (is_root(n))
-//					_root = NULL;
-//				else
-//					disconnect(n->parent, n);
-//				destroy_node(n);
-//				return;
-//			}
-//			else	
-//			// se nao for folha, chama recursivo no prox node
-//			{
-//				s = next_node(n);
-//				if (n != s)
-//					copy_node_content(*s->content, n);
-//				remove_node(s);
-//			};
-////			if (original_color == BLACK)
-////				fix_remove_node(n);
-//		};
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-// vvvvvvvvvvvvvvvvvvvvvvvv LIVRO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-
-		void remove_node(node_ptr *z)
-		{ 
-			node_ptr *x;
-			node_ptr *y;
-			y = z;
-			int y_original_color = y->color;
-
-			if (z == _root && _size == 1)
-			{
-				destroy_node(z);
-				_root = _nil;
-				_nil->left = _root;
-				_nil->right = _root;
-				_size--;
-				return;
-			};
-			if (z->left == _nil) // no children or only right
-			{
-				std::cout << "no children or only right\n";
-				x = z->right;
-				transplant(z, z->right);
-			}
-			else if (z->right == _nil) // only left child
-			{
-				std::cout << "only left child\n";
-				x = z->left;
-				transplant(z, z->left);
-			}
-			else // both children
-			{
-				std::cout << "both children\n";
-				y = minimum(z->right);
-				y_original_color = y->color;
-				x = y->right;
-//				if (y->parent == z && x)
-				if (y->parent == z)
-				{
-					x->parent = y;
-				}
-				else
-				{
-					transplant(y, y->right);
-					y->right = z->right;
-					y->right->parent = y;
-				}
-				transplant(z, y);
-				y->left = z->left;
-				y->left->parent = y;
-				y->color = z->color;
-			};
-			if (x == _nil) std::cout << "nil\n";
-			if (y_original_color == BLACK)
-				fix_remove_node(x);
-			if (z != _nil)
-			{
-				destroy_node(z);
-				_size--;
-				update_nil_node();
-			};
-		};
-
-		void transplant(node_ptr *u, node_ptr *v)
-		{
-			if (u->parent == NULL)
-			{
-				_root = v;
-			}
-			else if (is_left_child(u))
-			{
-				u->parent->left = v;
-			}
-			else
-			{
-				u->parent->right = v;
-			}
-			if (v)
-				v->parent = u->parent;
-		};
-
-		node_ptr *minimum(node_ptr *node) const
-		{
-			if (!node)
-				return node;
-			while (node->left != _nil)
-			  node = node->left;
-			return node;
-		};
-
-		node_ptr *maximum(node_ptr *node) const
-		{
-			if (!node)
-				return node;
-			while (node->right != _nil)
-			  node = node->right;
-			return node;
-		};
-
-		void fix_remove_node(node_ptr *z)
-		{
-			std::cout << "fix remove node\n";
-			node_ptr *w;
-			while (z != _root && z->color == BLACK)
-			{
-							std::cout << "z: ";print_node(*z);
-				if (z == z->parent->left)
-				{
-					w = z->parent->right;
-					if (w->color == RED)
-					{
-						std::cout << "Case 1a\n";
-						w->color = BLACK;
-						z->parent->color = RED;
-						rotate_left(z->parent);
-						w = z->parent->right;
-					}
-						print_tree_level();
-					if (w->left->color == BLACK && w->right->color == BLACK)
-					{
-						std::cout << "Case 2a\n";
-							std::cout << "w: ";print_node(*w);
-							std::cout << "z: ";print_node(*z);
-						w->color = RED;
-						z = z->parent;
-							print_tree_level();
-					}
-					else
-					{
-						if (w->right->color == BLACK)
-						{
-							std::cout << "Case 3a\n";
-							std::cout << "z: ";print_node(*z);
-							std::cout << "w: ";print_node(*w);
-							std::cout << "zpr: ";print_node(*z->parent->right);
-							w->left->color = BLACK;
-							w->color = RED;
-							rotate_right(w);
-							w = z->parent->right;
-								print_tree_level();
-						}
-						std::cout << "Case 4a\n";
-						w->color = z->parent->color;
-						z->parent->color = BLACK;
-						w->right->color = BLACK;
-						rotate_left(z->parent);
-						z = _root;
-					}
-				}
-				else
-				{
-					w = z->parent->left;
-					if (w->color == RED)
-					{
-						std::cout << "Case 1b\n";
-						w->color = BLACK;
-						z->parent->color = RED;
-						rotate_right(z->parent);
-						w = z->parent->left;
-					}
-					if (w->right->color == BLACK && w->left->color == BLACK)
-					{
-						std::cout << "Case 2b\n";
-						w->color = RED;
-						z = z->parent;
-					}
-					else
-					{
-						if (w->left->color == BLACK)
-						{
-							std::cout << "Case 3b\n";
-							w->right->color = BLACK;
-							w->color = RED;
-							rotate_left(w);
-							w = z->parent->left;
-						}
-						std::cout << "Case 4b\n"; //ok
-						w->color = z->parent->color;
-						z->parent->color = BLACK;
-						w->left->color = BLACK;
-						rotate_right(z->parent);
-						z = _root;
-								print_tree_level();
-					}
-				}
-			}
-			std::cout << "Case 5 - root\n";
-			z->color = BLACK;
-								print_tree_level();
-		};
-
-//  void rotate_left(node_ptr *x) {
-//    node_ptr *y = x->right;
-//    x->right = y->left;
-//    if (y->left != _nil)
-//      y->left->parent = x;
-//    y->parent = x->parent;
-//    if (x->parent == _nil)
-//      _root = y;
-//    else if (x == x->parent->left)
-//      x->parent->left = y;
-//    else
-//      x->parent->right = y;
-//    y->left = x;
-//    x->parent = y;
-//  };
-//
-//    void rotate_right(node_ptr *x) {
-//    node_ptr *y = x->left;
-//    x->left = y->right;
-//    if (y->right != _nil)
-//      y->right->parent = x;
-//    y->parent = x->parent;
-//    if (x->parent == _nil)
-//      _root = y;
-//    else if (x == x->parent->right)
-//      x->parent->right = y;
-//    else
-//      x->parent->left = y;
-//    y->right = x;
-//    x->parent = y;
-// }; 
-
-
-// ^^^^^^^^^^^^^^^^^^ END LIVRO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-// vvvvvvvvvvvvvvvvvv ORIGINAL  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-		node_ptr *rotate_left(node_ptr *n)
-		{
-			node_ptr *p, *rc, *lgc;
-			direction d;
-
-			// so roda se tiver filho direito
-			if (n->right == _nil)
-				return (n);
-			if (is_left_child(n)) d = LEFT;
-			if (is_right_child(n)) d = RIGHT;
-
-			// salva ponteiros
-			p = n->parent;
-			rc = n->right;
-			lgc = rc->left;
-
-			// desconecta 3 nodes
-			disconnect(p, n);
-			disconnect(n, rc);
-			disconnect(rc, lgc);
-
-			// reconecta 3 nodes
-			connect(n, RIGHT, lgc);
-			connect(rc, LEFT, n);
-			connect(p, d, rc);
-
-			if (p == NULL)
-				_root = rc;
-
-			return (rc);
-		};
-
-		node_ptr *rotate_right(node_ptr *n)
-		{
-			node_ptr *p, *lc, *rgc;
-			direction d;
-
-			// so roda se tiver filho direito
-			if (n->left == _nil)
-				return (n);
-			if (is_left_child(n)) d = LEFT;
-			if (is_right_child(n)) d = RIGHT;
-
-			// salva ponteiros
-			p = n->parent;
-			lc = n->left;
-			rgc = lc->right;
-
-			// desconecta 3 nodes
-			disconnect(p, n);
-			disconnect(n, lc);
-			disconnect(lc, rgc);
-
-			// reconecta 3 nodes
-			connect(n, LEFT, rgc);
-			connect(lc, RIGHT, n);
-			connect(p, d, lc);
-
-			if (p == NULL)
-				_root = lc;
-
-			return (lc);
-		};
-// ^^^^^^^^^^^^^^^^^^ END ORIGINAL  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 		node_ptr *increment_pointer(node_ptr *i, node_ptr *node)
 		{
 			if (_comp(i->content->first, node->content->first))
@@ -914,103 +829,41 @@ template <class Key, class T, class Compare = std::less<Key>,
 			else
 				return (i->left);
 		};
-		
-		void insert_node_at_position (node_ptr *p, node_ptr *node)
+
+// =================================================================================
+//						DEBUG AND PRINT FUNCTIONS
+// =================================================================================
+		public:
+		void print_tree_infix()
 		{
-			if (_comp(p->content->first, node->content->first))
-			{
-				connect(p, RIGHT, node);
-				node->left = _nil;
-			}
+			std::cout << "TREE infix:\n";
+			print_tree_infix_recursive(_root);
+			std::cout << std::endl;
+		};
+
+		void print_tree_level(int flag = 1)
+		{
+			std::cout << "size: " << _size << std::endl;
+			if (_root == _nil)
+				std::cout << "EMPTY TREE\n";
 			else
 			{
-				connect(p, LEFT, node);
-				node->right = _nil;
+				if (flag == 0)
+					print_tree_by_level(_root);
+				else
+					print_tree_by_level_color(_root, _nil);
 			};
-			_size++;
 		};
 
-		void insert_at_root(node_ptr *node)
+		void print_tree_infix_recursive(node_ptr *r)
 		{
-			node->color = BLACK;
-			_root = node;
-			_root->left = _nil;
-			_root->right = _nil;
-			_size++;
+			if (r == NULL) return;
+			print_tree_infix_recursive(r->left);
+			print_node(*r);								// long print
+//			std::cout << (*r).content->first << " ";	// short print
+			print_tree_infix_recursive(r->right);
 		};
 
-// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv FIX INSERT LIVRO  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv==
-	void fix_insert1(node_ptr *z)
-	{
-		while (z != _root && z->parent->color == RED)
-		{
-			if (z->parent == z->parent->parent->left)
-			{
-				node_ptr *y = z->parent->parent->right;
-				if (y->color == RED)
-				{
-					//std::cout << "Case 1a\n";
-					z->parent->color = BLACK;
-					y->color = BLACK;
-					z->parent->parent->color = RED;
-					z = z->parent->parent;
-				}
-				else
-				{
-					if (z == z->parent->right)
-					{
-						//std::cout << "Case 2a\n";
-						z = z->parent;
-						rotate_left(z);
-					}
-					//std::cout << "Case 3a\n";
-					z->parent->color = BLACK;
-					z->parent->parent->color = RED;
-					rotate_right(z->parent->parent);
-				}
-			}
-			else
-			{
-				node_ptr *y = z->parent->parent->left;
-				if (y->color == RED)
-				{
-					//std::cout << "Case 1b\n";
-					z->parent->color = BLACK;
-					y->color = BLACK;
-					z->parent->parent->color = RED;
-					z = z->parent->parent;
-				}
-				else
-				{
-					if (z == z->parent->left)
-					{
-						//std::cout << "Case 2b\n";
-						z = z->parent;
-						rotate_right(z);
-					}
-					// std::cout << "Case 3b\n";
-					z->parent->color = BLACK;
-					z->parent->parent->color = RED;
-					rotate_left(z->parent->parent);
-				};
-			};		
-			// std::cout << "Case 0\n";
-			_root->color = BLACK;
-		};
-	};
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END FIX INSERT LIVRO  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^==
-
-		bool is_red(node_ptr *node)
-		{
-			if (node == NULL)			return false;
-			if (node->color == RED)		return true;
-			return false;
-		};
-
-		bool is_black(node_ptr *node)
-		{
-			return (!is_red(node));
-		};
 
 
 	}; // class map
