@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/08 05:43:01 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/08 22:51:46 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,6 +558,8 @@ int main()
 		};
 		std::cout << std::endl;
 	};
+
+	return 0;
 	std::cout << "Teste reverse iterator: \n";
 
 	ft::map<int, int>::reverse_iterator itm1_r;

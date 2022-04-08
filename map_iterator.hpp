@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/02 22:59:19 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/08 22:53:36 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,23 @@ namespace ft
 		typedef typename C::difference_type					difference_type;
 		typedef typename std::bidirectional_iterator_tag	iterator_category;
 		typedef typename C::key_compare						key_compare;
+		typedef typename C::node_ptr						node_ptr;
 
 		// Methods
-		map_iterator () : _comp(key_compare()), _node(NULL), _leaf(NULL), _prev(NULL), _content(NULL) {}; 
+		map_iterator () : _comp(key_compare()), _node(NULL), _leaf(NULL), _content(NULL) {}; 
 		map_iterator (rbt_node<value_type>* const node,
 						rbt_node<value_type>* leaf): _comp(key_compare()), _node(node)
 		{
 			if (node)
 			{
-				_content = node->content;
 				_leaf = leaf;
-				_prev = prev_node(_node);
+				_content = node->content;
 			}
 			else
 			{
-				_content = NULL;
-				_prev = NULL;
 				_leaf = NULL;
+				_content = NULL;
 			};
-
 
 		};
 		map_iterator (map_iterator const & src) {*this = src;};
@@ -61,7 +59,6 @@ namespace ft
 				_comp = rhs._comp;
 				_node = rhs._node;
 				_leaf = rhs._leaf;
-				_prev = rhs._prev;
 				_content = rhs._content;
 			};
 			return *this;
@@ -78,13 +75,9 @@ namespace ft
 
 			if (_node == NULL) return (*this);
 			
-			_prev = _node;
 			p = next_node(_node);
 			this->_node = p;
-			if(p)
-				this->_content = p->content;
-			else
-				this->_content = NULL;
+			this->_content = p->content;
 			return (*this);
 		};
 
@@ -92,22 +85,21 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			if (_node == NULL)
+			if (_node == NULL) return (*this);
+
+			if (_node == _leaf)
 			{
-				this->_node = _prev;
-				if (_prev)
-					this->_content = (*_prev).content;
+				this->_node = _leaf->right; // leaf->right points to max tree element
+				this->_content = _leaf->right->content;
+				return (*this);
+			}
+			else
+			{
+				p = prev_node(_node);
+				this->_node = p;
+				this->_content = p->content;
 				return (*this);
 			};
-
-			_prev = _node;
-			p = prev_node(_node);
-			this->_node = p;
-			if(p)
-				this->_content = p->content;
-			else
-				this->_content = NULL;
-			return (*this);
 		};
 
 		map_iterator operator++(int)
@@ -142,34 +134,33 @@ namespace ft
 			return (!(*this == x));;
 		};
 			
-
-		// TODO  fazer curr() e update() ??
-
-
 		// Atributes
-		protected:
+		public:
 			key_compare				_comp;
 			rbt_node<value_type>*	_node;
 			rbt_node<value_type>*	_leaf;
-			rbt_node<value_type>*	_prev;
 			value_type*				_content;
 
+// =================================================================================
+//						AUXILIARY FUNCTIONS
+// =================================================================================
+
 		private:
-		rbt_node<value_type> * min_subtree(rbt_node<value_type> *i, rbt_node<value_type> *leaf)
+		node_ptr * min_subtree(node_ptr *i) const
 		{
-			if (i != leaf)
+			if (i != _leaf)
 			{
-				while (i->left != leaf)
+				while (i->left != _leaf)
 					i = i->left;
 			};
 			return i;
 		};
 
-		rbt_node<value_type> * max_subtree(rbt_node<value_type> *i, rbt_node<value_type> *leaf)
+		node_ptr * max_subtree(node_ptr *i) const
 		{
-			if (i != leaf)
+			if (i != _leaf)
 			{
-				while (i->right != leaf)
+				while (i->right != _leaf)
 					i = i->right;
 			};
 			return i;
@@ -195,13 +186,14 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			if (n->right != _leaf)	// go down
-				p = min_subtree(n->right, _leaf);
-			else						// or go up
+			if (n->right != _leaf)			// go down
+				p = min_subtree(n->right);
+			else							// or go up
 			{
 				p = n;
-				while (p != _leaf && is_right_child(p))
+				while (p != NULL && is_right_child(p))
 					p = p->parent;
+				if (p->parent != NULL)
 				p = p->parent;
 			};
 			return (p);
@@ -211,13 +203,14 @@ namespace ft
 		{
 			rbt_node<value_type> *p;
 
-			if (n->left != _leaf)	// go down
-				p = max_subtree(n->left, _leaf);
-			else						// or go up
+			if (n->left != _leaf)			// go down
+				p = max_subtree(n->left);
+			else							// or go up
 			{
 				p = n;
-				while (p != _leaf && is_left_child(p))
+				while (p != NULL && is_left_child(p))
 					p = p->parent;
+				if (p->parent != NULL)
 				p = p->parent;
 			};
 			return (p);
@@ -229,12 +222,9 @@ namespace ft
 			std::cout << "\n=================================================";
 			std::cout << "\niterator _node: ";
 			if (_node) print_node(*_node); else std::cout << " NULL";
-//			std::cout << "\niterator _prev: ";
-//			if (_prev) print_node(*_prev); else std::cout << " NULL";
 			std::cout << std::endl;
 			std::cout << "=================================================\n";
 		};
-
 	};
 };
 #endif
