@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:15 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/08 22:53:36 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/08 23:38:06 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,10 @@ namespace ft
 				return (true);
 			if (_node == NULL || x._node == NULL)
 				return (false);
+			if (_node == _leaf && x._node == _leaf)
+				return (true);
+			if (_node == _leaf || x._node == _leaf)
+				return (false);
 			return ( *(_node->content) == *(x._node->content));
 		};
 		bool operator!=(map_iterator const & x) const
@@ -193,9 +197,10 @@ namespace ft
 				p = n;
 				while (p != NULL && is_right_child(p))
 					p = p->parent;
-				if (p->parent != NULL)
 				p = p->parent;
 			};
+			if (p == NULL)
+				return (_leaf);
 			return (p);
 		};
 
@@ -210,9 +215,10 @@ namespace ft
 				p = n;
 				while (p != NULL && is_left_child(p))
 					p = p->parent;
-				if (p->parent != NULL)
 				p = p->parent;
 			};
+			if (p == NULL)
+				return (_leaf);
 			return (p);
 		};
 
