@@ -610,7 +610,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 //				remove_node(s);
 //			};
 ////			if (original_color == BLACK)
-////				rb_delete_fixup(n);
+////				fix_remove_node(n);
 //		};
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -633,22 +633,26 @@ template <class Key, class T, class Compare = std::less<Key>,
 				_size--;
 				return;
 			};
-			if (z->left == _nil)
+			if (z->left == _nil) // no children or only right
 			{
+				std::cout << "no children or only right\n";
 				x = z->right;
 				transplant(z, z->right);
 			}
-			else if (z->right == _nil)
+			else if (z->right == _nil) // only left child
 			{
+				std::cout << "only left child\n";
 				x = z->left;
 				transplant(z, z->left);
 			}
-			else
+			else // both children
 			{
+				std::cout << "both children\n";
 				y = minimum(z->right);
 				y_original_color = y->color;
 				x = y->right;
-				if (y->parent == z && x)
+//				if (y->parent == z && x)
+				if (y->parent == z)
 				{
 					x->parent = y;
 				}
@@ -656,14 +660,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 				{
 					transplant(y, y->right);
 					y->right = z->right;
-					if (y->right)
-						y->right->parent = y;
+					y->right->parent = y;
 				}
 				transplant(z, y);
 				y->left = z->left;
 				y->left->parent = y;
 				y->color = z->color;
 			};
+			if (x == _nil) std::cout << "nil\n";
 			if (y_original_color == BLACK)
 				fix_remove_node(x);
 			if (z != _nil)
@@ -712,20 +716,23 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void fix_remove_node(node_ptr *z)
 		{
+			std::cout << "fix remove node\n";
 			node_ptr *w;
 			while (z != _root && z->color == BLACK)
 			{
+							std::cout << "z: ";print_node(*z);
 				if (z == z->parent->left)
 				{
-					std::cout << "Case 1a\n";
 					w = z->parent->right;
 					if (w->color == RED)
 					{
+						std::cout << "Case 1a\n";
 						w->color = BLACK;
 						z->parent->color = RED;
 						rotate_left(z->parent);
 						w = z->parent->right;
 					}
+						print_tree_level();
 					if (w->left->color == BLACK && w->right->color == BLACK)
 					{
 						std::cout << "Case 2a\n";
@@ -737,10 +744,14 @@ template <class Key, class T, class Compare = std::less<Key>,
 						if (w->right->color == BLACK)
 						{
 							std::cout << "Case 3a\n";
+							std::cout << "z: ";print_node(*z);
+							std::cout << "w: ";print_node(*w);
+							std::cout << "zpr: ";print_node(*z->parent->right);
 							w->left->color = BLACK;
 							w->color = RED;
 							rotate_right(w);
 							w = z->parent->right;
+								print_tree_level();
 						}
 						std::cout << "Case 4a\n";
 						w->color = z->parent->color;
@@ -777,17 +788,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 							rotate_left(w);
 							w = z->parent->left;
 						}
-						std::cout << "Case 4b\n";
+						std::cout << "Case 4b\n"; //ok
 						w->color = z->parent->color;
 						z->parent->color = BLACK;
 						w->left->color = BLACK;
 						rotate_right(z->parent);
 						z = _root;
+								print_tree_level();
 					}
 				}
 			}
 			std::cout << "Case 5 - root\n";
 			z->color = BLACK;
+								print_tree_level();
 		};
 
 //  void rotate_left(node_ptr *x) {
