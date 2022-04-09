@@ -101,7 +101,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				while(i != _nil) // avanca i para um apos local de insercao (p)
 				{
 					p = i;
-					if (*(node->content) == *(i->content)) // se encontra node nao insere
+					if ((node->content->first) == (i->content->first)) // se encontra node nao insere
 					{
 						destroy_node(node);
 						return (ft::make_pair(it, false));
@@ -110,19 +110,61 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 				// Faz a insercao
 				insert_node_at_position(p, node);
-					std::cout << "inserting: " << node->content->first << "\n  ";
-					std::cout << "antes fix:\n";
-					print_tree_level();
+//					std::cout << "inserting: " << node->content->first << "\n  ";
+//					std::cout << "antes fix:\n";
+//					print_tree_level();
 
 				fix_insert_node(node);
-					std::cout << "depois fix;\n";
-					print_tree_level();
+//					std::cout << "depois fix;\n";
+//					print_tree_level();
 
 				update_nil_node();
 				return (ft::make_pair(iterator(node, _nil), true));
 			};
 		};
+
 		// insert hint
+		iterator insert (iterator position, const value_type& val)
+		{
+			// Cria um iterator apontando vazio
+			iterator it;
+			node_ptr *node = create_new_node_with_val(val);
+
+			if (_root == NULL)
+			{
+				insert_at_root(node);
+					std::cout << "[" << node->content->first << "]  "; print_tree_level();
+				return (iterator(_root, _nil));
+			}
+			else
+			{
+				// SE ARVORE JA TEM NODES
+				node_ptr	*i, *p;
+				i = position._node;
+				while(i != _nil) // avanca i para um apos local de insercao (p)
+				{
+					p = i;
+					if (*(node->content) == *(i->content)) // se encontra node nao insere
+					{
+						destroy_node(node);
+						return (it);
+					};
+					i = increment_pointer(i, node);
+				};
+				// Faz a insercao
+				insert_node_at_position(p, node);
+//					std::cout << "inserting: " << node->content->first << "\n  ";
+//					std::cout << "antes fix:\n";
+//					print_tree_level();
+
+				fix_insert_node(node);
+//					std::cout << "depois fix;\n";
+//					print_tree_level();
+
+				update_nil_node();
+				return (iterator(node, _nil));
+			};
+		};
 
 		// insert range
 		void insert (iterator first, iterator last)
@@ -167,20 +209,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 		//erase range
 		void erase(iterator first, iterator last)
 		{
-
-//			key_type key_first, key_last;
-//			iterator i;
-//
-//			key_first = first->first;
-//			key_last = last->first;
-//			while(1)
-//			{
-//				i = begin();
-//				if(i->first == key_last)
-//					return;
-//				while (i->first < key_first) i++;
-//				erase(i);
-//			};
 
 			key_type key_first, key_last, next_key, curr_key;
 			iterator i;
@@ -342,6 +370,15 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (iterator(p, _nil));
 			else
 				return (end());
+		};
+
+		mapped_type& operator[](const key_type& k)
+		{
+			pair<key_type, mapped_type> par(k, mapped_type());
+
+			insert(par);
+			iterator it = find(k);
+			return (it->second);
 		};
 
 		size_type count (const key_type& k) const{
