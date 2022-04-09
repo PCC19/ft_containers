@@ -94,7 +94,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return (*this);
 		};
 
-
 		// DESTRUCTOR
 		~map() { clear(); };
 

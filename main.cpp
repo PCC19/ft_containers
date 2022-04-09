@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 00:53:36 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 01:12:14 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -760,19 +760,16 @@ int main()
 	std::cout << "Mapa5: \n";
 	print_map(mapa5);
 
-
-
 	
+	std::cout << "Teste swap:\n";
 
-	
-//	std::cout << "Teste swap:\n";
-//
-//	ft::map<int,int> mapa_a(mapa0), mapa_b(mapa2);
-//	std::cout << "mapa_a: \n"; print_map(mapa_a);
-//	std::cout << "mapa_b: \n"; print_map(mapa_b);
-//	std::cout << "Apos Swap: \n";
-//	std::cout << "mapa_a: \n"; print_map(mapa_a);
-//	std::cout << "mapa_b: \n"; print_map(mapa_b);
+	ft::map<int,int> mapa_a(mapa0), mapa_b(mapa2);
+	std::cout << "mapa_a: \n"; print_map(mapa_a);
+	std::cout << "mapa_b: \n"; print_map(mapa_b);
+	mapa_a.swap(mapa_b);
+	std::cout << "Apos Swap: \n";
+	std::cout << "mapa_a: \n"; print_map(mapa_a);
+	std::cout << "mapa_b: \n"; print_map(mapa_b);
 
 
 
