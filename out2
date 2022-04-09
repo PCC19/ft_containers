@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffe5ca09c00
-pointer to my_vector: 0x7ffe5ca09c00
+           my_vector: 0x7ffff1fdfa20
+pointer to my_vector: 0x7ffff1fdfa20
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffe5ca0a9f0
+node:  	0x7ffff1fe0810
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffe5ca0aa40
+node:  	0x7ffff1fe0860
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffe5ca0aa90
+node:  	0x7ffff1fe08b0
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -792,4 +792,12 @@ Key nao existe (61):
 (89,890)
 (90,900)
 
-Elapsed time: 14.469ms
+Teste Range Constructor
+(50,500)
+(60,600)
+(70,700)
+(80,800)
+(89,890)
+(90,900)
+
+Elapsed time: 24.257ms

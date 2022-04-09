@@ -46,7 +46,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				};
 		}; // class value_compare
 
-		// METHODS
+		// CONSTRUCTORS
 		// empty constructor
 		explicit map (const key_compare& comp = key_compare(),
 						const allocator_type& alloc = allocator_type()) :
@@ -66,13 +66,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 
 		// range constructor
-			// depende de iterators e insert
+		template <class InputIterator>
+		map (InputIterator first, InputIterator last,
+			const key_compare& comp = key_compare(),
+			const allocator_type& alloc = allocator_type()): _root(NULL), _size(0), _comp(comp), _Alloc(alloc)
+		{ 
+			create_nil_node();
+			insert(first, last);
+		};
+
 		// copy constructor
 
-		~map() // destrutor temporario.
-		{
-			clear();
-		};
+		// DESTRUCTOR
+		~map() { clear(); };
 
 		// CAPACITY
 		bool empty()					{ return (_size == 0); };
@@ -319,6 +325,25 @@ template <class Key, class T, class Compare = std::less<Key>,
 		{
 			return ++const_reverse_iterator(min_subtree(_root));
 		};
+		
+		// OBSERVERS
+		key_compare		key_comp() const		{ return _comp; };
+		value_compare	value_comp() const		{ return value_compare(_comp); };
+
+		// OPERATIONS
+		iterator find(const key_type &k) const
+		{
+			node_ptr* p;
+			p = find_node(k);
+			if (p != _nil)
+				return (iterator(p, _nil));
+			else
+				return (end());
+		};
+
+		size_type count (const key_type& k) const{
+			return !(find(k) == end());
+		};
 
 		iterator lower_bound (const key_type &k)
 		{
@@ -356,22 +381,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			return ft::make_pair(lower_bound(k), upper_bound(k));
 		};
 
-		
-		// OBSERVERS
-		key_compare		key_comp() const		{ return _comp; };
-		value_compare	value_comp() const		{ return value_compare(_comp); };
-
-		// OPERATIONS
-		iterator find(const key_type &k) const
-		{
-			node_ptr* p;
-			p = find_node(k);
-			if (p != _nil)
-				return (iterator(p, _nil));
-			else
-				return (end());
-		};
-
+		// ELEMENT ACCESS
 		mapped_type& operator[](const key_type& k)
 		{
 			pair<key_type, mapped_type> par(k, mapped_type());
@@ -379,10 +389,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			insert(par);
 			iterator it = find(k);
 			return (it->second);
-		};
-
-		size_type count (const key_type& k) const{
-			return !(find(k) == end());
 		};
 
 		// ALLOCATOR
