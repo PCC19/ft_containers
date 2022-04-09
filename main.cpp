@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/08 23:42:38 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/09 21:36:47 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -569,7 +569,6 @@ int main()
 		std::cout << itm1_r->first << " | ";
 	std::cout << std::endl;
 
-	return 0;
 	std::cout << "Teste delete_node: \n";
 	std::cout << "Deleting 80 (two children)\n";
 		print_map(mapa1); mapa1.erase(80); print_map(mapa1);
@@ -590,29 +589,31 @@ int main()
 	ft::map<int, int>::iterator i_pos;
 
 	i_pos = mapa1.find(120);
+//		mapa1.print_tree_level();
 	mapa1.erase(i_pos);
-//	mapa1.print_tree_level();
-//	std::cout << "Teste do Erase (key) 100 \n";
-//	mapa1.erase(100);
-//	mapa1.print_tree_level();
+//		mapa1.print_tree_level();
+	std::cout << "Teste do Erase (key) 100 \n";
+	mapa1.erase(100);
+//		mapa1.print_tree_level();
 
-
-
-//	std::cout << "Teste do Erase (first, last)\n";
-//	ft::map<int, int>::iterator i_f, i_l;
-////	mapa1.print_tree_level();
-//	i_f = mapa1.find(10);
-//	i_l = mapa1.find(30);
-//	mapa1.erase(i_f, i_l);
-////	mapa1.print_tree_level();
+	std::cout << "Teste do Erase (first, last)\n";
+	ft::map<int, int>::iterator i_f, i_l;
+		print_map(mapa1);
+//		mapa1.print_tree_level();
+	i_f = mapa1.find(10);
+	i_l = mapa1.find(30);
+	mapa1.erase(i_f, i_l);
+		print_map(mapa1);
+//		mapa1.print_tree_level();
 
 	std::cout << "Teste do clear \n";
 	print_map(mapa1);
 	mapa1.clear();
+	print_map(mapa1);
 
 
 	std::cout << "//////////////////////////////////////////////\n";
-	std::cout << "Teste do rotate left: \n";
+	std::cout << "/// Inicializando mapa2 ///";
 	ft::map<int, int> mapa2;
 	// 80 40 20 10 30 60 50 70 120 100 140 90 89 110 111 134 150 130 135 125
 	mapa2.insert(ft::make_pair(80,800));
@@ -665,7 +666,6 @@ int main()
 	if (itm_bound == mapa2.end()) std::cout << "end !\n";
 	else
 		 std::cout << itm_bound->first << std::endl;
-
 	numero = 5;
 	itm_bound = mapa2.upper_bound(numero);
 	std::cout << "ub: " << numero <<  "---> ";
