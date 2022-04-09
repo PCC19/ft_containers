@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 00:46:35 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 00:53:36 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -754,6 +754,11 @@ int main()
 	it3_l = mapa2.find(100);
 	ft::map<int, int> mapa4(it3_i, it3_l);
 	print_map(mapa4);
+
+	std::cout << "Teste Copy Constructor\n";
+	ft::map<int, int> mapa5(mapa4);
+	std::cout << "Mapa5: \n";
+	print_map(mapa5);
 
 
 

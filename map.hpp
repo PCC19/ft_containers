@@ -76,6 +76,24 @@ template <class Key, class T, class Compare = std::less<Key>,
 		};
 
 		// copy constructor
+		map (const map & src) : _root(NULL), _size(0)
+		{
+			*this = src;
+		};
+
+		// assign operator
+		map& operator = (const map &src)
+		{
+			if (this == &src)
+				return (*this);
+			_comp = src._comp;
+			_Alloc = src._Alloc;
+			clear();
+			create_nil_node();
+			insert(src.begin(), src.end());;
+			return (*this);
+		};
+
 
 		// DESTRUCTOR
 		~map() { clear(); };
@@ -285,7 +303,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		const_iterator begin() const
 		{
-			return const_iterator(min_subtree(_root, _nil));
+			return const_iterator(min_subtree(_root), _nil);
 		};
 
 		iterator end()

@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffff1fdfa20
-pointer to my_vector: 0x7ffff1fdfa20
+           my_vector: 0x7ffed4dabe80
+pointer to my_vector: 0x7ffed4dabe80
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffff1fe0810
+node:  	0x7ffed4dacc70
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffff1fe0860
+node:  	0x7ffed4daccc0
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffff1fe08b0
+node:  	0x7ffed4dacd10
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -800,4 +800,13 @@ Teste Range Constructor
 (89,890)
 (90,900)
 
-Elapsed time: 24.257ms
+Teste Copy Constructor
+Mapa5: 
+(50,500)
+(60,600)
+(70,700)
+(80,800)
+(89,890)
+(90,900)
+
+Elapsed time: 18.298ms

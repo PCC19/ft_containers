@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffd549cfb00
-pointer to my_vector: 0x7ffd549cfb00
+           my_vector: 0x7ffde5fbb080
+pointer to my_vector: 0x7ffde5fbb080
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd549d0a60
+node:  	0x7ffde5fbbfe0
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd549d0ab0
+node:  	0x7ffde5fbc030
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffd549d0b00
+node:  	0x7ffde5fbc080
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -972,4 +972,18 @@ Print Tree Level:
 (89,890)
 (90,900)
 
-Elapsed time: 24.428ms
+Teste Copy Constructor
+[50]  size: 1
+Print Tree Level: 
+[50]		 root		lvl: 1	n: 0x6040000012d0	l: 0x604000001290	r: 0x604000001290	p: 0
+
+-----------------
+Mapa5: 
+(50,500)
+(60,600)
+(70,700)
+(80,800)
+(89,890)
+(90,900)
+
+Elapsed time: 24.572ms
