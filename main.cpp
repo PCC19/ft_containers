@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/09 21:36:47 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:16:55 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -721,6 +721,17 @@ int main()
 //	dd = 125; std::cout << "Deleting: " << dd << "\n"; mapa2.print_tree_level(); mapa2.erase(dd); mapa2.print_tree_level();
 
 
+	
+	std::cout << " Teste do insert fill\n";
+	ft::map<int, int> mapa3;
+	ft::map<int, int>::iterator it3_i, it3_l;
+
+	it3_i = mapa2.find(50);
+	it3_l = mapa2.find(100);
+	mapa3.insert(it3_i, it3_l);
+	print_map(mapa3);
+
+	
 
 	
 //	std::cout << "Teste swap:\n";

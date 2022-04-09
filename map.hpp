@@ -80,7 +80,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		size_type max_size() const		{ return _Alloc.max_size(); };
 
 		// MODIFIERS
-		// Insert
+		// Insert single
 		pair<iterator, bool> insert(const value_type& val)
 		{
 			// Cria um iterator apontando vazio
@@ -122,7 +122,19 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (ft::make_pair(iterator(node, _nil), true));
 			};
 		};
+		// insert hint
 
+		// insert range
+		void insert (iterator first, iterator last)
+		{
+			while (first != last)
+			{
+				insert(*first);
+				first++;
+			};
+		};
+
+		// erase key
 		size_type erase(const key_type &k)
 		{
 			node_ptr *n;
@@ -137,6 +149,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				return (0);
 		};
 
+		// erase position
 		void erase(iterator position)
 		{
 			node_ptr *n;
@@ -151,6 +164,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				std::cout << "Nao Achou \n";
 		};
 
+		//erase range
 		void erase(iterator first, iterator last)
 		{
 
@@ -674,6 +688,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr * min_subtree(node_ptr *i) const
 		{
+			if (i == NULL)
+				return i;
 			if (i != _nil)
 			{
 				while (i->left != _nil)
@@ -684,6 +700,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr * max_subtree(node_ptr *i) const
 		{
+			if (i == NULL)
+				return i;
 			if (i != _nil)
 			{
 				while (i->right != _nil)
