@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 21:22:09 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:47:48 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int main()
 //	std::cout << "Clear !\n";
 //	print_vector(my_vector);
 
+	std::cout << "Teste swap: \n";
 	N = 5;
 	for (i = 0; i < N; i++)
 	{
@@ -104,9 +105,16 @@ int main()
 	}
 	ft::vector<int>::iterator first_va, first_vb;
 	first_va = my_vector.begin();
+	first_va++;
 	std::cout << "My Vector:\n";
 	print_vector(my_vector);
 	std::cout << "first_va: " << *first_va << std::endl;
+	ft::vector<int>::const_iterator const_va;
+	const_va = my_vector.begin();
+	const_va++;
+	std::cout << "const_va: " << *const_va << std::endl;
+	std::cout << "iguais ?: " << (first_va == const_va) << std::endl;
+
 	
 	ft::vector<int> other_vector;
 	N = 17;
@@ -126,6 +134,9 @@ int main()
 	std::cout << "Other Vector:\n"; print_vector(other_vector);
 	std::cout << "first_vb: " << *first_vb << std::endl;
 	std::cout << "first_vb++: " << *(++first_vb) << std::endl;
+
+
+
 
 	std::cout << "ft::vector<int> second_vector(my_vector);\n";
 	ft::vector<int> second_vector(my_vector);
@@ -784,6 +795,14 @@ int main()
 	std::cout << "mapa_b: \n"; print_map(mapa_b);
 	std::cout << "first_b: " << first_b->first << std::endl;
 	std::cout << "first_b++: " << (++first_b)->first << std::endl;
+
+	std::cout << "Teste const iterator\n";
+	ft::map<int, int>::iterator it_normal = mapa_a.begin();
+	ft::map<int, int>::const_iterator it_const = mapa_a.begin();
+	std::cout << "it_normal: " << it_normal->first << std::endl;
+	std::cout << "it_const: " << it_const->first << std::endl;
+	std::cout << "Iguais ? " << (it_normal == it_const) << std::endl;
+
 
 
 

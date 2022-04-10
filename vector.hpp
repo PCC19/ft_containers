@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 19:57:10 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:39:38 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ namespace ft {
 			 typedef typename Allocator::pointer			pointer;
 			 typedef typename Allocator::const_pointer		const_pointer;
 			 typedef ft::random_access_iterator<vector>		iterator;
-			 typedef ft::random_access_iterator<vector>		const_interator;
+			 typedef ft::random_access_iterator<vector>		const_iterator;
 			 typedef std::ptrdiff_t							difference_type;
 			 typedef ft::reverse_iterator<vector>			reverse_iterator;
-			 typedef ft::reverse_iterator<vector>			const_reverse_interator;
+			 typedef ft::reverse_iterator<vector>			const_reverse_iterator;
 			 typedef std::random_access_iterator_tag		iterator_category;
 
 			/*
