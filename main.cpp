@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 01:12:14 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 19:21:20 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -736,10 +736,10 @@ int main()
 	it3_i = mapa3.find(60);
 	mapa3.insert(it3_i, ft::make_pair(75,750));
 	print_map(mapa3);
-//	std::cout << "Inserindo com hint depois da posicao (85 com hint 90)\n";
-//	it3_i = mapa3.find(90);
-//	mapa3.insert(it3_i, ft::make_pair(85,850));
-//	print_map(mapa3);
+	std::cout << "Inserindo com hint depois da posicao (85 com hint 90)\n";
+	it3_i = mapa3.find(90);
+	mapa3.insert(it3_i, ft::make_pair(85,850));
+	print_map(mapa3);
 
 	std::cout << "Teste operador []\n";
 	std::cout << "Key ja existe (60):\n";

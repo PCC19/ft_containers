@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffdf019a240
-pointer to my_vector: 0x7ffdf019a240
+           my_vector: 0x7ffc4a8050c0
+pointer to my_vector: 0x7ffc4a8050c0
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffdf019b030
+node:  	0x7ffc4a805eb0
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffdf019b080
+node:  	0x7ffc4a805f00
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffdf019b0d0
+node:  	0x7ffc4a805f50
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -778,6 +778,16 @@ Inserindo com hint antes da posicao (75 com hint 60)
 (89,890)
 (90,900)
 
+Inserindo com hint depois da posicao (85 com hint 90)
+(50,500)
+(60,600)
+(70,700)
+(75,750)
+(80,800)
+(85,850)
+(89,890)
+(90,900)
+
 Teste operador []
 Key ja existe (60):
 600
@@ -789,6 +799,7 @@ Key nao existe (61):
 (70,700)
 (75,750)
 (80,800)
+(85,850)
 (89,890)
 (90,900)
 
@@ -865,4 +876,4 @@ mapa_b:
 (10,100)
 (20,100)
 
-Elapsed time: 19.209ms
+Elapsed time: 23.147ms

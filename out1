@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7fffb3f47a60
-pointer to my_vector: 0x7fffb3f47a60
+           my_vector: 0x7fff18d4d240
+pointer to my_vector: 0x7fff18d4d240
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fffb3f489c0
+node:  	0x7fff18d4e1a0
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fffb3f48a10
+node:  	0x7fff18d4e1f0
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7fffb3f48a60
+node:  	0x7fff18d4e240
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -945,6 +945,16 @@ Inserindo com hint antes da posicao (75 com hint 60)
 (89,890)
 (90,900)
 
+Inserindo com hint depois da posicao (85 com hint 90)
+(50,500)
+(60,600)
+(70,700)
+(75,750)
+(80,800)
+(85,850)
+(89,890)
+(90,900)
+
 Teste operador []
 Key ja existe (60):
 600
@@ -956,13 +966,14 @@ Key nao existe (61):
 (70,700)
 (75,750)
 (80,800)
+(85,850)
 (89,890)
 (90,900)
 
 Teste Range Constructor
 [50]  size: 1
 Print Tree Level: 
-[50]		 root		lvl: 1	n: 0x604000001110	l: 0x6040000010d0	r: 0x6040000010d0	p: 0
+[50]		 root		lvl: 1	n: 0x604000001150	l: 0x604000001110	r: 0x604000001110	p: 0
 
 -----------------
 (50,500)
@@ -975,7 +986,7 @@ Print Tree Level:
 Teste Copy Constructor
 [50]  size: 1
 Print Tree Level: 
-[50]		 root		lvl: 1	n: 0x6040000012d0	l: 0x604000001290	r: 0x604000001290	p: 0
+[50]		 root		lvl: 1	n: 0x604000001310	l: 0x6040000012d0	r: 0x6040000012d0	p: 0
 
 -----------------
 Mapa5: 
@@ -989,12 +1000,12 @@ Mapa5:
 Teste swap:
 [5]  size: 1
 Print Tree Level: 
-[5]		 root		lvl: 1	n: 0x604000001490	l: 0x604000001450	r: 0x604000001450	p: 0
+[5]		 root		lvl: 1	n: 0x6040000014d0	l: 0x604000001490	r: 0x604000001490	p: 0
 
 -----------------
 [10]  size: 1
 Print Tree Level: 
-[10]		 root		lvl: 1	n: 0x604000001590	l: 0x604000001550	r: 0x604000001550	p: 0
+[10]		 root		lvl: 1	n: 0x6040000015d0	l: 0x604000001590	r: 0x604000001590	p: 0
 
 -----------------
 mapa_a: 
@@ -1026,17 +1037,17 @@ mapa_b:
 
 [5]  size: 1
 Print Tree Level: 
-[5]		 root		lvl: 1	n: 0x604000001ad0	l: 0x604000001a90	r: 0x604000001a90	p: 0
+[5]		 root		lvl: 1	n: 0x604000001b10	l: 0x604000001ad0	r: 0x604000001ad0	p: 0
 
 -----------------
 [10]  size: 4
 Print Tree Level: 
-[10]		 root		lvl: 1	n: 0x604000001bd0	l: 0x604000001b90	r: 0x604000001b90	p: 0
+[10]		 root		lvl: 1	n: 0x604000001c10	l: 0x604000001bd0	r: 0x604000001bd0	p: 0
 
 -----------------
 [5]  size: 21
 Print Tree Level: 
-[5]		 root		lvl: 1	n: 0x604000002110	l: 0x6040000020d0	r: 0x6040000020d0	p: 0
+[5]		 root		lvl: 1	n: 0x604000002150	l: 0x604000002110	r: 0x604000002110	p: 0
 
 -----------------
 Apos Swap: 
@@ -1067,4 +1078,4 @@ mapa_b:
 (10,100)
 (20,100)
 
-Elapsed time: 23.047ms
+Elapsed time: 23.487ms

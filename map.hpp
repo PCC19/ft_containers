@@ -149,6 +149,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// insert hint
 		iterator insert (iterator position, const value_type& val)
 		{
+			// Ve onde esta o valor val em relacao ao max e min do position
+			node_ptr *i = position._node;
+			node_ptr *j, *start_node;
+			key_type max_from_hint, min_from_hint;
+			
+			j = max_subtree(i);
+			max_from_hint = j->content->first;
+			j = min_subtree(i);
+			min_from_hint = j->content->first;
+			if (_comp(val.first, min_from_hint) && _comp(max_from_hint, val.first))
+				start_node = position._node;
+			else
+				start_node = _root;
+
 			// Cria um iterator apontando vazio
 			iterator it;
 			node_ptr *node = create_new_node_with_val(val);
@@ -162,8 +176,8 @@ template <class Key, class T, class Compare = std::less<Key>,
 			else
 			{
 				// SE ARVORE JA TEM NODES
-				node_ptr	*i, *p;
-				i = position._node;
+				node_ptr	*p;
+				i = start_node;
 				while(i != _nil) // avanca i para um apos local de insercao (p)
 				{
 					p = i;

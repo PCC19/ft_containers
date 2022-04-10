@@ -55,7 +55,7 @@ run:
 
 val:	$(OBJS)
 	#$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
-	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(C_SANIT) $(L_FLAGS) -D V=1 -o $(NAME)
+	$(CC) -I $(HEADER_DIR) $(MAIN) $(OBJS) $(C_FLAGS) $(L_FLAGS) -D V=1 -o $(NAME)
 	echo CONCLUIDO
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) > val1
 
