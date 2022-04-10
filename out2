@@ -95,8 +95,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffc4a8050c0
-pointer to my_vector: 0x7ffc4a8050c0
+           my_vector: 0x7ffc0a61e120
+pointer to my_vector: 0x7ffc0a61e120
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +375,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc4a805eb0
+node:  	0x7ffc0a61ef10
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc4a805f00
+node:  	0x7ffc0a61ef60
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffc4a805f50
+node:  	0x7ffc0a61efb0
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -876,4 +876,4 @@ mapa_b:
 (10,100)
 (20,100)
 
-Elapsed time: 23.147ms
+Elapsed time: 14.906ms

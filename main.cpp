@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 19:21:20 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 19:42:02 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,9 +467,6 @@ int main()
 	itm1 = mapa1.find(x);
 	if (itm1 != mapa1.end())
 		std::cout << "find(" << x << "): " << itm1->second << std::endl;
-	#if (V)
-//		mapa1.print_tree_level();
-	#endif
 
 	// Teste operator ++
 	std::cout << "Teste operator ++it:\n";
@@ -589,22 +586,17 @@ int main()
 	ft::map<int, int>::iterator i_pos;
 
 	i_pos = mapa1.find(120);
-//		mapa1.print_tree_level();
 	mapa1.erase(i_pos);
-//		mapa1.print_tree_level();
 	std::cout << "Teste do Erase (key) 100 \n";
 	mapa1.erase(100);
-//		mapa1.print_tree_level();
 
 	std::cout << "Teste do Erase (first, last)\n";
 	ft::map<int, int>::iterator i_f, i_l;
 		print_map(mapa1);
-//		mapa1.print_tree_level();
 	i_f = mapa1.find(10);
 	i_l = mapa1.find(30);
 	mapa1.erase(i_f, i_l);
 		print_map(mapa1);
-//		mapa1.print_tree_level();
 
 	std::cout << "Teste do clear \n";
 	print_map(mapa1);

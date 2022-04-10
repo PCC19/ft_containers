@@ -44,7 +44,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 				{
 					return comp(x.first, y.first);
 				};
-		}; // class value_compare
+		};
 
 		// CONSTRUCTORS
 		// empty constructor
@@ -106,41 +106,30 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// Insert single
 		pair<iterator, bool> insert(const value_type& val)
 		{
-			// Cria um iterator apontando vazio
 			iterator it;
 			node_ptr *node = create_new_node_with_val(val);
 
-			if (_root == NULL)
+			if (_root == NULL)	// no nodes
 			{
 				insert_at_root(node);
-					std::cout << "[" << node->content->first << "]  "; print_tree_level();
 				return (ft::make_pair(iterator(_root, _nil), true));
 			}
-			else
+			else				// already have nodes
 			{
-				// SE ARVORE JA TEM NODES
 				node_ptr	*i, *p;
 				i = _root;
-				while(i != _nil) // avanca i para um apos local de insercao (p)
+				while(i != _nil) 
 				{
 					p = i;
-					if ((node->content->first) == (i->content->first)) // se encontra node nao insere
+					if ((node->content->first) == (i->content->first))
 					{
 						destroy_node(node);
 						return (ft::make_pair(it, false));
 					};
 					i = increment_pointer(i, node);
 				};
-				// Faz a insercao
 				insert_node_at_position(p, node);
-//					std::cout << "inserting: " << node->content->first << "\n  ";
-//					std::cout << "antes fix:\n";
-//					print_tree_level();
-
 				fix_insert_node(node);
-//					std::cout << "depois fix;\n";
-//					print_tree_level();
-
 				update_nil_node();
 				return (ft::make_pair(iterator(node, _nil), true));
 			};
@@ -149,55 +138,40 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// insert hint
 		iterator insert (iterator position, const value_type& val)
 		{
-			// Ve onde esta o valor val em relacao ao max e min do position
-			node_ptr *i = position._node;
-			node_ptr *j, *start_node;
-			key_type max_from_hint, min_from_hint;
+			node_ptr	*i = position._node;
+			node_ptr	*start_node;
+			key_type	max_from_hint, min_from_hint;
 			
-			j = max_subtree(i);
-			max_from_hint = j->content->first;
-			j = min_subtree(i);
-			min_from_hint = j->content->first;
+			max_from_hint = max_subtree(i)->content->first;
+			min_from_hint = min_subtree(i)->content->first;
 			if (_comp(val.first, min_from_hint) && _comp(max_from_hint, val.first))
 				start_node = position._node;
 			else
 				start_node = _root;
 
-			// Cria um iterator apontando vazio
 			iterator it;
 			node_ptr *node = create_new_node_with_val(val);
-
 			if (_root == NULL)
 			{
 				insert_at_root(node);
-					std::cout << "[" << node->content->first << "]  "; print_tree_level();
 				return (iterator(_root, _nil));
 			}
 			else
 			{
-				// SE ARVORE JA TEM NODES
 				node_ptr	*p;
 				i = start_node;
-				while(i != _nil) // avanca i para um apos local de insercao (p)
+				while(i != _nil) 
 				{
 					p = i;
-					if (*(node->content) == *(i->content)) // se encontra node nao insere
+					if (*(node->content) == *(i->content)) 
 					{
 						destroy_node(node);
 						return (it);
 					};
 					i = increment_pointer(i, node);
 				};
-				// Faz a insercao
 				insert_node_at_position(p, node);
-//					std::cout << "inserting: " << node->content->first << "\n  ";
-//					std::cout << "antes fix:\n";
-//					print_tree_level();
-
 				fix_insert_node(node);
-//					std::cout << "depois fix;\n";
-//					print_tree_level();
-
 				update_nil_node();
 				return (iterator(node, _nil));
 			};
@@ -234,13 +208,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr *n;
 
 			n = find_node(position->first);
-			if (n)
-			{
-				remove_node(n);
-				print_tree_level();
-			}
-			else
-				std::cout << "Nao Achou \n";
+			if (n) remove_node(n);
 		};
 
 		//erase range
@@ -257,7 +225,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			{
 				i = find(curr_key);
 				next_key = (find((++i)->first))->first;
-				std::cout << "curr key: " << curr_key << std::endl;
 				erase(curr_key);
 				curr_key = next_key;
 			};
@@ -489,7 +456,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 			}
 			else							// both children
 			{
-//				y = minimum(z->right);
 				y = min_subtree(z->right);
 				y_original_color = y->color;
 				x = y->right;
@@ -534,13 +500,11 @@ template <class Key, class T, class Compare = std::less<Key>,
 						rotate_left(z->parent);
 						w = z->parent->right;
 					}
-						print_tree_level();
 					if (w->left->color == BLACK && w->right->color == BLACK)
 					{
 						//std::cout << "Case 2a\n";
 						w->color = RED;
 						z = z->parent;
-							print_tree_level();
 					}
 					else
 					{
@@ -551,7 +515,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 							w->color = RED;
 							rotate_right(w);
 							w = z->parent->right;
-								print_tree_level();
 						}
 						//std::cout << "Case 4a\n";
 						w->color = z->parent->color;
@@ -701,30 +664,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr *p, *rc, *lgc;
 			direction d;
 
-			// so roda se tiver filho direito
 			if (n->right == _nil)
 				return (n);
 			if (is_left_child(n)) d = LEFT;
 			if (is_right_child(n)) d = RIGHT;
-
-			// salva ponteiros
 			p = n->parent;
 			rc = n->right;
 			lgc = rc->left;
-
-			// desconecta 3 nodes
 			disconnect(p, n);
 			disconnect(n, rc);
 			disconnect(rc, lgc);
-
-			// reconecta 3 nodes
 			connect(n, RIGHT, lgc);
 			connect(rc, LEFT, n);
 			connect(p, d, rc);
-
-			if (p == NULL)
-				_root = rc;
-
+			if (p == NULL) _root = rc;
 			return (rc);
 		};
 
@@ -733,30 +686,20 @@ template <class Key, class T, class Compare = std::less<Key>,
 			node_ptr *p, *lc, *rgc;
 			direction d;
 
-			// so roda se tiver filho direito
 			if (n->left == _nil)
 				return (n);
 			if (is_left_child(n)) d = LEFT;
 			if (is_right_child(n)) d = RIGHT;
-
-			// salva ponteiros
 			p = n->parent;
 			lc = n->left;
 			rgc = lc->right;
-
-			// desconecta 3 nodes
 			disconnect(p, n);
 			disconnect(n, lc);
 			disconnect(lc, rgc);
-
-			// reconecta 3 nodes
 			connect(n, LEFT, rgc);
 			connect(lc, RIGHT, n);
 			connect(p, d, lc);
-
-			if (p == NULL)
-				_root = lc;
-
+			if (p == NULL) _root = lc;
 			return (lc);
 		};
 
@@ -955,10 +898,41 @@ template <class Key, class T, class Compare = std::less<Key>,
 //			std::cout << (*r).content->first << " ";	// short print
 			print_tree_infix_recursive(r->right);
 		};
+	}; // end of map class definition
 
+	/*
+	 * NON MEMBERS
+	 */
 
-
-	}; // class map
+	// OVERLOADS
+		template <typename Key, class T, class Compare, class Alloc>
+	bool operator==(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+		if(lhs.size() == rhs.size())
+			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+		return false;
+	};
+	template <typename Key, class T, class Compare, class Alloc>
+	bool operator!=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+		return !(lhs == rhs);
+	};
+	template <typename Key, class T, class Compare, class Alloc>
+	bool operator< (const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	};
+	template <typename Key, class T, class Compare, class Alloc>
+	bool operator<=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+		return !(rhs < lhs);
+	};
+	template <typename Key, class T, class Compare, class Alloc>
+	bool operator> (const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+		return rhs < lhs;
+	};
+	template <typename Key, class T, class Compare, class Alloc>
+	bool operator>=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+		return !(lhs < rhs);
+	};
+	template <typename Key, class T, class Compare, class Alloc>
+  	void swap (const map<Key,T,Compare,Alloc>& x, const map<Key,T,Compare,Alloc>& y){ x.swap(y); };
 
 }; // namespace
 #endif
