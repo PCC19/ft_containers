@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 21:15:47 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:22:09 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,11 @@ int main()
 	{
 		my_vector.push_back(i * 10);
 	}
+	ft::vector<int>::iterator first_va, first_vb;
+	first_va = my_vector.begin();
 	std::cout << "My Vector:\n";
 	print_vector(my_vector);
+	std::cout << "first_va: " << *first_va << std::endl;
 	
 	ft::vector<int> other_vector;
 	N = 17;
@@ -111,12 +114,18 @@ int main()
 	{
 		other_vector.push_back(i * (-10));
 	}
+	first_vb = other_vector.begin();
 	std::cout << "Other Vector:\n";
 	print_vector(other_vector);
+	std::cout << "first_vb: " << *first_vb << std::endl;
 	my_vector.swap(other_vector);
 	std::cout << "After swap !!\n";
 	std::cout << "My Vector:\n"; print_vector(my_vector);
+	std::cout << "first_va: " << *first_va << std::endl;
+	std::cout << "first_va++: " << *(++first_va) << std::endl;
 	std::cout << "Other Vector:\n"; print_vector(other_vector);
+	std::cout << "first_vb: " << *first_vb << std::endl;
+	std::cout << "first_vb++: " << *(++first_vb) << std::endl;
 
 	std::cout << "ft::vector<int> second_vector(my_vector);\n";
 	ft::vector<int> second_vector(my_vector);
@@ -323,6 +332,10 @@ int main()
 	std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
 	std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
 	std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
+
+	// =======================================
+	// TESTES DO MAP
+	// =======================================
 
 	//Pair:
 	ft::pair<int, char>	par1(12, 'a');

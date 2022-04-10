@@ -58,22 +58,28 @@ My Vector:
 |0|10|20|800|800|800|800|0|10|20|30|40|
 size: 12		capacity: 16
 -----------------------------------
+first_va: 0
 Other Vector:
 -----------------------------------
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 32
 -----------------------------------
+first_vb: 0
 After swap !!
 My Vector:
 -----------------------------------
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 32
 -----------------------------------
+first_va: 0
+first_va++: 10
 Other Vector:
 -----------------------------------
 |0|10|20|800|800|800|800|0|10|20|30|40|
 size: 12		capacity: 16
 -----------------------------------
+first_vb: 0
+first_vb++: -10
 ft::vector<int> second_vector(my_vector);
 My Vector:
 -----------------------------------
@@ -95,8 +101,8 @@ Sec Vector:
 |0|-10|-20|-30|-40|-50|-60|-70|-80|-90|-100|-110|-120|-130|-140|-150|-160|
 size: 17		capacity: 17
 -----------------------------------
-           my_vector: 0x7ffcc5d36cc0
-pointer to my_vector: 0x7ffcc5d36cc0
+           my_vector: 0x7ffc15e55160
+pointer to my_vector: 0x7ffc15e55160
 my_vector = second_vector
 My Vector:
 -----------------------------------
@@ -375,21 +381,21 @@ f: 2		 s: Cunha
 node: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffcc5d37ab0
+node:  	0x7ffc15e55fd0
 Content:	f: 0		 s: Paulo
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffcc5d37b00
+node:  	0x7ffc15e56020
 Content:	f: 1		 s: Roberto
 color:		0
 left:		0	right:	0
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 parent:	0
-node:  	0x7ffcc5d37b50
+node:  	0x7ffc15e56070
 Content:	f: 2		 s: Cunha
 color:		0
 left:		0	right:	0
@@ -882,4 +888,4 @@ mapa_b:
 
 first_b: 10
 first_b++: 20
-Elapsed time: 29.643ms
+Elapsed time: 24.529ms
