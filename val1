@@ -945,6 +945,16 @@ Inserindo com hint antes da posicao (75 com hint 60)
 (89,890)
 (90,900)
 
+Inserindo com hint depois da posicao (85 com hint 90)
+(50,500)
+(60,600)
+(70,700)
+(75,750)
+(80,800)
+(85,850)
+(89,890)
+(90,900)
+
 Teste operador []
 Key ja existe (60):
 600
@@ -956,13 +966,14 @@ Key nao existe (61):
 (70,700)
 (75,750)
 (80,800)
+(85,850)
 (89,890)
 (90,900)
 
 Teste Range Constructor
 [50]  size: 1
 Print Tree Level: 
-[50]		 root		lvl: 1	n: 0x5b87270	l: 0x5b871b0	r: 0x5b871b0	p: 0
+[50]		 root		lvl: 1	n: 0x5b87330	l: 0x5b87270	r: 0x5b87270	p: 0
 
 -----------------
 (50,500)
@@ -975,7 +986,7 @@ Print Tree Level:
 Teste Copy Constructor
 [50]  size: 1
 Print Tree Level: 
-[50]		 root		lvl: 1	n: 0x5b878a0	l: 0x5b877e0	r: 0x5b877e0	p: 0
+[50]		 root		lvl: 1	n: 0x5b87960	l: 0x5b878a0	r: 0x5b878a0	p: 0
 
 -----------------
 Mapa5: 
@@ -989,12 +1000,12 @@ Mapa5:
 Teste swap:
 [5]  size: 1
 Print Tree Level: 
-[5]		 root		lvl: 1	n: 0x5b87ed0	l: 0x5b87e10	r: 0x5b87e10	p: 0
+[5]		 root		lvl: 1	n: 0x5b87f90	l: 0x5b87ed0	r: 0x5b87ed0	p: 0
 
 -----------------
 [10]  size: 1
 Print Tree Level: 
-[10]		 root		lvl: 1	n: 0x5b882c0	l: 0x5b88200	r: 0x5b88200	p: 0
+[10]		 root		lvl: 1	n: 0x5b88380	l: 0x5b882c0	r: 0x5b882c0	p: 0
 
 -----------------
 mapa_a: 
@@ -1026,17 +1037,17 @@ mapa_b:
 
 [5]  size: 1
 Print Tree Level: 
-[5]		 root		lvl: 1	n: 0x5b89370	l: 0x5b892b0	r: 0x5b892b0	p: 0
+[5]		 root		lvl: 1	n: 0x5b89430	l: 0x5b89370	r: 0x5b89370	p: 0
 
 -----------------
 [10]  size: 4
 Print Tree Level: 
-[10]		 root		lvl: 1	n: 0x5b89760	l: 0x5b896a0	r: 0x5b896a0	p: 0
+[10]		 root		lvl: 1	n: 0x5b89820	l: 0x5b89760	r: 0x5b89760	p: 0
 
 -----------------
 [5]  size: 21
 Print Tree Level: 
-[5]		 root		lvl: 1	n: 0x5b8a810	l: 0x5b8a750	r: 0x5b8a750	p: 0
+[5]		 root		lvl: 1	n: 0x5b8a8d0	l: 0x5b8a810	r: 0x5b8a810	p: 0
 
 -----------------
 Apos Swap: 
@@ -1067,4 +1078,4 @@ mapa_b:
 (10,100)
 (20,100)
 
-Elapsed time: 253.438ms
+Elapsed time: 475.903ms
