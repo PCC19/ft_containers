@@ -57,7 +57,10 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void create_nil_node()
 		{
-			_nil  =  new node_ptr(NULL);
+		    std::allocator<rbt_node<value_type> > node_allocator;
+			_nil = node_allocator.allocate(1);
+			node_allocator.construct(_nil, NULL);
+//			_nil  =  new node_ptr(NULL);
 			_nil->parent = _root;
 			_nil->content = NULL;
 			_nil->left = NULL;
@@ -409,9 +412,13 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		node_ptr *create_new_node_with_val(const value_type& val)
 		{
+		    std::allocator<rbt_node<value_type> > node_allocator;
+
 			value_type *aux = _Alloc.allocate(1);
 			_Alloc.construct(aux, val);
-			node_ptr *node =  new node_ptr(aux);
+//			node_ptr *node =  new node_ptr(aux);
+			node_ptr *node = node_allocator.allocate(1);
+			node_allocator.construct(node, aux);
 			node->left = _nil;
 			node->right = _nil;
 			node->color = RED;
