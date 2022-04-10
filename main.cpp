@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 19:42:02 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/10 21:15:47 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -756,12 +756,21 @@ int main()
 	std::cout << "Teste swap:\n";
 
 	ft::map<int,int> mapa_a(mapa0), mapa_b(mapa2);
+	ft::map<int,int>::iterator first_a, first_b;
+	first_a = mapa_a.begin();
+	first_b = mapa_b.begin();
 	std::cout << "mapa_a: \n"; print_map(mapa_a);
+	std::cout << "first_a: " << first_a->first << std::endl;
 	std::cout << "mapa_b: \n"; print_map(mapa_b);
+	std::cout << "first_b: " << first_b->first << std::endl;
 	mapa_a.swap(mapa_b);
 	std::cout << "Apos Swap: \n";
 	std::cout << "mapa_a: \n"; print_map(mapa_a);
+	std::cout << "first_a: " << first_a->first << std::endl;
+	std::cout << "first_a++: " << (++first_a)->first << std::endl;
 	std::cout << "mapa_b: \n"; print_map(mapa_b);
+	std::cout << "first_b: " << first_b->first << std::endl;
+	std::cout << "first_b++: " << (++first_b)->first << std::endl;
 
 
 

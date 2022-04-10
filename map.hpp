@@ -60,7 +60,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 		    std::allocator<rbt_node<value_type> > node_allocator;
 			_nil = node_allocator.allocate(1);
 			node_allocator.construct(_nil, NULL);
-//			_nil  =  new node_ptr(NULL);
+			//_nil  =  new node_ptr(NULL);
 			_nil->parent = _root;
 			_nil->content = NULL;
 			_nil->left = NULL;
@@ -273,9 +273,29 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		void swap(map& other)
 		{
-			map<key_type, mapped_type> tmp(*this);
-			*this = other;
-			other = tmp;
+			node_ptr				*_root_tmp;
+			node_ptr				*_nil_tmp;
+			size_type				_size_tmp;
+			key_compare				_comp_tmp;
+			allocator_type			_Alloc_tmp;
+
+			_root_tmp = _root;
+			_nil_tmp = _nil;
+			_size_tmp = _size;
+			_comp_tmp = _comp;
+			_Alloc_tmp = _Alloc;
+
+			_root = other._root;
+			_nil = other._nil;
+			_size = other._size;
+			_comp = other._comp;
+			_Alloc = other._Alloc;
+
+			other._root = _root_tmp;
+			other._nil = _nil_tmp;
+			other._size = _size_tmp;
+			other._comp = _comp_tmp;
+			other._Alloc = _Alloc_tmp;
 		};
 
 		// ITERATORS
