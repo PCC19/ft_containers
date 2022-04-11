@@ -6,24 +6,24 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/10 21:47:48 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:31:35 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#define CYAN			"\e[0;36m"
+#define C_RED			"\e[0;31m"
+#define RESET			"\e[0m"
+#define BOLD			"\e[1m"
+#ifndef nullptr
+	#define nullptr NULL
+#endif
 
 #include <iostream>
 #include <ctime>
 #include <typeinfo>
 #include <map>
 
-#define CYAN			"\e[0;36m"
-#define C_RED			"\e[0;31m"
-#define RESET			"\e[0m"
-#define BOLD			"\e[1m"
-
 #include "node.hpp"
-#ifndef nullptr
-	#define nullptr NULL
-#endif
 #if V // ft
 	#include "vector.hpp"
 	#include "random_access_iterator.hpp"
@@ -37,7 +37,7 @@
 #endif
 #include "utils.hpp"
 
-
+void line() { std::cout << "-----------------------------------------\n"; };
 
 int main()
 {
@@ -51,11 +51,85 @@ int main()
 	(void) i;
 	
 
+	// HEADER
 	if (V == 1)
 		std::cout << "VERSION:  FT" << std::endl;
 	else
 		std::cout << "VERSION: STL" << std::endl;
 	ini = clock();
+
+	// ============================================================
+	//					VECTOR TESTS
+	// ============================================================
+	
+	std::cout << " =========================================\n";
+	std::cout << "				VECTOR TESTS				\n";
+	std::cout << " =========================================\n";
+
+	line(); std::cout << "1.0 Default constructor:\n";line();
+	line(); std::cout << "2.0 Fill constructor:\n";line();
+	line(); std::cout << "3.0 Range  constructor:\n";line();
+	
+	line(); std::cout << "4.0 Iterators\n";line();
+	line(); std::cout << "5.0 Reverse Iterators\n"; line();
+
+	line(); std::cout << "6.0 Size, max_size & Capacity\n";line();
+
+	line(); std::cout << "7.0 Resize\n"; line();
+	line(); std::cout << "8.0 Reserve\n";line();
+	line(); std::cout << "9.0 Empty\n:"; line();
+
+	line(); std::cout << "10.0 Operator []\n";line();
+	line(); std::cout << "11.0 at\n";line();
+	line(); std::cout << "12.0 front & back\n";line();
+
+	line(); std::cout << "13.0 Assign\n";line();
+	line(); std::cout << "14.0 push_back\n"; line();
+	line(); std::cout << "15.0 opo_bavck\n";line();
+	line(); std::cout << "16.0 insert_single\n"; line();
+	line(); std::cout << "17.0 insert fill\n";line();
+	line(); std::cout << "18.0 insert range\n";line();
+	line(); std::cout << "19.0 erase position\n";line();
+	line(); std::cout << "20.0 erase first/last\n";line();
+	line(); std::cout << "21.0 swap\n";line();
+	line(); std::cout << "22.0 clear\n";line();
+	
+	
+	
+	std::cout << " =========================================\n";
+	std::cout << "					MAP TESTS				\n";
+	std::cout << " =========================================\n";
+	
+	line(); std::cout << "1.0 Empty constructor:\n"; line();
+	line(); std::cout << "2.0 Range constructor:\n"; line();
+	line(); std::cout << "3.0 Copy  constructor:\n"; line();
+	
+	line(); std::cout << "4.0 Iterators\n"; line();
+	line(); std::cout << "5.0 Reverse Iterators\n"; line();
+
+	line(); std::cout << "6.0 Size, max_size & Empty\n"; line();
+
+	line(); std::cout << "7.0 Operator []\n"; line();
+	line(); std::cout << "8.0 at\n"; line();
+
+	line(); std::cout << "9.0 insert_single\n"; line();
+	line(); std::cout << "10.0 insert hint\n"; line();
+	line(); std::cout << "11.0 insert range\n"; line();
+	line(); std::cout << "12.0 erase key\n"; line();
+	line(); std::cout << "13.0 erase position\n"; line();
+	line(); std::cout << "14.0 erase range\n"; line();
+	line(); std::cout << "15.0 swap\n"; line();
+	line(); std::cout << "16.0 clear\n"; line();
+	
+	line(); std::cout << "17.0 find\n"; line();
+	line(); std::cout << "18.0 count\n"; line();
+	line(); std::cout << "19.0 lower bound\n"; line();
+	line(); std::cout << "20.0 upper bound\n"; line();
+	line(); std::cout << "21.0 equal range\n"; line();
+	
+return 0;	
+	
+	
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
 
