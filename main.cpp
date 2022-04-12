@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/12 23:24:47 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/13 00:01:22 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main()
 	clock_t ini;
 	clock_t fin;
 	double elapsed_time;
-	int N;
+	int N, i;
 	(void) N;
 	
 
@@ -178,21 +178,119 @@ int main()
 		print_vector(vector_4);
 
 	line(); std::cout << "18.0 insert range\n";line();
-		ft::vector<int>::iterator it5 = vector_4.begin();
-		ft::vector<int>::iterator it6 = vector_3.begin();
-		ft::vector<int>::iterator it7 = vector_3.end();
-		it7--;
-		print_vector(vector_3);
-		print_vector(vector_4);
-		std::cout << "starting from it5: " << *it5;
-		std::cout << " insert from it6: " << *it6 << " to it7: " << *it7 << std::endl;
-		vector_4.insert(it5 + 2, it6, it7);
+//		ft::vector<int> to_insert_range;
+//		to_insert_range.push_back(1000);
+//		to_insert_range.push_back(2000);
+//		to_insert_range.push_back(3000);
+//		std::cout << "to_insert_range"; print_vector(to_insert_range);
+//		std::cout << "Vector_4 :\n"; print_vector(vector_4);
+//		vector_4.insert((vector_4.begin() + 3), to_insert_range.begin(), to_insert_range.end());
+//		std::cout << "Vector_4 :\n"; print_vector(vector_4);
+
+//		ft::vector<int>::iterator it5 = vector_4.begin();
+//		ft::vector<int>::iterator it6 = vector_3.begin();
+//		ft::vector<int>::iterator it7 = vector_3.end();
+//		it7--;
+//		print_vector(vector_3);
+//		print_vector(vector_4);
+//		std::cout << "starting from it5: " << *it5;
+//		std::cout << " insert from it6: " << *it6 << " to it7: " << *it7 << std::endl;
+//		vector_4.insert(it5 + 2, it6, it7);
 
 	line(); std::cout << "19.0 erase position\n";line();
+		ft::vector<int>::iterator it8 = vector_4.begin();
+		it8 = it8 + 2;
+		print_vector(vector_4);
+		std::cout << " erase begin + 2\n";
+		vector_4.erase(it8);
+		print_vector(vector_4);
+
 	line(); std::cout << "20.0 erase first/last\n";line();
+		std::cout << " erase begin + 2 to end - 2\n";
+		print_vector(vector_4);
+		it8 = vector_4.begin();
+		it8 = it8 + 2;
+		ft::vector<int>::iterator it9 = vector_4.end();
+		it9 = it9 - 2;
+		vector_4.erase(it8, it9);
+		print_vector(vector_4);
+
 	line(); std::cout << "21.0 swap\n";line();
+		ft::vector<int> my_vector;
+		N = 5;
+		for (i = 0; i < N; i++)
+		{
+			my_vector.push_back(i * 10);
+		}
+		ft::vector<int>::iterator first_va, first_vb;
+		first_va = my_vector.begin();
+		first_va++;
+		std::cout << "My Vector:\n";
+		print_vector(my_vector);
+		std::cout << "first_va: " << *first_va << std::endl;
+		ft::vector<int>::const_iterator const_va;
+		const_va = my_vector.begin();
+		const_va++;
+		std::cout << "const_va: " << *const_va << std::endl;
+		std::cout << "iguais ?: " << (first_va == const_va) << std::endl;
+		
+		ft::vector<int> other_vector;
+		N = 17;
+		for (i = 0; i < N; i++)
+		{
+			other_vector.push_back(i * (-10));
+		}
+		first_vb = other_vector.begin();
+		std::cout << "Other Vector:\n";
+		print_vector(other_vector);
+		std::cout << "first_vb: " << *first_vb << std::endl;
+		my_vector.swap(other_vector);
+		std::cout << "After swap !!\n";
+		std::cout << "My Vector:\n"; print_vector(my_vector);
+		std::cout << "first_va: " << *first_va << std::endl;
+		std::cout << "first_va++: " << *(++first_va) << std::endl;
+		std::cout << "Other Vector:\n"; print_vector(other_vector);
+		std::cout << "first_vb: " << *first_vb << std::endl;
+		std::cout << "first_vb++: " << *(++first_vb) << std::endl;
+
 	line(); std::cout << "22.0 clear\n";line();
+		std::cout << "Vector 2:\n";
+		print_vector(vector_2);
+		std::cout << "Clear !\n:";
+		vector_2.clear();
+		print_vector(vector_2);
+
 	line(); std::cout << "23.0 Non-Member Functions\n"; line();
+		ft::vector<int> v1, v2;
+		v1.push_back(1);
+		v1.push_back(2);
+		v1.push_back(3);
+		v2 = v1;
+		std::cout << "v1:\n"; print_vector(v1);
+		std::cout << "v2:\n"; print_vector(v2);
+		std::cout << "v1 == v2 ? : " << (v1 == v2) << std::endl;
+		v1.push_back(4);
+		std::cout << "v1.push_back(4)\n";
+		std::cout << "v1:\n"; print_vector(v1);
+		std::cout << "v2:\n"; print_vector(v2);
+		std::cout << "v1 == v2 ? : " << (v1 == v2) << std::endl;
+		std::cout << "v1 != v2 ? : " << (v1 != v2) << std::endl;
+		v1.pop_back();
+		std::cout << "v1.pop_back()\n";
+		std::cout << "v1:\n"; print_vector(v1);
+		std::cout << "v2:\n"; print_vector(v2);
+		std::cout << "v1 <  v2 ? : " << (v1 < v2) << std::endl;
+		std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
+		std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
+		std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
+		v1.push_back(5);
+		std::cout << "v1.push_back(5)\n";
+		std::cout << "v1:\n"; print_vector(v1);
+		std::cout << "v2:\n"; print_vector(v2);
+		std::cout << "v1 <  v2 ? : " << (v1 < v2) << std::endl;
+		std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
+		std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
+		std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
 	
 	
 	
