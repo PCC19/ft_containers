@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/12 21:38:03 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/13 01:28:33 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,14 @@ namespace ft {
 			void insert (iterator position, InputIterator first, InputIterator last,
 				 typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
 			{
-				while (first != last) insert(position++, 1, *(first++));
+				iterator it = first;
+
+				while (it != last)
+				{
+					insert(position, *it);
+					it++;
+					position++;
+				};
 			};
 
 
