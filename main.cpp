@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/11 23:31:35 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/12 23:24:47 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ int main()
 	clock_t fin;
 	double elapsed_time;
 	int N;
-	int i;
-
 	(void) N;
-	(void) i;
 	
 
 	// HEADER
@@ -57,42 +54,145 @@ int main()
 	else
 		std::cout << "VERSION: STL" << std::endl;
 	ini = clock();
-
-	// ============================================================
-	//					VECTOR TESTS
-	// ============================================================
 	
 	std::cout << " =========================================\n";
 	std::cout << "				VECTOR TESTS				\n";
 	std::cout << " =========================================\n";
 
 	line(); std::cout << "1.0 Default constructor:\n";line();
+		ft::vector<int> vector_1;
+		std::cout << "Vector constructed with default constructor\n";
+		print_vector(vector_1);
+
 	line(); std::cout << "2.0 Fill constructor:\n";line();
+		ft::vector<int> vector_2(5,10);
+		std::cout << "Vector_2(5,10) (fill constructror)\n";
+		print_vector(vector_2);
+
 	line(); std::cout << "3.0 Range  constructor:\n";line();
+		ft::vector<int> vector_3;
+		for (int i = 2; i <= 32; i*=2)
+			vector_3.push_back(i);
+		print_vector(vector_3);
 	
 	line(); std::cout << "4.0 Iterators\n";line();
+		ft::vector<int>::iterator it1;
+		std::cout << "iterating on vector_2: \n";
+		print_vector(vector_2);
+		for (it1 = vector_2.begin(); it1 != vector_2.end(); it1++)
+			std::cout << *it1 << " , ";
+		std::cout << std::endl;
+
 	line(); std::cout << "5.0 Reverse Iterators\n"; line();
+		ft::vector<int>::reverse_iterator it2;
+		std::cout << "iterating on vector_3: \n";
+		print_vector(vector_3);
+		for (it2 = vector_3.rbegin(); it2 != vector_3.rend(); it2++)
+			std::cout << *it2 << " , ";
+		std::cout << std::endl;
 
 	line(); std::cout << "6.0 Size, max_size & Capacity\n";line();
+		print_vector(vector_3);
+		std::cout << "Vector_3 size: " << vector_3.size() << std::endl;
+		std::cout << "Vector_3 max_size: " << vector_3.max_size() << std::endl;
+		std::cout << "Vector_3 capacity: " << vector_3.capacity() << std::endl;
 
 	line(); std::cout << "7.0 Resize\n"; line();
+		std::cout << "Vector_3: resize(10,3)\n";
+		vector_3.resize(10,3);
+		print_vector(vector_3);
+		print_vector(vector_3);
+		std::cout << "Vector_3: resize(4,11)\n";
+		vector_3.resize(4,11);
+		print_vector(vector_3);
+
 	line(); std::cout << "8.0 Reserve\n";line();
+		std::cout << "vector_2:\n";
+		print_vector(vector_2);
+		std::cout << "Reserve 20:\n";
+		vector_2.reserve(20);
+		print_vector(vector_2);
+
 	line(); std::cout << "9.0 Empty\n:"; line();
+		std::cout << "is vector_2 empty ?\n";
+		std::cout << vector_2.empty() << std::endl;
+		std::cout << "is vector_1 empty ?\n";
+		std::cout << vector_1.empty() << std::endl;
 
 	line(); std::cout << "10.0 Operator []\n";line();
+		print_vector(vector_3);
+		std::cout << "vector_3[2]: " << vector_3[2] << std::endl;
+		std::cout << "vector_3[3]: " << vector_3[3] << std::endl;
+		std::cout << "vector_3[1]: " << vector_3[1] << std::endl;
+
 	line(); std::cout << "11.0 at\n";line();
+		print_vector(vector_3);
+		std::cout << "vector_3.at(2): " << vector_3.at(2) << std::endl;
+		std::cout << "vector_3.at(3): " << vector_3.at(3) << std::endl;
+		std::cout << "vector_3.at(1): " << vector_3.at(1) << std::endl;
+
 	line(); std::cout << "12.0 front & back\n";line();
+		print_vector(vector_3);
+		std::cout << "Vector_3 front: " << vector_3.front() << std::endl;
+		std::cout << "Vector_3 back : " << vector_3.back() << std::endl;
 
 	line(); std::cout << "13.0 Assign\n";line();
+		vector_3.push_back(10);
+		vector_3.push_back(20);
+		vector_3.push_back(30);
+		vector_3.push_back(40);
+		vector_3.push_back(50);
+		ft::vector<int>::iterator it3, it4;
+		it3 = vector_3.begin();
+		it3++;
+		it3++;
+		it4 = vector_3.end();
+		it4--;
+		it4--;
+		ft::vector<int> vector_4;
+		vector_4.assign(it3, it4);
+		print_vector(vector_3);
+		std::cout << "assign from it3: " << *it3 << " to it4: " << *it4 << std::endl;
+		print_vector(vector_4);
+
 	line(); std::cout << "14.0 push_back\n"; line();
-	line(); std::cout << "15.0 opo_bavck\n";line();
+		std::cout << "push_back(1):\n"; vector_4.push_back(1); print_vector(vector_4);;
+		std::cout << "push_back(2):\n"; vector_4.push_back(2); print_vector(vector_4);;
+		std::cout << "push_back(3):\n"; vector_4.push_back(3); print_vector(vector_4);;
+
+	line(); std::cout << "15.0 pop_back\n";line();
+		std::cout << "pop_back !\n"; vector_4.pop_back(); print_vector(vector_4);
+		std::cout << "pop_back !\n"; vector_4.pop_back(); print_vector(vector_4);
+		std::cout << "pop_back !\n"; vector_4.pop_back(); print_vector(vector_4);
+
 	line(); std::cout << "16.0 insert_single\n"; line();
+		std::cout << "Insert 2,15\n";
+		it3 = vector_4.begin();
+		it3++; it3++;
+		vector_4.insert(it3,15);
+		print_vector(vector_4);
+
 	line(); std::cout << "17.0 insert fill\n";line();
+		std::cout << "Insert 2, 3, 33:\n";
+		vector_4.insert(it3, 3, 33);
+		print_vector(vector_4);
+
 	line(); std::cout << "18.0 insert range\n";line();
+		ft::vector<int>::iterator it5 = vector_4.begin();
+		ft::vector<int>::iterator it6 = vector_3.begin();
+		ft::vector<int>::iterator it7 = vector_3.end();
+		it7--;
+		print_vector(vector_3);
+		print_vector(vector_4);
+		std::cout << "starting from it5: " << *it5;
+		std::cout << " insert from it6: " << *it6 << " to it7: " << *it7 << std::endl;
+		vector_4.insert(it5 + 2, it6, it7);
+
 	line(); std::cout << "19.0 erase position\n";line();
 	line(); std::cout << "20.0 erase first/last\n";line();
 	line(); std::cout << "21.0 swap\n";line();
 	line(); std::cout << "22.0 clear\n";line();
+	line(); std::cout << "23.0 Non-Member Functions\n"; line();
 	
 	
 	
@@ -126,10 +226,11 @@ int main()
 	line(); std::cout << "19.0 lower bound\n"; line();
 	line(); std::cout << "20.0 upper bound\n"; line();
 	line(); std::cout << "21.0 equal range\n"; line();
+	line(); std::cout << "22.0 Non-Member Functions\n"; line();
 	
 return 0;	
 	
-	
+/*
 	// Main program =============================
 	std::cout << "Hello World!" << std::endl;
 
@@ -877,7 +978,7 @@ return 0;
 	std::cout << "it_const: " << it_const->first << std::endl;
 	std::cout << "Iguais ? " << (it_normal == it_const) << std::endl;
 
-
+*/
 
 
 	
