@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/13 04:35:28 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/13 23:34:46 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void print_node(N &node)
 template<typename K,typename Val>
 void print_map(ft::map<K,Val> &m)
 {
+	if (m.empty())
+	{
+		std::cout << "(empy map)\n";
+		return;
+	};
 	typename ft::map<K,Val>::iterator i;
 	i = m.begin();
 	while (i != m.end())

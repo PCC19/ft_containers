@@ -240,6 +240,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			destroy_tree_temp(_root);
 			destroy_node(_nil);
 			_root = NULL;
+			_size = 0;
 		};
 
 		void destroy_tree_temp(node_ptr *r)
@@ -891,7 +892,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 			else
 				return (i->left);
 		};
-
+		
 // =================================================================================
 //						DEBUG AND PRINT FUNCTIONS
 // =================================================================================
