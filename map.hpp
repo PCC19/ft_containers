@@ -103,7 +103,9 @@ template <class Key, class T, class Compare = std::less<Key>,
 		// CAPACITY
 		bool empty()					{ return (_size == 0); };
 		size_type size()				{ return (_size); };
-		size_type max_size() const		{ return _Alloc.max_size(); };
+		size_type max_size() const		{ 
+			std::cout << "sizeof pair: " << sizeof(value_type) << "\n";
+		return _Alloc.max_size() / 5; };
 
 		// MODIFIERS
 		// Insert single
