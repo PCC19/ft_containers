@@ -102,7 +102,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 		// CAPACITY
 		bool empty()					{ return (_size == 0); };
-		size_type size()				{ return (_size); };
+		size_type size() const			{ return (_size); };
 		size_type max_size() const		{ return _Alloc.max_size() / 5; };
 
 		// MODIFIERS
@@ -934,7 +934,7 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 	// OVERLOADS
 		template <typename Key, class T, class Compare, class Alloc>
-	bool operator==(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs){
+	bool operator==(const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs){
 		if(lhs.size() == rhs.size())
 			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 		return false;

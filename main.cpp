@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/14 00:40:55 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 01:13:46 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -609,6 +609,8 @@ int main()
 			ft::map<int,int> m2(mapa_2);
 			std::cout << "m1: : \n"; print_map(m1);
 			std::cout << "m2: : \n"; print_map(m2);
+			std::cout << "m1 ==  m2 ? : " << (m1 == m2) << std::endl;
+			std::cout << "m1 !=  m2 ? : " << (m1 != m2) << std::endl;
 			std::cout << "m1 <  m2 ? : " << (m1 < m2) << std::endl;
 			std::cout << "m1 <= m2 ? : " << (m1 <= m2) << std::endl;
 			std::cout << "m1 >  m2 ? : " << (m1 > m2) << std::endl;
@@ -617,11 +619,34 @@ int main()
 			m1.insert(ft::make_pair(22,222));
 			std::cout << "m1: : \n"; print_map(m1);
 			std::cout << "m2: : \n"; print_map(m2);
+			std::cout << "m1 ==  m2 ? : " << (m1 == m2) << std::endl;
+			std::cout << "m1 !=  m2 ? : " << (m1 != m2) << std::endl;
 			std::cout << "m1 <  m2 ? : " << (m1 < m2) << std::endl;
 			std::cout << "m1 <= m2 ? : " << (m1 <= m2) << std::endl;
 			std::cout << "m1 >  m2 ? : " << (m1 > m2) << std::endl;
 			std::cout << "m1 >= m2 ? : " << (m1 >= m2) << std::endl;
 			line();
+
+
+//	size_t NUM = 429496729;
+////	size_t NUM = 230584300921369395;
+//	size_t j;
+
+//	ft::vector<int>		v;
+//	v.reserve(NUM);
+//	for (j = 0; j < NUM; j++)
+//		v.push_back(j);
+//	std::cout << "v.size: " << v.size() << "\n";
+//		v.clear();
+
+//	ft::map<int,int>	m;
+//	for (j = 0; j < NUM / 20; j++)
+//		m.insert(ft::make_pair(j,j));
+//	std::cout << "m.size: " << m.size() << "\n";
+//		m.clear();
+	
+
+
 
 	// ==========================================
 	fin = clock();
