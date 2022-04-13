@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/13 01:28:33 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/13 04:25:31 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,26 +281,34 @@ namespace ft {
 			// Insert position
 			iterator insert (iterator position, const value_type& val)
 			{
-				iterator it;
+				iterator it, j;
+				difference_type	n;
 
-				if (_size == _capacity) resize(_size);
+				n = position - begin();
+
+				if (_size == _capacity)
+				{
+					reserve (_size + 2);
+				};
+
+				j = begin() + n;
 				it = end();
-				while (it != position)
+				while (it != j)
 				{
 					*it = *(it -1);
 					it--;
 				}
-				_Alloc.destroy(&(*position));
-				_Alloc.construct(&(*position), val);
+				_Alloc.destroy(&(*(j)));
+				_Alloc.construct(&(*(j)), val);
 				_size++;
 
-				return position++;
+				return j++;
 			};
 
 			// Insert fill
 			void insert (iterator position, size_type n, const value_type& val)
 			{ 
-				while (n-- > 0) insert(position, val);
+				while (n-- > 0) position = insert(position, val);
 			};
 
 			// Insert Range
@@ -308,14 +316,20 @@ namespace ft {
 			void insert (iterator position, InputIterator first, InputIterator last,
 				 typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 0)
 			{
-				iterator it = first;
+				difference_type	n, n_pos;
 
-				while (it != last)
+				n_pos = position - begin();
+				n = last - first;
+				while (_size + n > _capacity) reserve(2 * _size);
+				iterator it = last - 1;
+				
+				position = begin() + n - 2;
+				while (it != first)
 				{
-					insert(position, *it);
-					it++;
-					position++;
+					position = insert(position, *it);
+					it--;
 				};
+				position = insert(position, *it);
 			};
 
 

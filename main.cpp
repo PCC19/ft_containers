@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/13 01:29:33 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/13 04:24:39 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,26 @@ int main()
 	std::cout << "				VECTOR TESTS				\n";
 	std::cout << " =========================================\n";
 
+	std::cout << std::endl;
 	line(); std::cout << "1.0 Default constructor:\n";line();
 		ft::vector<int> vector_1;
 		std::cout << "Vector constructed with default constructor\n";
 		print_vector(vector_1);
 
+	std::cout << std::endl;
 	line(); std::cout << "2.0 Fill constructor:\n";line();
 		ft::vector<int> vector_2(5,10);
 		std::cout << "Vector_2(5,10) (fill constructror)\n";
 		print_vector(vector_2);
 
+	std::cout << std::endl;
 	line(); std::cout << "3.0 Range  constructor:\n";line();
 		ft::vector<int> vector_3;
 		for (int i = 2; i <= 32; i*=2)
 			vector_3.push_back(i);
 		print_vector(vector_3);
 	
+	std::cout << std::endl;
 	line(); std::cout << "4.0 Iterators\n";line();
 		ft::vector<int>::iterator it1;
 		std::cout << "iterating on vector_2: \n";
@@ -83,6 +87,7 @@ int main()
 			std::cout << *it1 << " , ";
 		std::cout << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "5.0 Reverse Iterators\n"; line();
 		ft::vector<int>::reverse_iterator it2;
 		std::cout << "iterating on vector_3: \n";
@@ -91,12 +96,14 @@ int main()
 			std::cout << *it2 << " , ";
 		std::cout << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "6.0 Size, max_size & Capacity\n";line();
 		print_vector(vector_3);
 		std::cout << "Vector_3 size: " << vector_3.size() << std::endl;
 		std::cout << "Vector_3 max_size: " << vector_3.max_size() << std::endl;
 		std::cout << "Vector_3 capacity: " << vector_3.capacity() << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "7.0 Resize\n"; line();
 		std::cout << "Vector_3: resize(10,3)\n";
 		vector_3.resize(10,3);
@@ -106,6 +113,7 @@ int main()
 		vector_3.resize(4,11);
 		print_vector(vector_3);
 
+	std::cout << std::endl;
 	line(); std::cout << "8.0 Reserve\n";line();
 		std::cout << "vector_2:\n";
 		print_vector(vector_2);
@@ -113,29 +121,34 @@ int main()
 		vector_2.reserve(20);
 		print_vector(vector_2);
 
+	std::cout << std::endl;
 	line(); std::cout << "9.0 Empty\n:"; line();
 		std::cout << "is vector_2 empty ?\n";
 		std::cout << vector_2.empty() << std::endl;
 		std::cout << "is vector_1 empty ?\n";
 		std::cout << vector_1.empty() << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "10.0 Operator []\n";line();
 		print_vector(vector_3);
 		std::cout << "vector_3[2]: " << vector_3[2] << std::endl;
 		std::cout << "vector_3[3]: " << vector_3[3] << std::endl;
 		std::cout << "vector_3[1]: " << vector_3[1] << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "11.0 at\n";line();
 		print_vector(vector_3);
 		std::cout << "vector_3.at(2): " << vector_3.at(2) << std::endl;
 		std::cout << "vector_3.at(3): " << vector_3.at(3) << std::endl;
 		std::cout << "vector_3.at(1): " << vector_3.at(1) << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "12.0 front & back\n";line();
 		print_vector(vector_3);
 		std::cout << "Vector_3 front: " << vector_3.front() << std::endl;
 		std::cout << "Vector_3 back : " << vector_3.back() << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "13.0 Assign\n";line();
 		vector_3.push_back(10);
 		vector_3.push_back(20);
@@ -155,16 +168,19 @@ int main()
 		std::cout << "assign from it3: " << *it3 << " to it4: " << *it4 << std::endl;
 		print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "14.0 push_back\n"; line();
 		std::cout << "push_back(1):\n"; vector_4.push_back(1); print_vector(vector_4);;
 		std::cout << "push_back(2):\n"; vector_4.push_back(2); print_vector(vector_4);;
 		std::cout << "push_back(3):\n"; vector_4.push_back(3); print_vector(vector_4);;
 
+	std::cout << std::endl;
 	line(); std::cout << "15.0 pop_back\n";line();
 		std::cout << "pop_back !\n"; vector_4.pop_back(); print_vector(vector_4);
 		std::cout << "pop_back !\n"; vector_4.pop_back(); print_vector(vector_4);
 		std::cout << "pop_back !\n"; vector_4.pop_back(); print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "16.0 insert_single\n"; line();
 		std::cout << "Insert 2,15\n";
 		it3 = vector_4.begin();
@@ -172,13 +188,15 @@ int main()
 		vector_4.insert(it3,15);
 		print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "17.0 insert fill\n";line();
 		std::cout << "Insert 2, 3, 33:\n";
-		vector_4.insert(it3, 3, 33);
+		vector_4.insert(it3, 5, 33);
 		print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "18.0 insert range\n";line();
-		vector_4.reserve(20);
+		//vector_4.reserve(20);
 		ft::vector<int> vector_r;
 		vector_r.push_back(1000);
 		vector_r.push_back(2000);
@@ -198,6 +216,7 @@ int main()
 		vector_4.insert(it5 , it6, it7);
 		print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "19.0 erase position\n";line();
 		ft::vector<int>::iterator it8 = vector_4.begin();
 		it8 = it8 + 2;
@@ -206,6 +225,7 @@ int main()
 		vector_4.erase(it8);
 		print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "20.0 erase first/last\n";line();
 		std::cout << " erase begin + 2 to end - 2\n";
 		print_vector(vector_4);
@@ -216,6 +236,7 @@ int main()
 		vector_4.erase(it8, it9);
 		print_vector(vector_4);
 
+	std::cout << std::endl;
 	line(); std::cout << "21.0 swap\n";line();
 		ft::vector<int> my_vector;
 		N = 5;
@@ -254,6 +275,7 @@ int main()
 		std::cout << "first_vb: " << *first_vb << std::endl;
 		std::cout << "first_vb++: " << *(++first_vb) << std::endl;
 
+	std::cout << std::endl;
 	line(); std::cout << "22.0 clear\n";line();
 		std::cout << "Vector 2:\n";
 		print_vector(vector_2);
@@ -261,6 +283,7 @@ int main()
 		vector_2.clear();
 		print_vector(vector_2);
 
+	std::cout << std::endl;
 	line(); std::cout << "23.0 Non-Member Functions\n"; line();
 		ft::vector<int> v1, v2;
 		v1.push_back(1);
@@ -327,7 +350,6 @@ int main()
 	line(); std::cout << "21.0 equal range\n"; line();
 	line(); std::cout << "22.0 Non-Member Functions\n"; line();
 	
-return 0;	
 	
 /*
 	// Main program =============================
