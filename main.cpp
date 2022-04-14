@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/14 02:39:05 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 02:42:09 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -617,8 +617,8 @@ int main()
 		line(); std::cout << "\t21.0 Non-Member Functions\n"; line();
 			ft::map<int,int> m1(mapa_2);
 			ft::map<int,int> m2(mapa_2);
-			std::cout << "m1: : \n"; print_map(m1);
-			std::cout << "m2: : \n"; print_map(m2);
+			std::cout << "m1:  \n"; print_map(m1);
+			std::cout << "m2:  \n"; print_map(m2);
 			std::cout << "m1 ==  m2 ? : " << (m1 == m2) << std::endl;
 			std::cout << "m1 !=  m2 ? : " << (m1 != m2) << std::endl;
 			std::cout << "m1 <  m2 ? : " << (m1 < m2) << std::endl;
@@ -627,8 +627,8 @@ int main()
 			std::cout << "m1 >= m2 ? : " << (m1 >= m2) << std::endl;
 			std::cout << std::endl;
 			m1.insert(ft::make_pair(22,222));
-			std::cout << "m1: : \n"; print_map(m1);
-			std::cout << "m2: : \n"; print_map(m2);
+			std::cout << "m1:  \n"; print_map(m1);
+			std::cout << "m2:  \n"; print_map(m2);
 			std::cout << "m1 ==  m2 ? : " << (m1 == m2) << std::endl;
 			std::cout << "m1 !=  m2 ? : " << (m1 != m2) << std::endl;
 			std::cout << "m1 <  m2 ? : " << (m1 < m2) << std::endl;
