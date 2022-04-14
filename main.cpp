@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/14 02:01:54 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 02:31:50 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -635,23 +635,6 @@ int main()
 			std::cout << "m1 <= m2 ? : " << (m1 <= m2) << std::endl;
 			std::cout << "m1 >  m2 ? : " << (m1 > m2) << std::endl;
 			std::cout << "m1 >= m2 ? : " << (m1 >= m2) << std::endl;
-			line();
-
-		line(); std::cout << "\tBIG SIZE TEST\n"; line();
-			size_t NUM = 42949672;
-			size_t j;
-
-			ft::vector<int>		v;
-			v.reserve(NUM);
-			for (j = 0; j < NUM; j++)
-				v.push_back(j);
-			std::cout << "v.size: " << v.size() << "\n";
-			v.clear();
-			ft::map<int,int>	m;
-			for (j = 0; j < NUM / 200; j++)
-				m.insert(ft::make_pair(j,j));
-			std::cout << "m.size: " << m.size() << "\n";
-			m.clear();
 			line();
 
 	// ==========================================
