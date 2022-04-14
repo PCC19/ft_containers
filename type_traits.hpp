@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:45:07 by pcunha            #+#    #+#             */
-/*   Updated: 2022/02/14 17:32:43 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 01:46:41 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 namespace ft
 {
 
-	// Integral constant definition, to be used to define the true and false objects
-	// It has a type (bool) and a value of this type (v) that can be True or False
-	// The operator () returns v
 	template <class T, T v>
 	struct integral_constant
 	{

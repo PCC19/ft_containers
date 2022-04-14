@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:32:59 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/14 01:20:39 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 02:01:54 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,19 @@ void nline() { std::cout << "\n-----------------------------------------\n"; };
 
 int main()
 {
-	clock_t ini;
-	clock_t fin;
+	clock_t ini, fin;
 	double elapsed_time;
 	int N, i;
-	(void) N;
 	
-
-	// HEADER
 	if (V == 1)
 		std::cout << "VERSION:  FT" << std::endl;
 	else
 		std::cout << "VERSION: STL" << std::endl;
 	ini = clock();
 	
-	std::cout << " =========================================\n";
-	std::cout << "				VECTOR TESTS				\n";
-	std::cout << " =========================================\n";
+	std::cout << "=========================================\n";
+	std::cout << "              VECTOR TESTS				\n";
+	std::cout << "=========================================\n";
 
 	nline(); std::cout << "\t1.0 Default constructor:\n";line();
 		ft::vector<int> vector_1;
@@ -179,7 +175,6 @@ int main()
 		print_vector(vector_4);
 
 	nline(); std::cout << "\t18.0 insert range\n";line();
-		//vector_4.reserve(20);
 		ft::vector<int> vector_r;
 		vector_r.push_back(1000);
 		vector_r.push_back(2000);
@@ -293,12 +288,15 @@ int main()
 		std::cout << "v1 <= v2 ? : " << (v1 <= v2) << std::endl;
 		std::cout << "v1 >  v2 ? : " << (v1 > v2) << std::endl;
 		std::cout << "v1 >= v2 ? : " << (v1 >= v2) << std::endl;
+		line();
+		std::cout << std::endl;
+		std::cout << std::endl;
 	
 	
 	
-	std::cout << " =========================================\n";
-	std::cout << "					MAP TESTS				\n";
-	std::cout << " =========================================\n";
+	std::cout << "=========================================\n";
+	std::cout << "                 MAP TESTS				\n";
+	std::cout << "=========================================\n";
 	
 	line(); std::cout << "\t0.0 Pair & Make_Pair:\n"; line();
 		ft::pair<int, char>	par1(12, 'a');
@@ -340,7 +338,6 @@ int main()
 		std::cout << "par3 == par4: " << (par3 == par4) << std::endl;
 		std::cout << "par3 != par4: " << (par3 != par4) << std::endl;
 		line();
-		// Make_pair
 		ft::pair<char, std::string> par;
 		std::cout << "make_pair: \n";
 		par = ft::make_pair('o', "paulo");
@@ -425,14 +422,27 @@ int main()
 
 	line(); std::cout << "\t9.0 insert_single\n"; line();
 		ft::pair<int, int>	par_a;
+		ft::map<int, int>::iterator it;
 		par_a = ft::make_pair(15,150);
 		print_pair(par_a);
 		std::cout << "inserting pair(15,150) in mapa_2:\n";
 		mapa_2.insert(par_a);
 		print_map(mapa_2);
+		std::cout << "Iterating ... \n";
+		for (it = mapa_2.begin(); it != mapa_2.end(); it++)
+			std::cout << it->first << ", ";
+		std::cout << std::endl;
 		std::cout << "inserting pair(5,50) in mapa_2 with make_pair:\n";
 		mapa_2.insert(ft::make_pair(5,50));
 		print_map(mapa_2);
+		std::cout << "Iterating ... \n";
+		for (it = mapa_2.begin(); it != mapa_2.end(); it++)
+			std::cout << it->first << ", ";
+		std::cout << std::endl;
+		std::cout << "inserting again pair(15,150) in mapa_2 (can't repeat):\n";
+		mapa_2.insert(par_a);
+		print_map(mapa_2);
+		std::cout << " Itens are always ordered by key\n";
 		line();
 		
 	line(); std::cout << "\t10.0 insert hint\n"; line();
@@ -628,8 +638,7 @@ int main()
 			line();
 
 		line(); std::cout << "\tBIG SIZE TEST\n"; line();
-
-			size_t NUM = 429496729;
+			size_t NUM = 42949672;
 			size_t j;
 
 			ft::vector<int>		v;
@@ -649,5 +658,4 @@ int main()
 	fin = clock();
 	elapsed_time = 1000 * ((double) fin - (double) ini) / (double) (CLOCKS_PER_SEC);
 	std::cout << "Elapsed time: " << elapsed_time << "ms" << std::endl;
-
 };

@@ -1,5 +1,3 @@
-#clang++ -D V=0 main.cpp -I vector.hpp -o a
-
 NAME = a
 NAME2 = $(NAME)_stl
 
@@ -10,7 +8,6 @@ HEADER_DIR =	./
 SDIR =	./
 ODIR =	./
 
-#SRCS =	$(SDIR)main.cpp
 HEADERS = $(HEADER_DIR)vector.hpp\
 			$(HEADER_DIR)random_access_iterator.hpp\
 			$(HEADER_DIR)reverse_iterator.hpp\
@@ -36,9 +33,7 @@ $(NAME):	$(OBJS) $(MAIN) $(HEADERS)
 	echo CONCLUIDO
 
 $(ODIR)%.o: $(SDIR)%.cpp
-#		#mkdir -p $(ODIR)
 		$(CC) $(C_FLAGS) $(HEADERS) $(L_FLAGS) -c $< -o $@
-
 
 all: $(NAME)
 

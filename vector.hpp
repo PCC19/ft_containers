@@ -6,7 +6,7 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:08 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/13 04:25:31 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 01:44:50 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ namespace ft {
 					pop_back();
 				_Alloc.deallocate(_Data, _capacity);
 				_Data = nullptr;
-				_size = 0;	// redundante, apos while size deve ser 0
+				_size = 0;	
 			}
 
 			void reserve (size_type n)

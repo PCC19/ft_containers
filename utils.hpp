@@ -6,13 +6,12 @@
 /*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 02:33:28 by pcunha            #+#    #+#             */
-/*   Updated: 2022/04/13 23:34:46 by pcunha           ###   ########.fr       */
+/*   Updated: 2022/04/14 01:46:53 by pcunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 # define UTILS_HPP
-
 
 template <typename T>
 void	print_vector(T& vector_to_print)

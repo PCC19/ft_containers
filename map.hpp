@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcunha <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/14 01:44:18 by pcunha            #+#    #+#             */
+/*   Updated: 2022/04/14 01:44:21 by pcunha           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_HPP
 #define MAP_HPP
 
@@ -60,7 +72,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 		    std::allocator<rbt_node<value_type> > node_allocator;
 			_nil = node_allocator.allocate(1);
 			node_allocator.construct(_nil, NULL);
-			//_nil  =  new node_ptr(NULL);
 			_nil->parent = _root;
 			_nil->content = NULL;
 			_nil->left = NULL;
@@ -437,7 +448,6 @@ template <class Key, class T, class Compare = std::less<Key>,
 
 			value_type *aux = _Alloc.allocate(1);
 			_Alloc.construct(aux, val);
-//			node_ptr *node =  new node_ptr(aux);
 			node_ptr *node = node_allocator.allocate(1);
 			node_allocator.construct(node, aux);
 			node->left = _nil;
